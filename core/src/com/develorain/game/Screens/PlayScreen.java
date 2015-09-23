@@ -17,8 +17,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
+import com.develorain.game.Sprites.Cubey;
 
-import java.awt.*;
+
 
 public class PlayScreen implements Screen {
     private Illumination game;
@@ -33,23 +34,25 @@ public class PlayScreen implements Screen {
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr; // the outlines of the shapes and stuff
+    private Cubey player;
 
 
     public PlayScreen(Illumination game) {
         this.game = game;
         cam = new OrthographicCamera();
-        //gamePort = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, cam); // possibly change to ScreenViewport
-        gamePort = new ScreenViewport(cam);
+        gamePort = new FitViewport(Illumination.V_WIDTH / Illumination.PPM, Illumination.V_HEIGHT / Illumination.PPM, cam); // possibly change to ScreenViewport
+        //gamePort = new ScreenViewport(cam);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("level1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / Illumination.PPM);
 
         cam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         world = new World(new Vector2(0, -9.8f), true);
         b2dr = new Box2DDebugRenderer();
 
+        player = new Cubey(world);
 
         BodyDef bdef = new BodyDef();
         PolygonShape shape = new PolygonShape();
@@ -60,11 +63,11 @@ public class PlayScreen implements Screen {
              Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rect.getX() + rect.getWidth() / 2, rect.getY() + rect.getHeight() / 2);
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Illumination.PPM, (rect.getY() + rect.getHeight() / 2) / Illumination.PPM);
 
             body = world.createBody(bdef);
 
-            shape.setAsBox(rect.getWidth() / 2, rect.getHeight() / 2);
+            shape.setAsBox(rect.getWidth() / 2 / Illumination.PPM, rect.getHeight() / 2 / Illumination.PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
         }
@@ -72,6 +75,11 @@ public class PlayScreen implements Screen {
 
     public void update(float dt) {
         handleInput(dt);
+
+        world.step(1 / 60f, 6, 2);
+
+        cam.position.x = player.b2body.getPosition().x;
+        cam.position.y = player.b2body.getPosition().y;
 
         cam.update();
         renderer.setView(cam);
@@ -92,20 +100,20 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt) {
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            cam.position.x += 100 * dt;
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
+            player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            cam.position.x -= 100 * dt;
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
+            player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            cam.position.y += 100 * dt;
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            cam.position.y -= 100 * dt;
+
         }
     }
 
