@@ -14,7 +14,7 @@ public class Cubey extends Sprite {
     public final int PLAYER_HEIGHT = 24;
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_DENSITY = 4;
-    public final boolean PLAYER_FIXED_ROTATION = true;
+    public final boolean PLAYER_FIXED_ROTATION = false;
 
     public World world;
     public Body b2body;
