@@ -9,6 +9,12 @@ import com.badlogic.gdx.utils.Array;
 import com.develorain.game.Illumination;
 
 public class Cubey extends Sprite {
+    public final int PLAYER_WIDTH = 24;
+    public final int PLAYER_HEIGHT = 24;
+    public final int PLAYER_RESTITUTION = 0;
+    public final int PLAYER_DENSITY = 4;
+    public final boolean PLAYER_FIXED_ROTATION = true;
+
     public World world;
     public Body b2body;
     public Sprite boxSprite;
@@ -21,21 +27,35 @@ public class Cubey extends Sprite {
     }
 
     public void definePlayer() {
+        // Player variable declaration
+        BodyDef bdef;
+        PolygonShape shape;
+        FixtureDef fdef;
+
+        // Initialize and define player sprite
         boxSprite = new Sprite(new Texture("cubey.png"));
         boxSprite.setSize(0.5f, 0.5f);
+        boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
 
-        BodyDef bdef = new BodyDef();
+        // Initialize and define player definition
+        bdef = new BodyDef();
         bdef.position.set(100 / Illumination.PPM, 100 / Illumination.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
-        b2body = world.createBody(bdef);
+        bdef.fixedRotation = PLAYER_FIXED_ROTATION;
 
-        b2body.setUserData(boxSprite);
+        // Initialize player shape
+        shape = new PolygonShape();
 
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(25 / Illumination.PPM, 25 / Illumination.PPM);
-
+        // Initialize and define player fixture
+        fdef = new FixtureDef();
+        fdef.restitution = PLAYER_RESTITUTION;
+        fdef.density = PLAYER_DENSITY;
         fdef.shape = shape;
+        shape.setAsBox(PLAYER_WIDTH / Illumination.PPM, PLAYER_HEIGHT / Illumination.PPM);
+
+        // Initializing player body
+        b2body = world.createBody(bdef);
+        b2body.setUserData(boxSprite);
         b2body.createFixture(fdef);
     }
 
@@ -47,7 +67,8 @@ public class Cubey extends Sprite {
                 Sprite sprite = (Sprite) body.getUserData();
 
                 // Sets the texture to the center of the player
-                sprite.setPosition(body.getPosition().x - 25 / Illumination.PPM, body.getPosition().y - 25 / Illumination.PPM);
+                // Addition of PLAYER_WIDTH & PLAYER_HEIGHT by 2 is required to properly align the player and the texture
+                sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH + 1f) / Illumination.PPM, body.getPosition().y - (PLAYER_HEIGHT + 1f) / Illumination.PPM);
 
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
                 sprite.draw(batch);
