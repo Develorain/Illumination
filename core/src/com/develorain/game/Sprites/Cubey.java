@@ -33,7 +33,7 @@ public class Cubey extends Sprite {
 
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(boxSprite.getTexture().getWidth() / Illumination.PPM, boxSprite.getTexture().getHeight() / Illumination.PPM);
+        shape.setAsBox(25 / Illumination.PPM, 25 / Illumination.PPM);
 
         fdef.shape = shape;
         b2body.createFixture(fdef);
@@ -47,8 +47,7 @@ public class Cubey extends Sprite {
                 Sprite sprite = (Sprite) body.getUserData();
 
                 // Sets the texture to the center of the player
-                sprite.setPosition(body.getPosition().x - boxSprite.getTexture().getWidth() / Illumination.PPM,
-                        body.getPosition().y - boxSprite.getTexture().getHeight() / Illumination.PPM);
+                sprite.setPosition(body.getPosition().x - 25 / Illumination.PPM, body.getPosition().y - 25 / Illumination.PPM);
 
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
                 sprite.draw(batch);
