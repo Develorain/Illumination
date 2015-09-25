@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
+import com.develorain.game.Sprites.KingSlime;
 import com.develorain.game.Tools.B2WorldCreator;
 
 
@@ -46,21 +47,18 @@ public class PlayScreen implements Screen {
 
         // Initialize tiled map variables
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("level1.tmx");
+        map = mapLoader.load("Graphics/level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1 / Illumination.PPM);
-
-        // Set initial camera position to center of the screen (pretty much useless)
-        cam.position.set(gamePort.getWorldWidth() / 2, gamePort.getWorldHeight() / 2, 0);
 
         // Initialize world
         world = new World(new Vector2(0, -9.8f), true);
         b2dr = new Box2DDebugRenderer();
 
         // Initialize player
-        player = new Cubey(world);
+        player = new Cubey(this);
 
         // Initializes the collision of the static tiles (ground)
-        new B2WorldCreator(world, map);
+        new B2WorldCreator(this);
     }
 
     public void update(float dt) {
@@ -96,7 +94,7 @@ public class PlayScreen implements Screen {
         b2dr.render(world, cam.combined);
 
         // Draws player
-        player.drawPlayer(game.batch);
+        player.draw(game.batch);
 
         // Sets projection of the batch to the camera's matrices
         game.batch.setProjectionMatrix(cam.combined);
@@ -115,13 +113,21 @@ public class PlayScreen implements Screen {
 
         // Runs if up is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 4f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, 6f), player.b2body.getWorldCenter(), true);
         }
 
         // Runs if down is pressed
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 
         }
+    }
+
+    public TiledMap getMap() {
+        return map;
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     @Override

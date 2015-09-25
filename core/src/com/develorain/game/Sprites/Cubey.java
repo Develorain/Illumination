@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.develorain.game.Illumination;
+import com.develorain.game.Screens.PlayScreen;
 
 public class Cubey extends Sprite {
     public final int PLAYER_WIDTH = 24;
@@ -20,8 +21,8 @@ public class Cubey extends Sprite {
     public Sprite boxSprite;
     Array<Body> tmpBodies;
 
-    public Cubey(World world) {
-        this.world = world;
+    public Cubey(PlayScreen screen) {
+        this.world = screen.getWorld();
         definePlayer();
         tmpBodies = new Array<Body>();
     }
@@ -33,7 +34,7 @@ public class Cubey extends Sprite {
         FixtureDef fdef;
 
         // Initialize and define player sprite
-        boxSprite = new Sprite(new Texture("cubey.png"));
+        boxSprite = new Sprite(new Texture("Graphics/cubey.png"));
         boxSprite.setSize(0.5f, 0.5f);
         boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
 
@@ -59,7 +60,7 @@ public class Cubey extends Sprite {
         b2body.createFixture(fdef);
     }
 
-    public void drawPlayer(Batch batch) {
+    public void draw(Batch batch) {
         batch.begin();
         world.getBodies(tmpBodies);
         for(Body body: tmpBodies) {
@@ -68,7 +69,7 @@ public class Cubey extends Sprite {
 
                 // Sets the texture to the center of the player
                 // Addition of PLAYER_WIDTH & PLAYER_HEIGHT by 2 is required to properly align the player and the texture
-                sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH + 1f) / Illumination.PPM, body.getPosition().y - (PLAYER_HEIGHT + 1f) / Illumination.PPM);
+                sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / Illumination.PPM), body.getPosition().y - (PLAYER_HEIGHT / Illumination.PPM));
 
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
                 sprite.draw(batch);
