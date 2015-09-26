@@ -1,10 +1,15 @@
 package com.develorain.game.Screens;
 
+import box2dLight.PointLight;
+import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -16,9 +21,16 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
 import com.develorain.game.Tools.B2WorldCreator;
+import com.develorain.game.Tools.CameraUtilities;
 
 
 public class PlayScreen implements Screen {
+    public boolean DEBUG_MODE = false;
+    public static boolean WHITE_MODE = true;
+
+    RayHandler rayHandler;
+    PointLight light;
+
     // Reference to the game, used to set Screens
     private Illumination game;
 
@@ -57,6 +69,9 @@ public class PlayScreen implements Screen {
         // Initialize player
         player = new Cubey(this);
 
+        rayHandler = new RayHandler(world);
+        light = new PointLight(rayHandler, 50, Color.WHITE, 1f, player.getX(), player.getY());
+
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
     }
@@ -73,10 +88,21 @@ public class PlayScreen implements Screen {
         cam.position.y = player.b2body.getPosition().y;
 
         // Updates the camera
+        //CameraUtilities.lerpToTarget(cam, new Vector2(player.getX(), player.getY()));
+        //cameraUpdate(dt);
         cam.update();
 
         // Sets the tiled map renderer to render only what is on screen or in camera view
         renderer.setView(cam);
+    }
+
+    public void cameraUpdate(float dt) {
+        Vector3 position = cam.position;
+        position.x = cam.position.x + (player.getX() - cam.position.x) * 0.1f;
+        position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
+        cam.position.set(position);
+
+        cam.update();
     }
 
     @Override
@@ -94,12 +120,15 @@ public class PlayScreen implements Screen {
         renderer.render();
 
         // Renders the box2D debug renderer (lines)
-        b2dr.render(world, cam.combined);
+        if(DEBUG_MODE)
+            b2dr.render(world, cam.combined);
 
         // Draws player
         player.draw(game.batch);
 
-
+        light.setPosition(player.getX(), player.getY());
+        //rayHandler.setCombinedMatrix(cam.combined);
+        rayHandler.updateAndRender();
     }
 
     public void handleInput(float dt) {
@@ -121,6 +150,17 @@ public class PlayScreen implements Screen {
         // Runs if down is pressed
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
 
+        }
+
+        // Runs if shift is pressed
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT))
+            DEBUG_MODE = !DEBUG_MODE;
+
+        // Runs if Q is pressed
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            WHITE_MODE = !WHITE_MODE;
+
+            player = new Cubey(this);
         }
     }
 

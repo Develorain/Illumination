@@ -14,7 +14,7 @@ public class Cubey extends Sprite {
     public final int PLAYER_HEIGHT = 24;
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_DENSITY = 4;
-    public final boolean PLAYER_FIXED_ROTATION = false;
+    public final boolean PLAYER_FIXED_ROTATION = true;
 
     public World world;
     public Body b2body;
@@ -34,7 +34,14 @@ public class Cubey extends Sprite {
         FixtureDef fdef;
 
         // Initialize and define player sprite
-        boxSprite = new Sprite(new Texture("Graphics/cubey.png"));
+        if(PlayScreen.WHITE_MODE) {
+            boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
+        }
+
+        if(!PlayScreen.WHITE_MODE) {
+            boxSprite = new Sprite(new Texture("Graphics/blackcubey.png"));
+        }
+
         boxSprite.setSize(0.5f, 0.5f);
         boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
 

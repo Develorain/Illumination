@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="40" tilewidth="16" tileheight="16" nextobjectid="18">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" nextobjectid="43">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="9">
   <image source="tileset.png" width="48" height="48"/>
  </tileset>
- <layer name="graphics" width="240" height="40">
+ <layer name="graphics" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt3UEKwzAQBEHp/5/OCxaEwdFMUgV712H7YGHjvYBW+/YBgMf0C730C730C730C71S+92HA//srQZO+7s18AtOd9nOQx5dQi/9Qi/Pg9BLu9BLv9BLv9BLv9BLv9BLv9BLv9Br6td7xJBPg9BLv9BLv9BLv9DrjX59Rw/foSHopV/opV/opV/old6vey+YpbegX5ilt6BfmKW3oF+YpbegX5ilt6BfmKW3oF+YpbegX5ilt6BfmKW3oF+YPf1/7u0B1voAeX8A2w==
+   eJzt0zEKgDAUBcGk8P5XthJE2EoxCjPw6vwUOwZXc/UB8GH6gKYPaPqApg9o+oCmD2j6gKYPaPqApg9o+oCmD2j6gKYPaPqApg9o+oCmDw7zha1+/7ztwd35N/+wAxWMALA=
   </data>
  </layer>
- <objectgroup name="ground">
-  <object id="3" x="640" y="464" width="96" height="176"/>
-  <object id="4" x="16" y="624" width="624" height="16"/>
-  <object id="5" x="0" y="0" width="16" height="640"/>
-  <object id="6" x="96" y="304" width="160" height="16"/>
-  <object id="9" x="336" y="384" width="176" height="16"/>
-  <object id="10" x="352" y="112" width="640" height="16"/>
-  <object id="12" x="608" y="96" width="160" height="16"/>
-  <object id="14" x="16" y="176" width="16" height="16"/>
-  <object id="15" x="160" y="128" width="16" height="16"/>
+ <objectgroup name="white ground">
+  <object id="32" x="0" y="304" width="400" height="16"/>
+  <object id="34" x="512" y="304" width="448" height="16"/>
+  <object id="37" x="1104" y="0" width="16" height="304"/>
+  <object id="42" x="1264" y="304" width="128" height="16"/>
+ </objectgroup>
+ <objectgroup name="black ground">
+  <object id="40" x="960" y="304" width="304" height="16"/>
  </objectgroup>
 </map>

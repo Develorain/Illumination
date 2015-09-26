@@ -19,7 +19,22 @@ public class B2WorldCreator {
         FixtureDef fdef = new FixtureDef();
         Body body;
 
+        // Creates boxes around white tiles
         for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            bdef.type = BodyDef.BodyType.StaticBody;
+            bdef.position.set((rect.getX() + rect.getWidth() / 2) / Illumination.PPM, (rect.getY() + rect.getHeight() / 2) / Illumination.PPM);
+
+            body = world.createBody(bdef);
+
+            shape.setAsBox(rect.getWidth() / 2 / Illumination.PPM, rect.getHeight() / 2 / Illumination.PPM);
+            fdef.shape = shape;
+            body.createFixture(fdef);
+        }
+
+        // Creates boxes around black tiles
+        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
