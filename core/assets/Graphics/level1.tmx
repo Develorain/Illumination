@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" nextobjectid="43">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="200" height="20" tilewidth="16" tileheight="16" nextobjectid="44">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="9">
   <image source="tileset.png" width="48" height="48"/>
  </tileset>
  <layer name="graphics" width="200" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt0zEKgDAUBcGk8P5XthJE2EoxCjPw6vwUOwZXc/UB8GH6gKYPaPqApg9o+oCmD2j6gKYPaPqApg9o+oCmD2j6gKYPaPqApg9o+oCmDw7zha1+/7ztwd35N/+wAxWMALA=
+   eJzt0zEOgDAMBMHk/5+mokFaCZqYYkZy7Wt2LZ729AD4MX1A0wc0fUDTBzR9QNMHNH1A0wc0fUDTBzR9QNMHNH1A0wc0fUDTBzR9QNMHt33gpv+/3fLVyV/MuABTCQBR
   </data>
  </layer>
  <objectgroup name="white ground">
@@ -16,5 +16,6 @@
  </objectgroup>
  <objectgroup name="black ground">
   <object id="40" x="960" y="304" width="304" height="16"/>
+  <object id="43" x="976" y="144" width="16" height="16"/>
  </objectgroup>
 </map>

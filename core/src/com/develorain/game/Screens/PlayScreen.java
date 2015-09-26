@@ -1,5 +1,6 @@
 package com.develorain.game.Screens;
 
+import box2dLight.ConeLight;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
@@ -22,14 +23,16 @@ import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
 import com.develorain.game.Tools.B2WorldCreator;
 import com.develorain.game.Tools.CameraUtilities;
+import com.develorain.game.Tools.LightBuilder;
 
 
 public class PlayScreen implements Screen {
-    public boolean DEBUG_MODE = false;
+    public boolean DEBUG_MODE = true;
     public static boolean WHITE_MODE = true;
 
     RayHandler rayHandler;
     PointLight light;
+    ConeLight light2;
 
     // Reference to the game, used to set Screens
     private Illumination game;
@@ -69,8 +72,12 @@ public class PlayScreen implements Screen {
         // Initialize player
         player = new Cubey(this);
 
+        // Light Testing
         rayHandler = new RayHandler(world);
-        light = new PointLight(rayHandler, 50, Color.WHITE, 1f, player.getX(), player.getY());
+        rayHandler.setAmbientLight(.2f);
+        light = new PointLight(rayHandler, 200, Color.RED, 3f, player.getX(), player.getY());
+        light.setSoftnessLength(0.5f);
+        light.attachToBody(player.b2body);
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
@@ -87,6 +94,8 @@ public class PlayScreen implements Screen {
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
 
+        //light.setPosition(player.b2body.getPosition().x, player.b2body.getPosition().y);
+
         // Updates the camera
         //CameraUtilities.lerpToTarget(cam, new Vector2(player.getX(), player.getY()));
         //cameraUpdate(dt);
@@ -96,25 +105,17 @@ public class PlayScreen implements Screen {
         renderer.setView(cam);
     }
 
-    public void cameraUpdate(float dt) {
-        Vector3 position = cam.position;
-        position.x = cam.position.x + (player.getX() - cam.position.x) * 0.1f;
-        position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
-        cam.position.set(position);
-
-        cam.update();
-    }
-
     @Override
     public void render(float dt) {
         update(dt);
 
         // Clears screen
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Sets projection of the batch to the camera's matrices
         game.batch.setProjectionMatrix(cam.combined);
+        rayHandler.setCombinedMatrix(cam);
 
         // Renders the tiled map
         renderer.render();
@@ -126,9 +127,16 @@ public class PlayScreen implements Screen {
         // Draws player
         player.draw(game.batch);
 
-        light.setPosition(player.getX(), player.getY());
-        //rayHandler.setCombinedMatrix(cam.combined);
         rayHandler.updateAndRender();
+    }
+
+    public void cameraUpdate(float dt) {
+        Vector3 position = cam.position;
+        position.x = cam.position.x + (player.getX() - cam.position.x) * 0.1f;
+        position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
+        cam.position.set(position);
+
+        cam.update();
     }
 
     public void handleInput(float dt) {
@@ -148,8 +156,8 @@ public class PlayScreen implements Screen {
         }
 
         // Runs if down is pressed
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+            light.setDistance(light.getDistance() + 0.05f);
         }
 
         // Runs if shift is pressed
