@@ -127,7 +127,7 @@ public class PlayScreen implements Screen {
         // Draws player
         player.draw(game.batch);
 
-        rayHandler.render();
+        //rayHandler.render();
     }
 
     public void cameraUpdate(float dt) {
