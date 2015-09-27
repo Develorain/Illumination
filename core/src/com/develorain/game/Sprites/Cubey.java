@@ -11,8 +11,8 @@ import com.develorain.game.Screens.PlayScreen;
 import static com.develorain.game.Illumination.PPM;
 
 public class Cubey extends Sprite {
-    public final int PLAYER_WIDTH = 5;
-    public final int PLAYER_HEIGHT = 5;
+    public final int PLAYER_WIDTH = 16;   // pixels
+    public final int PLAYER_HEIGHT = 16;  // pixels
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_DENSITY = 4;
     public final boolean PLAYER_FIXED_ROTATION = true;
@@ -48,18 +48,8 @@ public class Cubey extends Sprite {
         FixtureDef fdef;
 
         boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
-
-        // Initialize and define player sprite
-        /*if(PlayScreen.WHITE_MODE) {
-            boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
-        }
-
-        if(!PlayScreen.WHITE_MODE) {
-            boxSprite = new Sprite(new Texture("Graphics/blackcubey.png"));
-        }*/
-
-        //boxSprite.setSize(0.1f, 0.1f);
         boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
+        boxSprite.setSize(32f / PPM, 32f / PPM);
 
         // Initialize and define player definition
         bdef = new BodyDef();
