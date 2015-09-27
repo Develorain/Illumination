@@ -16,6 +16,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
@@ -99,6 +101,8 @@ public class PlayScreen implements Screen {
 
         // Sets the tiled map renderer to render only what is on screen or in camera view
         renderer.setView(cam);
+
+        rayHandler.update();
     }
 
     @Override
@@ -123,7 +127,7 @@ public class PlayScreen implements Screen {
         // Draws player
         player.draw(game.batch);
 
-        rayHandler.updateAndRender();
+        rayHandler.render();
     }
 
     public void cameraUpdate(float dt) {
@@ -132,7 +136,7 @@ public class PlayScreen implements Screen {
         //position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
         //cam.position.set(position);
 
-        // Centers the camera on the player (requires refactoring in the future, incorporate lerping to target, add new package of utilities)
+        // Centers the camera on the player (requires refactoring in the future, incorporate interpolation to target, add new package of utilities)
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
 
