@@ -9,8 +9,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -22,24 +20,27 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
 import com.develorain.game.Tools.B2WorldCreator;
-import com.develorain.game.Tools.CameraUtilities;
 import com.develorain.game.Tools.LightBuilder;
+
+import static com.develorain.game.Illumination.PPM;
+import static com.develorain.game.Illumination.V_HEIGHT;
+import static com.develorain.game.Illumination.V_WIDTH;
 
 
 public class PlayScreen implements Screen {
-    public boolean DEBUG_MODE = true;
+    public boolean DEBUG_MODE = false;
     public static boolean WHITE_MODE = true;
 
     RayHandler rayHandler;
-    PointLight light;
-    ConeLight light2;
+    PointLight playerLight;
+    ConeLight tempLight;
 
     // Reference to the game, used to set Screens
     private Illumination game;
 
     // Basic PlayScreen variables
     private OrthographicCamera cam;
-    private Viewport gamePort;
+    private Viewport fitViewport;
 
     // Tiled map variables
     private TmxMapLoader mapLoader;
@@ -57,13 +58,12 @@ public class PlayScreen implements Screen {
 
         // Initialize camera/viewport variable
         cam = new OrthographicCamera();
-        gamePort = new FitViewport(Illumination.V_WIDTH / Illumination.PPM, Illumination.V_HEIGHT / Illumination.PPM, cam); // possibly change to ScreenViewport
-        //gamePort = new ScreenViewport(cam); temporary code
+        fitViewport = new FitViewport(V_WIDTH / PPM, V_HEIGHT / PPM, cam);
 
         // Initialize tiled map variables
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("Graphics/level1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / Illumination.PPM);
+        renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initialize world
         world = new World(new Vector2(0, -9.8f), true);
@@ -72,12 +72,15 @@ public class PlayScreen implements Screen {
         // Initialize player
         player = new Cubey(this);
 
-        // Light Testing
+        // Initialize ray handler
         rayHandler = new RayHandler(world);
-        rayHandler.setAmbientLight(.2f);
-        light = new PointLight(rayHandler, 200, Color.RED, 3f, player.getX(), player.getY());
-        light.setSoftnessLength(0.5f);
-        light.attachToBody(player.b2body);
+        rayHandler.setAmbientLight(1f);
+
+        // Initialize playerLight
+        playerLight = LightBuilder.createPointLight(rayHandler, player.b2body, Color.BLACK, 3);
+
+        // Temporary lamp
+        tempLight = LightBuilder.createConeLight(rayHandler, 300, 300, Color.WHITE, 4, 270, 30);
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
@@ -94,8 +97,6 @@ public class PlayScreen implements Screen {
         cam.position.x = player.b2body.getPosition().x;
         cam.position.y = player.b2body.getPosition().y;
 
-        //light.setPosition(player.b2body.getPosition().x, player.b2body.getPosition().y);
-
         // Updates the camera
         //CameraUtilities.lerpToTarget(cam, new Vector2(player.getX(), player.getY()));
         //cameraUpdate(dt);
@@ -110,7 +111,7 @@ public class PlayScreen implements Screen {
         update(dt);
 
         // Clears screen
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Sets projection of the batch to the camera's matrices
@@ -141,13 +142,13 @@ public class PlayScreen implements Screen {
 
     public void handleInput(float dt) {
         // Runs if right is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 2) {
-            player.b2body.applyLinearImpulse(new Vector2(0.1f, 0), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 10) {
+            player.b2body.applyLinearImpulse(new Vector2(2f, 0), player.b2body.getWorldCenter(), true);
         }
 
         // Runs if left is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -2) {
-            player.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -10) {
+            player.b2body.applyLinearImpulse(new Vector2(-2f, 0), player.b2body.getWorldCenter(), true);
         }
 
         // Runs if up is pressed
@@ -156,8 +157,8 @@ public class PlayScreen implements Screen {
         }
 
         // Runs if down is pressed
-        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-            light.setDistance(light.getDistance() + 0.05f);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            player.b2body.applyLinearImpulse(new Vector2(0, -20f), player.b2body.getWorldCenter(), true);
         }
 
         // Runs if shift is pressed
@@ -168,7 +169,7 @@ public class PlayScreen implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             WHITE_MODE = !WHITE_MODE;
 
-            player = new Cubey(this);
+            player.switchBoxSprite();
         }
     }
 
@@ -187,7 +188,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        gamePort.update(width, height);
+        fitViewport.update(width, height);
     }
 
     @Override

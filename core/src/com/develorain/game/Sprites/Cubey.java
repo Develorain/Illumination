@@ -6,12 +6,13 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.develorain.game.Illumination;
 import com.develorain.game.Screens.PlayScreen;
 
+import static com.develorain.game.Illumination.PPM;
+
 public class Cubey extends Sprite {
-    public final int PLAYER_WIDTH = 24;
-    public final int PLAYER_HEIGHT = 24;
+    public final int PLAYER_WIDTH = 5;
+    public final int PLAYER_HEIGHT = 5;
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_DENSITY = 4;
     public final boolean PLAYER_FIXED_ROTATION = true;
@@ -27,27 +28,42 @@ public class Cubey extends Sprite {
         tmpBodies = new Array<Body>();
     }
 
+    public void switchBoxSprite() {
+        if(PlayScreen.WHITE_MODE) {
+            boxSprite.setTexture(new Texture("Graphics/whitecubey.png"));
+        }
+
+        if(!PlayScreen.WHITE_MODE) {
+            boxSprite.setTexture(new Texture("Graphics/blackcubey.png"));
+        }
+
+        //boxSprite.setSize(0.25f, 0.25f);
+        //b2body.setUserData(boxSprite);
+    }
+
     public void definePlayer() {
         // Player variable declaration
         BodyDef bdef;
         PolygonShape shape;
         FixtureDef fdef;
 
+        boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
+
         // Initialize and define player sprite
-        if(PlayScreen.WHITE_MODE) {
+        /*if(PlayScreen.WHITE_MODE) {
             boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
         }
 
         if(!PlayScreen.WHITE_MODE) {
             boxSprite = new Sprite(new Texture("Graphics/blackcubey.png"));
-        }
+        }*/
 
-        boxSprite.setSize(0.5f, 0.5f);
+        //boxSprite.setSize(0.1f, 0.1f);
         boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
 
         // Initialize and define player definition
         bdef = new BodyDef();
-        bdef.position.set(100 / Illumination.PPM, 100 / Illumination.PPM);
+        bdef.position.set(100 / PPM, 100 / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = PLAYER_FIXED_ROTATION;
 
@@ -59,7 +75,7 @@ public class Cubey extends Sprite {
         fdef.restitution = PLAYER_RESTITUTION;
         fdef.density = PLAYER_DENSITY;
         fdef.shape = shape;
-        shape.setAsBox(PLAYER_WIDTH / Illumination.PPM, PLAYER_HEIGHT / Illumination.PPM);
+        shape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
         // Initializing player body
         b2body = world.createBody(bdef);
@@ -75,8 +91,7 @@ public class Cubey extends Sprite {
                 Sprite sprite = (Sprite) body.getUserData();
 
                 // Sets the texture to the center of the player
-                // Addition of PLAYER_WIDTH & PLAYER_HEIGHT by 2 is required to properly align the player and the texture
-                sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / Illumination.PPM), body.getPosition().y - (PLAYER_HEIGHT / Illumination.PPM));
+                sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / PPM), body.getPosition().y - (PLAYER_HEIGHT / PPM));
 
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
                 sprite.draw(batch);
