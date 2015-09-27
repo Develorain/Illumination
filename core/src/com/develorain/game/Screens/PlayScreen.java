@@ -93,14 +93,9 @@ public class PlayScreen implements Screen {
         // Sets the world frames to 60 FPS
         world.step(1 / 60f, 6, 2);
 
-        // Centers the camera on the player (requires refactoring in the future, incorporate lerping to target, add new package of utilities)
-        cam.position.x = player.b2body.getPosition().x;
-        cam.position.y = player.b2body.getPosition().y;
-
         // Updates the camera
         //CameraUtilities.lerpToTarget(cam, new Vector2(player.getX(), player.getY()));
-        //cameraUpdate(dt);
-        cam.update();
+        cameraUpdate(dt);
 
         // Sets the tiled map renderer to render only what is on screen or in camera view
         renderer.setView(cam);
@@ -132,10 +127,14 @@ public class PlayScreen implements Screen {
     }
 
     public void cameraUpdate(float dt) {
-        Vector3 position = cam.position;
-        position.x = cam.position.x + (player.getX() - cam.position.x) * 0.1f;
-        position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
-        cam.position.set(position);
+        //Vector3 position = cam.position;
+        //position.x = cam.position.x + (player.getX() - cam.position.x) * 0.1f;
+        //position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
+        //cam.position.set(position);
+
+        // Centers the camera on the player (requires refactoring in the future, incorporate lerping to target, add new package of utilities)
+        cam.position.x = player.b2body.getPosition().x;
+        cam.position.y = player.b2body.getPosition().y;
 
         cam.update();
     }
