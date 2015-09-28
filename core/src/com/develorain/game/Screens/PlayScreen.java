@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
 import com.develorain.game.Tools.B2WorldCreator;
+import com.develorain.game.Tools.CameraUtilities;
 import com.develorain.game.Tools.LightBuilder;
 
 import static com.develorain.game.Illumination.PPM;
@@ -28,7 +29,7 @@ import static com.develorain.game.Illumination.V_WIDTH;
 
 
 public class PlayScreen implements Screen {
-    public boolean DEBUG_MODE = false;
+    public boolean DEBUG_MODE = true;
     public static boolean WHITE_MODE = true;
 
     RayHandler rayHandler;
@@ -61,7 +62,7 @@ public class PlayScreen implements Screen {
 
         // Initialize camera/viewport variable
         cam = new OrthographicCamera();
-        fitViewport = new FitViewport(V_WIDTH / PPM, V_HEIGHT / PPM, cam);
+        fitViewport = new FitViewport(2 * V_WIDTH / PPM, 2 * V_HEIGHT / PPM, cam);
 
         // Initialize tiled map variables
         mapLoader = new TmxMapLoader();
@@ -137,12 +138,13 @@ public class PlayScreen implements Screen {
 
     public void cameraUpdate(float dt) {
         // Centers the camera on the player using interpolation
-        Vector3 position = cam.position;
-        position.x = cam.position.x + (player.b2body.getPosition().x - cam.position.x) * 0.2f;
-        position.y = cam.position.y + (player.b2body.getPosition().y - cam.position.y) * 0.2f;
-        cam.position.set(position);
+        CameraUtilities.lerpToTarget(cam, new Vector2(player.b2body.getPosition().x, player.b2body.getPosition().y));
+        //Vector3 position = cam.position;
+        //position.x = cam.position.x + (player.b2body.getPosition().x - cam.position.x) * 0.2f;
+        //position.y = cam.position.y + (player.b2body.getPosition().y - cam.position.y) * 0.2f;
+        //cam.position.set(position);
 
-        cam.update();
+        //cam.update();
     }
 
     public void handleInput(float dt) {

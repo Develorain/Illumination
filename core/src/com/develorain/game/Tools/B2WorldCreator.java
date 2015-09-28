@@ -1,6 +1,7 @@
 package com.develorain.game.Tools;
 
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
@@ -33,5 +34,23 @@ public class B2WorldCreator {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+
+        MapProperties prop = map.getProperties();
+        int mapWidth = prop.get("width", Integer.class);
+        int mapHeight = prop.get("height", Integer.class);
+        int tilePixelWidth = prop.get("tilewidth", Integer.class);
+        int tilePixelHeight = prop.get("tileheight", Integer.class);
+
+        int mapPixelWidth = mapWidth * tilePixelWidth;
+        int mapPixelHeight = mapHeight * tilePixelHeight;
+
+        bdef.type = BodyDef.BodyType.StaticBody;
+        bdef.position.set(mapPixelWidth / 2 / PPM, tilePixelHeight / 2 / PPM);
+
+        body = world.createBody(bdef);
+
+        shape.setAsBox(mapPixelWidth / 2 / PPM, tilePixelHeight / 2 / PPM);
+        fdef.shape = shape;
+        body.createFixture(fdef);
     }
 }

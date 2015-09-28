@@ -10,6 +10,7 @@ public class CameraUtilities {
         position.x = cam.position.x + (target.x - cam.position.x) * 0.1f;
         position.y = cam.position.y + (target.y - cam.position.y) * 0.1f;
         cam.position.set(position);
+
         cam.update();
     }
 }
