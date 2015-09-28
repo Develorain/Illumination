@@ -16,8 +16,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Cubey;
@@ -36,6 +34,9 @@ public class PlayScreen implements Screen {
     RayHandler rayHandler;
     PointLight playerLight;
     ConeLight tempLight;
+    float lastTimeRightKeyPressed = -100;
+    float lastTimeLeftKeyPressed = -100;
+    float currentTime = 0;
 
     // Reference to the game, used to set Screens
     private Illumination game;
@@ -86,9 +87,13 @@ public class PlayScreen implements Screen {
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
+
+
     }
 
     public void update(float dt) {
+        currentTime += dt;
+
         // Handle input
         handleInput(dt);
 
@@ -110,7 +115,7 @@ public class PlayScreen implements Screen {
         update(dt);
 
         // Clears screen
-        Gdx.gl.glClearColor(0f, 0f, 1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Sets projection of the batch to the camera's matrices
@@ -131,27 +136,24 @@ public class PlayScreen implements Screen {
     }
 
     public void cameraUpdate(float dt) {
-        //Vector3 position = cam.position;
-        //position.x = cam.position.x + (player.getX() - cam.position.x) * 0.1f;
-        //position.y = cam.position.y + (player.getY() - cam.position.y) * 0.1f;
-        //cam.position.set(position);
-
-        // Centers the camera on the player (requires refactoring in the future, incorporate interpolation to target, add new package of utilities)
-        cam.position.x = player.b2body.getPosition().x;
-        cam.position.y = player.b2body.getPosition().y;
+        // Centers the camera on the player using interpolation
+        Vector3 position = cam.position;
+        position.x = cam.position.x + (player.b2body.getPosition().x - cam.position.x) * 0.2f;
+        position.y = cam.position.y + (player.b2body.getPosition().y - cam.position.y) * 0.2f;
+        cam.position.set(position);
 
         cam.update();
     }
 
     public void handleInput(float dt) {
         // Runs if right is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 10) {
-            player.b2body.applyLinearImpulse(new Vector2(2f, 0), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 700 / PPM) {
+            player.b2body.applyLinearImpulse(new Vector2(1f, 0), player.b2body.getWorldCenter(), true);
         }
 
         // Runs if left is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -10) {
-            player.b2body.applyLinearImpulse(new Vector2(-2f, 0), player.b2body.getWorldCenter(), true);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -700 / PPM) {
+            player.b2body.applyLinearImpulse(new Vector2(-1f, 0), player.b2body.getWorldCenter(), true);
         }
 
         // Runs if up is pressed
@@ -162,6 +164,31 @@ public class PlayScreen implements Screen {
         // Runs if down is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             player.b2body.applyLinearImpulse(new Vector2(0, -20f), player.b2body.getWorldCenter(), true);
+        }
+
+        // Dashing right
+        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+            if(currentTime - lastTimeRightKeyPressed < 0.2f) {
+                System.out.println("DASHED RIGHT");
+                //player.b2body.applyLinearImpulse(new Vector2(5f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.setTransform(player.b2body.getPosition().x + 100 / PPM, player.b2body.getPosition().y, 0);
+                lastTimeRightKeyPressed = -100;
+            } else {
+                lastTimeRightKeyPressed = currentTime;
+            }
+        }
+
+        // Dashing left
+        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+            if(currentTime - lastTimeLeftKeyPressed < 0.2f) {
+                System.out.println("DASHED LEFT");
+                //player.b2body.applyLinearImpulse(new Vector2(-5f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.setTransform(player.b2body.getPosition().x - 100 / PPM, player.b2body.getPosition().y, 0);
+                player.setPosition(player.getX() - 100, player.getY());
+                lastTimeLeftKeyPressed = -100;
+            } else {
+                lastTimeLeftKeyPressed = currentTime;
+            }
         }
 
         // Runs if shift is pressed

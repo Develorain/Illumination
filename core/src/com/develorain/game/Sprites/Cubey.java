@@ -14,7 +14,8 @@ public class Cubey extends Sprite {
     public final int PLAYER_WIDTH = 16;   // pixels
     public final int PLAYER_HEIGHT = 16;  // pixels
     public final int PLAYER_RESTITUTION = 0;
-    public final int PLAYER_DENSITY = 4;
+    public final int PLAYER_FRICTION = 35;
+    public final int PLAYER_DENSITY = 10;
     public final boolean PLAYER_FIXED_ROTATION = true;
 
     public World world;
@@ -64,6 +65,7 @@ public class Cubey extends Sprite {
         fdef = new FixtureDef();
         fdef.restitution = PLAYER_RESTITUTION;
         fdef.density = PLAYER_DENSITY;
+        fdef.friction = PLAYER_FRICTION;
         fdef.shape = shape;
         shape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
