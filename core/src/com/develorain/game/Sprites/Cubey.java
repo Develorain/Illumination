@@ -37,9 +37,6 @@ public class Cubey extends Sprite {
         if(!PlayScreen.WHITE_MODE) {
             boxSprite.setTexture(new Texture("Graphics/blackcubey.png"));
         }
-
-        //boxSprite.setSize(0.25f, 0.25f);
-        //b2body.setUserData(boxSprite);
     }
 
     public void definePlayer() {

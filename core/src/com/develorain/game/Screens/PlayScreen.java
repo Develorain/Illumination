@@ -88,8 +88,6 @@ public class PlayScreen implements Screen {
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
-
-
     }
 
     public void update(float dt) {
@@ -139,58 +137,56 @@ public class PlayScreen implements Screen {
     public void cameraUpdate(float dt) {
         // Centers the camera on the player using interpolation
         CameraUtilities.lerpToTarget(cam, new Vector2(player.b2body.getPosition().x, player.b2body.getPosition().y));
-        //Vector3 position = cam.position;
-        //position.x = cam.position.x + (player.b2body.getPosition().x - cam.position.x) * 0.2f;
-        //position.y = cam.position.y + (player.b2body.getPosition().y - cam.position.y) * 0.2f;
-        //cam.position.set(position);
-
-        //cam.update();
     }
 
     public void handleInput(float dt) {
+        boolean inputGiven = false;
         // Runs if right is pressed or held
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 7) {
             player.b2body.applyLinearImpulse(new Vector2(1f, 0), player.b2body.getWorldCenter(), true);
+            inputGiven = true;
         }
 
         // Runs if left is pressed or held
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -7) {
             player.b2body.applyLinearImpulse(new Vector2(-1f, 0), player.b2body.getWorldCenter(), true);
+            inputGiven = true;
         }
 
         // Runs if up is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 6f), player.b2body.getWorldCenter(), true);
+            player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
+            inputGiven = true;
         }
 
         // Runs if down is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
             player.b2body.applyLinearImpulse(new Vector2(0, -20f), player.b2body.getWorldCenter(), true);
+            inputGiven = true;
         }
 
         // Dash right
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 25) {
             if(currentTime - lastTimeDashed > 0.5) {
-                System.out.println("DASHED RIGHT");
-                player.b2body.applyLinearImpulse(new Vector2(8f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(4f, 0), player.b2body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
             }
+            inputGiven = true;
         }
 
         // Dash left
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x >= -25) {
             if(currentTime - lastTimeDashed > 0.5) {
-                System.out.println("DASHED LEFT");
-                player.b2body.applyLinearImpulse(new Vector2(-8f, 0), player.b2body.getWorldCenter(), true);
+                player.b2body.applyLinearImpulse(new Vector2(-4f, 0), player.b2body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
             }
+            inputGiven = true;
         }
 
-        /*
+
         // Teleport right
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
             if(currentTime - lastTimeRightKeyPressed < 0.2f) {
-                System.out.println("TELEPORT RIGHT");
                 player.b2body.setTransform(player.b2body.getPosition().x + 100 / PPM, player.b2body.getPosition().y, 0);
                 lastTimeRightKeyPressed = -100;
             } else {
@@ -201,13 +197,12 @@ public class PlayScreen implements Screen {
         // Teleport left
         if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
             if(currentTime - lastTimeLeftKeyPressed < 0.2f) {
-                System.out.println("TELEPORT LEFT");
                 player.b2body.setTransform(player.b2body.getPosition().x - 100 / PPM, player.b2body.getPosition().y, 0);
                 lastTimeLeftKeyPressed = -100;
             } else {
                 lastTimeLeftKeyPressed = currentTime;
             }
-        }*/
+        }
 
         // Runs if shift is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.F1))
@@ -218,6 +213,20 @@ public class PlayScreen implements Screen {
             WHITE_MODE = !WHITE_MODE;
 
             player.switchBoxSprite();
+        }
+
+        if(!inputGiven) {
+            if(player.b2body.getLinearVelocity().x - 0.3f > 0) {
+                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x - 0.3f, player.b2body.getLinearVelocity().y);
+            } else if(player.b2body.getLinearVelocity().x > 0) {
+                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+            }
+
+            if(player.b2body.getLinearVelocity().x + 0.3f < 0) {
+                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x + 0.3f, player.b2body.getLinearVelocity().y);
+            } else if(player.b2body.getLinearVelocity().x < 0) {
+                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
+            }
         }
     }
 
