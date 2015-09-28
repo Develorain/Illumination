@@ -14,7 +14,7 @@ public class Cubey extends Sprite {
     public final int PLAYER_WIDTH = 16;   // pixels
     public final int PLAYER_HEIGHT = 16;  // pixels
     public final int PLAYER_RESTITUTION = 0;
-    public final int PLAYER_FRICTION = 35;
+    public final int PLAYER_FRICTION = 0;
     public final int PLAYER_DENSITY = 10;
     public final boolean PLAYER_FIXED_ROTATION = true;
 
