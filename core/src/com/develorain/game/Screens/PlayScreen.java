@@ -134,7 +134,8 @@ public class PlayScreen implements Screen {
         // Draws player
         player.draw(game.batch);
 
-        rayHandler.render();
+        // Renders ray handler
+        //rayHandler.render();
     }
 
     public void handleInput(float dt) {
