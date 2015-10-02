@@ -1,7 +1,5 @@
 package com.develorain.game.Screens;
 
-import box2dLight.ConeLight;
-import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -17,10 +15,11 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
-import com.develorain.game.Sprites.Cubey;
+import com.develorain.game.Sprites.Player;
 import com.develorain.game.Tools.B2WorldCreator;
 import com.develorain.game.Tools.CameraUtilities;
 import com.develorain.game.Tools.LightBuilder;
+import com.develorain.game.Tools.PlayerController;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Illumination.V_HEIGHT;
@@ -28,16 +27,14 @@ import static com.develorain.game.Illumination.V_WIDTH;
 
 
 public class PlayScreen implements Screen {
-    public boolean DEBUG_MODE = true;
+    public static boolean DEBUG_MODE = true;
     public static boolean WHITE_MODE = true;
 
-    RayHandler rayHandler;
-    PointLight playerLight;
-    ConeLight tempLight;
-    float lastTimeRightKeyPressed = -100;
-    float lastTimeLeftKeyPressed = -100;
-    float lastTimeDashed = -100;
-    float currentTime = 0;
+    public RayHandler rayHandler;
+    PlayerController playerController;
+
+    // Stores current game time
+    public static float currentTime = 0;
 
     // Reference to the game, used to set Screens
     private Illumination game;
@@ -54,7 +51,7 @@ public class PlayScreen implements Screen {
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
-    private Cubey player;
+    private Player player;
 
     public PlayScreen(Illumination game) {
         // Set game as class variable
@@ -74,43 +71,49 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         // Initialize player
-        player = new Cubey(this);
+        player = new Player(this);
+        playerController = new PlayerController(player.b2body);
 
         // Initialize ray handler
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        playerLight = LightBuilder.createPointLight(rayHandler, player.b2body, Color.BLACK, 3);
+        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 2);
 
-        // Temporary lamp
-        tempLight = LightBuilder.createConeLight(rayHandler, 300, 300, Color.WHITE, 4, 270, 30);
+        // Temp test lamp
+        LightBuilder.createConeLight(rayHandler, 300, 300, Color.WHITE, 4, 270, 30);
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
     }
 
     public void update(float dt) {
+        // Increasing current game time
         currentTime += dt;
 
-        // Handle input
+        // Handles play screen input
         handleInput(dt);
+
+        // Handles player input
+        playerController.handleInput();
 
         // Sets the world frames to 60 FPS
         world.step(1 / 60f, 6, 2);
 
-        // Updates the camera
-        //CameraUtilities.lerpToTarget(cam, new Vector2(player.getX(), player.getY()));
-        cameraUpdate(dt);
+        // Centers the camera on the player using interpolation (updates the camera)
+        CameraUtilities.lerpToTarget(cam, new Vector2(player.b2body.getPosition().x, player.b2body.getPosition().y));
 
         // Sets the tiled map renderer to render only what is on screen or in camera view
         renderer.setView(cam);
 
+        // Updates the ray handler
         rayHandler.update();
     }
 
     @Override
     public void render(float dt) {
+        // Runs update method before rendering
         update(dt);
 
         // Clears screen
@@ -131,80 +134,11 @@ public class PlayScreen implements Screen {
         // Draws player
         player.draw(game.batch);
 
-        //rayHandler.render();
-    }
-
-    public void cameraUpdate(float dt) {
-        // Centers the camera on the player using interpolation
-        CameraUtilities.lerpToTarget(cam, new Vector2(player.b2body.getPosition().x, player.b2body.getPosition().y));
+        rayHandler.render();
     }
 
     public void handleInput(float dt) {
-        boolean inputGiven = false;
-        // Runs if right is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && player.b2body.getLinearVelocity().x <= 7) {
-            player.b2body.applyLinearImpulse(new Vector2(1f, 0), player.b2body.getWorldCenter(), true);
-            inputGiven = true;
-        }
-
-        // Runs if left is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && player.b2body.getLinearVelocity().x >= -7) {
-            player.b2body.applyLinearImpulse(new Vector2(-1f, 0), player.b2body.getWorldCenter(), true);
-            inputGiven = true;
-        }
-
-        // Runs if up is pressed
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-            player.b2body.applyLinearImpulse(new Vector2(0, 8f), player.b2body.getWorldCenter(), true);
-            inputGiven = true;
-        }
-
-        // Runs if down is pressed
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-            player.b2body.applyLinearImpulse(new Vector2(0, -20f), player.b2body.getWorldCenter(), true);
-            inputGiven = true;
-        }
-
-        // Dash right
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x <= 25) {
-            if(currentTime - lastTimeDashed > 0.5) {
-                player.b2body.applyLinearImpulse(new Vector2(4f, 0), player.b2body.getWorldCenter(), true);
-                lastTimeDashed = currentTime;
-            }
-            inputGiven = true;
-        }
-
-        // Dash left
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && player.b2body.getLinearVelocity().x >= -25) {
-            if(currentTime - lastTimeDashed > 0.5) {
-                player.b2body.applyLinearImpulse(new Vector2(-4f, 0), player.b2body.getWorldCenter(), true);
-                lastTimeDashed = currentTime;
-            }
-            inputGiven = true;
-        }
-
-
-        // Teleport right
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-            if(currentTime - lastTimeRightKeyPressed < 0.2f) {
-                player.b2body.setTransform(player.b2body.getPosition().x + 100 / PPM, player.b2body.getPosition().y, 0);
-                lastTimeRightKeyPressed = -100;
-            } else {
-                lastTimeRightKeyPressed = currentTime;
-            }
-        }
-
-        // Teleport left
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-            if(currentTime - lastTimeLeftKeyPressed < 0.2f) {
-                player.b2body.setTransform(player.b2body.getPosition().x - 100 / PPM, player.b2body.getPosition().y, 0);
-                lastTimeLeftKeyPressed = -100;
-            } else {
-                lastTimeLeftKeyPressed = currentTime;
-            }
-        }
-
-        // Runs if shift is pressed
+        // Runs if F1 is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.F1))
             DEBUG_MODE = !DEBUG_MODE;
 
@@ -213,20 +147,6 @@ public class PlayScreen implements Screen {
             WHITE_MODE = !WHITE_MODE;
 
             player.switchBoxSprite();
-        }
-
-        if(!inputGiven) {
-            if(player.b2body.getLinearVelocity().x - 0.3f > 0) {
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x - 0.3f, player.b2body.getLinearVelocity().y);
-            } else if(player.b2body.getLinearVelocity().x > 0) {
-                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
-            }
-
-            if(player.b2body.getLinearVelocity().x + 0.3f < 0) {
-                player.b2body.setLinearVelocity(player.b2body.getLinearVelocity().x + 0.3f, player.b2body.getLinearVelocity().y);
-            } else if(player.b2body.getLinearVelocity().x < 0) {
-                player.b2body.setLinearVelocity(0, player.b2body.getLinearVelocity().y);
-            }
         }
     }
 

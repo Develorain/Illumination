@@ -10,7 +10,7 @@ import com.develorain.game.Screens.PlayScreen;
 
 import static com.develorain.game.Illumination.PPM;
 
-public class Cubey extends Sprite {
+public class Player extends Sprite {
     public final int PLAYER_WIDTH = 16;   // pixels
     public final int PLAYER_HEIGHT = 16;  // pixels
     public final int PLAYER_RESTITUTION = 0;
@@ -18,12 +18,24 @@ public class Cubey extends Sprite {
     public final int PLAYER_DENSITY = 10;
     public final boolean PLAYER_FIXED_ROTATION = true;
 
+    boolean rightWallCollision = false;
+    boolean leftWallCollision = false;
+
     public World world;
     public Body b2body;
     public Sprite boxSprite;
     Array<Body> tmpBodies;
 
-    public Cubey(PlayScreen screen) {
+    private enum playerState {
+        GROUNDED,
+        AIRBORNE,
+        WALL_SLIDING,
+        WALL_JUMPING,
+        GROUND_SLIDING
+    }
+
+
+    public Player(PlayScreen screen) {
         this.world = screen.getWorld();
         definePlayer();
         tmpBodies = new Array<Body>();
