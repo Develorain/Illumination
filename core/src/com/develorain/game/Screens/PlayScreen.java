@@ -82,7 +82,7 @@ public class PlayScreen implements Screen {
         LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 2);
 
         // Temp test lamp
-        LightBuilder.createConeLight(rayHandler, 300, 300, Color.WHITE, 4, 270, 30);
+        LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
@@ -151,6 +151,19 @@ public class PlayScreen implements Screen {
         }
     }
 
+    @Override
+    public void dispose() {
+        map.dispose();
+        renderer.dispose();
+        world.dispose();
+        b2dr.dispose();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        fitViewport.update(width, height);
+    }
+
     public TiledMap getMap() {
         return map;
     }
@@ -162,11 +175,6 @@ public class PlayScreen implements Screen {
     @Override
     public void show() {
 
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        fitViewport.update(width, height);
     }
 
     @Override
@@ -182,13 +190,5 @@ public class PlayScreen implements Screen {
     @Override
     public void hide() {
 
-    }
-
-    @Override
-    public void dispose() {
-        map.dispose();
-        renderer.dispose();
-        world.dispose();
-        b2dr.dispose();
     }
 }

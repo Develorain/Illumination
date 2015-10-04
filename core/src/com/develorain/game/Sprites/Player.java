@@ -3,7 +3,9 @@ package com.develorain.game.Sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.develorain.game.Screens.PlayScreen;
@@ -53,35 +55,59 @@ public class Player extends Sprite {
 
     public void definePlayer() {
         // Player variable declaration
-        BodyDef bdef;
-        PolygonShape shape;
-        FixtureDef fdef;
+        BodyDef playerBodyDef;
+        PolygonShape playerShape;
+        FixtureDef playerFixtureDef;
 
+        // Censor variable declaration
+        BodyDef sensorBodyDef;
+        PolygonShape sensorShape;
+        FixtureDef sensorFixtureDef;
+
+        // Initialize player sprite
         boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
         boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
         boxSprite.setSize(32f / PPM, 32f / PPM);
 
         // Initialize and define player definition
-        bdef = new BodyDef();
-        bdef.position.set(100 / PPM, 100 / PPM);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.fixedRotation = PLAYER_FIXED_ROTATION;
+        playerBodyDef = new BodyDef();
+        playerBodyDef.position.set(100 / PPM, 100 / PPM);
+        playerBodyDef.type = BodyDef.BodyType.DynamicBody;
+        playerBodyDef.fixedRotation = PLAYER_FIXED_ROTATION;
 
         // Initialize player shape
-        shape = new PolygonShape();
+        playerShape = new PolygonShape();
 
-        // Initialize and define player fixture
-        fdef = new FixtureDef();
-        fdef.restitution = PLAYER_RESTITUTION;
-        fdef.density = PLAYER_DENSITY;
-        fdef.friction = PLAYER_FRICTION;
-        fdef.shape = shape;
-        shape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
+        // Initialize and define player fixture and shape
+        playerFixtureDef = new FixtureDef();
+        playerFixtureDef.restitution = PLAYER_RESTITUTION;
+        playerFixtureDef.density = PLAYER_DENSITY;
+        playerFixtureDef.friction = PLAYER_FRICTION;
+        playerFixtureDef.shape = playerShape;
+        playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
+
+
+        // Initialize an define player's sensor's definition
+        sensorBodyDef = new BodyDef();
+        sensorBodyDef.type = BodyDef.BodyType.KinematicBody;
+
+        // Initialize player sensor's shape
+        sensorShape = new PolygonShape();
+
+        // Initialize and define player sensor's fixture and shape
+        sensorFixtureDef = new FixtureDef();
+        sensorFixtureDef.isSensor = true;
+        sensorFixtureDef.restitution = 0;
+        sensorFixtureDef.density = 0;
+        sensorFixtureDef.friction = 0;
+        sensorFixtureDef.shape = sensorShape;
+        sensorShape.setAsBox(10 / PPM, 10 / PPM, new Vector2(0 / PPM, -PLAYER_HEIGHT / 2 / PPM), 0);
 
         // Initializing player body
-        b2body = world.createBody(bdef);
+        b2body = world.createBody(playerBodyDef);
         b2body.setUserData(boxSprite);
-        b2body.createFixture(fdef);
+        b2body.createFixture(playerFixtureDef);
+        b2body.createFixture(sensorFixtureDef);
     }
 
     public void draw(Batch batch) {
