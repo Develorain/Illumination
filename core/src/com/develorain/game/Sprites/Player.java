@@ -3,7 +3,6 @@ package com.develorain.game.Sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -43,26 +42,43 @@ public class Player extends Sprite {
         tmpBodies = new Array<Body>();
     }
 
-    public void switchBoxSprite() {
-        if(PlayScreen.WHITE_MODE) {
-            boxSprite.setTexture(new Texture("Graphics/whitecubey.png"));
-        }
-
-        if(!PlayScreen.WHITE_MODE) {
-            boxSprite.setTexture(new Texture("Graphics/blackcubey.png"));
-        }
+    public void definePlayer() {
+        createPlayer();
+        createPlayerSensor();
     }
 
-    public void definePlayer() {
+    private void createPlayerSensor() {
+        // Sensor variable declaration
+        BodyDef sensorBodyDef;
+        PolygonShape sensorShape;
+        FixtureDef sensorFixtureDef;
+
+        // Initialize and define player's sensor's definition
+        sensorBodyDef = new BodyDef();
+        sensorBodyDef.type = BodyDef.BodyType.KinematicBody;
+
+        // Initialize player sensor's shape
+        sensorShape = new PolygonShape();
+
+        // Initialize and define player sensor's fixture and shape
+        sensorFixtureDef = new FixtureDef();
+        sensorFixtureDef.isSensor = true;
+        sensorFixtureDef.restitution = 0;
+        sensorFixtureDef.density = 0;
+        sensorFixtureDef.friction = 0;
+        sensorFixtureDef.shape = sensorShape;
+        sensorShape.setAsBox(10 / PPM, 10 / PPM, new Vector2(0 / PPM, -PLAYER_HEIGHT / 2 / PPM), 0);
+
+        // Initializing sensor body
+        b2body.createFixture(sensorFixtureDef);
+
+    }
+
+    private void createPlayer() {
         // Player variable declaration
         BodyDef playerBodyDef;
         PolygonShape playerShape;
         FixtureDef playerFixtureDef;
-
-        // Censor variable declaration
-        BodyDef sensorBodyDef;
-        PolygonShape sensorShape;
-        FixtureDef sensorFixtureDef;
 
         // Initialize player sprite
         boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
@@ -86,28 +102,9 @@ public class Player extends Sprite {
         playerFixtureDef.shape = playerShape;
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
-
-        // Initialize an define player's sensor's definition
-        sensorBodyDef = new BodyDef();
-        sensorBodyDef.type = BodyDef.BodyType.KinematicBody;
-
-        // Initialize player sensor's shape
-        sensorShape = new PolygonShape();
-
-        // Initialize and define player sensor's fixture and shape
-        sensorFixtureDef = new FixtureDef();
-        sensorFixtureDef.isSensor = true;
-        sensorFixtureDef.restitution = 0;
-        sensorFixtureDef.density = 0;
-        sensorFixtureDef.friction = 0;
-        sensorFixtureDef.shape = sensorShape;
-        sensorShape.setAsBox(10 / PPM, 10 / PPM, new Vector2(0 / PPM, -PLAYER_HEIGHT / 2 / PPM), 0);
-
-        // Initializing player body
         b2body = world.createBody(playerBodyDef);
         b2body.setUserData(boxSprite);
         b2body.createFixture(playerFixtureDef);
-        b2body.createFixture(sensorFixtureDef);
     }
 
     public void draw(Batch batch) {
@@ -125,5 +122,15 @@ public class Player extends Sprite {
             }
         }
         batch.end();
+    }
+
+    public void switchBoxSprite() {
+        if(PlayScreen.WHITE_MODE) {
+            boxSprite.setTexture(new Texture("Graphics/whitecubey.png"));
+        }
+
+        if(!PlayScreen.WHITE_MODE) {
+            boxSprite.setTexture(new Texture("Graphics/blackcubey.png"));
+        }
     }
 }
