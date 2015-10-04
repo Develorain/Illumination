@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -68,6 +69,37 @@ public class PlayScreen implements Screen {
 
         // Initialize world
         world = new World(new Vector2(0, -9.8f), true);
+        world.setContactListener(new ContactListener() {
+            @Override
+            public void beginContact(Contact contact) {
+                //Fixture fA = contact.getFixtureA();
+                //Fixture fB = contact.getFixtureB();
+                //Gdx.app.log("beginContact", "between " + fA.toString() + " and " + fB.toString());
+                //player.setCanJump(true);
+                System.out.println("Begin contact");
+                Vector2 normal = contact.getWorldManifold().getNormal();
+                playerController.canJump = true;
+                System.out.println(normal.x + ", " + normal.y);
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+                //Gdx.app.log("endContact", "between ");
+                //player.setCanJump(false);
+                System.out.println("End contact");
+                playerController.canJump = false;
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {
+
+            }
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {
+
+            }
+        });
         b2dr = new Box2DDebugRenderer();
 
         // Initialize player
@@ -76,6 +108,7 @@ public class PlayScreen implements Screen {
 
         // Initialize ray handler
         rayHandler = new RayHandler(world);
+        //rayHandler.setAmbientLight(0.025f);
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
@@ -128,23 +161,23 @@ public class PlayScreen implements Screen {
         renderer.render();
 
         // Renders the box2D debug renderer (lines)
-        if(DEBUG_MODE)
+        if (DEBUG_MODE)
             b2dr.render(world, cam.combined);
 
         // Draws player
         player.draw(game.batch);
 
         // Renders ray handler
-        //rayHandler.render();
+        rayHandler.render();
     }
 
     public void handleInput(float dt) {
         // Runs if F1 is pressed
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F1))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F1))
             DEBUG_MODE = !DEBUG_MODE;
 
         // Runs if Q is pressed
-        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             WHITE_MODE = !WHITE_MODE;
 
             player.switchBoxSprite();
