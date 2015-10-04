@@ -17,6 +17,8 @@ public class PlayerController {
     private float lastTimeLeftKeyPressed = -100;
     private float lastTimeDashed = -100;
     public boolean canJump = false;
+    public boolean canWallJumpToLeft = false;
+    public boolean canWallJumpToRight = false;
 
     public PlayerController(Body body) {
         this.body = body;
@@ -36,9 +38,18 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Runs if up is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canJump) {
             body.applyLinearImpulse(new Vector2(0, 8f), body.getWorldCenter(), true);
+            inputGiven = true;
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToLeft) {
+            body.applyLinearImpulse(new Vector2(-8f, 8f), body.getWorldCenter(), true);
+            inputGiven = true;
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToRight) {
+            body.applyLinearImpulse(new Vector2(8f, 8f), body.getWorldCenter(), true);
             inputGiven = true;
         }
 

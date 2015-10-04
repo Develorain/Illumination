@@ -73,13 +73,26 @@ public class PlayScreen implements Screen {
             @Override
             public void beginContact(Contact contact) {
                 Vector2 normal = contact.getWorldManifold().getNormal();
-                playerController.canJump = true;
+                if(normal.x == 0f && normal.y == -1f) {
+                    playerController.canJump = true;
+                }
+
+                if(normal.x == 1f && normal.y == 0f) {
+                    playerController.canWallJumpToLeft = true;
+                }
+
+                if(normal.x == -1f && normal.y == 0f) {
+                    playerController.canWallJumpToRight = true;
+                }
+
                 System.out.println(normal.x + ", " + normal.y);
             }
 
             @Override
             public void endContact(Contact contact) {
                 playerController.canJump = false;
+                playerController.canWallJumpToLeft = false;
+                playerController.canWallJumpToRight = false;
             }
 
             @Override
@@ -104,7 +117,7 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 2);
+        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
 
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
