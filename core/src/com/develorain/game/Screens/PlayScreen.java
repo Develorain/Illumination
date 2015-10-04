@@ -72,11 +72,6 @@ public class PlayScreen implements Screen {
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
-                //Fixture fA = contact.getFixtureA();
-                //Fixture fB = contact.getFixtureB();
-                //Gdx.app.log("beginContact", "between " + fA.toString() + " and " + fB.toString());
-                //player.setCanJump(true);
-                System.out.println("Begin contact");
                 Vector2 normal = contact.getWorldManifold().getNormal();
                 playerController.canJump = true;
                 System.out.println(normal.x + ", " + normal.y);
@@ -84,9 +79,6 @@ public class PlayScreen implements Screen {
 
             @Override
             public void endContact(Contact contact) {
-                //Gdx.app.log("endContact", "between ");
-                //player.setCanJump(false);
-                System.out.println("End contact");
                 playerController.canJump = false;
             }
 

@@ -102,12 +102,4 @@ public class PlayerController {
             }
         }
     }
-
-    public void setCanJump(boolean b) {
-        canJump = b;
-    }
-
-    public boolean getCanJump() {
-        return canJump;
-    }
 }

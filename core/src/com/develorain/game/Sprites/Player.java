@@ -19,22 +19,10 @@ public class Player extends Sprite {
     public final int PLAYER_DENSITY = 10;
     public final boolean PLAYER_FIXED_ROTATION = true;
 
-    boolean rightWallCollision = false;
-    boolean leftWallCollision = false;
-
     public World world;
     public Body b2body;
     public Sprite boxSprite;
     Array<Body> tmpBodies;
-
-    private enum playerState {
-        GROUNDED,
-        AIRBORNE,
-        WALL_SLIDING,
-        WALL_JUMPING,
-        GROUND_SLIDING
-    }
-
 
     public Player(PlayScreen screen) {
         this.world = screen.getWorld();
@@ -44,7 +32,6 @@ public class Player extends Sprite {
 
     public void definePlayer() {
         createPlayer();
-        //createPlayerSensor();
     }
 
     private void createPlayer() {
@@ -79,32 +66,6 @@ public class Player extends Sprite {
         b2body = world.createBody(playerBodyDef);
         b2body.setUserData(boxSprite);
         b2body.createFixture(playerFixtureDef);
-    }
-
-    private void createPlayerSensor() {
-        // Sensor variable declaration
-        BodyDef sensorBodyDef;
-        PolygonShape sensorShape;
-        FixtureDef sensorFixtureDef;
-
-        // Initialize and define player's sensor's definition
-        sensorBodyDef = new BodyDef();
-        sensorBodyDef.type = BodyDef.BodyType.KinematicBody;
-
-        // Initialize player sensor's shape
-        sensorShape = new PolygonShape();
-
-        // Initialize and define player sensor's fixture and shape
-        sensorFixtureDef = new FixtureDef();
-        sensorFixtureDef.isSensor = true;
-        sensorFixtureDef.restitution = 0;
-        sensorFixtureDef.density = 0;
-        sensorFixtureDef.friction = 0;
-        sensorFixtureDef.shape = sensorShape;
-        sensorShape.setAsBox((PLAYER_WIDTH - 1) / PPM, 5 / PPM, new Vector2(0 / PPM,  -6 / PPM - PLAYER_HEIGHT / 2 / PPM), 0);
-
-        // Initializing sensor body
-        b2body.createFixture(sensorFixtureDef);
     }
 
     public void draw(Batch batch) {
