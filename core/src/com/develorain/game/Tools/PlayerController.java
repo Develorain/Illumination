@@ -43,12 +43,12 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToLeft) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToLeft && !canJump) {
             body.applyLinearImpulse(new Vector2(-8f, 8f), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToRight) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToRight && !canJump) {
             body.applyLinearImpulse(new Vector2(8f, 8f), body.getWorldCenter(), true);
             inputGiven = true;
         }
