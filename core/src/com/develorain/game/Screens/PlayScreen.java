@@ -7,7 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -17,10 +17,9 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Player;
-import com.develorain.game.Tools.B2WorldCreator;
-import com.develorain.game.Tools.CameraUtilities;
-import com.develorain.game.Tools.LightBuilder;
-import com.develorain.game.Tools.PlayerController;
+import com.develorain.game.Tools.*;
+
+import java.util.ArrayList;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Illumination.V_HEIGHT;
@@ -32,7 +31,7 @@ public class PlayScreen implements Screen {
     public static boolean WHITE_MODE = true;
 
     public RayHandler rayHandler;
-    PlayerController playerController;
+    private PlayerController playerController;
 
     // Stores current game time
     public static float currentTime = 0;
@@ -54,6 +53,8 @@ public class PlayScreen implements Screen {
     private Box2DDebugRenderer b2dr;
     private Player player;
 
+    private ArrayList<ContactWrapper> contactWrappers = new ArrayList<ContactWrapper>();
+
     public PlayScreen(Illumination game) {
         // Set game as class variable
         this.game = game;
@@ -72,6 +73,8 @@ public class PlayScreen implements Screen {
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
+                contactWrappers.add(new ContactWrapper(contact));
+
                 Vector2 normal = contact.getWorldManifold().getNormal();
                 if(normal.x == 0f && normal.y == -1f) {
                     playerController.canJump = true;
@@ -84,15 +87,29 @@ public class PlayScreen implements Screen {
                 if(normal.x == -1f && normal.y == 0f) {
                     playerController.canWallJumpToRight = true;
                 }
-
-                System.out.println(normal.x + ", " + normal.y);
             }
 
             @Override
             public void endContact(Contact contact) {
-                playerController.canJump = false;
-                playerController.canWallJumpToLeft = false;
-                playerController.canWallJumpToRight = false;
+                for(ContactWrapper indexContactWrapper : contactWrappers) {
+                    if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB ==contact.getFixtureB()) {
+
+                        if(indexContactWrapper.normalVectorX == 0f && indexContactWrapper.normalVectorY == -1f) {
+                            playerController.canJump = false;
+                        }
+
+                        if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
+                            playerController.canWallJumpToLeft = false;
+                        }
+
+                        if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
+                            playerController.canWallJumpToRight = false;
+                        }
+
+                        contactWrappers.remove(indexContactWrapper);
+                        break;
+                    }
+                }
             }
 
             @Override
