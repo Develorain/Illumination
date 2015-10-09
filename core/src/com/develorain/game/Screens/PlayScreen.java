@@ -7,7 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -27,7 +26,7 @@ import static com.develorain.game.Illumination.V_WIDTH;
 
 
 public class PlayScreen implements Screen {
-    public static boolean DEBUG_MODE = true;
+    public static boolean DEBUG_MODE = false;
     public static boolean WHITE_MODE = true;
 
     public RayHandler rayHandler;
@@ -70,58 +69,9 @@ public class PlayScreen implements Screen {
 
         // Initialize world
         world = new World(new Vector2(0, -9.8f), true);
-        world.setContactListener(new ContactListener() {
-            @Override
-            public void beginContact(Contact contact) {
-                contactWrappers.add(new ContactWrapper(contact));
+        createWorldContactListener(world);
 
-                Vector2 normal = contact.getWorldManifold().getNormal();
-                if(normal.x == 0f && normal.y == -1f) {
-                    playerController.canJump = true;
-                }
-
-                if(normal.x == 1f && normal.y == 0f) {
-                    playerController.canWallJumpToLeft = true;
-                }
-
-                if(normal.x == -1f && normal.y == 0f) {
-                    playerController.canWallJumpToRight = true;
-                }
-            }
-
-            @Override
-            public void endContact(Contact contact) {
-                for(ContactWrapper indexContactWrapper : contactWrappers) {
-                    if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB ==contact.getFixtureB()) {
-
-                        if(indexContactWrapper.normalVectorX == 0f && indexContactWrapper.normalVectorY == -1f) {
-                            playerController.canJump = false;
-                        }
-
-                        if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
-                            playerController.canWallJumpToLeft = false;
-                        }
-
-                        if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
-                            playerController.canWallJumpToRight = false;
-                        }
-
-                        contactWrappers.remove(indexContactWrapper);
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void preSolve(Contact contact, Manifold oldManifold) {
-
-            }
-
-            @Override
-            public void postSolve(Contact contact, ContactImpulse impulse) {
-
-            }
-        });
+        // Initialize box2d debug renderer
         b2dr = new Box2DDebugRenderer();
 
         // Initialize player
@@ -134,7 +84,7 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
+        LightBuilder.createPointLight(rayHandler, player.b2body, Color.CHARTREUSE, 3);
 
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
@@ -206,6 +156,57 @@ public class PlayScreen implements Screen {
         }
     }
 
+    public void createWorldContactListener(World world) {
+        world.setContactListener(new ContactListener() {
+            @Override
+            public void beginContact(Contact contact) {
+                contactWrappers.add(new ContactWrapper(contact));
+
+                Vector2 normal = contact.getWorldManifold().getNormal();
+                if(normal.x == 0f && normal.y == -1f) {
+                    playerController.canJump = true;
+                }
+
+                if(normal.x == 1f && normal.y == 0f) {
+                    playerController.canWallJumpToLeft = true;
+                }
+
+                if(normal.x == -1f && normal.y == 0f) {
+                    playerController.canWallJumpToRight = true;
+                }
+            }
+
+            @Override
+            public void endContact(Contact contact) {
+                for(ContactWrapper indexContactWrapper : contactWrappers) {
+                    if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB ==contact.getFixtureB()) {
+
+                        if(indexContactWrapper.normalVectorX == 0f && indexContactWrapper.normalVectorY == -1f) {
+                            playerController.canJump = false;
+                        }
+
+                        if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
+                            playerController.canWallJumpToLeft = false;
+                        }
+
+                        if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
+                            playerController.canWallJumpToRight = false;
+                        }
+
+                        contactWrappers.remove(indexContactWrapper);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void preSolve(Contact contact, Manifold oldManifold) {}
+
+            @Override
+            public void postSolve(Contact contact, ContactImpulse impulse) {}
+        });
+    }
+
     @Override
     public void dispose() {
         map.dispose();
@@ -228,22 +229,14 @@ public class PlayScreen implements Screen {
     }
 
     @Override
-    public void show() {
-
-    }
+    public void show() {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
-    public void hide() {
-
-    }
+    public void hide() {}
 }
