@@ -105,6 +105,7 @@ public class PlayScreen implements Screen {
         // Increasing current game time
         currentTime += dt;
 
+        // Updates the HUD
         hud.update(dt);
 
         // Handles play screen input

@@ -26,7 +26,7 @@ public class HUD {
         viewport = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        worldTimer = 30;
+        worldTimer = 200;
         timeCount = 0;
 
         Table table = new Table();
@@ -53,6 +53,7 @@ public class HUD {
             timeCount = 0;
         }
 
+        // Ends the game when timer is 0
         if(worldTimer == 0) {
             Gdx.app.exit();
         }
