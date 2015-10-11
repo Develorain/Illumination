@@ -1,5 +1,6 @@
 package com.develorain.game.Scenes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -25,7 +26,7 @@ public class HUD {
         viewport = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        worldTimer = 30;
+        worldTimer = 200;
         timeCount = 0;
 
         Table table = new Table();
@@ -50,6 +51,10 @@ public class HUD {
             countdownLabel.setText(String.format("%02d", worldTimer));
 
             timeCount = 0;
+        }
+
+        if(worldTimer == 0) {
+            Gdx.app.exit();
         }
     }
 }
