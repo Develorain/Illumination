@@ -26,14 +26,14 @@ public class HUD {
         viewport = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        worldTimer = 200;
+        worldTimer = 30;
         timeCount = 0;
 
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label(String.format("%1d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Time", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(timeLabel).expandX().padTop(10);
@@ -48,7 +48,7 @@ public class HUD {
 
         if(timeCount >= 1) {
             worldTimer--;
-            countdownLabel.setText(String.format("%02d", worldTimer));
+            countdownLabel.setText(String.format("%d", worldTimer));
 
             timeCount = 0;
         }
