@@ -40,25 +40,25 @@ public class PlayerController {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canJump) {
-            body.applyLinearImpulse(new Vector2(0, 8f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToLeft && !canJump) {
-            body.applyLinearImpulse(new Vector2(-8f, 8f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-8f, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToRight && !canJump) {
-            body.applyLinearImpulse(new Vector2(8f, 8f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(8f, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && canChargeDownwards) {
-            body.setLinearVelocity(0, 0);
+            body.setLinearVelocity(body.getLinearVelocity().x, 0);
             body.applyLinearImpulse(new Vector2(0, -20f), body.getWorldCenter(), true);
             canChargeDownwards = false;
             inputGiven = true;

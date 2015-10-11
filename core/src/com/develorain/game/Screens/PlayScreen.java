@@ -73,7 +73,7 @@ public class PlayScreen implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
 
         // Initialize world
-        world = new World(new Vector2(0, -9.8f), true);
+        world = new World(new Vector2(0, -25f), true);
         createWorldContactListener(world);
 
         // Initialize box2d debug renderer

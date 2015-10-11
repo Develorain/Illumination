@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -22,6 +23,8 @@ public class HUD {
     private Label countdownLabel;
     private Label timeLabel;
 
+    public BitmapFont myfont;
+
     public HUD(SpriteBatch sb) {
         viewport = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
@@ -29,12 +32,21 @@ public class HUD {
         worldTimer = 200;
         timeCount = 0;
 
+        // FONT
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/autoradiographic.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 40;
+        parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
+        myfont = generator.generateFont(parameter);
+        myfont.setColor(Color.WHITE);
+        generator.dispose();
+
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("Time", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(myfont, Color.WHITE));
+        timeLabel = new Label("Time", new Label.LabelStyle(myfont, Color.WHITE));
 
         table.add(timeLabel).expandX().padTop(10);
         table.row();
@@ -49,12 +61,11 @@ public class HUD {
         if(timeCount >= 1) {
             worldTimer--;
             countdownLabel.setText(String.format("%d", worldTimer));
-
             timeCount = 0;
         }
 
         // Ends the game when timer is 0
-        if(worldTimer == 0) {
+        if(worldTimer <= 0) {
             Gdx.app.exit();
         }
     }
