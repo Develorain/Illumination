@@ -55,10 +55,9 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Player player;
+    private HUD hud;
 
     private ArrayList<ContactWrapper> contactWrappers = new ArrayList<ContactWrapper>();
-
-    private HUD hud;
 
     public PlayScreen(Illumination game) {
         // Set game as class variable
@@ -95,6 +94,7 @@ public class PlayScreen implements Screen {
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
 
+        // Initialize HUD
         hud = new HUD(game.batch);
 
         // Initializes the collision of the static tiles (ground)
@@ -104,6 +104,8 @@ public class PlayScreen implements Screen {
     public void update(float dt) {
         // Increasing current game time
         currentTime += dt;
+
+        hud.update(dt);
 
         // Handles play screen input
         handleInput(dt);

@@ -32,7 +32,7 @@ public class HUD {
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label(String.format("%02d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        countdownLabel = new Label(String.format("%1d", worldTimer), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         timeLabel = new Label("Time", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(timeLabel).expandX().padTop(10);
@@ -40,5 +40,16 @@ public class HUD {
         table.add(countdownLabel).expandX();
 
         stage.addActor(table);
+    }
+
+    public void update(float dt) {
+        timeCount += dt;
+
+        if(timeCount >= 1) {
+            worldTimer--;
+            countdownLabel.setText(String.format("%02d", worldTimer));
+
+            timeCount = 0;
+        }
     }
 }
