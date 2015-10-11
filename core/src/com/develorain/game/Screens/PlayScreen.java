@@ -7,6 +7,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -15,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
+import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Tools.*;
 
@@ -54,6 +58,8 @@ public class PlayScreen implements Screen {
 
     private ArrayList<ContactWrapper> contactWrappers = new ArrayList<ContactWrapper>();
 
+    private HUD hud;
+
     public PlayScreen(Illumination game) {
         // Set game as class variable
         this.game = game;
@@ -84,10 +90,12 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.b2body, Color.CHARTREUSE, 3);
+        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
 
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
+
+        hud = new HUD(game.batch);
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
@@ -124,6 +132,10 @@ public class PlayScreen implements Screen {
         // Clears screen
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // Draws HUD
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
 
         // Sets projection of the batch to the camera's matrices
         game.batch.setProjectionMatrix(cam.combined);

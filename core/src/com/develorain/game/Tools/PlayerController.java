@@ -57,7 +57,6 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Runs if down is pressed
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && canChargeDownwards) {
             body.setLinearVelocity(0, 0);
             body.applyLinearImpulse(new Vector2(0, -20f), body.getWorldCenter(), true);
@@ -83,6 +82,17 @@ public class PlayerController {
             inputGiven = true;
         }
 
+        // Sprint right
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x <= 15) {
+            body.applyLinearImpulse(new Vector2(0.5f, 0), body.getWorldCenter(), true);
+            inputGiven = true;
+        }
+
+        // Sprint left
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x >= -15) {
+            body.applyLinearImpulse(new Vector2(-0.5f, 0), body.getWorldCenter(), true);
+            inputGiven = true;
+        }
 
         // Teleport right
         if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
