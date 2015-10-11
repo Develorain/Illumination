@@ -29,13 +29,13 @@ public class PlayerController {
         boolean inputGiven = false;
         // Runs if right is pressed or held
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= 7) {
-            body.applyLinearImpulse(new Vector2(1f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(2f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Runs if left is pressed or held
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -7) {
-            body.applyLinearImpulse(new Vector2(-1f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-2f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
@@ -66,8 +66,8 @@ public class PlayerController {
 
         // Dash right
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= 25) {
-            if(currentTime - lastTimeDashed > 0.5) {
-                body.applyLinearImpulse(new Vector2(4f, 0), body.getWorldCenter(), true);
+            if(currentTime - lastTimeDashed > 1) {
+                body.applyLinearImpulse(new Vector2(8f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
             }
             inputGiven = true;
@@ -75,8 +75,8 @@ public class PlayerController {
 
         // Dash left
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -25) {
-            if(currentTime - lastTimeDashed > 0.5) {
-                body.applyLinearImpulse(new Vector2(-4f, 0), body.getWorldCenter(), true);
+            if(currentTime - lastTimeDashed > 1) {
+                body.applyLinearImpulse(new Vector2(-8f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
             }
             inputGiven = true;
