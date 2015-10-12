@@ -217,6 +217,7 @@ public class PlayScreen implements Screen {
                             playerController.canDoubleJump = true;
                         }
 
+                        playerController.canChargeDownwards = true;
                         contactWrappers.remove(indexContactWrapper);
                         break;
                     }
