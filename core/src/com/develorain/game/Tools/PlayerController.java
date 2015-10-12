@@ -29,46 +29,46 @@ public class PlayerController {
     public void handleInput() {
         boolean inputGiven = false;
         // Runs if right is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= 7) {
+        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && body.getLinearVelocity().x <= 7) {
             body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Runs if left is pressed or held
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -7) {
+        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && body.getLinearVelocity().x >= -7) {
             body.applyLinearImpulse(new Vector2(-1.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Jump
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canJump) {
             body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
         // Double jump
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canDoubleJump && !canJump && !canWallJumpToLeft && !canWallJumpToRight) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canDoubleJump && !canJump && !canWallJumpToLeft && !canWallJumpToRight) {
             body.applyLinearImpulse(new Vector2(0, 8f), body.getWorldCenter(), true);
             canDoubleJump = false;
         }
 
         // Right wall jump
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToLeft && !canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump) {
             body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
         // Left wall jump
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToRight && !canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump) {
             body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
         // Down charge
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && canChargeDownwards) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.S)) && canChargeDownwards) {
             body.setLinearVelocity(body.getLinearVelocity().x, 0);
             body.applyLinearImpulse(new Vector2(0, -20f), body.getWorldCenter(), true);
             canChargeDownwards = false;
@@ -76,7 +76,7 @@ public class PlayerController {
         }
 
         // Dash right
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= 25) {
+        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= 25) {
             if(currentTime - lastTimeDashed > 1) {
                 body.applyLinearImpulse(new Vector2(80f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
@@ -85,7 +85,7 @@ public class PlayerController {
         }
 
         // Dash left
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -25) {
+        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -25) {
             if(currentTime - lastTimeDashed > 1) {
                 body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
@@ -94,19 +94,19 @@ public class PlayerController {
         }
 
         // Sprint right
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x <= 15) {
+        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x <= 15) {
             body.applyLinearImpulse(new Vector2(0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Sprint left
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x >= -15) {
+        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x >= -15) {
             body.applyLinearImpulse(new Vector2(-0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Teleport right
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) || Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             if(currentTime - lastTimeRightKeyPressed < 0.2f) {
                 body.setTransform(body.getPosition().x + 100 / PPM, body.getPosition().y, 0);
                 lastTimeRightKeyPressed = -100;
@@ -116,7 +116,7 @@ public class PlayerController {
         }
 
         // Teleport left
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.A))) {
             if(currentTime - lastTimeLeftKeyPressed < 0.2f) {
                 body.setTransform(body.getPosition().x - 100 / PPM, body.getPosition().y, 0);
                 lastTimeLeftKeyPressed = -100;
