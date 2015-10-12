@@ -17,6 +17,7 @@ public class PlayerController {
     private float lastTimeLeftKeyPressed = -100;
     private float lastTimeDashed = -100;
     public boolean canJump = false;
+    public boolean canDoubleJump = false;
     public boolean canWallJumpToLeft = false;
     public boolean canWallJumpToRight = false;
     public boolean canChargeDownwards = false;
@@ -29,34 +30,44 @@ public class PlayerController {
         boolean inputGiven = false;
         // Runs if right is pressed or held
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= 7) {
-            body.applyLinearImpulse(new Vector2(2f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Runs if left is pressed or held
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -7) {
-            body.applyLinearImpulse(new Vector2(-2f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-1.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
+        // Jump
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canJump) {
             body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
+        // Double jump
+        if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canDoubleJump && !canJump && !canWallJumpToLeft && !canWallJumpToRight) {
+            body.applyLinearImpulse(new Vector2(0, 8f), body.getWorldCenter(), true);
+            canDoubleJump = false;
+        }
+
+        // Right wall jump
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToLeft && !canJump) {
-            body.applyLinearImpulse(new Vector2(-8f, 10f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
+        // Left wall jump
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP) && canWallJumpToRight && !canJump) {
-            body.applyLinearImpulse(new Vector2(8f, 10f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             canChargeDownwards = true;
             inputGiven = true;
         }
 
+        // Down charge
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && canChargeDownwards) {
             body.setLinearVelocity(body.getLinearVelocity().x, 0);
             body.applyLinearImpulse(new Vector2(0, -20f), body.getWorldCenter(), true);
@@ -67,7 +78,7 @@ public class PlayerController {
         // Dash right
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= 25) {
             if(currentTime - lastTimeDashed > 1) {
-                body.applyLinearImpulse(new Vector2(8f, 0), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(80f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
             }
             inputGiven = true;
@@ -76,7 +87,7 @@ public class PlayerController {
         // Dash left
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -25) {
             if(currentTime - lastTimeDashed > 1) {
-                body.applyLinearImpulse(new Vector2(-8f, 0), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
             }
             inputGiven = true;
@@ -112,6 +123,11 @@ public class PlayerController {
             } else {
                 lastTimeLeftKeyPressed = currentTime;
             }
+        }
+
+        // Limit movement on Y-axis
+        if(body.getLinearVelocity().y >= 20) {
+            body.setLinearVelocity(body.getLinearVelocity().x, 20);
         }
 
         // Manual deceleration

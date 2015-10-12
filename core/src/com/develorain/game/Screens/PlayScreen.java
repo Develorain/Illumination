@@ -136,10 +136,6 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Draws HUD
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
-
         // Sets projection of the batch to the camera's matrices
         game.batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
@@ -156,6 +152,10 @@ public class PlayScreen implements Screen {
 
         // Renders ray handler
         rayHandler.render();
+
+        // Draws HUD
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     public void handleInput(float dt) {
@@ -178,16 +178,22 @@ public class PlayScreen implements Screen {
                 contactWrappers.add(new ContactWrapper(contact));
 
                 Vector2 normal = contact.getWorldManifold().getNormal();
+                // If the player is on the ground
                 if(normal.x == 0f && normal.y == -1f) {
                     playerController.canJump = true;
+                    playerController.canDoubleJump = false;
                 }
 
+                // If the player is colliding to a wall on player's right
                 if(normal.x == 1f && normal.y == 0f) {
                     playerController.canWallJumpToLeft = true;
+                    playerController.canDoubleJump = false;
                 }
 
+                // If the player is colliding to a wall on player's left
                 if(normal.x == -1f && normal.y == 0f) {
                     playerController.canWallJumpToRight = true;
+                    playerController.canDoubleJump = false;
                 }
             }
 
@@ -198,14 +204,17 @@ public class PlayScreen implements Screen {
 
                         if(indexContactWrapper.normalVectorX == 0f && indexContactWrapper.normalVectorY == -1f) {
                             playerController.canJump = false;
+                            playerController.canDoubleJump = true;
                         }
 
                         if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToLeft = false;
+                            playerController.canDoubleJump = true;
                         }
 
                         if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToRight = false;
+                            playerController.canDoubleJump = true;
                         }
 
                         contactWrappers.remove(indexContactWrapper);
