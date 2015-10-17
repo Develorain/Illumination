@@ -41,8 +41,8 @@ public class Player extends Sprite {
 
         // Initialize player sprite
         boxSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
-        boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
         boxSprite.setSize(32f / PPM, 32f / PPM);
+        boxSprite.setOrigin(boxSprite.getWidth() / 2, boxSprite.getHeight() / 2);
 
         // Initialize and define player definition
         playerBodyDef = new BodyDef();

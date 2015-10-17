@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="29">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="42">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="9">
   <image source="tileset.png" width="48" height="48"/>
  </tileset>
@@ -9,20 +9,23 @@
   </data>
  </layer>
  <objectgroup name="slopes">
-  <object id="22" x="432" y="15984">
-   <polyline points="0,0 336,-400"/>
-  </object>
-  <object id="25" x="1056" y="15584">
-   <polyline points="0,0 304,400"/>
-  </object>
-  <object id="26" x="1056" y="15584">
-   <polyline points="0,0 -288,0"/>
-  </object>
   <object id="27" x="16" y="15312">
    <polyline points="0,0 0,672"/>
   </object>
   <object id="28" x="16" y="15984">
    <polyline points="0,0 416,0"/>
+  </object>
+  <object id="38" x="432" y="15984">
+   <polyline points="0,0 336,-400"/>
+  </object>
+  <object id="39" x="768" y="15584">
+   <polyline points="0,0 288,0"/>
+  </object>
+  <object id="40" x="1056" y="15584">
+   <polyline points="0,0 304,400"/>
+  </object>
+  <object id="41" x="1360" y="15984">
+   <polyline points="0,0 464,0"/>
   </object>
  </objectgroup>
 </map>

@@ -141,14 +141,14 @@ public class PlayScreen implements Screen {
         rayHandler.setCombinedMatrix(cam);
 
         // Renders the tiled map
-        //renderer.render();
+        renderer.render();
 
         // Renders the box2D debug renderer (lines)
         if (DEBUG_MODE)
             b2dr.render(world, cam.combined);
 
         // Draws player
-        //player.draw(game.batch);
+        player.draw(game.batch);
 
         // Renders ray handler
         rayHandler.render();
