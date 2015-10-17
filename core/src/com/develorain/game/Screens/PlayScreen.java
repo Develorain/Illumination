@@ -30,7 +30,7 @@ import static com.develorain.game.Illumination.V_WIDTH;
 
 
 public class PlayScreen implements Screen {
-    public static boolean DEBUG_MODE = false;
+    public static boolean DEBUG_MODE = true;
     public static boolean WHITE_MODE = true;
 
     public RayHandler rayHandler;
@@ -141,14 +141,14 @@ public class PlayScreen implements Screen {
         rayHandler.setCombinedMatrix(cam);
 
         // Renders the tiled map
-        renderer.render();
+        //renderer.render();
 
         // Renders the box2D debug renderer (lines)
         if (DEBUG_MODE)
             b2dr.render(world, cam.combined);
 
         // Draws player
-        player.draw(game.batch);
+        //player.draw(game.batch);
 
         // Renders ray handler
         rayHandler.render();
@@ -178,14 +178,12 @@ public class PlayScreen implements Screen {
                 contactWrappers.add(new ContactWrapper(contact));
 
                 Vector2 normal = contact.getWorldManifold().getNormal();
-                System.out.println("IN:" + normal);
                 // If the player is on the ground
                 if(normal.y > 0f) {
                     playerController.canJump = true;
                 }
 
                 // If the player is colliding to a wall on player's right
-                /*
                 if(normal.x == -1f && normal.y == 0f) {
                     playerController.canWallJumpToLeft = true;
                 }
@@ -194,20 +192,17 @@ public class PlayScreen implements Screen {
                 if(normal.x == 1f && normal.y == 0f) {
                     playerController.canWallJumpToRight = true;
                 }
-                */
+
             }
 
             @Override
             public void endContact(Contact contact) {
                 for(ContactWrapper indexContactWrapper : contactWrappers) {
                     if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB ==contact.getFixtureB()) {
-
-                        System.out.println("OUT:" + indexContactWrapper.normalVectorX + ", " + indexContactWrapper.normalVectorY);
                         if(indexContactWrapper.normalVectorY > 0f) {
                             playerController.canJump = false;
                         }
 
-                        /*
                         if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToLeft = false;
                         }
@@ -215,7 +210,6 @@ public class PlayScreen implements Screen {
                         if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToRight = false;
                         }
-                        */
 
                         playerController.canChargeDownwards = true;
                         contactWrappers.remove(indexContactWrapper);
