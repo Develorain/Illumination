@@ -51,31 +51,6 @@ public class B2WorldCreator {
             body1.createFixture(line, 1.0f);
             line.dispose();
         }
-
-
-        //
-        //
-        //
-        //
-        //
-        //
-        MapProperties prop = map.getProperties();
-        int mapWidth = prop.get("width", Integer.class);
-        int mapHeight = prop.get("height", Integer.class);
-        int tilePixelWidth = prop.get("tilewidth", Integer.class);
-        int tilePixelHeight = prop.get("tileheight", Integer.class);
-
-        int mapPixelWidth = mapWidth * tilePixelWidth;
-        int mapPixelHeight = mapHeight * tilePixelHeight;
-
-        bdef.type = BodyDef.BodyType.StaticBody;
-        bdef.position.set(mapPixelWidth / 2 / PPM, tilePixelHeight / 2 / PPM);
-
-        body = world.createBody(bdef);
-
-        shape.setAsBox(mapPixelWidth / 2 / PPM, tilePixelHeight / 2 / PPM);
-        fdef.shape = shape;
-        body.createFixture(fdef);
     }
 
     private static ChainShape createPolyline(PolylineMapObject polyline) {
@@ -85,6 +60,7 @@ public class B2WorldCreator {
         for(int i = 0; i < worldVertices.length; i++) {
             worldVertices[i] = new Vector2(vertices[i * 2] / PPM, vertices[i * 2 + 1] / PPM);
         }
+
         ChainShape cs = new ChainShape();
         cs.createChain(worldVertices);
         return cs;
