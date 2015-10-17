@@ -178,22 +178,20 @@ public class PlayScreen implements Screen {
                 contactWrappers.add(new ContactWrapper(contact));
 
                 Vector2 normal = contact.getWorldManifold().getNormal();
+                System.out.println(normal);
                 // If the player is on the ground
                 if(normal.x == 0f && normal.y == -1f) {
                     playerController.canJump = true;
-                    playerController.canDoubleJump = false;
                 }
 
                 // If the player is colliding to a wall on player's right
                 if(normal.x == 1f && normal.y == 0f) {
                     playerController.canWallJumpToLeft = true;
-                    playerController.canDoubleJump = false;
                 }
 
                 // If the player is colliding to a wall on player's left
                 if(normal.x == -1f && normal.y == 0f) {
                     playerController.canWallJumpToRight = true;
-                    playerController.canDoubleJump = false;
                 }
             }
 
@@ -204,17 +202,14 @@ public class PlayScreen implements Screen {
 
                         if(indexContactWrapper.normalVectorX == 0f && indexContactWrapper.normalVectorY == -1f) {
                             playerController.canJump = false;
-                            playerController.canDoubleJump = true;
                         }
 
                         if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToLeft = false;
-                            playerController.canDoubleJump = true;
                         }
 
                         if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToRight = false;
-                            playerController.canDoubleJump = true;
                         }
 
                         playerController.canChargeDownwards = true;

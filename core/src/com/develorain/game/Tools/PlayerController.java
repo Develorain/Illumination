@@ -41,23 +41,24 @@ public class PlayerController {
         }
 
         // Jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canJump) {
-            if(body.getLinearVelocity().y < 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W))) {
+            if(canJump) {
+                if (body.getLinearVelocity().y < 0) {
+                    body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                }
+
+                body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
+                canDoubleJump = true;
+            } else if(canDoubleJump && !canWallJumpToLeft && !canWallJumpToRight) {
+                if(body.getLinearVelocity().y < 0) {
+                    body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                }
+
+                body.applyLinearImpulse(new Vector2(0, 9f), body.getWorldCenter(), true);
+                canDoubleJump = false;
             }
 
-            body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             inputGiven = true;
-        }
-
-        // Double jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canDoubleJump && !canJump && !canWallJumpToLeft && !canWallJumpToRight) {
-            if(body.getLinearVelocity().y < 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x, 0);
-            }
-
-            body.applyLinearImpulse(new Vector2(0, 9f), body.getWorldCenter(), true);
-            canDoubleJump = false;
         }
 
         // Right wall jump
@@ -68,6 +69,7 @@ public class PlayerController {
 
             body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
+            canDoubleJump = true;
         }
 
         // Left wall jump
@@ -77,6 +79,7 @@ public class PlayerController {
             }
             body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
+            canDoubleJump = true;
         }
 
         // Down charge
