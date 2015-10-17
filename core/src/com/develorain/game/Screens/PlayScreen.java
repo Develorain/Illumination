@@ -89,10 +89,10 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
+        //LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
 
         // Temp test lamp
-        LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
+        //LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
 
         // Initialize HUD
         hud = new HUD(game.batch);

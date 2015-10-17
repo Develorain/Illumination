@@ -42,24 +42,28 @@ public class PlayerController {
 
         // Jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canJump) {
+            body.setLinearVelocity(body.getLinearVelocity().x, 0);
             body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Double jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canDoubleJump && !canJump && !canWallJumpToLeft && !canWallJumpToRight) {
-            body.applyLinearImpulse(new Vector2(0, 8f), body.getWorldCenter(), true);
+            body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            body.applyLinearImpulse(new Vector2(0, 9f), body.getWorldCenter(), true);
             canDoubleJump = false;
         }
 
         // Right wall jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump) {
+            body.setLinearVelocity(0, 0);
             body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Left wall jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump) {
+            body.setLinearVelocity(0, 0);
             body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
         }
@@ -123,9 +127,11 @@ public class PlayerController {
         }
 
         // Limit movement on Y-axis
-        if(body.getLinearVelocity().y >= 20) {
-            body.setLinearVelocity(body.getLinearVelocity().x, 20);
+        /*
+        if(body.getLinearVelocity().y >= 40) {
+            body.setLinearVelocity(body.getLinearVelocity().x, 40);
         }
+        */
 
         // Manual deceleration
         if(!inputGiven) {
