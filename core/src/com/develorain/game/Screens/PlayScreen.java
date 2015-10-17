@@ -7,9 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -30,7 +27,7 @@ import static com.develorain.game.Illumination.V_WIDTH;
 
 
 public class PlayScreen implements Screen {
-    public static boolean DEBUG_MODE = true;
+    public static boolean DEBUG_MODE = false;
     public static boolean WHITE_MODE = true;
 
     public RayHandler rayHandler;
@@ -176,8 +173,8 @@ public class PlayScreen implements Screen {
             @Override
             public void beginContact(Contact contact) {
                 contactWrappers.add(new ContactWrapper(contact));
-
                 Vector2 normal = contact.getWorldManifold().getNormal();
+
                 // If the player is on the ground
                 if(normal.y > 0f) {
                     playerController.canJump = true;

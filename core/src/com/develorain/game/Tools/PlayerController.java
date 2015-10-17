@@ -28,15 +28,17 @@ public class PlayerController {
 
     public void handleInput() {
         boolean inputGiven = false;
-        // Runs if right is pressed or held
+        // Runs if right is held
         if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && body.getLinearVelocity().x <= 7) {
             body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
+            body.applyTorque(1.3f, true);
             inputGiven = true;
         }
 
-        // Runs if left is pressed or held
+        // Runs if left is held
         if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && body.getLinearVelocity().x >= -7) {
             body.applyLinearImpulse(new Vector2(-1.5f, 0), body.getWorldCenter(), true);
+            body.applyTorque(-1.3f, true);
             inputGiven = true;
         }
 
