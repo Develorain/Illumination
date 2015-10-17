@@ -42,28 +42,39 @@ public class PlayerController {
 
         // Jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canJump) {
-            body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            if(body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            }
+
             body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Double jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canDoubleJump && !canJump && !canWallJumpToLeft && !canWallJumpToRight) {
-            body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            if(body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            }
+
             body.applyLinearImpulse(new Vector2(0, 9f), body.getWorldCenter(), true);
             canDoubleJump = false;
         }
 
         // Right wall jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump) {
-            body.setLinearVelocity(0, 0);
+            if(body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(0, 0);
+            }
+
             body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Left wall jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump) {
-            body.setLinearVelocity(0, 0);
+            if(body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(0, 0);
+            }
             body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
         }

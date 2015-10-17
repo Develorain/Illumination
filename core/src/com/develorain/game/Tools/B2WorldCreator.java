@@ -39,6 +39,7 @@ public class B2WorldCreator {
             body.createFixture(fdef);
         }
 
+
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
             Shape line;
             line = createPolyline((PolylineMapObject) object);
