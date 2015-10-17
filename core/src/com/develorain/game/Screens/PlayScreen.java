@@ -178,21 +178,23 @@ public class PlayScreen implements Screen {
                 contactWrappers.add(new ContactWrapper(contact));
 
                 Vector2 normal = contact.getWorldManifold().getNormal();
-                System.out.println(normal);
+                System.out.println("IN:" + normal);
                 // If the player is on the ground
-                if(normal.x == 0f && normal.y == -1f) {
+                if(normal.y > 0f) {
                     playerController.canJump = true;
                 }
 
                 // If the player is colliding to a wall on player's right
-                if(normal.x == 1f && normal.y == 0f) {
+                /*
+                if(normal.x == -1f && normal.y == 0f) {
                     playerController.canWallJumpToLeft = true;
                 }
 
                 // If the player is colliding to a wall on player's left
-                if(normal.x == -1f && normal.y == 0f) {
+                if(normal.x == 1f && normal.y == 0f) {
                     playerController.canWallJumpToRight = true;
                 }
+                */
             }
 
             @Override
@@ -200,17 +202,20 @@ public class PlayScreen implements Screen {
                 for(ContactWrapper indexContactWrapper : contactWrappers) {
                     if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB ==contact.getFixtureB()) {
 
-                        if(indexContactWrapper.normalVectorX == 0f && indexContactWrapper.normalVectorY == -1f) {
+                        System.out.println("OUT:" + indexContactWrapper.normalVectorX + ", " + indexContactWrapper.normalVectorY);
+                        if(indexContactWrapper.normalVectorY > 0f) {
                             playerController.canJump = false;
                         }
 
-                        if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
+                        /*
+                        if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToLeft = false;
                         }
 
-                        if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
+                        if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
                             playerController.canWallJumpToRight = false;
                         }
+                        */
 
                         playerController.canChargeDownwards = true;
                         contactWrappers.remove(indexContactWrapper);

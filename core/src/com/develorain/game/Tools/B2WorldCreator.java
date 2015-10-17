@@ -26,6 +26,7 @@ public class B2WorldCreator {
         Body body;
 
         // Creates boxes around square tiles
+        /*
         for(MapObject object : map.getLayers().get(1).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
@@ -37,10 +38,10 @@ public class B2WorldCreator {
             shape.setAsBox(rect.getWidth() / 2 / PPM, rect.getHeight() / 2 / PPM);
             fdef.shape = shape;
             body.createFixture(fdef);
-        }
+        }*/
 
 
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
+        for(MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
             Shape line;
             line = createPolyline((PolylineMapObject) object);
 

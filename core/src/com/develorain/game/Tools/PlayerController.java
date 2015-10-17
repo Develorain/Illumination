@@ -120,26 +120,6 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Teleport right
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) || Gdx.input.isKeyJustPressed(Input.Keys.D)) {
-            if(currentTime - lastTimeRightKeyPressed < 0.2f) {
-                body.setTransform(body.getPosition().x + 100 / PPM, body.getPosition().y, 0);
-                lastTimeRightKeyPressed = -100;
-            } else {
-                lastTimeRightKeyPressed = currentTime;
-            }
-        }
-
-        // Teleport left
-        if((Gdx.input.isKeyJustPressed(Input.Keys.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.A))) {
-            if(currentTime - lastTimeLeftKeyPressed < 0.2f) {
-                body.setTransform(body.getPosition().x - 100 / PPM, body.getPosition().y, 0);
-                lastTimeLeftKeyPressed = -100;
-            } else {
-                lastTimeLeftKeyPressed = currentTime;
-            }
-        }
-
         // Limit movement on Y-axis
         /*
         if(body.getLinearVelocity().y >= 40) {
