@@ -46,7 +46,7 @@ public class Player extends Sprite {
 
         // Initialize and define player definition
         playerBodyDef = new BodyDef();
-        playerBodyDef.position.set(100 / PPM, 100 / PPM);
+        playerBodyDef.position.set(300 / PPM, 300 / PPM);
         playerBodyDef.type = BodyDef.BodyType.DynamicBody;
         playerBodyDef.fixedRotation = PLAYER_FIXED_ROTATION;
 
@@ -78,6 +78,7 @@ public class Player extends Sprite {
                 sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / PPM), body.getPosition().y - (PLAYER_HEIGHT / PPM));
 
                 sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+
                 sprite.draw(batch);
             }
         }

@@ -86,10 +86,10 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        //LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
+        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
 
         // Temp test lamp
-        //LightBuilder.createConeLight(rayHandler, 200, 300, Color.RED, 4, 270, 30);
+        LightBuilder.createConeLight(rayHandler, 800, 600, Color.RED, 8, 270, 30);
 
         // Initialize HUD
         hud = new HUD(game.batch);
@@ -174,7 +174,6 @@ public class PlayScreen implements Screen {
             public void beginContact(Contact contact) {
                 contactWrappers.add(new ContactWrapper(contact));
                 Vector2 normal = contact.getWorldManifold().getNormal();
-
                 // If the player is on the ground
                 if(normal.y > 0f) {
                     playerController.canJump = true;

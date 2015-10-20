@@ -43,7 +43,7 @@ public class PlayerController {
         }
 
         // Jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W))) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W))) {
             if(canJump) {
                 if (body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
@@ -64,7 +64,7 @@ public class PlayerController {
         }
 
         // Right wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -75,7 +75,7 @@ public class PlayerController {
         }
 
         // Left wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.UP) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -122,8 +122,8 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Limit movement on Y-axis
         /*
+        // Limit movement on Y-axis
         if(body.getLinearVelocity().y >= 40) {
             body.setLinearVelocity(body.getLinearVelocity().x, 40);
         }
