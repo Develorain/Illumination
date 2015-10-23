@@ -29,6 +29,7 @@ import static com.develorain.game.Illumination.V_WIDTH;
 public class PlayScreen implements Screen {
     public static boolean DEBUG_MODE = false;
     public static boolean WHITE_MODE = true;
+    public static int TIME_SLOWDOWN_MODIFIER = 1;
 
     public RayHandler rayHandler;
     private PlayerController playerController;
@@ -112,7 +113,7 @@ public class PlayScreen implements Screen {
         playerController.handleInput();
 
         // Sets the world frames to 60 FPS
-        world.step(1 / 60f, 6, 2);
+        world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
         // Centers the camera on the player using interpolation (updates the camera)
         CameraUtilities.lerpToTarget(cam, new Vector2(player.b2body.getPosition().x, player.b2body.getPosition().y));
@@ -194,7 +195,7 @@ public class PlayScreen implements Screen {
             @Override
             public void endContact(Contact contact) {
                 for(ContactWrapper indexContactWrapper : contactWrappers) {
-                    if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB ==contact.getFixtureB()) {
+                    if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB == contact.getFixtureB()) {
                         if(indexContactWrapper.normalVectorY > 0f) {
                             playerController.canJump = false;
                         }

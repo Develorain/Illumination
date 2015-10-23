@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.develorain.game.Illumination.PPM;
+import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 import static com.develorain.game.Screens.PlayScreen.currentTime;
 
 public class PlayerController {
@@ -84,6 +85,10 @@ public class PlayerController {
             canDoubleJump = true;
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 4 : 1;
+        }
+
         // Down charge
         if((Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.S)) && canChargeDownwards) {
             body.setLinearVelocity(body.getLinearVelocity().x, 0);
@@ -131,17 +136,17 @@ public class PlayerController {
 
         // Manual deceleration
         if(!inputGiven) {
-            if(body.getLinearVelocity().x - 0.3f > 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x - 0.3f, body.getLinearVelocity().y);
-            } else if(body.getLinearVelocity().x > 0) {
-                body.setLinearVelocity(0, body.getLinearVelocity().y);
-            }
+            if(body.getLinearVelocity().x > 0.3f) {
+                body.applyLinearImpulse(new Vector2(-0.2f, 0), body.getWorldCenter(), true);
+            } //else if(body.getLinearVelocity().x > 0) {
+               //body.setLinearVelocity(0, body.getLinearVelocity().y);
+           //}
 
-            if(body.getLinearVelocity().x + 0.3f < 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x + 0.3f, body.getLinearVelocity().y);
-            } else if(body.getLinearVelocity().x < 0) {
-                body.setLinearVelocity(0, body.getLinearVelocity().y);
-            }
+            if(body.getLinearVelocity().x < -0.3f) {
+                body.applyLinearImpulse(new Vector2(0.2f, 0), body.getWorldCenter(), true);
+            }// else if(body.getLinearVelocity().x < 0) {
+                //body.setLinearVelocity(0, body.getLinearVelocity().y);
+           //}
         }
     }
 }
