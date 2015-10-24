@@ -19,7 +19,8 @@ public class Player extends Sprite {
     public final boolean PLAYER_FIXED_ROTATION = false;
 
     public World world;
-    public Body b2body;
+    public Body playerB2DBody;
+    public Body sensorB2DBody;
     public Sprite boxSprite;
     Array<Body> tmpBodies;
 
@@ -31,6 +32,7 @@ public class Player extends Sprite {
 
     public void definePlayer() {
         createPlayer();
+        createPlayerCollisionSensor();
     }
 
     private void createPlayer() {
@@ -62,9 +64,39 @@ public class Player extends Sprite {
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
         // Initialize player body
-        b2body = world.createBody(playerBodyDef);
-        b2body.setUserData(boxSprite);
-        b2body.createFixture(playerFixtureDef);
+        playerB2DBody = world.createBody(playerBodyDef);
+        playerB2DBody.setUserData(boxSprite);
+        playerB2DBody.createFixture(playerFixtureDef);
+    }
+
+    public void createPlayerCollisionSensor() {
+        // Player variable declaration
+        BodyDef sensorBodyDef;
+        PolygonShape sensorShape;
+        FixtureDef sensorFixtureDef;
+
+        // Initialize and define player definition
+        sensorBodyDef = new BodyDef();
+        sensorBodyDef.type = BodyDef.BodyType.DynamicBody;
+        sensorBodyDef.fixedRotation = true;
+        sensorBodyDef.position.set(playerB2DBody.getPosition().x, playerB2DBody.getPosition().y);
+
+        // Initialize player shape
+        sensorShape = new PolygonShape();
+
+        // Initialize and define player fixture and shape
+        sensorFixtureDef = new FixtureDef();
+        sensorFixtureDef.shape = sensorShape;
+        sensorShape.setAsBox((PLAYER_WIDTH + 1) / PPM, (PLAYER_HEIGHT + 1) / PPM);
+        sensorFixtureDef.isSensor = true;
+
+        // Initialize player body
+        sensorB2DBody = world.createBody(sensorBodyDef);
+        sensorB2DBody.createFixture(sensorFixtureDef);
+    }
+
+    public void updateSensorPosition() {
+
     }
 
     public void draw(Batch batch) {

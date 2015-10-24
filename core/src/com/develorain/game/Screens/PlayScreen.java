@@ -79,15 +79,16 @@ public class PlayScreen implements Screen {
 
         // Initialize player
         player = new Player(this);
-        playerController = new PlayerController(player.b2body);
+        playerController = new PlayerController(player.playerB2DBody);
 
         // Initialize ray handler
         rayHandler = new RayHandler(world);
-        //rayHandler.setAmbientLight(0.025f);
         rayHandler.setAmbientLight(1f);
+        //rayHandler.setAmbientLight(0.025f);
+        //rayHandler.setAmbientLight(0.25f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.b2body, Color.RED, 3);
+        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.RED, 3);
 
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 800, 600, Color.RED, 8, 270, 30);
@@ -116,7 +117,7 @@ public class PlayScreen implements Screen {
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
         // Centers the camera on the player using interpolation (updates the camera)
-        CameraUtilities.lerpToTarget(cam, new Vector2(player.b2body.getPosition().x, player.b2body.getPosition().y));
+        CameraUtilities.lerpToTarget(cam, new Vector2(player.playerB2DBody.getPosition().x, player.playerB2DBody.getPosition().y));
 
         // Sets the tiled map renderer to render only what is on screen or in camera view
         renderer.setView(cam);
@@ -170,6 +171,9 @@ public class PlayScreen implements Screen {
     }
 
     public void createWorldContactListener(World world) {
+        // Instead of detecting that you're touching the ground using collisions, find the nearest tile and check player proximity to it
+        // MAKE A SENSOR THAT IS LARGER THAN PLAYER'S BODY AND CHECK FOR NORMAL VECTOR INSTEAD OF MAKING MULTIPLE SENSORS
+
         world.setContactListener(new ContactListener() {
             @Override
             public void beginContact(Contact contact) {
