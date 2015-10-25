@@ -22,12 +22,12 @@ public class Player extends Sprite {
     public Body playerB2DBody;
     public Body sensorB2DBody;
     public Sprite boxSprite;
-    Array<Body> tmpBodies;
+    public Array<Body> tmpBodies;
 
     public Player(PlayScreen screen) {
         this.world = screen.getWorld();
         definePlayer();
-        tmpBodies = new Array<Body>();
+        tmpBodies = new Array<>();
     }
 
     public void definePlayer() {

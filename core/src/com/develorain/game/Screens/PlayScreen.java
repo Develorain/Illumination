@@ -55,7 +55,9 @@ public class PlayScreen implements Screen {
     private Player player;
     private HUD hud;
 
-    private ArrayList<ContactWrapper> contactWrappers = new ArrayList<ContactWrapper>();
+    private ArrayList<ContactWrapper> contactWrappers = new ArrayList<>();
+
+    WorldContactListener contactListener;
 
     public PlayScreen(Illumination game) {
         // Set game as class variable
@@ -72,13 +74,13 @@ public class PlayScreen implements Screen {
 
         // Initialize world
         world = new World(new Vector2(0, -25f), true);
-        createWorldContactListener(world);
 
         // Initialize box2d debug renderer
         b2dr = new Box2DDebugRenderer();
 
         // Initialize player
         player = new Player(this);
+
         playerController = new PlayerController(player.playerB2DBody);
 
         // Initialize ray handler
@@ -98,6 +100,10 @@ public class PlayScreen implements Screen {
 
         // Initializes the collision of the static tiles (ground)
         new B2WorldCreator(this);
+
+        contactListener = new WorldContactListener(playerController);
+
+        world.setContactListener(contactListener);
     }
 
     public void update(float dt) {
@@ -168,63 +174,6 @@ public class PlayScreen implements Screen {
 
             player.switchBoxSprite();
         }
-    }
-
-    public void createWorldContactListener(World world) {
-        // Instead of detecting that you're touching the ground using collisions, find the nearest tile and check player proximity to it
-        // MAKE A SENSOR THAT IS LARGER THAN PLAYER'S BODY AND CHECK FOR NORMAL VECTOR INSTEAD OF MAKING MULTIPLE SENSORS
-
-        world.setContactListener(new ContactListener() {
-            @Override
-            public void beginContact(Contact contact) {
-                contactWrappers.add(new ContactWrapper(contact));
-                Vector2 normal = contact.getWorldManifold().getNormal();
-                // If the player is on the ground
-                if(normal.y > 0f) {
-                    playerController.canJump = true;
-                }
-
-                // If the player is colliding to a wall on player's right
-                if(normal.x == -1f && normal.y == 0f) {
-                    playerController.canWallJumpToLeft = true;
-                }
-
-                // If the player is colliding to a wall on player's left
-                if(normal.x == 1f && normal.y == 0f) {
-                    playerController.canWallJumpToRight = true;
-                }
-
-            }
-
-            @Override
-            public void endContact(Contact contact) {
-                for(ContactWrapper indexContactWrapper : contactWrappers) {
-                    if(indexContactWrapper.fixtureA == contact.getFixtureA() && indexContactWrapper.fixtureB == contact.getFixtureB()) {
-                        if(indexContactWrapper.normalVectorY > 0f) {
-                            playerController.canJump = false;
-                        }
-
-                        if(indexContactWrapper.normalVectorX == -1f && indexContactWrapper.normalVectorY == 0f) {
-                            playerController.canWallJumpToLeft = false;
-                        }
-
-                        if(indexContactWrapper.normalVectorX == 1f && indexContactWrapper.normalVectorY == 0f) {
-                            playerController.canWallJumpToRight = false;
-                        }
-
-                        playerController.canChargeDownwards = true;
-                        contactWrappers.remove(indexContactWrapper);
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void preSolve(Contact contact, Manifold oldManifold) {}
-
-            @Override
-            public void postSolve(Contact contact, ContactImpulse impulse) {}
-        });
     }
 
     @Override
