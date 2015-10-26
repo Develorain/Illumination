@@ -36,7 +36,7 @@ public class LightBuilder {
     public static ConeLight createConeLight(RayHandler rayHandler, float x, float y, Color c, float dist, float direction, float cone) {
         ConeLight cl = new ConeLight(rayHandler, 120, c, dist, x / PPM, y / PPM, direction, cone);
         cl.setSoftnessLength(0f); // sets intensity of shadows, higher number = less shadows
-        cl.setXray(false); // changes light from being in background to foreground. when x-ray is true, shadows are not formed
+        cl.setXray(false);        // changes light from being in background to foreground. when x-ray is true, shadows are not formed
         return cl;
     }
 }

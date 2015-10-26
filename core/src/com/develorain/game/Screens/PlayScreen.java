@@ -19,8 +19,6 @@ import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Tools.*;
 
-import java.util.ArrayList;
-
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Illumination.V_HEIGHT;
 import static com.develorain.game.Illumination.V_WIDTH;
@@ -55,8 +53,6 @@ public class PlayScreen implements Screen {
     private Player player;
     private HUD hud;
 
-    private ArrayList<ContactWrapper> contactWrappers = new ArrayList<>();
-
     WorldContactListener contactListener;
 
     public PlayScreen(Illumination game) {
@@ -81,13 +77,12 @@ public class PlayScreen implements Screen {
         // Initialize player
         player = new Player(this);
 
+        // Initialize player controller
         playerController = new PlayerController(player.playerB2DBody);
 
         // Initialize ray handler
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(1f);
-        //rayHandler.setAmbientLight(0.025f);
-        //rayHandler.setAmbientLight(0.25f);
 
         // Initialize playerLight
         LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.RED, 3);
@@ -98,11 +93,13 @@ public class PlayScreen implements Screen {
         // Initialize HUD
         hud = new HUD(game.batch);
 
-        // Initializes the collision of the static tiles (ground)
+        // Initialize the collision of the static tiles (ground)
         new B2WorldCreator(this);
 
+        // Initialize world's contact listener
         contactListener = new WorldContactListener(playerController);
 
+        // Set the world to use world contact listener
         world.setContactListener(contactListener);
     }
 
@@ -153,7 +150,7 @@ public class PlayScreen implements Screen {
             b2dr.render(world, cam.combined);
 
         // Draws player
-        player.draw(game.batch);
+        //player.draw(game.batch);
 
         // Renders ray handler
         rayHandler.render();
@@ -164,11 +161,11 @@ public class PlayScreen implements Screen {
     }
 
     public void handleInput(float dt) {
-        // Runs if F1 is pressed
+        // Toggles between debug modes
         if (Gdx.input.isKeyJustPressed(Input.Keys.F1))
             DEBUG_MODE = !DEBUG_MODE;
 
-        // Runs if Q is pressed
+        // Toggle between player sprites
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             WHITE_MODE = !WHITE_MODE;
 

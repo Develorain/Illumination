@@ -23,6 +23,7 @@ public class WorldContactListener implements ContactListener {
     public void beginContact(Contact contact) {
         contactWrappers.add(new ContactWrapper(contact));
         Vector2 normal = contact.getWorldManifold().getNormal();
+        System.out.println(normal);
         // If the player is on the ground
         if (normal.y > 0f) {
             playerController.canJump = true;
@@ -69,9 +70,5 @@ public class WorldContactListener implements ContactListener {
 
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
-    }
-
-    public void update(float dt) {
-
     }
 }
