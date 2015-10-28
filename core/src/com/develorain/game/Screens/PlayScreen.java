@@ -150,7 +150,7 @@ public class PlayScreen implements Screen {
             b2dr.render(world, cam.combined);
 
         // Draws player
-        //player.draw(game.batch);
+        player.draw(game.batch);
 
         // Renders ray handler
         rayHandler.render();

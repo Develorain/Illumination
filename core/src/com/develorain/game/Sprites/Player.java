@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.develorain.game.Illumination;
 import com.develorain.game.Screens.PlayScreen;
 
 import static com.develorain.game.Illumination.PPM;
@@ -18,8 +17,8 @@ public class Player extends Sprite {
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_FRICTION = 0;
     public final int PLAYER_DENSITY = 10;
-    public final boolean PLAYER_FIXED_ROTATION = false;
-    public final float SENSOR_SCALING = 1.5f;
+    public final boolean PLAYER_FIXED_ROTATION = true;
+    public final float SENSOR_SCALING = 0.875f;
 
     public World world;
     public Body playerB2DBody;
@@ -69,21 +68,49 @@ public class Player extends Sprite {
         playerB2DBody.setUserData(boxSprite);
         playerB2DBody.createFixture(fdef);
 
-        // Create player sensor
+        // Create player's foot sensor
         PolygonShape sensorShape = new PolygonShape();
         sensorShape.setAsBox(PLAYER_WIDTH / PPM, 6 / PPM);
-        Vector2[] temp = new Vector2[] {
-                new Vector2(-(PLAYER_WIDTH) / PPM, 0),
-                new Vector2((PLAYER_WIDTH) / PPM, 0),
-                new Vector2(-(PLAYER_WIDTH) / PPM, -PLAYER_HEIGHT * 2 / PPM),
-                new Vector2((PLAYER_WIDTH) / PPM, -PLAYER_HEIGHT * 2 / PPM)
+        Vector2[] footCoords = new Vector2[] {
+                new Vector2((-PLAYER_WIDTH * SENSOR_SCALING) / PPM, 0),
+                new Vector2((PLAYER_WIDTH * SENSOR_SCALING) / PPM, 0),
+                new Vector2((-PLAYER_WIDTH * SENSOR_SCALING) / PPM, -PLAYER_HEIGHT * 2 / PPM),
+                new Vector2((PLAYER_WIDTH * SENSOR_SCALING) / PPM, -PLAYER_HEIGHT * 2 / PPM)
         };
-        sensorShape.set(temp);
+        sensorShape.set(footCoords);
         fdef.density = 0;
         fdef.shape = sensorShape;
         fdef.isSensor = true;
 
-        playerB2DBody.createFixture(fdef).setUserData("sensor");
+        playerB2DBody.createFixture(fdef).setUserData("foot sensor");
+
+        // Create player's left sensor
+        sensorShape.setAsBox(6 / PPM, PLAYER_HEIGHT / PPM);
+        Vector2[] leftCoords = new Vector2[] {
+                new Vector2(2 * -PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * SENSOR_SCALING) / PPM),
+                new Vector2(0 / PPM, (PLAYER_HEIGHT * SENSOR_SCALING) / PPM),
+                new Vector2(2 * -PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * SENSOR_SCALING) / PPM),
+                new Vector2(0 / PPM, (-PLAYER_HEIGHT * SENSOR_SCALING) / PPM)
+        };
+        sensorShape.set(leftCoords);
+        fdef.shape = sensorShape;
+        fdef.isSensor = true;
+
+        playerB2DBody.createFixture(fdef).setUserData("left sensor");
+
+        // Create player's right sensor
+        sensorShape.setAsBox(6 / PPM, PLAYER_HEIGHT / PPM);
+        Vector2[] rightCoords = new Vector2[] {
+                new Vector2(0 / PPM, (PLAYER_HEIGHT * SENSOR_SCALING) / PPM),
+                new Vector2(2 * PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * SENSOR_SCALING) / PPM),
+                new Vector2(0 / PPM, (-PLAYER_HEIGHT * SENSOR_SCALING) / PPM),
+                new Vector2(2 * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * SENSOR_SCALING) / PPM)
+        };
+        sensorShape.set(rightCoords);
+        fdef.shape = sensorShape;
+        fdef.isSensor = true;
+
+        playerB2DBody.createFixture(fdef).setUserData("right sensor");
     }
 
     public void draw(Batch batch) {
