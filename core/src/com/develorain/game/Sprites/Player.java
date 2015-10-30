@@ -20,7 +20,7 @@ public class Player extends Sprite {
     public final boolean PLAYER_FIXED_ROTATION = true;
     public final float FOOT_SENSOR_SCALING_WIDTH = 0.875f;
     public final float FOOT_SENSOR_SCALING_HEIGHT = 1.5f;
-    public final float SIDE_SENSOR_SCALING_HEIGHT = 4f;
+    public final float SIDE_SENSOR_SCALING_HEIGHT = 1f;
     public final float SIDE_SENSOR_SCALING_WIDTH = 1.6f;
 
     public World world;
@@ -90,10 +90,10 @@ public class Player extends Sprite {
         // Create player's left sensor
         sensorShape.setAsBox(6 / PPM, PLAYER_HEIGHT / PPM);
         Vector2[] leftCoords = new Vector2[] {
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM)
+                new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
+                new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
+                new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
+                new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
         };
         sensorShape.set(leftCoords);
         fdef.shape = sensorShape;
@@ -104,10 +104,10 @@ public class Player extends Sprite {
         // Create player's right sensor
         sensorShape.setAsBox(6 / PPM, PLAYER_HEIGHT / PPM);
         Vector2[] rightCoords = new Vector2[] {
-                new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH / SIDE_SENSOR_SCALING_HEIGHT) / PPM)
+                new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
+                new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
+                new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
+                new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
         };
         sensorShape.set(rightCoords);
         fdef.shape = sensorShape;
