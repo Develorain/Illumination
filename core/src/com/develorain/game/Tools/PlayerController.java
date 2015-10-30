@@ -20,7 +20,7 @@ public class PlayerController {
     private float lastTimeLeftKeyPressed = -100;
     private float lastTimeDashed = -100;
     public int footContactCounter = 0;
-    public boolean canDoubleJump = false;
+    public boolean canDoubleJump = true;  // true because you start in the air
     public boolean canWallJumpToLeft = false;
     public boolean canWallJumpToRight = false;
     public boolean canChargeDownwards = false;
@@ -45,15 +45,14 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Jump
+        // Jump and double jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W))) {
             if(canJump()) {
-                if (body.getLinearVelocity().y < 0) {
+                if(body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
-                canDoubleJump = true;
             } else if(canDoubleJump && !canWallJumpToLeft && !canWallJumpToRight) {
                 if(body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
