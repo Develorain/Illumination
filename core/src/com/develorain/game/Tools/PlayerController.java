@@ -93,7 +93,11 @@ public class PlayerController {
 
         // Down charge
         if((Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.S)) && canChargeDownwards) {
-            body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            float yVelocity = body.getLinearVelocity().y;
+            if(yVelocity >= 0) {
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            }
+
             body.applyLinearImpulse(new Vector2(0, -20f), body.getWorldCenter(), true);
             canChargeDownwards = false;
             inputGiven = true;
