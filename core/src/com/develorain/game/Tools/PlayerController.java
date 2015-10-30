@@ -19,7 +19,7 @@ public class PlayerController {
     private float lastTimeRightKeyPressed = -100;
     private float lastTimeLeftKeyPressed = -100;
     private float lastTimeDashed = -100;
-    public boolean canJump = false;
+    public int footContactCounter = 0;
     public boolean canDoubleJump = false;
     public boolean canWallJumpToLeft = false;
     public boolean canWallJumpToRight = false;
@@ -47,7 +47,7 @@ public class PlayerController {
 
         // Jump
         if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W))) {
-            if(canJump) {
+            if(canJump()) {
                 if (body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
@@ -67,7 +67,7 @@ public class PlayerController {
         }
 
         // Right wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -78,7 +78,7 @@ public class PlayerController {
         }
 
         // Left wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -150,5 +150,9 @@ public class PlayerController {
                 //body.setLinearVelocity(0, body.getLinearVelocity().y);
            //}
         }
+    }
+
+    private boolean canJump() {
+        return footContactCounter > 0;
     }
 }

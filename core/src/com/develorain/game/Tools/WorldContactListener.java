@@ -19,7 +19,7 @@ public class WorldContactListener implements ContactListener {
 
         // If the player is on the ground
         if(fixA.getUserData() == "foot sensor" || fixB.getUserData() == "foot sensor") {
-            playerController.canJump = true;
+            playerController.footContactCounter++;
         }
 
         // If the player is touch the left wall
@@ -40,7 +40,7 @@ public class WorldContactListener implements ContactListener {
 
         // If the player just left the ground
         if(fixA.getUserData() == "foot sensor" || fixB.getUserData() == "foot sensor") {
-            playerController.canJump = false;
+            playerController.footContactCounter--;
         }
 
         // If the player just left the left wall
