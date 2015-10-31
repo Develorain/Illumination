@@ -20,7 +20,7 @@ public class PlayerController {
     public int footContactCounter = 0;
     public int leftContactCounter = 0;
     public int rightContactCounter = 0;
-    public boolean canDoubleJump = true;  // true because you start in the air
+    public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
 
     public PlayerController(Body body) {
