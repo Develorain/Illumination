@@ -25,12 +25,12 @@ public class WorldContactListener implements ContactListener {
 
         // If the player is touch the left wall
         if(fixA.getUserData() == "left sensor" || fixB.getUserData() == "left sensor") {
-            playerController.canWallJumpToRight = true;
+            playerController.leftContactCounter++;
         }
 
         // If the player is touch the right wall
         if(fixA.getUserData() == "right sensor" || fixB.getUserData() == "right sensor") {
-            playerController.canWallJumpToLeft = true;
+            playerController.rightContactCounter++;
         }
     }
 
@@ -47,12 +47,12 @@ public class WorldContactListener implements ContactListener {
 
         // If the player just left the left wall
         if(fixA.getUserData() == "left sensor" || fixB.getUserData() == "left sensor") {
-            playerController.canWallJumpToRight = false;
+            playerController.leftContactCounter--;
         }
 
         // If the player just left the right wall
         if(fixA.getUserData() == "right sensor" || fixB.getUserData() == "right sensor") {
-            playerController.canWallJumpToLeft = false;
+            playerController.rightContactCounter--;
         }
 
         playerController.canChargeDownwards = true;

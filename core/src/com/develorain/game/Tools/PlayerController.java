@@ -20,9 +20,9 @@ public class PlayerController {
     private float lastTimeLeftKeyPressed = -100;
     private float lastTimeDashed = -100;
     public int footContactCounter = 0;
+    public int leftContactCounter = 0;
+    public int rightContactCounter = 0;
     public boolean canDoubleJump = true;  // true because you start in the air
-    public boolean canWallJumpToLeft = false;
-    public boolean canWallJumpToRight = false;
     public boolean canChargeDownwards = false;
 
     public PlayerController(Body body) {
@@ -53,7 +53,7 @@ public class PlayerController {
                 }
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
-            } else if(canDoubleJump && !canWallJumpToLeft && !canWallJumpToRight) {
+            } else if(canDoubleJump && !canWallJumpToLeft() && !canWallJumpToRight()) {
                 if(body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
@@ -66,7 +66,7 @@ public class PlayerController {
         }
 
         // Right wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft && !canJump()) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft() && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -77,7 +77,7 @@ public class PlayerController {
         }
 
         // Left wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight && !canJump()) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight() && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -139,6 +139,7 @@ public class PlayerController {
         }
         */
 
+
         // Manual deceleration
         if(!inputGiven) {
             if(body.getLinearVelocity().x > 0.3f) {
@@ -157,5 +158,13 @@ public class PlayerController {
 
     private boolean canJump() {
         return footContactCounter > 0;
+    }
+
+    private boolean canWallJumpToLeft() {
+        return rightContactCounter > 0;
+    }
+
+    private boolean canWallJumpToRight() {
+        return leftContactCounter > 0;
     }
 }
