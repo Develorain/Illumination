@@ -16,8 +16,6 @@ public class PlayerController {
     private Body body;
 
     // Variables
-    private float lastTimeRightKeyPressed = -100;
-    private float lastTimeLeftKeyPressed = -100;
     private float lastTimeDashed = -100;
     public int footContactCounter = 0;
     public int leftContactCounter = 0;
