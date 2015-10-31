@@ -10,10 +10,10 @@ public class Illumination extends Game {
 	public static final int V_HEIGHT = 720;
 	public static final float PPM = 100;
 
-	public static final short CUBEY_BIT = 1;
-	public static final short WHITETILE_BIT = 2;
-	public static final short BLUETILE_BIT = 4;
-	public static final short REDTILE_BIT = 8;
+	public static final short PLAYER_BIT = 1;
+	public static final short WHITESLOPE_BIT = 2;
+	public static final short BLUESLOPE_BIT = 4;
+	public static final short REDSLOPE_BIT = 8;
 
 	public SpriteBatch batch;
 	

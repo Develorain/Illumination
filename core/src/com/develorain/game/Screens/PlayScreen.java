@@ -85,7 +85,7 @@ public class PlayScreen implements Screen {
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.RED, 3);
+        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.CHARTREUSE, 5);
 
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 800, 600, Color.RED, 8, 270, 30);
@@ -166,7 +166,7 @@ public class PlayScreen implements Screen {
             DEBUG_MODE = !DEBUG_MODE;
 
         // Toggle between player sprites
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
             WHITE_MODE = !WHITE_MODE;
 
             player.switchBoxSprite();

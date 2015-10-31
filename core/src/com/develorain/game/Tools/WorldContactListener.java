@@ -3,9 +3,6 @@ package com.develorain.game.Tools;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class WorldContactListener implements ContactListener {
-    // Instead of detecting that you're touching the ground using collisions, find the nearest tile and check player proximity to it
-    // MAKE A SENSOR THAT IS LARGER THAN PLAYER'S BODY AND CHECK FOR NORMAL VECTOR INSTEAD OF MAKING MULTIPLE SENSORS
-
     private PlayerController playerController;
 
     public WorldContactListener(PlayerController playerController) {

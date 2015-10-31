@@ -119,13 +119,13 @@ public class PlayerController {
         }
 
         // Sprint right
-        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x <= SPRINT_SPEED_CAP) {
+        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x <= SPRINT_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Sprint left
-        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
+        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(-0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
