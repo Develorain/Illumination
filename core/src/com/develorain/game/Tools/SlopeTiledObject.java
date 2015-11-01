@@ -46,4 +46,10 @@ public class SlopeTiledObject {
         cs.createChain(worldVertices);
         return cs;
     }
+
+    public void setCategoryFilter(short filterBit) {
+        Filter filter = new Filter();
+        filter.categoryBits = filterBit;
+        fixture.setFilterData(filter);
+    }
 }

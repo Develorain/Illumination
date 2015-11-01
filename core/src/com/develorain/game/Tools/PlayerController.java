@@ -4,15 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
+import com.develorain.game.Illumination;
+import com.develorain.game.Screens.PlayScreen;
+import com.develorain.game.Sprites.Player;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 import static com.develorain.game.Screens.PlayScreen.currentTime;
+import static com.develorain.game.Illumination.PPM;
 
 public class PlayerController {
     private final int DASH_SPEED_CAP = 25;
     private final int SPRINT_SPEED_CAP = 15;
     private final int REGULAR_SPEED_CAP = 7;
-    // Reference of body to be controlled
+
+    // Reference of player and body to be controlled
+    private Player player;
     private Body body;
 
     // Variables
@@ -22,12 +29,13 @@ public class PlayerController {
     public int rightContactCounter = 0;
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
+    public static boolean SLOWMOTION_MODE = false;
 
-    public PlayerController(Body body) {
-        this.body = body;
+    public PlayerController(Player player) {
+        this.body = player.playerB2DBody;
     }
 
-    public void handleInput() {
+    public void handleInput(World world, PlayScreen screen) {
         boolean inputGiven = false;
         // Runs if right is held
         if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
@@ -86,6 +94,18 @@ public class PlayerController {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 4 : 1;
+            SLOWMOTION_MODE = !SLOWMOTION_MODE;
+
+            float xVelocity = body.getLinearVelocity().x;
+            float yVelocity = body.getLinearVelocity().y;
+            float x = body.getPosition().x * PPM;  // convert meters to pixels? i'm pretty sure
+            float y = body.getPosition().y * PPM;
+
+            world.destroyBody(body);
+
+            player = new Player(screen, x, y);
+            body = player.playerB2DBody;
+            body.setLinearVelocity(xVelocity, yVelocity);
         }
 
         // Down charge
@@ -136,7 +156,6 @@ public class PlayerController {
             body.setLinearVelocity(body.getLinearVelocity().x, 40);
         }
         */
-
 
         // Manual deceleration
         if(!inputGiven) {

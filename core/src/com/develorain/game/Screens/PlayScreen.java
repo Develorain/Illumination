@@ -53,7 +53,7 @@ public class PlayScreen implements Screen {
     private Player player;
     private HUD hud;
 
-    WorldContactListener contactListener;
+    private WorldContactListener contactListener;
 
     public PlayScreen(Illumination game) {
         // Set game as class variable
@@ -75,17 +75,19 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         // Initialize player
-        player = new Player(this);
+        player = new Player(this, 300, 300);
 
         // Initialize player controller
-        playerController = new PlayerController(player.playerB2DBody);
+        playerController = new PlayerController(player);
 
         // Initialize ray handler
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(1f);
 
         // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.CHARTREUSE, 5);
+        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.CHARTREUSE, 2);
+        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.BLUE, 3);
+        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.BLUE, 3);
 
         // Temp test lamp
         LightBuilder.createConeLight(rayHandler, 800, 600, Color.RED, 8, 270, 30);
@@ -93,14 +95,14 @@ public class PlayScreen implements Screen {
         // Initialize HUD
         hud = new HUD(game.batch);
 
-        // Initialize the collision of the static tiles (ground)
-        new B2WorldCreator(this);
-
         // Initialize world's contact listener
         contactListener = new WorldContactListener(playerController);
 
         // Set the world to use world contact listener
         world.setContactListener(contactListener);
+
+        // Initialize the collision of the static tiles (ground)
+        new B2WorldCreator(this);
     }
 
     public void update(float dt) {
@@ -111,10 +113,10 @@ public class PlayScreen implements Screen {
         hud.update(dt);
 
         // Handles play screen input
-        handleInput(dt);
+        handleInput();
 
         // Handles player input
-        playerController.handleInput();
+        playerController.handleInput(world, this);
 
         // Sets the world frames to 60 FPS
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
@@ -160,7 +162,7 @@ public class PlayScreen implements Screen {
         hud.stage.draw();
     }
 
-    public void handleInput(float dt) {
+    public void handleInput() {
         // Toggles between debug modes
         if (Gdx.input.isKeyJustPressed(Input.Keys.F1))
             DEBUG_MODE = !DEBUG_MODE;

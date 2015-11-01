@@ -9,7 +9,8 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
 import com.develorain.game.Screens.PlayScreen;
 
-import static com.develorain.game.Illumination.PPM;
+import static com.develorain.game.Illumination.*;
+import static com.develorain.game.Tools.PlayerController.SLOWMOTION_MODE;
 
 public class Player extends Sprite {
     public final int PLAYER_WIDTH = 16;   // pixels
@@ -17,28 +18,24 @@ public class Player extends Sprite {
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_FRICTION = 0;
     public final int PLAYER_DENSITY = 10;
-    public final boolean PLAYER_FIXED_ROTATION = true;
     public final float FOOT_SENSOR_SCALING_WIDTH = 0.875f;
     public final float FOOT_SENSOR_SCALING_HEIGHT = 1.5f;
     public final float SIDE_SENSOR_SCALING_HEIGHT = 1f;
     public final float SIDE_SENSOR_SCALING_WIDTH = 1.6f;
+    public final boolean PLAYER_FIXED_ROTATION = true;
 
     public World world;
     public Body playerB2DBody;
     public Sprite boxSprite;
     public Array<Body> tmpBodies;
 
-    public Player(PlayScreen screen) {
+    public Player(PlayScreen screen, float x, float y) {
         this.world = screen.getWorld();
-        definePlayer();
+        createPlayer(x, y);
         tmpBodies = new Array<>();
     }
 
-    public void definePlayer() {
-        createPlayer();
-    }
-
-    private void createPlayer() {
+    private void createPlayer(float x, float y) {
         // Player variable declaration
         BodyDef bdef;
         PolygonShape playerShape;
@@ -51,7 +48,7 @@ public class Player extends Sprite {
 
         // Initialize and define player definition
         bdef = new BodyDef();
-        bdef.position.set(300 / PPM, 300 / PPM);
+        bdef.position.set(x / PPM, y / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = PLAYER_FIXED_ROTATION;
 
@@ -64,6 +61,14 @@ public class Player extends Sprite {
         fdef.density = PLAYER_DENSITY;
         fdef.friction = PLAYER_FRICTION;
         fdef.shape = playerShape;
+        fdef.filter.categoryBits = PLAYER_BIT;
+
+        if(!SLOWMOTION_MODE) {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+        } else {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+        }
+
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
         // Initialize player body

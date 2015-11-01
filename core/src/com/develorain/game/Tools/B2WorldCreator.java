@@ -11,10 +11,14 @@ public class B2WorldCreator {
         TiledMap map = screen.getMap();
 
         for(MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
-            new BlueSlope(screen, object);
+            new WhiteSlope(screen, object);
         }
 
         for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
+            new BlueSlope(screen, object);
+        }
+
+        for(MapObject object : map.getLayers().get(3).getObjects().getByType(PolylineMapObject.class)) {
             new RedSlope(screen, object);
         }
     }
