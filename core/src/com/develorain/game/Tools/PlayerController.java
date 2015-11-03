@@ -4,14 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.World;
-import com.develorain.game.Illumination;
-import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Sprites.Player;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 import static com.develorain.game.Screens.PlayScreen.currentTime;
-import static com.develorain.game.Illumination.PPM;
 
 public class PlayerController {
     private final int DASH_SPEED_CAP = 25;
@@ -32,11 +28,13 @@ public class PlayerController {
     public static boolean SLOWMOTION_MODE = false;
 
     public PlayerController(Player player) {
+        this.player = player;
         this.body = player.playerB2DBody;
     }
 
-    public void handleInput(World world, PlayScreen screen) {
+    public void handleInput() {
         boolean inputGiven = false;
+
         // Runs if right is held
         if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
@@ -59,7 +57,7 @@ public class PlayerController {
                 }
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
-            } else if(canDoubleJump && !canWallJumpToLeft() && !canWallJumpToRight()) {
+            } else if(canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
                 if(body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
@@ -71,8 +69,7 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Right wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToLeft() && !canJump()) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpTowardsTheLeft() && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -82,8 +79,7 @@ public class PlayerController {
             canDoubleJump = true;
         }
 
-        // Left wall jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpToRight() && !canJump()) {
+        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpTowardsTheRight() && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -92,18 +88,16 @@ public class PlayerController {
             canDoubleJump = true;
         }
 
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 4 : 1;
             SLOWMOTION_MODE = !SLOWMOTION_MODE;
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
-            float x = body.getPosition().x * PPM;  // convert meters to pixels? i'm pretty sure
-            float y = body.getPosition().y * PPM;
 
-            world.destroyBody(body);
+            player = player.destroyAndRemake();
 
-            player = new Player(screen, x, y);
             body = player.playerB2DBody;
             body.setLinearVelocity(xVelocity, yVelocity);
         }
@@ -177,11 +171,11 @@ public class PlayerController {
         return footContactCounter > 0;
     }
 
-    private boolean canWallJumpToLeft() {
+    private boolean canWallJumpTowardsTheLeft() {
         return rightContactCounter > 0;
     }
 
-    private boolean canWallJumpToRight() {
+    private boolean canWallJumpTowardsTheRight() {
         return leftContactCounter > 0;
     }
 }

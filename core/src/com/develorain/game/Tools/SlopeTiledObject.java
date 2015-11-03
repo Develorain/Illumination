@@ -22,7 +22,7 @@ public class SlopeTiledObject {
         this.object = object;
         this.screen = screen;
         this.world = screen.getWorld();
-        this.map = screen.getMap();
+        this.map = screen.getTiledMap();
 
         line = createPolyline((PolylineMapObject) object);
 

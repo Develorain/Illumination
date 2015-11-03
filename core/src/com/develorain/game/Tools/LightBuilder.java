@@ -6,7 +6,8 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Body;
 
-import static com.develorain.game.Illumination.PPM;
+import static com.develorain.game.Illumination.*;
+import static com.develorain.game.Tools.PlayerController.SLOWMOTION_MODE;
 
 
 public class LightBuilder {
@@ -15,6 +16,15 @@ public class LightBuilder {
         pl.setSoftnessLength(0.5f);
         pl.attachToBody(body);
         pl.setXray(false);
+
+        if(!SLOWMOTION_MODE) {
+            // SET LIGHT CONTACT FILTER
+        } else {
+            // SET LIGHT CONTACT FILTER
+        }
+
+        pl.setContactFilter(WHITESLOPE_BIT, (short) 2, (short) 4); // 2 and 4 are nonsensical numbers, but them seem to work for some reason
+
         return pl;
     }
 

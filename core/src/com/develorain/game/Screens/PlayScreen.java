@@ -42,10 +42,10 @@ public class PlayScreen implements Screen {
     private OrthographicCamera cam;
     private Viewport fitViewport;
 
-    // Tiled map variables
+    // Map variables
     private TmxMapLoader mapLoader;
-    private TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    private TiledMap tiledMap;
+    private OrthogonalTiledMapRenderer mapRenderer;
 
     // Box2D variables
     private World world;
@@ -56,52 +56,35 @@ public class PlayScreen implements Screen {
     private WorldContactListener contactListener;
 
     public PlayScreen(Illumination game) {
-        // Set game as class variable
         this.game = game;
 
-        // Initialize camera/viewport variable
         cam = new OrthographicCamera();
         fitViewport = new FitViewport(2 * V_WIDTH / PPM, 2 * V_HEIGHT / PPM, cam);
 
-        // Initialize tiled map variables
         mapLoader = new TmxMapLoader();
-        map = mapLoader.load("Graphics/level1.tmx");
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / PPM);
+        tiledMap = mapLoader.load("Graphics/level1.tmx");
+        mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
 
-        // Initialize world
         world = new World(new Vector2(0, -25f), true);
 
-        // Initialize box2d debug renderer
         b2dr = new Box2DDebugRenderer();
 
-        // Initialize player
-        player = new Player(this, 300, 300);
-
-        // Initialize player controller
-        playerController = new PlayerController(player);
-
-        // Initialize ray handler
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(1f);
 
-        // Initialize playerLight
-        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.CHARTREUSE, 2);
-        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.BLUE, 3);
-        LightBuilder.createPointLight(rayHandler, player.playerB2DBody, Color.BLUE, 3);
+        player = new Player(this, rayHandler, 300, 300);
 
-        // Temp test lamp
-        LightBuilder.createConeLight(rayHandler, 800, 600, Color.RED, 8, 270, 30);
+        playerController = new PlayerController(player);
 
-        // Initialize HUD
+        LightBuilder.createConeLight(rayHandler, 800, 600, Color.CHARTREUSE, 8, 270, 30);
+        LightBuilder.createConeLight(rayHandler, 800, 600, Color.YELLOW, 4, 270, 30);
+
         hud = new HUD(game.batch);
 
-        // Initialize world's contact listener
         contactListener = new WorldContactListener(playerController);
 
-        // Set the world to use world contact listener
         world.setContactListener(contactListener);
 
-        // Initialize the collision of the static tiles (ground)
         new B2WorldCreator(this);
     }
 
@@ -116,7 +99,7 @@ public class PlayScreen implements Screen {
         handleInput();
 
         // Handles player input
-        playerController.handleInput(world, this);
+        playerController.handleInput();
 
         // Sets the world frames to 60 FPS
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
@@ -124,8 +107,8 @@ public class PlayScreen implements Screen {
         // Centers the camera on the player using interpolation (updates the camera)
         CameraUtilities.lerpToTarget(cam, new Vector2(player.playerB2DBody.getPosition().x, player.playerB2DBody.getPosition().y));
 
-        // Sets the tiled map renderer to render only what is on screen or in camera view
-        renderer.setView(cam);
+        // Sets the tiled tiledMap mapRenderer to render only what is on screen or in camera view
+        mapRenderer.setView(cam);
 
         // Updates the ray handler
         rayHandler.update();
@@ -144,10 +127,10 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
 
-        // Renders the tiled map
-        renderer.render();
+        // Renders the tiledMap
+        mapRenderer.render();
 
-        // Renders the box2D debug renderer (lines)
+        // Renders the box2D debug mapRenderer (lines)
         if (DEBUG_MODE)
             b2dr.render(world, cam.combined);
 
@@ -177,8 +160,8 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-        map.dispose();
-        renderer.dispose();
+        tiledMap.dispose();
+        mapRenderer.dispose();
         world.dispose();
         b2dr.dispose();
     }
@@ -188,8 +171,8 @@ public class PlayScreen implements Screen {
         fitViewport.update(width, height);
     }
 
-    public TiledMap getMap() {
-        return map;
+    public TiledMap getTiledMap() {
+        return tiledMap;
     }
 
     public World getWorld() {
