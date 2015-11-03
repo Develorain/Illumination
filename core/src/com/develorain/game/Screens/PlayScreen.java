@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Scenes.HUD;
+import com.develorain.game.Sprites.KingSlime;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Tools.*;
 

@@ -38,14 +38,12 @@ public class PlayerController {
         // Runs if right is held
         if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
-            body.applyTorque(1.3f, true);
             inputGiven = true;
         }
 
         // Runs if left is held
         if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(-1.5f, 0), body.getWorldCenter(), true);
-            body.applyTorque(-1.3f, true);
             inputGiven = true;
         }
 

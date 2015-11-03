@@ -10,15 +10,15 @@ public class B2WorldCreator {
     public B2WorldCreator(PlayScreen screen) {
         TiledMap map = screen.getTiledMap();
 
-        for(MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
+        for(MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
             new WhiteSlope(screen, object);
         }
 
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
+        for(MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
             new BlueSlope(screen, object);
         }
 
-        for(MapObject object : map.getLayers().get(3).getObjects().getByType(PolylineMapObject.class)) {
+        for(MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
             new RedSlope(screen, object);
         }
     }
