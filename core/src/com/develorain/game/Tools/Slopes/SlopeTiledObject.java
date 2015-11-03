@@ -1,4 +1,4 @@
-package com.develorain.game.Tools;
+package com.develorain.game.Tools.Slopes;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;

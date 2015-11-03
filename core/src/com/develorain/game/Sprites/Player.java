@@ -75,12 +75,11 @@ public class Player extends Sprite {
         fdef.density = PLAYER_DENSITY;
         fdef.friction = PLAYER_FRICTION;
         fdef.shape = playerShape;
-        fdef.filter.categoryBits = PLAYER_BIT;
 
         if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | NORMAL_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | ALTERNATE_SLOPE_BIT;
         }
 
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
@@ -109,9 +108,9 @@ public class Player extends Sprite {
         };
 
         if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | NORMAL_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | ALTERNATE_SLOPE_BIT;
         }
 
         sensorShape.set(rightCoords);
@@ -134,9 +133,9 @@ public class Player extends Sprite {
         };
 
         if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | NORMAL_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | ALTERNATE_SLOPE_BIT;
         }
 
         sensorShape.set(leftCoords);
@@ -159,9 +158,9 @@ public class Player extends Sprite {
         };
 
         if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | NORMAL_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+            fdef.filter.maskBits = DEFAULT_BIT | ALTERNATE_SLOPE_BIT;
         }
 
         sensorShape.set(footCoords);
