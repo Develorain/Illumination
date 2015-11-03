@@ -108,6 +108,12 @@ public class Player extends Sprite {
                 new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
         };
 
+        if(!SLOWMOTION_MODE) {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+        } else {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+        }
+
         sensorShape.set(rightCoords);
         fdef.shape = sensorShape;
         fdef.isSensor = true;
@@ -127,6 +133,12 @@ public class Player extends Sprite {
                 new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
         };
 
+        if(!SLOWMOTION_MODE) {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+        } else {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+        }
+
         sensorShape.set(leftCoords);
         fdef.shape = sensorShape;
         fdef.isSensor = true;
@@ -145,6 +157,12 @@ public class Player extends Sprite {
                 new Vector2((-PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, -PLAYER_HEIGHT * FOOT_SENSOR_SCALING_HEIGHT / PPM),
                 new Vector2((PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, -PLAYER_HEIGHT * FOOT_SENSOR_SCALING_HEIGHT / PPM)
         };
+
+        if(!SLOWMOTION_MODE) {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | BLUESLOPE_BIT;
+        } else {
+            fdef.filter.maskBits = DEFAULT_BIT | WHITESLOPE_BIT | REDSLOPE_BIT;
+        }
 
         sensorShape.set(footCoords);
         fdef.density = 0;
