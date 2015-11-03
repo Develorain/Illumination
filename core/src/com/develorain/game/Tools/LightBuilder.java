@@ -22,9 +22,9 @@ public class LightBuilder {
         filter.maskBits = WHITESLOPE_BIT;
 
         if(!SLOWMOTION_MODE) {
-            filter.maskBits += BLUESLOPE_BIT;
+            filter.maskBits |= BLUESLOPE_BIT;
         } else {
-            filter.maskBits += REDSLOPE_BIT;
+            filter.maskBits |= REDSLOPE_BIT;
         }
 
         pl.setContactFilter(filter);
