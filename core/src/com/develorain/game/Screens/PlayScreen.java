@@ -16,8 +16,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Scenes.HUD;
-import com.develorain.game.Sprites.KingSlime;
 import com.develorain.game.Sprites.Player;
+import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.*;
 
 import static com.develorain.game.Illumination.PPM;
@@ -52,6 +52,7 @@ public class PlayScreen implements Screen {
     private World world;
     private Box2DDebugRenderer b2dr;
     private Player player;
+    private SampleEnemy enemy;
     private HUD hud;
 
     private WorldContactListener contactListener;
@@ -87,6 +88,8 @@ public class PlayScreen implements Screen {
         world.setContactListener(contactListener);
 
         new B2WorldCreator(this);
+
+        enemy = new SampleEnemy(this, 200, 200);
     }
 
     public void update(float dt) {

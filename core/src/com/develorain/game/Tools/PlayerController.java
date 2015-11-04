@@ -36,19 +36,19 @@ public class PlayerController {
         boolean inputGiven = false;
 
         // Runs if right is held
-        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)&& body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Runs if left is held
-        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(-1.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Jump and double jump
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W))) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
             if(canJump()) {
                 if(body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
@@ -67,7 +67,7 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpTowardsTheLeft() && !canJump()) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Z)&& canWallJumpTowardsTheLeft() && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -77,7 +77,7 @@ public class PlayerController {
             canDoubleJump = true;
         }
 
-        if((Gdx.input.isKeyJustPressed(Input.Keys.Z) || Gdx.input.isKeyJustPressed(Input.Keys.W)) && canWallJumpTowardsTheRight() && !canJump()) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheRight() && !canJump()) {
             if(body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -101,7 +101,7 @@ public class PlayerController {
         }
 
         // Down charge
-        if((Gdx.input.isKeyJustPressed(Input.Keys.DOWN) || Gdx.input.isKeyJustPressed(Input.Keys.S)) && canChargeDownwards) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)&& canChargeDownwards) {
             float yVelocity = body.getLinearVelocity().y;
             if(yVelocity >= 0) {
                 body.setLinearVelocity(body.getLinearVelocity().x, 0);
@@ -113,7 +113,7 @@ public class PlayerController {
         }
 
         // Dash right
-        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= DASH_SPEED_CAP) {
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= DASH_SPEED_CAP) {
             if(currentTime - lastTimeDashed > 1) {
                 body.applyLinearImpulse(new Vector2(80f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
@@ -122,7 +122,7 @@ public class PlayerController {
         }
 
         // Dash left
-        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -DASH_SPEED_CAP) {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -DASH_SPEED_CAP) {
             if(currentTime - lastTimeDashed > 1) {
                 body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
                 lastTimeDashed = currentTime;
@@ -131,13 +131,13 @@ public class PlayerController {
         }
 
         // Sprint right
-        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x <= SPRINT_SPEED_CAP) {
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)&& Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x <= SPRINT_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Sprint left
-        if((Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(-0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }

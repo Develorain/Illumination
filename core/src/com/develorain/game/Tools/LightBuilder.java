@@ -19,7 +19,7 @@ public class LightBuilder {
         pl.setXray(false);
 
         Filter filter = new Filter();
-        filter.maskBits = DEFAULT_BIT;
+        filter.maskBits = DEFAULT_SLOPE_BIT;
 
         if(!SLOWMOTION_MODE) {
             filter.maskBits |= NORMAL_SLOPE_BIT;
