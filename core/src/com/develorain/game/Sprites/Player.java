@@ -50,11 +50,21 @@ public class Player extends Sprite {
         this.world = screen.getWorld();
         this.screen = screen;
         this.rayHandler = rayHandler;
+
         createPlayer(x, y, rayHandler);
+
         tmpBodies = new Array<>();
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
+        fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
+
+        if(!SLOWMOTION_MODE) {
+            fdef.filter.maskBits |= NORMAL_SLOPE_BIT;
+        } else {
+            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT;
+        }
+
         createBody(x, y);
         createSprite();
         createSensors();
@@ -63,7 +73,6 @@ public class Player extends Sprite {
 
     private void createBody(float x, float y) {
         BodyDef bdef = new BodyDef();
-        FixtureDef fdef = new FixtureDef();
         PolygonShape playerShape = new PolygonShape();
 
         bdef.position.set(x / PPM, y / PPM);
@@ -76,14 +85,6 @@ public class Player extends Sprite {
         fdef.friction = PLAYER_FRICTION;
         fdef.filter.categoryBits = PLAYER_BIT;
 
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
-
-        if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits |= NORMAL_SLOPE_BIT;
-        } else {
-            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT;
-        }
-
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
         playerB2DBody = world.createBody(bdef);
@@ -92,12 +93,8 @@ public class Player extends Sprite {
 
     private void createSensors() {
         fdef.isSensor = true;
-
-        if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT;
-        } else {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ALTERNATE_SLOPE_BIT;
-        }
+        fdef.density = 0f;
+        fdef.friction = 0;
 
         createFootSensor();
         createLeftSensor();
