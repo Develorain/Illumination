@@ -64,7 +64,7 @@ public class PlayScreen implements Screen {
         fitViewport = new FitViewport(2 * V_WIDTH / PPM, 2 * V_HEIGHT / PPM, cam);
 
         mapLoader = new TmxMapLoader();
-        tiledMap = mapLoader.load("Graphics/level1.tmx");
+        tiledMap = mapLoader.load("Graphics/Maps/level1.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
 
         world = new World(new Vector2(0, -25f), true);

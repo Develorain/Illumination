@@ -41,7 +41,7 @@ public class SampleEnemy extends Enemy {
     }
 
     protected void createSprite() {
-        enemySprite = new Sprite(new Texture("Graphics/whitecubey.png"));
+        enemySprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/enemy.png"));
         enemySprite.setSize(ENEMY_WIDTH * 2 / PPM, ENEMY_HEIGHT * 2 / PPM);
         enemySprite.setOrigin(enemySprite.getWidth() / 2, enemySprite.getHeight() / 2);
         b2body.setUserData(enemySprite);

@@ -84,7 +84,7 @@ public class Player extends Sprite {
     }
 
     private void createSprite() {
-        playerSprite = new Sprite(new Texture("Graphics/whitecubey.png"));
+        playerSprite = new Sprite(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
         playerSprite.setSize(32f / PPM, 32f / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
         playerB2DBody.setUserData(playerSprite);
@@ -207,11 +207,11 @@ public class Player extends Sprite {
         playerSprite.getTexture().dispose();
 
         if(PlayScreen.WHITE_MODE) {
-            playerSprite.setTexture(new Texture("Graphics/whitecubey.png"));
+            playerSprite.setTexture(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
         }
 
         if(!PlayScreen.WHITE_MODE) {
-            playerSprite.setTexture(new Texture("Graphics/blackcubey.png"));
+            playerSprite.setTexture(new Texture("Graphics/Sprites/PlayerSprites/blackplayer.png"));
         }
     }
 }
