@@ -151,8 +151,9 @@ public class PlayScreen implements Screen {
 
     public void handleInput() {
         // Toggles between debug modes
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F1))
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
             DEBUG_MODE = !DEBUG_MODE;
+        }
 
         // Toggle between player sprites
         if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {

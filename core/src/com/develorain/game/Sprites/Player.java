@@ -24,6 +24,10 @@ public class Player extends Sprite {
     public final int PLAYER_RESTITUTION = 0;
     public final int PLAYER_FRICTION = 0;
     public final int PLAYER_DENSITY = 10;
+    public final float FOOT_SENSOR_WIDTH = 16f;
+    public final float FOOT_SENSOR_HEIGHT = 6f;
+    public final float SIDE_SENSOR_WIDTH = 6f;
+    public final float SIDE_SENSOR_HEIGHT = 16f;
     public final float FOOT_SENSOR_SCALING_WIDTH = 0.875f;
     public final float FOOT_SENSOR_SCALING_HEIGHT = 1.5f;
     public final float SIDE_SENSOR_SCALING_HEIGHT = 1f;
@@ -36,6 +40,9 @@ public class Player extends Sprite {
     public Body playerB2DBody;
     public Sprite playerSprite;
     public Array<Body> tmpBodies;
+
+    FixtureDef fdef = new FixtureDef();
+    PolygonShape sensorShape = new PolygonShape();
 
     public ArrayList<PointLight> pointLights = new ArrayList<>();
 
@@ -50,9 +57,7 @@ public class Player extends Sprite {
     private void createPlayer(float x, float y, RayHandler rayHandler) {
         createBody(x, y);
         createSprite();
-        createFootSensor();
-        createLeftSensor();
-        createRightSensor();
+        createSensors();
         createLights(rayHandler);
     }
 
@@ -71,10 +76,12 @@ public class Player extends Sprite {
         fdef.friction = PLAYER_FRICTION;
         fdef.filter.categoryBits = PLAYER_BIT;
 
+        fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
+
         if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT;
+            fdef.filter.maskBits |= NORMAL_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ALTERNATE_SLOPE_BIT;
+            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT;
         }
 
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
@@ -83,17 +90,29 @@ public class Player extends Sprite {
         playerB2DBody.createFixture(fdef);
     }
 
+    private void createSensors() {
+        fdef.isSensor = true;
+
+        if(!SLOWMOTION_MODE) {
+            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT;
+        } else {
+            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ALTERNATE_SLOPE_BIT;
+        }
+
+        createFootSensor();
+        createLeftSensor();
+        createRightSensor();
+    }
+
     private void createSprite() {
         playerSprite = new Sprite(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
-        playerSprite.setSize(32f / PPM, 32f / PPM);
+        playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
         playerB2DBody.setUserData(playerSprite);
     }
 
     private void createFootSensor() {
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape sensorShape = new PolygonShape();
-        sensorShape.setAsBox(PLAYER_WIDTH / PPM, 6 / PPM);
+        sensorShape.setAsBox(FOOT_SENSOR_WIDTH / PPM, FOOT_SENSOR_HEIGHT / PPM);
 
         Vector2[] footCoords = new Vector2[] {
                 new Vector2((-PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, 0),
@@ -102,24 +121,14 @@ public class Player extends Sprite {
                 new Vector2((PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, -PLAYER_HEIGHT * FOOT_SENSOR_SCALING_HEIGHT / PPM)
         };
 
-        if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT;
-        } else {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ALTERNATE_SLOPE_BIT;
-        }
-
         sensorShape.set(footCoords);
-        fdef.density = 0;
         fdef.shape = sensorShape;
-        fdef.isSensor = true;
 
         playerB2DBody.createFixture(fdef).setUserData("foot sensor");
     }
 
     private void createLeftSensor() {
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape sensorShape = new PolygonShape();
-        sensorShape.setAsBox(6 / PPM, PLAYER_HEIGHT / PPM);
+        sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
 
         Vector2[] leftCoords = new Vector2[] {
                 new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
@@ -128,23 +137,14 @@ public class Player extends Sprite {
                 new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
         };
 
-        if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT;
-        } else {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ALTERNATE_SLOPE_BIT;
-        }
-
         sensorShape.set(leftCoords);
         fdef.shape = sensorShape;
-        fdef.isSensor = true;
 
         playerB2DBody.createFixture(fdef).setUserData("left sensor");
     }
 
     private void createRightSensor() {
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape sensorShape = new PolygonShape();
-        sensorShape.setAsBox(6 / PPM, PLAYER_HEIGHT / PPM);
+        sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
 
         Vector2[] rightCoords = new Vector2[] {
                 new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
@@ -153,15 +153,8 @@ public class Player extends Sprite {
                 new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
         };
 
-        if(!SLOWMOTION_MODE) {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT;
-        } else {
-            fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ALTERNATE_SLOPE_BIT;
-        }
-
         sensorShape.set(rightCoords);
         fdef.shape = sensorShape;
-        fdef.isSensor = true;
 
         playerB2DBody.createFixture(fdef).setUserData("right sensor");
     }

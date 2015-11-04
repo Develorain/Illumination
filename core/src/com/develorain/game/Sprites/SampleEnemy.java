@@ -40,6 +40,7 @@ public class SampleEnemy extends Enemy {
         b2body.createFixture(fdef);
     }
 
+    @Override
     protected void createSprite() {
         enemySprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/enemy.png"));
         enemySprite.setSize(ENEMY_WIDTH * 2 / PPM, ENEMY_HEIGHT * 2 / PPM);
