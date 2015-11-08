@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
 
 import static com.develorain.game.Illumination.*;
-import static com.develorain.game.Tools.PlayerController.SLOWMOTION_MODE;
+import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
 
 public class LightBuilder {
@@ -21,7 +21,7 @@ public class LightBuilder {
         Filter filter = new Filter();
         filter.maskBits = DEFAULT_SLOPE_BIT;
 
-        if(!SLOWMOTION_MODE) {
+        if(!SLOW_MOTION_MODE) {
             filter.maskBits |= NORMAL_SLOPE_BIT;
         } else {
             filter.maskBits |= ALTERNATE_SLOPE_BIT;

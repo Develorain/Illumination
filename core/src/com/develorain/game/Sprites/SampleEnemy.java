@@ -47,4 +47,8 @@ public class SampleEnemy extends Enemy {
         enemySprite.setOrigin(enemySprite.getWidth() / 2, enemySprite.getHeight() / 2);
         b2body.setUserData(enemySprite);
     }
+
+    public void update() {
+        b2body.setLinearVelocity(3, b2body.getLinearVelocity().y);
+    }
 }

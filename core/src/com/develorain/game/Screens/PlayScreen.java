@@ -11,7 +11,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
@@ -20,21 +21,17 @@ import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.*;
 
-import static com.develorain.game.Illumination.PPM;
-import static com.develorain.game.Illumination.V_HEIGHT;
-import static com.develorain.game.Illumination.V_WIDTH;
-
+import static com.develorain.game.Illumination.*;
 
 public class PlayScreen implements Screen {
     public static boolean DEBUG_MODE = false;
     public static boolean WHITE_MODE = true;
     public static int TIME_SLOWDOWN_MODIFIER = 1;
 
-    public RayHandler rayHandler;
-    private PlayerController playerController;
-
     // Stores current game time
     public static float currentTime = 0;
+    public RayHandler rayHandler;
+    private PlayerController playerController;
 
     // Reference to the game, used to set Screens
     private Illumination game;
@@ -51,8 +48,8 @@ public class PlayScreen implements Screen {
     // Box2D variables
     private World world;
     private Box2DDebugRenderer b2dr;
+    private B2WorldCreator b2worldCreator;
     private Player player;
-    private SampleEnemy enemy;
     private HUD hud;
 
     private WorldContactListener contactListener;
@@ -74,7 +71,7 @@ public class PlayScreen implements Screen {
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(1f);
 
-        player = new Player(this, rayHandler, 300, 300);
+        player = new Player(this, rayHandler, 300, 300, "down");
 
         playerController = new PlayerController(player);
 
@@ -87,9 +84,7 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(contactListener);
 
-        new B2WorldCreator(this);
-
-        enemy = new SampleEnemy(this, 200, 200);
+        b2worldCreator = new B2WorldCreator(this);
     }
 
     public void update(float dt) {
@@ -98,6 +93,11 @@ public class PlayScreen implements Screen {
 
         // Updates the HUD
         hud.update(dt);
+
+        for (int i = 0; i < b2worldCreator.getSampleEnemies().size(); i++) {
+            SampleEnemy enemy = b2worldCreator.getSampleEnemies().get(i);
+            enemy.update();
+        }
 
         // Handles play screen input
         handleInput();
@@ -161,6 +161,32 @@ public class PlayScreen implements Screen {
 
             player.switchBoxSprite();
         }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+                world.setGravity(new Vector2(25, 0));
+                player.destroyAndRemake("right");
+                cam.rotate(-90);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+                world.setGravity(new Vector2(-25, 0));
+                player.destroyAndRemake("left");
+                cam.rotate(90);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                world.setGravity(new Vector2(0, 25));
+                player.destroyAndRemake("up");
+                cam.rotate(180);
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+                world.setGravity(new Vector2(0, -25));
+                player.destroyAndRemake("down");
+                cam.rotate(180);
+            }
+        }
     }
 
     @Override
@@ -185,14 +211,18 @@ public class PlayScreen implements Screen {
     }
 
     @Override
-    public void show() {}
+    public void show() {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void hide() {}
+    public void hide() {
+    }
 }
