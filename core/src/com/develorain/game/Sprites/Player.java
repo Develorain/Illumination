@@ -60,7 +60,7 @@ public class Player extends Sprite {
         createFootSensor();
         createLeftSensor();
         createRightSensor();
-        //createLights(rayHandler);
+        createLights(rayHandler);
     }
 
     private void createBody(float x, float y) {
@@ -225,7 +225,7 @@ public class Player extends Sprite {
         world.destroyBody(playerB2DBody);
 
         for (int i = 0; i < pointLights.size(); i++) {
-            //pointLights.get(i).remove();
+            pointLights.get(i).remove();
         }
 
         return new Player(screen, rayHandler, x, y, direction);

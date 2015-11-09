@@ -164,28 +164,82 @@ public class PlayScreen implements Screen {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-                world.setGravity(new Vector2(25, 0));
-                player.destroyAndRemake("right");
-                cam.rotate(-90);
-            }
-
-            if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-                world.setGravity(new Vector2(-25, 0));
-                player.destroyAndRemake("left");
-                cam.rotate(90);
-            }
+            String previousDirection = player.direction;
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+                player = player.destroyAndRemake("up");
                 world.setGravity(new Vector2(0, 25));
-                player.destroyAndRemake("up");
-                cam.rotate(180);
+
+                switch (previousDirection) {
+                    case "up":
+                        break;
+                    case "down":
+                        cam.rotate(180);
+                        break;
+                    case "left":
+                        cam.rotate(90);
+                        break;
+                    case "right":
+                        cam.rotate(-90);
+                        break;
+                }
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+                player = player.destroyAndRemake("down");
                 world.setGravity(new Vector2(0, -25));
-                player.destroyAndRemake("down");
-                cam.rotate(180);
+
+                switch (previousDirection) {
+                    case "up":
+                        cam.rotate(180);
+                        break;
+                    case "down":
+                        break;
+                    case "left":
+                        cam.rotate(-90);
+                        break;
+                    case "right":
+                        cam.rotate(90);
+                        break;
+                }
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
+                player = player.destroyAndRemake("left");
+                world.setGravity(new Vector2(-25, 0));
+
+                switch (previousDirection) {
+                    case "up":
+                        cam.rotate(-90);
+                        break;
+                    case "down":
+                        cam.rotate(90);
+                        break;
+                    case "left":
+                        break;
+                    case "right":
+                        cam.rotate(180);
+                        break;
+                }
+            }
+
+            if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
+                player = player.destroyAndRemake("right");
+                world.setGravity(new Vector2(25, 0));
+
+                switch (previousDirection) {
+                    case "up":
+                        cam.rotate(90);
+                        break;
+                    case "down":
+                        cam.rotate(-90);
+                        break;
+                    case "left":
+                        cam.rotate(180);
+                        break;
+                    case "right":
+                        break;
+                }
             }
         }
     }

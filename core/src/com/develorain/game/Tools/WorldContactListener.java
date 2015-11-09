@@ -101,8 +101,6 @@ public class WorldContactListener implements ContactListener {
                 break;
         }
 
-        // if endcontact is with player
-        // TODO: Store the player fixture and check if fixtureA or fixtureB is equal to the player fixture. If it is, below lines are run
         playerController.canChargeDownwards = true;
     }
 
