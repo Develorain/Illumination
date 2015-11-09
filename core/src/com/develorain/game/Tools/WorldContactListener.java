@@ -22,10 +22,30 @@ public class WorldContactListener implements ContactListener {
             case PLAYER_FOOT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
                 playerController.footContactCounter++;
                 break;
+            case PLAYER_FOOT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+                playerController.footContactCounter++;
+                break;
+            case PLAYER_FOOT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+                playerController.footContactCounter++;
+                break;
+
             case PLAYER_LEFT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
                 playerController.leftContactCounter++;
                 break;
+            case PLAYER_LEFT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+                playerController.leftContactCounter++;
+                break;
+            case PLAYER_LEFT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+                playerController.leftContactCounter++;
+                break;
+
             case PLAYER_RIGHT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.rightContactCounter++;
+                break;
+            case PLAYER_RIGHT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+                playerController.rightContactCounter++;
+                break;
+            case PLAYER_RIGHT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
                 playerController.rightContactCounter++;
                 break;
         }
@@ -43,18 +63,46 @@ public class WorldContactListener implements ContactListener {
         switch (cDef) {
             case PLAYER_FOOT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
                 playerController.footContactCounter--;
+                playerController.canDoubleJump = true;
                 break;
+            case PLAYER_FOOT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+                playerController.footContactCounter--;
+                playerController.canDoubleJump = true;
+                break;
+            case PLAYER_FOOT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+                playerController.footContactCounter--;
+                playerController.canDoubleJump = true;
+                break;
+
             case PLAYER_LEFT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
                 playerController.leftContactCounter--;
+                playerController.canDoubleJump = true;
                 break;
+            case PLAYER_LEFT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+                playerController.leftContactCounter--;
+                playerController.canDoubleJump = true;
+                break;
+            case PLAYER_LEFT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+                playerController.leftContactCounter--;
+                playerController.canDoubleJump = true;
+                break;
+
             case PLAYER_RIGHT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
                 playerController.rightContactCounter--;
+                playerController.canDoubleJump = true;
+                break;
+            case PLAYER_RIGHT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+                playerController.rightContactCounter--;
+                playerController.canDoubleJump = true;
+                break;
+            case PLAYER_RIGHT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+                playerController.rightContactCounter--;
+                playerController.canDoubleJump = true;
                 break;
         }
 
         // if endcontact is with player
         // TODO: Store the player fixture and check if fixtureA or fixtureB is equal to the player fixture. If it is, below lines are run
-        playerController.canDoubleJump = true;
         playerController.canChargeDownwards = true;
     }
 
