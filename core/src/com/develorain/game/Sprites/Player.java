@@ -41,7 +41,7 @@ public class Player extends Sprite {
     public Body playerB2DBody;
     public Sprite playerSprite;
     public Array<Body> tmpBodies;
-    public ArrayList<PointLight> pointLights = new ArrayList();
+    public ArrayList<PointLight> pointLights = new ArrayList<>();
 
     public Player(PlayScreen screen, RayHandler rayHandler, float x, float y, String direction) {
         this.world = screen.getWorld();
@@ -51,20 +51,22 @@ public class Player extends Sprite {
 
         createPlayer(x, y, rayHandler);
 
-        tmpBodies = new Array();
+        tmpBodies = new Array<>();
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
         createBody(x, y);
         createSprite();
-        createSensors();
+        createFootSensor();
+        createLeftSensor();
+        createRightSensor();
         //createLights(rayHandler);
     }
 
     private void createBody(float x, float y) {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
-        PolygonShape shape = new PolygonShape();
+        PolygonShape playerShape = new PolygonShape();
 
         bdef.position.set(x / PPM, y / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -72,9 +74,9 @@ public class Player extends Sprite {
 
         determinePlayerDirection(bdef);
 
-        shape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
+        playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
-        fdef.shape = shape;
+        fdef.shape = playerShape;
         fdef.restitution = PLAYER_RESTITUTION;
         fdef.density = PLAYER_DENSITY;
         fdef.friction = PLAYER_FRICTION;
@@ -109,12 +111,6 @@ public class Player extends Sprite {
         }
     }
 
-    private void createSensors() {
-        createFootSensor();
-        createLeftSensor();
-        createRightSensor();
-    }
-
     private void createSprite() {
         playerSprite = new Sprite(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
         playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
@@ -129,7 +125,7 @@ public class Player extends Sprite {
         fdef.isSensor = true;
         fdef.density = 0f;
         fdef.friction = 0;
-        fdef.filter.categoryBits = PLAYER_SENSOR_BIT;
+        fdef.filter.categoryBits = PLAYER_FOOT_SENSOR_BIT;
 
         fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
 
@@ -161,7 +157,7 @@ public class Player extends Sprite {
         fdef.isSensor = true;
         fdef.density = 0f;
         fdef.friction = 0;
-        fdef.filter.categoryBits = PLAYER_SENSOR_BIT;
+        fdef.filter.categoryBits = PLAYER_LEFT_SENSOR_BIT;
         fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
@@ -192,7 +188,7 @@ public class Player extends Sprite {
         fdef.isSensor = true;
         fdef.density = 0f;
         fdef.friction = 0;
-        fdef.filter.categoryBits = PLAYER_SENSOR_BIT;
+        fdef.filter.categoryBits = PLAYER_RIGHT_SENSOR_BIT;
         fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {

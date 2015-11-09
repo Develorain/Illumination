@@ -14,8 +14,10 @@ public class Illumination extends Game {
     public static final short NORMAL_SLOPE_BIT = 2;
     public static final short ALTERNATE_SLOPE_BIT = 4;
     public static final short PLAYER_BIT = 8;
-    public static final short PLAYER_SENSOR_BIT = 16;
-    public static final short ENEMY_BIT = 32;
+    public static final short PLAYER_FOOT_SENSOR_BIT = 16;
+    public static final short PLAYER_LEFT_SENSOR_BIT = 32;
+    public static final short PLAYER_RIGHT_SENSOR_BIT = 64;
+    public static final short ENEMY_BIT = 128;
 
     public SpriteBatch batch;
 

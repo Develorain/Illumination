@@ -2,6 +2,8 @@ package com.develorain.game.Tools;
 
 import com.badlogic.gdx.physics.box2d.*;
 
+import static com.develorain.game.Illumination.*;
+
 public class WorldContactListener implements ContactListener {
     private PlayerController playerController;
 
@@ -14,19 +16,18 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        // If the player is on the ground
-        if (fixA.getUserData() == "foot sensor" || fixB.getUserData() == "foot sensor") {
-            playerController.footContactCounter++;
-        }
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        // If the player is touch the left wall
-        if (fixA.getUserData() == "left sensor" || fixB.getUserData() == "left sensor") {
-            playerController.leftContactCounter++;
-        }
-
-        // If the player is touch the right wall
-        if (fixA.getUserData() == "right sensor" || fixB.getUserData() == "right sensor") {
-            playerController.rightContactCounter++;
+        switch (cDef) {
+            case PLAYER_FOOT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.footContactCounter++;
+                break;
+            case PLAYER_LEFT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.leftContactCounter++;
+                break;
+            case PLAYER_RIGHT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.rightContactCounter++;
+                break;
         }
 
         playerController.canDoubleJump = false;
@@ -37,19 +38,18 @@ public class WorldContactListener implements ContactListener {
         Fixture fixA = contact.getFixtureA();
         Fixture fixB = contact.getFixtureB();
 
-        // If the player just left the ground
-        if (fixA.getUserData() == "foot sensor" || fixB.getUserData() == "foot sensor") {
-            playerController.footContactCounter--;
-        }
+        int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        // If the player just left the left wall
-        if (fixA.getUserData() == "left sensor" || fixB.getUserData() == "left sensor") {
-            playerController.leftContactCounter--;
-        }
-
-        // If the player just left the right wall
-        if (fixA.getUserData() == "right sensor" || fixB.getUserData() == "right sensor") {
-            playerController.rightContactCounter--;
+        switch (cDef) {
+            case PLAYER_FOOT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.footContactCounter--;
+                break;
+            case PLAYER_LEFT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.leftContactCounter--;
+                break;
+            case PLAYER_RIGHT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+                playerController.rightContactCounter--;
+                break;
         }
 
         // if endcontact is with player

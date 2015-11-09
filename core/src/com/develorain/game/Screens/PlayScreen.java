@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
-import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.*;
 
 import static com.develorain.game.Illumination.*;
@@ -94,10 +93,12 @@ public class PlayScreen implements Screen {
         // Updates the HUD
         hud.update(dt);
 
+        /*
         for (int i = 0; i < b2worldCreator.getSampleEnemies().size(); i++) {
             SampleEnemy enemy = b2worldCreator.getSampleEnemies().get(i);
             enemy.update();
         }
+        */
 
         // Handles play screen input
         handleInput();
