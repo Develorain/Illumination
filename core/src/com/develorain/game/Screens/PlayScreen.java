@@ -163,81 +163,76 @@ public class PlayScreen implements Screen {
             player.switchBoxSprite();
         }
 
+        // TODO: If I use E, using A breaks the program
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             String previousDirection = player.direction;
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-                player = player.destroyAndRemake("up");
-                world.setGravity(new Vector2(0, 25));
+                cam.rotate(180);
 
                 switch (previousDirection) {
                     case "up":
+                        player = player.destroyAndRemake("down");
+                        world.setGravity(new Vector2(0, -25));
                         break;
                     case "down":
-                        cam.rotate(180);
+                        player = player.destroyAndRemake("up");
+                        world.setGravity(new Vector2(0, 25));
                         break;
                     case "left":
-                        cam.rotate(90);
+                        player = player.destroyAndRemake("right");
+                        world.setGravity(new Vector2(25, 0));
                         break;
                     case "right":
-                        cam.rotate(-90);
+                        player = player.destroyAndRemake("left");
+                        world.setGravity(new Vector2(-25, 0));
                         break;
                 }
-            }
 
-            if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-                player = player.destroyAndRemake("down");
-                world.setGravity(new Vector2(0, -25));
-
-                switch (previousDirection) {
-                    case "up":
-                        cam.rotate(180);
-                        break;
-                    case "down":
-                        break;
-                    case "left":
-                        cam.rotate(-90);
-                        break;
-                    case "right":
-                        cam.rotate(90);
-                        break;
-                }
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-                player = player.destroyAndRemake("left");
-                world.setGravity(new Vector2(-25, 0));
+                cam.rotate(90);
 
                 switch (previousDirection) {
                     case "up":
-                        cam.rotate(-90);
+                        player = player.destroyAndRemake("right");
+                        world.setGravity(new Vector2(25, 0));
                         break;
                     case "down":
-                        cam.rotate(90);
+                        player = player.destroyAndRemake("left");
+                        world.setGravity(new Vector2(-25, 0));
                         break;
                     case "left":
+                        player = player.destroyAndRemake("up");
+                        world.setGravity(new Vector2(0, 25));
                         break;
                     case "right":
-                        cam.rotate(180);
+                        player = player.destroyAndRemake("down");
+                        world.setGravity(new Vector2(0, -25));
                         break;
                 }
             }
 
             if (Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-                player = player.destroyAndRemake("right");
-                world.setGravity(new Vector2(25, 0));
+                cam.rotate(-90);
 
                 switch (previousDirection) {
                     case "up":
-                        cam.rotate(90);
+                        player = player.destroyAndRemake("left");
+                        world.setGravity(new Vector2(-25, 0));
                         break;
                     case "down":
-                        cam.rotate(-90);
+                        player = player.destroyAndRemake("right");
+                        world.setGravity(new Vector2(25, 0));
                         break;
                     case "left":
-                        cam.rotate(180);
+                        player = player.destroyAndRemake("down");
+                        world.setGravity(new Vector2(0, -25));
                         break;
                     case "right":
+                        player = player.destroyAndRemake("up");
+                        world.setGravity(new Vector2(0, 25));
                         break;
                 }
             }
