@@ -4,6 +4,7 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
+import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.*;
 
 import static com.develorain.game.Illumination.*;
@@ -53,6 +55,8 @@ public class PlayScreen implements Screen {
 
     private WorldContactListener contactListener;
 
+    private Music music;
+
     public PlayScreen(Illumination game) {
         this.game = game;
 
@@ -84,6 +88,13 @@ public class PlayScreen implements Screen {
         world.setContactListener(contactListener);
 
         b2worldCreator = new B2WorldCreator(this);
+
+
+        music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
+
     }
 
     public void update(float dt) {
@@ -93,12 +104,10 @@ public class PlayScreen implements Screen {
         // Updates the HUD
         hud.update(dt);
 
-        /*
         for (int i = 0; i < b2worldCreator.getSampleEnemies().size(); i++) {
             SampleEnemy enemy = b2worldCreator.getSampleEnemies().get(i);
             enemy.update();
         }
-        */
 
         // Handles play screen input
         handleInput();

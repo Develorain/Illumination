@@ -2,7 +2,9 @@ package com.develorain.game.Tools;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Rectangle;
 import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.Slopes.AlternateSlope;
@@ -29,13 +31,11 @@ public class B2WorldCreator {
             new AlternateSlope(screen, object);
         }
 
-        /*
         sampleEnemies = new ArrayList<>();
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             sampleEnemies.add(new SampleEnemy(screen, rect.getX(), rect.getY()));
         }
-        */
     }
 
     public ArrayList<SampleEnemy> getSampleEnemies() {

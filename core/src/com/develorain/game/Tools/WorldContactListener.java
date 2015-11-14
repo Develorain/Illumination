@@ -48,9 +48,12 @@ public class WorldContactListener implements ContactListener {
             case PLAYER_RIGHT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
                 playerController.rightContactCounter++;
                 break;
-        }
 
-        playerController.canDoubleJump = false;
+            case PLAYER_BIT | ENEMY_BIT:
+                System.out.println("PLAYER DIED");
+                //Illumination.manager.get("audio/sounds/hitsound.wav", Sound.class).play();
+                break;
+        }
     }
 
     @Override

@@ -32,7 +32,7 @@ public class SampleEnemy extends Enemy {
         fdef.friction = ENEMY_FRICTION;
 
         fdef.filter.categoryBits = ENEMY_BIT;
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | ENEMY_BIT;
+        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | PLAYER_BIT | ENEMY_BIT;
 
         enemyShape.setAsBox(ENEMY_WIDTH / PPM, ENEMY_HEIGHT / PPM);
 

@@ -1,6 +1,9 @@
 package com.develorain.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.develorain.game.Screens.PlayScreen;
 
@@ -18,12 +21,17 @@ public class Illumination extends Game {
     public static final short PLAYER_LEFT_SENSOR_BIT = 32;
     public static final short PLAYER_RIGHT_SENSOR_BIT = 64;
     public static final short ENEMY_BIT = 128;
-
+    public static AssetManager manager;  //consider not using static version
     public SpriteBatch batch;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
+        manager = new AssetManager();
+        manager.load("audio/music/disconnected.ogg", Music.class);
+        manager.load("audio/sounds/hitsound.wav", Sound.class);
+        manager.finishLoading();
+
         setScreen(new PlayScreen(this));
     }
 
