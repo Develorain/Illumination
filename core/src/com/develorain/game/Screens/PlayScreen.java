@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -20,7 +19,10 @@ import com.develorain.game.Illumination;
 import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.SampleEnemy;
-import com.develorain.game.Tools.*;
+import com.develorain.game.Tools.B2WorldCreator;
+import com.develorain.game.Tools.CameraUtilities;
+import com.develorain.game.Tools.PlayerController;
+import com.develorain.game.Tools.WorldContactListener;
 
 import static com.develorain.game.Illumination.*;
 
@@ -78,23 +80,20 @@ public class PlayScreen implements Screen {
 
         playerController = new PlayerController(player);
 
-        LightBuilder.createConeLight(rayHandler, 800, 600, Color.CHARTREUSE, 8, 270, 30);
-        LightBuilder.createConeLight(rayHandler, 800, 600, Color.YELLOW, 4, 270, 30);
-
         hud = new HUD(game.batch);
 
         contactListener = new WorldContactListener(playerController);
 
         world.setContactListener(contactListener);
 
-        b2worldCreator = new B2WorldCreator(this);
+        b2worldCreator = new B2WorldCreator(this, rayHandler);
 
-
+        /*
         music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
         music.play();
-
+        */
     }
 
     public void update(float dt) {
