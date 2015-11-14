@@ -76,24 +76,22 @@ public class PlayScreen implements Screen {
         rayHandler = new RayHandler(world);
         rayHandler.setAmbientLight(1f);
 
-        player = new Player(this, rayHandler, 300, 300, "down");
+        hud = new HUD(game.batch);
+
+        b2worldCreator = new B2WorldCreator(this, rayHandler);
+
+        player = b2worldCreator.getPlayer();
 
         playerController = new PlayerController(player);
-
-        hud = new HUD(game.batch);
 
         contactListener = new WorldContactListener(playerController);
 
         world.setContactListener(contactListener);
 
-        b2worldCreator = new B2WorldCreator(this, rayHandler);
-
-        /*
         music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
         music.play();
-        */
     }
 
     public void update(float dt) {

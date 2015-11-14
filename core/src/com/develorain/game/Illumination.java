@@ -30,6 +30,8 @@ public class Illumination extends Game {
         manager = new AssetManager();
         manager.load("audio/music/disconnected.ogg", Music.class);
         manager.load("audio/sounds/hitsound.wav", Sound.class);
+        manager.load("audio/sounds/startslowmotion.ogg", Sound.class);
+        manager.load("audio/sounds/endslowmotion.ogg", Sound.class);
         manager.finishLoading();
 
         setScreen(new PlayScreen(this));

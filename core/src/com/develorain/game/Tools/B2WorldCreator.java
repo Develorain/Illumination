@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.develorain.game.Screens.PlayScreen;
+import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.Slopes.AlternateSlope;
 import com.develorain.game.Tools.Slopes.DefaultSlope;
@@ -16,6 +17,7 @@ import com.develorain.game.Tools.Slopes.NormalSlope;
 import java.util.ArrayList;
 
 public class B2WorldCreator {
+    private Player player;
     private ArrayList<SampleEnemy> sampleEnemies;
 
     public B2WorldCreator(PlayScreen screen, RayHandler rayHandler) {
@@ -45,9 +47,19 @@ public class B2WorldCreator {
             LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.CHARTREUSE, 8, 270, 30);
             LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.YELLOW, 4, 270, 30);
         }
+
+        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            player = new Player(screen, rayHandler, rect.getX(), rect.getY(), "down");
+        }
     }
 
     public ArrayList<SampleEnemy> getSampleEnemies() {
         return sampleEnemies;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

@@ -1,6 +1,8 @@
 package com.develorain.game.Tools;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.*;
+import com.develorain.game.Illumination;
 
 import static com.develorain.game.Illumination.*;
 
@@ -51,7 +53,8 @@ public class WorldContactListener implements ContactListener {
 
             case PLAYER_BIT | ENEMY_BIT:
                 System.out.println("PLAYER DIED");
-                //Illumination.manager.get("audio/sounds/hitsound.wav", Sound.class).play();
+                playerController.shouldRespawn = true;
+                Illumination.manager.get("audio/sounds/hitsound.wav", Sound.class).play();
                 break;
         }
     }

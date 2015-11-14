@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
@@ -229,6 +232,24 @@ public class Player extends Sprite {
         }
 
         return new Player(screen, rayHandler, x, y, direction);
+    }
+
+    public void destroy() {
+        world.destroyBody(playerB2DBody);
+
+        for (int i = 0; i < pointLights.size(); i++) {
+            pointLights.get(i).remove();
+        }
+    }
+
+    public Player respawn() {
+        for (MapObject object : screen.getTiledMap().getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+
+            return new Player(screen, rayHandler, rect.getX(), rect.getY(), "down");
+        }
+
+        return null;
     }
 
     public void draw(Batch batch) {

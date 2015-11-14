@@ -2,8 +2,10 @@ package com.develorain.game.Tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Player;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
@@ -19,8 +21,9 @@ public class PlayerController {
     public int rightContactCounter = 0;
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
-    // Reference of player and body to be controlled
+    public boolean shouldRespawn = false;
 
+    // Reference of player and body to be controlled
     private Player player;
     private Body body;
 
@@ -89,6 +92,11 @@ public class PlayerController {
             TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 4 : 1;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
+            if (SLOW_MOTION_MODE)
+                Illumination.manager.get("audio/sounds/startslowmotion.ogg", Sound.class).play();
+            else
+                Illumination.manager.get("audio/sounds/endslowmotion.ogg", Sound.class).play();
+
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
 
@@ -138,6 +146,13 @@ public class PlayerController {
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
             body.applyLinearImpulse(new Vector2(-0.5f, 0), body.getWorldCenter(), true);
             inputGiven = true;
+        }
+
+        if (shouldRespawn) {
+            player.destroy();
+            player = player.respawn();
+
+            shouldRespawn = false;
         }
 
         /*
