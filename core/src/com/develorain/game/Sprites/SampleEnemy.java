@@ -32,12 +32,12 @@ public class SampleEnemy extends Enemy {
         fdef.friction = ENEMY_FRICTION;
 
         fdef.filter.categoryBits = ENEMY_BIT;
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | PLAYER_BIT | ENEMY_BIT;
+        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT | ENEMY_BIT;
 
         enemyShape.setAsBox(ENEMY_WIDTH / PPM, ENEMY_HEIGHT / PPM);
 
         b2body = world.createBody(bdef);
-        b2body.createFixture(fdef);
+        b2body.createFixture(fdef).setUserData(this);
     }
 
     @Override
@@ -49,6 +49,6 @@ public class SampleEnemy extends Enemy {
     }
 
     public void update() {
-        b2body.setLinearVelocity(3, b2body.getLinearVelocity().y);
+        b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
     }
 }

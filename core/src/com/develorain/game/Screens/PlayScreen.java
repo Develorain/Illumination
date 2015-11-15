@@ -91,14 +91,13 @@ public class PlayScreen implements Screen {
         music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
-        music.play();
+        //music.play();
     }
 
     public void update(float dt) {
         // Increasing current game time
         currentTime += dt;
 
-        // Updates the HUD
         hud.update(dt);
 
         for (int i = 0; i < b2worldCreator.getSampleEnemies().size(); i++) {
@@ -106,28 +105,22 @@ public class PlayScreen implements Screen {
             enemy.update();
         }
 
-        // Handles play screen input
         handleInput();
 
-        // Handles player input
         playerController.handleInput();
 
-        // Sets the world frames to 60 FPS
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
-        // Centers the camera on the player using interpolation (updates the camera)
         CameraUtilities.lerpToTarget(cam, new Vector2(player.playerB2DBody.getPosition().x, player.playerB2DBody.getPosition().y));
 
         // Sets the tiled tiledMap mapRenderer to render only what is on screen or in camera view
         mapRenderer.setView(cam);
 
-        // Updates the ray handler
         rayHandler.update();
     }
 
     @Override
     public void render(float dt) {
-        // Runs update method before rendering
         update(dt);
 
         // Clears screen
@@ -138,17 +131,14 @@ public class PlayScreen implements Screen {
         game.batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
 
-        // Renders the tiledMap
         mapRenderer.render();
 
         // Renders the box2D debug mapRenderer (lines)
         if (DEBUG_MODE)
             b2dr.render(world, cam.combined);
 
-        // Draws player
         player.draw(game.batch);
 
-        // Renders ray handler
         rayHandler.render();
 
         // Draws HUD

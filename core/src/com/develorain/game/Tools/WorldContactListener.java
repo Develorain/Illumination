@@ -3,6 +3,7 @@ package com.develorain.game.Tools;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.Illumination;
+import com.develorain.game.Sprites.Enemy;
 
 import static com.develorain.game.Illumination.*;
 
@@ -51,8 +52,15 @@ public class WorldContactListener implements ContactListener {
                 playerController.rightContactCounter++;
                 break;
 
+            case ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
+                    ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                } else {
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                }
+                break;
+
             case PLAYER_BIT | ENEMY_BIT:
-                System.out.println("PLAYER DIED");
                 playerController.shouldRespawn = true;
                 Illumination.manager.get("audio/sounds/hitsound.wav", Sound.class).play();
                 break;

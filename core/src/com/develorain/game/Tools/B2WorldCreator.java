@@ -11,6 +11,7 @@ import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.SampleEnemy;
 import com.develorain.game.Tools.Slopes.AlternateSlope;
+import com.develorain.game.Tools.Slopes.BoundarySlope;
 import com.develorain.game.Tools.Slopes.DefaultSlope;
 import com.develorain.game.Tools.Slopes.NormalSlope;
 
@@ -52,6 +53,10 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             player = new Player(screen, rayHandler, rect.getX(), rect.getY(), "down");
+        }
+
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(PolylineMapObject.class)) {
+            new BoundarySlope(screen, object);
         }
     }
 

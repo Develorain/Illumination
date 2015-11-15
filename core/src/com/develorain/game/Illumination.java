@@ -21,6 +21,7 @@ public class Illumination extends Game {
     public static final short PLAYER_LEFT_SENSOR_BIT = 32;
     public static final short PLAYER_RIGHT_SENSOR_BIT = 64;
     public static final short ENEMY_BIT = 128;
+    public static final short BOUNDARY_SLOPE_BIT = 256;
     public static AssetManager manager;  //consider not using static version
     public SpriteBatch batch;
 

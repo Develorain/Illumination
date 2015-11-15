@@ -165,13 +165,13 @@ public class PlayerController {
         // Manual deceleration
         if (!inputGiven) {
             if (body.getLinearVelocity().x > 0.3f) {
-                body.applyLinearImpulse(new Vector2(-0.2f, 0), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(-0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             } //else if(body.getLinearVelocity().x > 0) {
             //body.setLinearVelocity(0, body.getLinearVelocity().y);
             //}
 
             if (body.getLinearVelocity().x < -0.3f) {
-                body.applyLinearImpulse(new Vector2(0.2f, 0), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             }// else if(body.getLinearVelocity().x < 0) {
             //body.setLinearVelocity(0, body.getLinearVelocity().y);
             //}
