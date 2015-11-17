@@ -62,7 +62,7 @@ public class WorldContactListener implements ContactListener {
 
             case PLAYER_BIT | ENEMY_BIT:
                 playerController.shouldRespawn = true;
-                Illumination.manager.get("audio/sounds/hitsound.wav", Sound.class).play();
+                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;
         }
     }

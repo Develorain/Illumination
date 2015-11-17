@@ -29,10 +29,10 @@ public class Illumination extends Game {
     public void create() {
         batch = new SpriteBatch();
         manager = new AssetManager();
-        manager.load("audio/music/disconnected.ogg", Music.class);
-        manager.load("audio/sounds/hitsound.wav", Sound.class);
-        manager.load("audio/sounds/startslowmotion.ogg", Sound.class);
-        manager.load("audio/sounds/endslowmotion.ogg", Sound.class);
+        manager.load("Audio/Music/disconnected.ogg", Music.class);
+        manager.load("Audio/Sounds/hitsound.wav", Sound.class);
+        manager.load("Audio/Sounds/startslowmotion.ogg", Sound.class);
+        manager.load("Audio/Sounds/endslowmotion.ogg", Sound.class);
         manager.finishLoading();
 
         setScreen(new PlayScreen(this));

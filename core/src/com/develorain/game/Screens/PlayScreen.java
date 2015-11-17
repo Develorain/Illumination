@@ -88,7 +88,7 @@ public class PlayScreen implements Screen {
 
         world.setContactListener(contactListener);
 
-        music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
+        music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
         //music.play();

@@ -39,12 +39,12 @@ public class PlayerController {
         boolean inputGiven = false;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(1.5f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(-1.5f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
@@ -93,9 +93,9 @@ public class PlayerController {
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
             if (SLOW_MOTION_MODE)
-                Illumination.manager.get("audio/sounds/startslowmotion.ogg", Sound.class).play();
+                Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
             else
-                Illumination.manager.get("audio/sounds/endslowmotion.ogg", Sound.class).play();
+                Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
@@ -138,13 +138,13 @@ public class PlayerController {
 
         // Sprint right
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x <= SPRINT_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(0.5f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         // Sprint left
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(-0.5f, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 

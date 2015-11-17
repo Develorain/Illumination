@@ -45,8 +45,8 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.CHARTREUSE, 8, 270, 30);
-            LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.YELLOW, 4, 270, 30);
+            LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.ROYAL, 8, 270, 30);
+            LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.ROYAL, 4, 270, 30);
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
