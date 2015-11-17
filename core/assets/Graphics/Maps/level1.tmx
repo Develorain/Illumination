@@ -6,7 +6,7 @@
  <tileset firstgid="37" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
- <objectgroup color="#ffffff" name="white slope">
+ <objectgroup color="#ffffff" name="default slope">
   <object id="304" x="16" y="15984">
    <polyline points="0,0 416,0 784,-368"/>
   </object>
@@ -41,7 +41,7 @@
    <polyline points="0,0 0,-368 112,-480 240,-480"/>
   </object>
  </objectgroup>
- <objectgroup color="#5684d8" name="blue slope">
+ <objectgroup color="#5684d8" name="normal slope">
   <object id="153" x="5264" y="15040">
    <polyline points="0,0 512,0"/>
   </object>
@@ -142,15 +142,23 @@
    <polyline points="0,0 -496,0 -496,16 0,16 0,0"/>
   </object>
  </objectgroup>
- <objectgroup color="#dc273c" name="red slope">
+ <objectgroup color="#dc273c" name="alternate slope">
   <object id="263" x="208" y="15504">
    <polyline points="0,0 464,0 464,16 0,16 0,0"/>
   </object>
  </objectgroup>
- <objectgroup color="#ff6100" name="enemy">
+ <objectgroup color="#b7ed17" name="boundary slope">
+  <object id="328" x="1360.82" y="15983.9">
+   <polyline points="0,0 0,-16"/>
+  </object>
+  <object id="329" x="1550.91" y="15983.9">
+   <polyline points="0,0 0,-16"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#ff6100" name="enemies">
   <object id="299" x="1440" y="15952" width="16" height="16"/>
  </objectgroup>
- <objectgroup color="#971ded" name="light">
+ <objectgroup color="#971ded" name="lights">
   <object id="290" x="416" y="15232" width="16" height="16"/>
   <object id="291" x="1472" y="15232" width="16" height="16"/>
   <object id="292" x="880" y="15232" width="16" height="16"/>
@@ -163,14 +171,6 @@
  </objectgroup>
  <objectgroup name="player">
   <object id="296" x="256" y="15664" width="16" height="16" rotation="180"/>
- </objectgroup>
- <objectgroup color="#b7ed17" name="boundary">
-  <object id="328" x="1360.82" y="15983.9">
-   <polyline points="0,0 0,-16"/>
-  </object>
-  <object id="329" x="1550.91" y="15983.9">
-   <polyline points="0,0 0,-16"/>
-  </object>
  </objectgroup>
  <layer name="white tiles" width="1000" height="1000">
   <data encoding="base64" compression="zlib">

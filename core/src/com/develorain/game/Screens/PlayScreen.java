@@ -18,7 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
 import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
-import com.develorain.game.Sprites.SampleEnemy;
+import com.develorain.game.Sprites.Walker;
 import com.develorain.game.Tools.B2WorldCreator;
 import com.develorain.game.Tools.CameraUtilities;
 import com.develorain.game.Tools.PlayerController;
@@ -100,8 +100,8 @@ public class PlayScreen implements Screen {
 
         hud.update(dt);
 
-        for (int i = 0; i < b2worldCreator.getSampleEnemies().size(); i++) {
-            SampleEnemy enemy = b2worldCreator.getSampleEnemies().get(i);
+        for (int i = 0; i < b2worldCreator.getWalkers().size(); i++) {
+            Walker enemy = b2worldCreator.getWalkers().get(i);
             enemy.update();
         }
 

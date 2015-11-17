@@ -9,10 +9,10 @@ import com.develorain.game.Screens.PlayScreen;
 
 import static com.develorain.game.Illumination.*;
 
-public class SampleEnemy extends Enemy {
+public class Walker extends Enemy {
     public Sprite enemySprite;
 
-    public SampleEnemy(PlayScreen screen, float x, float y) {
+    public Walker(PlayScreen screen, float x, float y) {
         super(screen, x, y);
     }
 
