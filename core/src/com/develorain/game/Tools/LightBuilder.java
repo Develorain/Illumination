@@ -21,7 +21,7 @@ public class LightBuilder {
         Filter filter = new Filter();
         filter.maskBits = DEFAULT_SLOPE_BIT;
 
-        if(!SLOW_MOTION_MODE) {
+        if (!SLOW_MOTION_MODE) {
             filter.maskBits |= NORMAL_SLOPE_BIT;
         } else {
             filter.maskBits |= ALTERNATE_SLOPE_BIT;
@@ -49,7 +49,8 @@ public class LightBuilder {
 
     public static ConeLight createConeLight(RayHandler rayHandler, float x, float y, Color c, float dist, float direction, float cone) {
         ConeLight cl = new ConeLight(rayHandler, 120, c, dist, x / PPM, y / PPM, direction, cone);
-        cl.setSoftnessLength(0f); // sets intensity of shadows, higher number = less shadows
+        //cl.setSoftnessLength(2f); // sets intensity of shadows, higher number = less shadows
+        cl.setSoftnessLength(5f);
         cl.setXray(false);        // changes light from being in background to foreground. when x-ray is true, shadows are not formed
         return cl;
     }

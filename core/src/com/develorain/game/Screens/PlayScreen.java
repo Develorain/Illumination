@@ -74,7 +74,7 @@ public class PlayScreen implements Screen {
         b2dr = new Box2DDebugRenderer();
 
         rayHandler = new RayHandler(world);
-        rayHandler.setAmbientLight(1f);
+        rayHandler.setAmbientLight(0.2f);
 
         hud = new HUD(game.batch);
 

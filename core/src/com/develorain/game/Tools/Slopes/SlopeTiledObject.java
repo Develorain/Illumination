@@ -10,13 +10,13 @@ import com.develorain.game.Screens.PlayScreen;
 import static com.develorain.game.Illumination.PPM;
 
 public class SlopeTiledObject {
-    World world;
-    TiledMap map;
-    Body body;
-    Shape line;
-    PlayScreen screen;
-    MapObject object;
-    Fixture fixture;
+    public World world;
+    public TiledMap map;
+    public Body body;
+    public Shape line;
+    public PlayScreen screen;
+    public MapObject object;
+    public Fixture fixture;
 
     public SlopeTiledObject(PlayScreen screen, MapObject object) {
         this.object = object;
@@ -38,7 +38,7 @@ public class SlopeTiledObject {
         float[] vertices = polyline.getPolyline().getTransformedVertices();
         Vector2[] worldVertices = new Vector2[vertices.length / 2];
 
-        for(int i = 0; i < worldVertices.length; i++) {
+        for (int i = 0; i < worldVertices.length; i++) {
             worldVertices[i] = new Vector2(vertices[i * 2] / PPM, vertices[i * 2 + 1] / PPM);
         }
 

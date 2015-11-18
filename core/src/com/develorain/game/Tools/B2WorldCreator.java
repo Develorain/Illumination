@@ -10,10 +10,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.Walker;
-import com.develorain.game.Tools.Slopes.AlternateSlope;
-import com.develorain.game.Tools.Slopes.BoundarySlope;
-import com.develorain.game.Tools.Slopes.DefaultSlope;
-import com.develorain.game.Tools.Slopes.NormalSlope;
+import com.develorain.game.Tools.Slopes.*;
 
 import java.util.ArrayList;
 
@@ -57,6 +54,10 @@ public class B2WorldCreator {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             player = new Player(screen, rayHandler, rect.getX(), rect.getY(), "down");
+        }
+
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(PolylineMapObject.class)) {
+            new EndSlope(screen, object);
         }
     }
 

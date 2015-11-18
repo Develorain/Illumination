@@ -85,7 +85,7 @@ public class Player extends Sprite {
         fdef.friction = PLAYER_FRICTION;
         fdef.filter.categoryBits = PLAYER_BIT;
 
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ENEMY_BIT;
+        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | ENEMY_BIT | END_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
             fdef.filter.maskBits |= NORMAL_SLOPE_BIT;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="330">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="339">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -160,17 +160,24 @@
  </objectgroup>
  <objectgroup color="#971ded" name="lights">
   <object id="290" x="416" y="15232" width="16" height="16"/>
-  <object id="291" x="1472" y="15232" width="16" height="16"/>
+  <object id="291" x="1440" y="15504" width="16" height="16"/>
   <object id="292" x="880" y="15232" width="16" height="16"/>
   <object id="322" x="2000" y="15248" width="16" height="16"/>
   <object id="323" x="2848" y="15600" width="16" height="16"/>
-  <object id="324" x="4224" y="14816" width="16" height="16"/>
+  <object id="324" x="4208" y="14672" width="16" height="16"/>
   <object id="325" x="4784" y="15584" width="16" height="16"/>
-  <object id="326" x="5408" y="14736" width="16" height="16"/>
-  <object id="327" x="4400" y="13600" width="16" height="16"/>
+  <object id="326" x="5408" y="14592" width="16" height="16"/>
+  <object id="327" x="4400" y="13408" width="16" height="16"/>
+  <object id="330" x="5120" y="13824" width="16" height="16"/>
+  <object id="331" x="5536" y="12448" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="player">
   <object id="296" x="256" y="15664" width="16" height="16" rotation="180"/>
+ </objectgroup>
+ <objectgroup color="#0dff00" name="end">
+  <object id="338" x="464" y="13840">
+   <polyline points="0,0 0,-368"/>
+  </object>
  </objectgroup>
  <layer name="white tiles" width="1000" height="1000">
   <data encoding="base64" compression="zlib">
