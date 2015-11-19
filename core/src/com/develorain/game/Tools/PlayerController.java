@@ -2,10 +2,8 @@ package com.develorain.game.Tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.develorain.game.Illumination;
 import com.develorain.game.Sprites.Player;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
@@ -92,10 +90,10 @@ public class PlayerController {
             TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 4 : 1;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
-            if (SLOW_MOTION_MODE)
-                Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
-            else
-                Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
+            //if (SLOW_MOTION_MODE)
+            //Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
+            //else
+            //Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;

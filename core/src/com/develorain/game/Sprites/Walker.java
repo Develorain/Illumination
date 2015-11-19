@@ -6,14 +6,15 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.develorain.game.Screens.PlayScreen;
+import com.develorain.game.Tools.LevelCreator;
 
 import static com.develorain.game.Illumination.*;
 
 public class Walker extends Enemy {
     public Sprite enemySprite;
 
-    public Walker(PlayScreen screen, float x, float y) {
-        super(screen, x, y);
+    public Walker(PlayScreen screen, float x, float y, LevelCreator levelCreator) {
+        super(screen, x, y, levelCreator);
     }
 
     @Override

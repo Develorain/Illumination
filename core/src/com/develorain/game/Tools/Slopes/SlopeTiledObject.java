@@ -6,6 +6,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.Screens.PlayScreen;
+import com.develorain.game.Tools.LevelCreator;
 
 import static com.develorain.game.Illumination.PPM;
 
@@ -18,11 +19,11 @@ public class SlopeTiledObject {
     public MapObject object;
     public Fixture fixture;
 
-    public SlopeTiledObject(PlayScreen screen, MapObject object) {
+    public SlopeTiledObject(PlayScreen screen, MapObject object, LevelCreator levelCreator) {
         this.object = object;
         this.screen = screen;
-        this.world = screen.getWorld();
-        this.map = screen.getTiledMap();
+        this.world = levelCreator.getWorld();
+        this.map = levelCreator.getTiledMap();
 
         line = createPolyline((PolylineMapObject) object);
 
