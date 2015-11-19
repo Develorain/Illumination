@@ -98,7 +98,7 @@ public class PlayerController {
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
 
-            player = player.destroyAndRemake(player.direction);
+            player = player.destroyAndRemake();
 
             body = player.playerB2DBody;
             body.setLinearVelocity(xVelocity, yVelocity);

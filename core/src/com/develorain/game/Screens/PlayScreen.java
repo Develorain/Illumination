@@ -26,7 +26,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(Illumination game) {
         this.game = game;
 
-        levelCreator = new LevelCreator(this, game.batch);
+        levelCreator = new LevelCreator(game.batch);
         levelCreator.loadNextLevel();
 
         //music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);

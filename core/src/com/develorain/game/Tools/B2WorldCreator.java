@@ -7,7 +7,6 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.Walker;
 import com.develorain.game.Tools.Slopes.*;
@@ -18,7 +17,7 @@ public class B2WorldCreator {
     private Player player;
     private ArrayList<Walker> walkers;
 
-    public B2WorldCreator(PlayScreen screen, RayHandler rayHandler, LevelCreator levelCreator) {
+    public B2WorldCreator(RayHandler rayHandler, LevelCreator levelCreator) {
         TiledMap map = levelCreator.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
@@ -53,7 +52,7 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            player = new Player(rayHandler, rect.getX(), rect.getY(), "down", levelCreator);
+            player = new Player(rayHandler, rect.getX(), rect.getY(), levelCreator);
         }
 
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(PolylineMapObject.class)) {

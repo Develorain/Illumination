@@ -40,17 +40,15 @@ public class Player extends Sprite {
 
     public World world;
     public RayHandler rayHandler;
-    public String direction;
     public Body playerB2DBody;
     public Sprite playerSprite;
     public Array<Body> tmpBodies;
     public ArrayList<PointLight> pointLights = new ArrayList<>();
     public LevelCreator levelCreator;
 
-    public Player(RayHandler rayHandler, float x, float y, String direction, LevelCreator levelCreator) {
+    public Player(RayHandler rayHandler, float x, float y, LevelCreator levelCreator) {
         this.world = levelCreator.getWorld();
         this.rayHandler = rayHandler;
-        this.direction = direction;
         this.levelCreator = levelCreator;
 
         createPlayer(x, y, rayHandler);
@@ -76,8 +74,6 @@ public class Player extends Sprite {
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = PLAYER_FIXED_ROTATION;
 
-        determinePlayerDirection(bdef);
-
         playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
 
         fdef.shape = playerShape;
@@ -96,23 +92,6 @@ public class Player extends Sprite {
 
         playerB2DBody = world.createBody(bdef);
         playerB2DBody.createFixture(fdef);
-    }
-
-    private void determinePlayerDirection(BodyDef bdef) {
-        switch (direction) {
-            case "down":
-                bdef.angle = 0;
-                break;
-            case "up":
-                bdef.angle = MathUtils.PI;
-                break;
-            case "left":
-                bdef.angle = -MathUtils.PI / 2;
-                break;
-            case "right":
-                bdef.angle = MathUtils.PI / 2;
-                break;
-        }
     }
 
     private void createSprite() {
@@ -222,7 +201,7 @@ public class Player extends Sprite {
         pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 3));
     }
 
-    public Player destroyAndRemake(String direction) {
+    public Player destroyAndRemake() {
         float x = playerB2DBody.getPosition().x * PPM;  // position is in world units, so it is converted to pixels
         float y = playerB2DBody.getPosition().y * PPM;
 
@@ -232,7 +211,7 @@ public class Player extends Sprite {
             pointLights.get(i).remove();
         }
 
-        return new Player(rayHandler, x, y, direction, levelCreator);
+        return new Player(rayHandler, x, y, levelCreator);
     }
 
     public void destroy() {
@@ -247,7 +226,7 @@ public class Player extends Sprite {
         for (MapObject object : levelCreator.getTiledMap().getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            return new Player(rayHandler, rect.getX(), rect.getY(), "down", levelCreator);
+            return new Player(rayHandler, rect.getX(), rect.getY(), levelCreator);
         }
 
         return null;

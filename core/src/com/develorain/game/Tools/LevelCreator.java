@@ -11,7 +11,6 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.develorain.game.Scenes.HUD;
-import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.Walker;
 
@@ -32,13 +31,11 @@ public class LevelCreator {
     private HUD hud;
     private PlayerController playerController;
     private RayHandler rayHandler;
-    private PlayScreen screen;
     private SpriteBatch batch;
     private OrthographicCamera cam;
     private FitViewport fitViewport;
 
-    public LevelCreator(PlayScreen screen, SpriteBatch batch) {
-        this.screen = screen;
+    public LevelCreator(SpriteBatch batch) {
         this.batch = batch;
 
         cam = new OrthographicCamera();
@@ -47,6 +44,10 @@ public class LevelCreator {
 
     public void loadNextLevel() {
         currentLevel++;
+
+        if (currentLevel > 1)
+            dispose();
+
         mapLoader = new TmxMapLoader();
         tiledMap = mapLoader.load("Graphics/Maps/level" + currentLevel + ".tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
@@ -60,7 +61,7 @@ public class LevelCreator {
 
         hud = new HUD(batch);
 
-        b2worldCreator = new B2WorldCreator(screen, rayHandler, this);
+        b2worldCreator = new B2WorldCreator(rayHandler, this);
 
         player = b2worldCreator.getPlayer();
 
