@@ -95,7 +95,6 @@ public class LevelCreator {
         rayHandler.setCombinedMatrix(cam);
 
         if (DEBUG_MODE)
-
             b2dr.render(world, cam.combined);
 
         mapRenderer.render();

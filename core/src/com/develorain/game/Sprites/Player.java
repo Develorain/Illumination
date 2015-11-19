@@ -13,13 +13,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Tools.LevelCreator;
 import com.develorain.game.Tools.LightBuilder;
 
 import java.util.ArrayList;
 
 import static com.develorain.game.Illumination.*;
+import static com.develorain.game.Screens.PlayScreen.WHITE_MODE;
 import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
 public class Player extends Sprite {
@@ -39,7 +39,6 @@ public class Player extends Sprite {
     public boolean PLAYER_FIXED_ROTATION = true;
 
     public World world;
-    public PlayScreen screen;
     public RayHandler rayHandler;
     public String direction;
     public Body playerB2DBody;
@@ -48,9 +47,8 @@ public class Player extends Sprite {
     public ArrayList<PointLight> pointLights = new ArrayList<>();
     public LevelCreator levelCreator;
 
-    public Player(PlayScreen screen, RayHandler rayHandler, float x, float y, String direction, LevelCreator levelCreator) {
+    public Player(RayHandler rayHandler, float x, float y, String direction, LevelCreator levelCreator) {
         this.world = levelCreator.getWorld();
-        this.screen = screen;
         this.rayHandler = rayHandler;
         this.direction = direction;
         this.levelCreator = levelCreator;
@@ -234,7 +232,7 @@ public class Player extends Sprite {
             pointLights.get(i).remove();
         }
 
-        return new Player(screen, rayHandler, x, y, direction, levelCreator);
+        return new Player(rayHandler, x, y, direction, levelCreator);
     }
 
     public void destroy() {
@@ -249,7 +247,7 @@ public class Player extends Sprite {
         for (MapObject object : levelCreator.getTiledMap().getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            return new Player(screen, rayHandler, rect.getX(), rect.getY(), "down", levelCreator);
+            return new Player(rayHandler, rect.getX(), rect.getY(), "down", levelCreator);
         }
 
         return null;
@@ -276,11 +274,11 @@ public class Player extends Sprite {
     public void switchBoxSprite() {
         playerSprite.getTexture().dispose();
 
-        if (PlayScreen.WHITE_MODE) {
+        if (WHITE_MODE) {
             playerSprite.setTexture(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
         }
 
-        if (!PlayScreen.WHITE_MODE) {
+        if (!WHITE_MODE) {
             playerSprite.setTexture(new Texture("Graphics/Sprites/PlayerSprites/blackplayer.png"));
         }
     }

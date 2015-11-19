@@ -22,25 +22,25 @@ public class B2WorldCreator {
         TiledMap map = levelCreator.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
-            new DefaultSlope(screen, object, levelCreator);
+            new DefaultSlope(object, levelCreator);
         }
 
         for (MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
-            new NormalSlope(screen, object, levelCreator);
+            new NormalSlope(object, levelCreator);
         }
 
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
-            new AlternateSlope(screen, object, levelCreator);
+            new AlternateSlope(object, levelCreator);
         }
 
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(PolylineMapObject.class)) {
-            new BoundarySlope(screen, object, levelCreator);
+            new BoundarySlope(object, levelCreator);
         }
 
         walkers = new ArrayList<>();
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(screen, rect.getX(), rect.getY(), levelCreator));
+            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator));
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
@@ -53,11 +53,11 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            player = new Player(screen, rayHandler, rect.getX(), rect.getY(), "down", levelCreator);
+            player = new Player(rayHandler, rect.getX(), rect.getY(), "down", levelCreator);
         }
 
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(PolylineMapObject.class)) {
-            new EndSlope(screen, object, levelCreator);
+            new EndSlope(object, levelCreator);
         }
     }
 

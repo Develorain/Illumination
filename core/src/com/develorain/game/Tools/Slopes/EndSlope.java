@@ -7,8 +7,8 @@ import com.develorain.game.Tools.LevelCreator;
 import static com.develorain.game.Illumination.END_SLOPE_BIT;
 
 public class EndSlope extends SlopeTiledObject {
-    public EndSlope(PlayScreen screen, MapObject object, LevelCreator levelCreator) {
-        super(screen, object, levelCreator);
+    public EndSlope(MapObject object, LevelCreator levelCreator) {
+        super(object, levelCreator);
         fixture.setUserData(this);
         setCategoryFilter(END_SLOPE_BIT);
     }

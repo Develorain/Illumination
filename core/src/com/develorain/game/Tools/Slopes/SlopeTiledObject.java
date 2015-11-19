@@ -5,7 +5,6 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.develorain.game.Screens.PlayScreen;
 import com.develorain.game.Tools.LevelCreator;
 
 import static com.develorain.game.Illumination.PPM;
@@ -15,13 +14,11 @@ public class SlopeTiledObject {
     public TiledMap map;
     public Body body;
     public Shape line;
-    public PlayScreen screen;
     public MapObject object;
     public Fixture fixture;
 
-    public SlopeTiledObject(PlayScreen screen, MapObject object, LevelCreator levelCreator) {
+    public SlopeTiledObject(MapObject object, LevelCreator levelCreator) {
         this.object = object;
-        this.screen = screen;
         this.world = levelCreator.getWorld();
         this.map = levelCreator.getTiledMap();
 
