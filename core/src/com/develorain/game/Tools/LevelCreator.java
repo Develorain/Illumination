@@ -45,9 +45,6 @@ public class LevelCreator {
     public void loadNextLevel() {
         currentLevel++;
 
-        if (currentLevel > 1)
-            dispose();
-
         mapLoader = new TmxMapLoader();
         tiledMap = mapLoader.load("Graphics/Maps/level" + currentLevel + ".tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
@@ -67,7 +64,7 @@ public class LevelCreator {
 
         playerController = new PlayerController(player);
 
-        contactListener = new WorldContactListener(playerController);
+        contactListener = new WorldContactListener(playerController, this);
 
         world.setContactListener(contactListener);
     }

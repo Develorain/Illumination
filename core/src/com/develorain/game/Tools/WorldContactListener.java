@@ -7,9 +7,11 @@ import static com.develorain.game.Illumination.*;
 
 public class WorldContactListener implements ContactListener {
     private PlayerController playerController;
+    private LevelCreator levelCreator;
 
-    public WorldContactListener(PlayerController playerController) {
+    public WorldContactListener(PlayerController playerController, LevelCreator levelCreator) {
         this.playerController = playerController;
+        this.levelCreator = levelCreator;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             case PLAYER_BIT | END_SLOPE_BIT:
-                System.out.println("NEXT LEVEL");
+                levelCreator.loadNextLevel();
                 break;
         }
     }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="400" height="150" tilewidth="16" tileheight="16" nextobjectid="15">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
+  <image source="tileset.png" width="96" height="96"/>
+ </tileset>
+ <objectgroup name="white">
+  <object id="8" x="672" y="2112">
+   <polyline points="0,0 0,48 -672,48 -672,-624 800,-624 800,48 224,48 224,0 752,0"/>
+  </object>
+  <object id="9" x="1424" y="2112">
+   <polyline points="0,0 0,-576 -608,-576 -608,-32"/>
+  </object>
+  <object id="10" x="816" y="2080">
+   <polyline points="0,0 -64,0 -64,-544 -768,-544 -768,32 -144,32"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="blue"/>
+ <objectgroup name="red"/>
+ <objectgroup name="boundaries"/>
+ <objectgroup name="enemy"/>
+ <objectgroup name="lights">
+  <object id="11" x="224" y="1776" width="16" height="16"/>
+  <object id="12" x="512" y="1776" width="16" height="16"/>
+  <object id="13" x="1008" y="1776" width="16" height="16"/>
+  <object id="14" x="1248" y="1776" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="player">
+  <object id="6" x="128" y="1776" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="end">
+  <object id="1" x="1360" y="2112">
+   <polyline points="0,0 0,-64"/>
+  </object>
+ </objectgroup>
+ <layer name="white" width="400" height="150">
+  <data encoding="base64" compression="zlib">
+   eJzt2LENg1AUBEEacP/tOnfmAJ/3MyO9HAj2JK4LAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACg7eV+egCnWPf0aQdwinVPn3YApyi3rdLmwjMCfKvcNvsBsFNum/0A2Cm3zX4A7JTbZj8Adsptsx8AO+W22Q+AnXLb7AfATrlt9gNgp9w2+wGwU26b/QDYKbfNfgDslNtmPwB2ym2zHwA75bbZD4CdctvsB8BOuW32A2Cn3Db7AbBTbpv9ANgpt81+AOyU22Y/AHbKbbMfADvlttkPgJ1y2+wHwE65bfYDYKfcNvsBsFNum/0A2Cm3zX4A7JTbZj8Adsptsx8AO+W22Q+AnXLb7AfATrlt9gNgp9w2+wGwo233842BE2nb/Xxj4ESf/4D+9U55P4BTrHtqPwCa1j21HwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJS9AZVNK8c=
+  </data>
+ </layer>
+ <layer name="blue" width="400" height="150">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4DeprQAB
+  </data>
+ </layer>
+ <layer name="red" width="400" height="150">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4DeprQAB
+  </data>
+ </layer>
+ <layer name="door" width="400" height="150">
+  <data encoding="base64" compression="zlib">
+   eJzt1aENAAAIwDBe4P9nMVgEKESb7IZFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJPsAGDDPwC48A8ALvwDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPiiAAsZAIk=
+  </data>
+ </layer>
+</map>
