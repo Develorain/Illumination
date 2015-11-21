@@ -56,7 +56,6 @@ public class PlayScreen implements Screen {
     public void handleInput() {
         // Toggles between debug modes
         if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
-            levelCreator.loadNextLevel();
             DEBUG_MODE = !DEBUG_MODE;
         }
 

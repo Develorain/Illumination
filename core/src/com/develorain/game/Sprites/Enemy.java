@@ -15,9 +15,11 @@ public abstract class Enemy extends Sprite {
     public final boolean ENEMY_FIXED_ROTATION = true;
     public Body b2body;
     public Vector2 velocity;
+    public String colour;
     protected World world;
 
-    public Enemy(float x, float y, LevelCreator levelCreator) {
+    public Enemy(float x, float y, LevelCreator levelCreator, String colour) {
+        this.colour = colour;
         world = levelCreator.getWorld();
         velocity = new Vector2(3, 0);
         createBody(x, y);

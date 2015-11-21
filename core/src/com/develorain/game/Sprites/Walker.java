@@ -12,8 +12,8 @@ import static com.develorain.game.Illumination.*;
 public class Walker extends Enemy {
     public Sprite enemySprite;
 
-    public Walker(float x, float y, LevelCreator levelCreator) {
-        super(x, y, levelCreator);
+    public Walker(float x, float y, LevelCreator levelCreator, String colour) {
+        super(x, y, levelCreator, colour);
     }
 
     @Override
@@ -31,8 +31,22 @@ public class Walker extends Enemy {
         fdef.density = ENEMY_DENSITY;
         fdef.friction = ENEMY_FRICTION;
 
-        fdef.filter.categoryBits = ENEMY_BIT;
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT | ENEMY_BIT;
+        switch (colour) {
+            case "white":
+                fdef.filter.categoryBits = DEFAULT_ENEMY_BIT;
+                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
+                break;
+            case "blue":
+                fdef.filter.categoryBits = NORMAL_ENEMY_BIT;
+                fdef.filter.maskBits = DEFAULT_ENEMY_BIT;
+                break;
+            case "red":
+                fdef.filter.categoryBits = ALTERNATE_ENEMY_BIT;
+                fdef.filter.maskBits = DEFAULT_ENEMY_BIT;
+                break;
+        }
+
+        fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
 
         enemyShape.setAsBox(ENEMY_WIDTH / PPM, ENEMY_HEIGHT / PPM);
 
@@ -42,7 +56,18 @@ public class Walker extends Enemy {
 
     @Override
     protected void createSprite() {
-        enemySprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/enemy.png"));
+        switch (colour) {
+            case "white":
+                enemySprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/whitewalker.png"));
+                break;
+            case "blue":
+                enemySprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/bluewalker.png"));
+                break;
+            case "red":
+                enemySprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/redwalker.png"));
+                break;
+        }
+
         enemySprite.setSize(ENEMY_WIDTH * 2 / PPM, ENEMY_HEIGHT * 2 / PPM);
         enemySprite.setOrigin(enemySprite.getWidth() / 2, enemySprite.getHeight() / 2);
         b2body.setUserData(enemySprite);

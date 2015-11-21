@@ -39,23 +39,33 @@ public class B2WorldCreator {
         walkers = new ArrayList<>();
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator));
+            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator, "white"));
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator, "blue"));
+        }
+
+        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator, "red"));
+        }
+
+        for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.ROYAL, 8, 270, 30);
             LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.ROYAL, 4, 270, 30);
         }
 
-        for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             player = new Player(rayHandler, rect.getX(), rect.getY(), levelCreator);
         }
 
-        for (MapObject object : map.getLayers().get(7).getObjects().getByType(PolylineMapObject.class)) {
+        for (MapObject object : map.getLayers().get(9).getObjects().getByType(PolylineMapObject.class)) {
             new EndSlope(object, levelCreator);
         }
     }

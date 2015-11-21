@@ -52,15 +52,50 @@ public class WorldContactListener implements ContactListener {
                 playerController.rightContactCounter++;
                 break;
 
-            case ENEMY_BIT | BOUNDARY_SLOPE_BIT:
-                if (fixA.getFilterData().categoryBits == ENEMY_BIT) {
+            case DEFAULT_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == DEFAULT_ENEMY_BIT) {
+                    ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                } else {
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                }
+                break;
+            case NORMAL_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == DEFAULT_ENEMY_BIT) {
+                    ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                } else {
+                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                }
+                break;
+            case ALTERNATE_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == DEFAULT_ENEMY_BIT) {
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 } else {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 }
                 break;
 
-            case PLAYER_BIT | ENEMY_BIT:
+            case DEFAULT_ENEMY_BIT | DEFAULT_ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+
+            case PLAYER_BIT | DEFAULT_ENEMY_BIT:
+                playerController.shouldRespawn = true;
+                //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                break;
+            case PLAYER_BIT | NORMAL_ENEMY_BIT:
+                playerController.shouldRespawn = true;
+                //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                break;
+            case PLAYER_BIT | ALTERNATE_ENEMY_BIT:
                 playerController.shouldRespawn = true;
                 //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;

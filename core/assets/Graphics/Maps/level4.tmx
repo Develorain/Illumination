@@ -17,7 +17,9 @@
  <objectgroup name="blue"/>
  <objectgroup name="red"/>
  <objectgroup name="boundaries"/>
- <objectgroup name="enemy"/>
+ <objectgroup name="white enemies"/>
+ <objectgroup name="blue enemies"/>
+ <objectgroup name="red enemies"/>
  <objectgroup name="lights">
   <object id="11" x="224" y="1776" width="16" height="16"/>
   <object id="12" x="512" y="1776" width="16" height="16"/>

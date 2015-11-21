@@ -17,7 +17,9 @@
  <objectgroup name="normal slope"/>
  <objectgroup name="alternate slope"/>
  <objectgroup name="boundary slope"/>
- <objectgroup name="enemies"/>
+ <objectgroup name="white enemies"/>
+ <objectgroup name="blue enemies"/>
+ <objectgroup name="red enemies"/>
  <objectgroup name="lights">
   <object id="36" x="400" y="1904" width="16" height="16"/>
   <object id="37" x="1440" y="1984" width="16" height="16"/>
