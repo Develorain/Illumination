@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="150" tilewidth="16" tileheight="16" nextobjectid="42">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="300" height="150" tilewidth="16" tileheight="16" nextobjectid="64">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
  <objectgroup name="default slope">
-  <object id="33" x="848" y="2400">
-   <polyline points="0,0 0,-48 -848,-48 -848,0 0,0"/>
+  <object id="43" x="48" y="2352">
+   <polyline points="0,0 800,0"/>
   </object>
-  <object id="34" x="1232" y="2400">
-   <polyline points="0,0 0,-48 416,-48 416,0 0,0"/>
+  <object id="53" x="1296" y="2352">
+   <polyline points="0,0 336,0"/>
   </object>
-  <object id="41" x="1600" y="2352">
-   <polyline points="0,0 0,-880 -1552,-880 -1552,0"/>
+  <object id="56" x="2512" y="2352">
+   <polyline points="0,0 496,0"/>
+  </object>
+  <object id="57" x="48" y="2352">
+   <polyline points="0,0 0,-880"/>
+  </object>
+  <object id="58" x="48" y="1472">
+   <polyline points="0,0 2960,0"/>
+  </object>
+  <object id="59" x="3008" y="1472">
+   <polyline points="0,0 0,880"/>
+  </object>
+  <object id="60" x="2512" y="2352">
+   <polyline points="0,0 0,48 512,48"/>
+  </object>
+  <object id="61" x="848" y="2352">
+   <polyline points="0,0 0,48 -848,48"/>
+  </object>
+  <object id="62" x="1296" y="2352">
+   <polyline points="0,0 0,48 336,48 336,0"/>
   </object>
  </objectgroup>
  <objectgroup name="normal slope"/>
@@ -22,19 +40,19 @@
  <objectgroup name="red enemies"/>
  <objectgroup name="lights">
   <object id="36" x="400" y="1904" width="16" height="16"/>
-  <object id="37" x="1440" y="1984" width="16" height="16"/>
+  <object id="52" x="1456" y="1952" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="player">
-  <object id="32" x="160" y="2208" width="16" height="16"/>
+  <object id="32" x="112" y="2256" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="end">
-  <object id="31" x="1456" y="2352">
+  <object id="63" x="2848" y="2352">
    <polyline points="0,0 0,-48"/>
   </object>
  </objectgroup>
  <layer name="white tiles" width="300" height="150">
   <data encoding="base64" compression="zlib">
-   eJzt1LEJA0EQBEEl8PmnK1vGgBzxfa8q2ACOoe/1AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAfXS57wKe7m3T+K/jW3U06/xV8Sx8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oBNHy32gE0fLfaATR8t9oDteuD92lPeAae5+285sfOnvANOc/ffcmLnT3kHnOYN0A4sfQ==
+   eJzt0gENBCEQBME3cP7tvgvI0FXJCoDp3w8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAos+56LHndjPO3Tr23G7GuVvHHvtRovdt9qNE79vsR4net9mPEr1vsx8let9mP0r0vs1+lOh9m/0o0fs2+1Gi9232o0Tv2+xHid632Y8SvW+zHyV632Y/SvS+zX6U6H2b/SjR+zb7UaL3bfajRO/b7EeJ3rfZjxK9b7MfJXrfZj9K9L7NfpTofZv9KNH7NvtRovdt9qNE79vsR4net9mPEr1vsx8let9mP0r0vs1+lOh9m/0o0fs2+1Gi9232o0Tv2+xHid632Y8SvW+zHyV632Y/SvS+zX6U6H2b/SjR+zb7UaL3bfajRO/b7EeJ3rfZjxK9b7MfJXrfZj9K9L7NfpTofZv9KNH7NvtRovdt9qNE79vsR4net9mPEr1vsx8let9mP0r0vs1+lOh92/fgnfbCG0663Ufhj191u5kXOnzhDSfd7qPwx6+63cwLHb7whpNu91H441f9AVa8PlA=
   </data>
  </layer>
  <layer name="blue tiles" width="300" height="150">
@@ -49,7 +67,7 @@
  </layer>
  <layer name="door tiles" width="300" height="150">
   <data encoding="base64" compression="zlib">
-   eJzt1DEJAAAIAEEr2L+siwHESeEOvsJHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU9kBXOdXwBd+BQAAALBThikAZw==
+   eJzt1EkNAAAIwDAs4N8sHzxwpE1mYREAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADzsgPYzq+AK/wKAAAAfiv7cgBn
   </data>
  </layer>
 </map>

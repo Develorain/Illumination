@@ -18,9 +18,7 @@ public class PlayScreen implements Screen {
 
     // Reference to the game, used to set Screens
     private Illumination game;
-
     private Music music;
-
     private LevelCreator levelCreator;
 
     public PlayScreen(Illumination game) {
@@ -36,7 +34,7 @@ public class PlayScreen implements Screen {
     }
 
     public void update(float dt) {
-        levelCreator.update(dt);
+        levelCreator.update();
 
         currentTime += dt;
 

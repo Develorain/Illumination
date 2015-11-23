@@ -54,7 +54,7 @@ public class LevelCreator {
         b2dr = new Box2DDebugRenderer();
 
         rayHandler = new RayHandler(world);
-        rayHandler.setAmbientLight(0.2f);
+        rayHandler.setAmbientLight(0.1f);
 
         hud = new HUD(batch);
 
@@ -69,8 +69,8 @@ public class LevelCreator {
         world.setContactListener(contactListener);
     }
 
-    public void update(float dt) {
-        hud.update(dt);
+    public void update() {
+        hud.update();
 
         for (int i = 0; i < b2worldCreator.getWalkers().size(); i++) {
             Walker enemy = b2worldCreator.getWalkers().get(i);

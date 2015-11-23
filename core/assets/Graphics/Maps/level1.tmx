@@ -164,15 +164,15 @@
  <objectgroup color="#ff6100" name="white enemies">
   <object id="299" x="1504" y="15952" width="16" height="16"/>
   <object id="354" x="2544" y="15920" width="16" height="16"/>
-  <object id="355" x="2624" y="15920" width="16" height="16"/>
+  <object id="355" x="2880" y="15920" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="blue enemies">
   <object id="348" x="1392" y="15952" width="16" height="16"/>
-  <object id="356" x="2784" y="15920" width="16" height="16"/>
-  <object id="358" x="2864" y="15920" width="16" height="16"/>
+  <object id="356" x="3008" y="15920" width="16" height="16"/>
+  <object id="358" x="2656" y="15920" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="red enemies">
-  <object id="359" x="3040" y="15920" width="16" height="16"/>
+  <object id="359" x="2816" y="15920" width="16" height="16"/>
   <object id="360" x="3088" y="15920" width="16" height="16"/>
  </objectgroup>
  <objectgroup color="#971ded" name="lights">

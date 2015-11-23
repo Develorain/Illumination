@@ -38,11 +38,11 @@ public class Walker extends Enemy {
                 break;
             case "blue":
                 fdef.filter.categoryBits = NORMAL_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT;
+                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT;
                 break;
             case "red":
                 fdef.filter.categoryBits = ALTERNATE_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT;
+                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
                 break;
         }
 

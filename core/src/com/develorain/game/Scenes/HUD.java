@@ -12,25 +12,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
+import com.develorain.game.Screens.PlayScreen;
 
 public class HUD {
     public Stage stage;
+    public BitmapFont myfont;
     private Viewport viewport;
-
-    private Integer worldTimer;
-    private float timeCount;
-
+    private int worldTimer;
     private Label countdownLabel;
     private Label timeLabel;
-
-    public BitmapFont myfont;
 
     public HUD(SpriteBatch sb) {
         viewport = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
-        worldTimer = 200;
-        timeCount = 0;
+        worldTimer = 0;
 
         // FONT
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/autoradiographic.ttf"));
@@ -57,18 +53,11 @@ public class HUD {
         stage.addActor(table);
     }
 
-    public void update(float dt) {
-        timeCount += dt;
-
-        if(timeCount >= 1) {
-            worldTimer--;
+    public void update() {
+        if (PlayScreen.currentTime >= 1) {
+            worldTimer++;
             countdownLabel.setText(String.format("%d", worldTimer));
-            timeCount = 0;
-        }
-
-        // Ends the game when timer is 0
-        if(worldTimer <= 0) {
-            Gdx.app.exit();
+            PlayScreen.currentTime = 0;
         }
     }
 }

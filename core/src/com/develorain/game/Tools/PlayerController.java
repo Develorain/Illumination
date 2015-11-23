@@ -25,7 +25,6 @@ public class PlayerController {
     private Player player;
     private Body body;
 
-    // Variables
     private float lastTimeDashed = -100;
 
     public PlayerController(Player player) {
