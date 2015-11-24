@@ -17,39 +17,39 @@ public class B2WorldCreator {
     private Player player;
     private ArrayList<Walker> walkers;
 
-    public B2WorldCreator(RayHandler rayHandler, LevelCreator levelCreator) {
-        TiledMap map = levelCreator.getTiledMap();
+    public B2WorldCreator(RayHandler rayHandler, Level level) {
+        TiledMap map = level.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
-            new DefaultSlope(object, levelCreator);
+            new DefaultSlope(object, level);
         }
 
         for (MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
-            new NormalSlope(object, levelCreator);
+            new NormalSlope(object, level);
         }
 
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
-            new AlternateSlope(object, levelCreator);
+            new AlternateSlope(object, level);
         }
 
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(PolylineMapObject.class)) {
-            new BoundarySlope(object, levelCreator);
+            new BoundarySlope(object, level);
         }
 
         walkers = new ArrayList<>();
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator, "white"));
+            walkers.add(new Walker(rect.getX(), rect.getY(), level, "white"));
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator, "blue"));
+            walkers.add(new Walker(rect.getX(), rect.getY(), level, "blue"));
         }
 
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), levelCreator, "red"));
+            walkers.add(new Walker(rect.getX(), rect.getY(), level, "red"));
         }
 
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
@@ -62,11 +62,11 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            player = new Player(rayHandler, rect.getX(), rect.getY(), levelCreator);
+            player = new Player(rayHandler, rect.getX(), rect.getY(), level);
         }
 
         for (MapObject object : map.getLayers().get(9).getObjects().getByType(PolylineMapObject.class)) {
-            new EndSlope(object, levelCreator);
+            new EndSlope(object, level);
         }
     }
 

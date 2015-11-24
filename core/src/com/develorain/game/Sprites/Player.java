@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Array;
-import com.develorain.game.Tools.LevelCreator;
+import com.develorain.game.Tools.Level;
 import com.develorain.game.Tools.LightBuilder;
 
 import java.util.ArrayList;
@@ -44,12 +44,12 @@ public class Player extends Sprite {
     public Sprite playerSprite;
     public Array<Body> tmpBodies;
     public ArrayList<PointLight> pointLights = new ArrayList<>();
-    public LevelCreator levelCreator;
+    public Level level;
 
-    public Player(RayHandler rayHandler, float x, float y, LevelCreator levelCreator) {
-        this.world = levelCreator.getWorld();
+    public Player(RayHandler rayHandler, float x, float y, Level level) {
+        this.world = level.getWorld();
         this.rayHandler = rayHandler;
-        this.levelCreator = levelCreator;
+        this.level = level;
 
         createPlayer(x, y, rayHandler);
 
@@ -211,7 +211,7 @@ public class Player extends Sprite {
             pointLights.get(i).remove();
         }
 
-        return new Player(rayHandler, x, y, levelCreator);
+        return new Player(rayHandler, x, y, level);
     }
 
     public void destroy() {
@@ -223,10 +223,10 @@ public class Player extends Sprite {
     }
 
     public Player respawn() {
-        for (MapObject object : levelCreator.getTiledMap().getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : level.getTiledMap().getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            return new Player(rayHandler, rect.getX(), rect.getY(), levelCreator);
+            return new Player(rayHandler, rect.getX(), rect.getY(), level);
         }
 
         return null;

@@ -5,15 +5,15 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.develorain.game.Tools.LevelCreator;
+import com.develorain.game.Tools.Level;
 
 import static com.develorain.game.Illumination.*;
 
 public class Walker extends Enemy {
     public Sprite enemySprite;
 
-    public Walker(float x, float y, LevelCreator levelCreator, String colour) {
-        super(x, y, levelCreator, colour);
+    public Walker(float x, float y, Level level, String colour) {
+        super(x, y, level, colour);
     }
 
     @Override

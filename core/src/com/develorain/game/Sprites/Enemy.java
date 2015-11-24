@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.develorain.game.Tools.LevelCreator;
+import com.develorain.game.Tools.Level;
 
 public abstract class Enemy extends Sprite {
     public final int ENEMY_WIDTH = 16;     // pixels
@@ -18,9 +18,9 @@ public abstract class Enemy extends Sprite {
     public String colour;
     protected World world;
 
-    public Enemy(float x, float y, LevelCreator levelCreator, String colour) {
+    public Enemy(float x, float y, Level level, String colour) {
         this.colour = colour;
-        world = levelCreator.getWorld();
+        world = level.getWorld();
         velocity = new Vector2(3, 0);
         createBody(x, y);
         createSprite();
