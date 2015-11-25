@@ -18,10 +18,10 @@ public abstract class Enemy extends Sprite {
     public String colour;
     protected World world;
 
-    public Enemy(float x, float y, Level level, String colour) {
+    public Enemy(float x, float y, Level level, String colour, Vector2 velocity) {
         this.colour = colour;
+        this.velocity = velocity;
         world = level.getWorld();
-        velocity = new Vector2(3, 0);
         createBody(x, y);
         createSprite();
     }

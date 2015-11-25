@@ -10,11 +10,11 @@ import com.develorain.game.Tools.Level;
 
 import static com.develorain.game.Illumination.*;
 
-public class Walker extends Enemy {
+public class Sprinter extends Enemy {
     public Sprite enemySprite;
 
-    public Walker(float x, float y, Level level, String colour) {
-        super(x, y, level, colour, new Vector2(3, 0));
+    public Sprinter(float x, float y, Level level, String colour) {
+        super(x, y, level, colour, new Vector2(5, 0));
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.develorain.game.Sprites.Player;
+import com.develorain.game.Sprites.Sprinter;
 import com.develorain.game.Sprites.Walker;
 import com.develorain.game.Tools.Slopes.*;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class B2WorldCreator {
     private Player player;
     private ArrayList<Walker> walkers;
+    private ArrayList<Sprinter> sprinters;
 
     public B2WorldCreator(RayHandler rayHandler, Level level) {
         TiledMap map = level.getTiledMap();
@@ -68,10 +70,30 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(9).getObjects().getByType(PolylineMapObject.class)) {
             new EndSlope(object, level);
         }
+
+        sprinters = new ArrayList<>();
+        for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "white"));
+        }
+
+        for (MapObject object : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "blue"));
+        }
+
+        for (MapObject object : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "red"));
+        }
     }
 
     public ArrayList<Walker> getWalkers() {
         return walkers;
+    }
+
+    public ArrayList<Sprinter> getSprinters() {
+        return sprinters;
     }
 
     public Player getPlayer() {

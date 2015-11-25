@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Sprites.Player;
+import com.develorain.game.Sprites.Sprinter;
 import com.develorain.game.Sprites.Walker;
 
 import static com.develorain.game.Illumination.PPM;
@@ -65,6 +66,11 @@ public class Level {
 
         for (int i = 0; i < b2worldCreator.getWalkers().size(); i++) {
             Walker enemy = b2worldCreator.getWalkers().get(i);
+            enemy.update();
+        }
+
+        for (int i = 0; i < b2worldCreator.getSprinters().size(); i++) {
+            Sprinter enemy = b2worldCreator.getSprinters().get(i);
             enemy.update();
         }
 

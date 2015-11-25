@@ -12,7 +12,7 @@ import static com.develorain.game.Screens.PlayScreen.currentTime;
 public class PlayerController {
     public static boolean SLOW_MOTION_MODE = false;
     private final int DASH_SPEED_CAP = 25;
-    private final int SPRINT_SPEED_CAP = 15;
+    private final int SPRINT_SPEED_CAP = 13;
     private final int REGULAR_SPEED_CAP = 7;
     public int footContactCounter = 0;
     public int leftContactCounter = 0;
@@ -36,12 +36,12 @@ public class PlayerController {
         boolean inputGiven = false;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(1f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(-1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-1f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
@@ -86,7 +86,7 @@ public class PlayerController {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 4 : 1;
+            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 3 : 1;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
             //if (SLOW_MOTION_MODE)
