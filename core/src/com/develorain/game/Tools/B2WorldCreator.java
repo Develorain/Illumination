@@ -23,15 +23,15 @@ public class B2WorldCreator {
         TiledMap map = level.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
-            new DefaultSlope(object, level);
+            new DefaultSlope(object, level, true);
         }
 
         for (MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
-            new NormalSlope(object, level);
+            new NormalSlope(object, level, true);
         }
 
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
-            new AlternateSlope(object, level);
+            new AlternateSlope(object, level, true);
         }
 
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(PolylineMapObject.class)) {
@@ -85,6 +85,18 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "red"));
+        }
+
+        for (MapObject object : map.getLayers().get(13).getObjects().getByType(PolylineMapObject.class)) {
+            new DefaultSlope(object, level, false);
+        }
+
+        for (MapObject object : map.getLayers().get(14).getObjects().getByType(PolylineMapObject.class)) {
+            new NormalSlope(object, level, false);
+        }
+
+        for (MapObject object : map.getLayers().get(15).getObjects().getByType(PolylineMapObject.class)) {
+            new AlternateSlope(object, level, false);
         }
     }
 

@@ -19,12 +19,12 @@ public class LightBuilder {
         pl.setXray(false);
 
         Filter filter = new Filter();
-        filter.maskBits = DEFAULT_SLOPE_BIT;
+        filter.maskBits = DEFAULT_SLOPE_BIT | UNCLIMBABLE_DEFAULT_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            filter.maskBits |= NORMAL_SLOPE_BIT;
+            filter.maskBits |= NORMAL_SLOPE_BIT | UNCLIMBABLE_NORMAL_SLOPE_BIT;
         } else {
-            filter.maskBits |= ALTERNATE_SLOPE_BIT;
+            filter.maskBits |= ALTERNATE_SLOPE_BIT | UNCLIMBABLE_ALTERNATE_SLOPE_BIT;
         }
 
         pl.setContactFilter(filter);

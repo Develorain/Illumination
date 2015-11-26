@@ -82,12 +82,12 @@ public class Player extends Sprite {
         fdef.friction = PLAYER_FRICTION;
         fdef.filter.categoryBits = PLAYER_BIT;
 
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | DEFAULT_ENEMY_BIT | END_SLOPE_BIT;
+        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | UNCLIMBABLE_DEFAULT_SLOPE_BIT | DEFAULT_ENEMY_BIT | END_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= NORMAL_SLOPE_BIT | NORMAL_ENEMY_BIT;
+            fdef.filter.maskBits |= NORMAL_SLOPE_BIT | UNCLIMBABLE_NORMAL_SLOPE_BIT | NORMAL_ENEMY_BIT;
         } else {
-            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT | ALTERNATE_ENEMY_BIT;
+            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT | UNCLIMBABLE_ALTERNATE_SLOPE_BIT | ALTERNATE_ENEMY_BIT;
         }
 
         playerB2DBody = world.createBody(bdef);

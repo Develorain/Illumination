@@ -25,6 +25,9 @@ public class Illumination extends Game {
     public static final short END_SLOPE_BIT = 512;
     public static final short NORMAL_ENEMY_BIT = 1024;
     public static final short ALTERNATE_ENEMY_BIT = 2048;
+    public static final short UNCLIMBABLE_DEFAULT_SLOPE_BIT = 4096;
+    public static final short UNCLIMBABLE_NORMAL_SLOPE_BIT = 8192;
+    public static final short UNCLIMBABLE_ALTERNATE_SLOPE_BIT = 16384;
 
     public static AssetManager manager;  //consider not using static version
     public SpriteBatch batch;
