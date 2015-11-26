@@ -3,6 +3,7 @@ package com.develorain.game.Tools;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -32,6 +33,11 @@ public class Level {
     private PlayerController playerController;
     private RayHandler rayHandler;
     private OrthographicCamera cam;
+    private MapProperties mapProperties;
+    private int levelWidth;  // in tiles (ex: 300 tiles width)
+    private int levelHeight; // in tiles  (ex: 150 tiles height)
+    private int TILE_WIDTH = 16;
+    private int TILE_HEIGHT = 16;
 
     public Level(LevelCreator levelCreator, SpriteBatch batch, OrthographicCamera cam, int currentLevel) {
         this.batch = batch;
@@ -40,13 +46,16 @@ public class Level {
         mapLoader = new TmxMapLoader();
         tiledMap = mapLoader.load("Graphics/Maps/level" + currentLevel + ".tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
+        mapProperties = tiledMap.getProperties();
+        levelWidth = mapProperties.get("width", Integer.class);
+        levelHeight = mapProperties.get("height", Integer.class);
 
         world = new World(new Vector2(0, -25f), true);
 
         b2dr = new Box2DDebugRenderer();
 
         rayHandler = new RayHandler(world);
-        rayHandler.setAmbientLight(1f);
+        rayHandler.setAmbientLight(0.25f);
 
         hud = new HUD(batch);
 
@@ -78,7 +87,12 @@ public class Level {
 
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
-        CameraUtilities.lerpToTarget(cam, new Vector2(player.playerB2DBody.getPosition().x, player.playerB2DBody.getPosition().y));
+        CameraUtilities.lerpToTarget(cam, player.playerB2DBody.getPosition());
+
+        float startX = cam.viewportWidth / 2;
+        float startY = cam.viewportHeight / 2;
+
+        CameraUtilities.boundary(cam, startX, startY, (levelWidth * TILE_WIDTH - startX * 2) / PPM, (levelHeight * TILE_HEIGHT - startY * 2) / PPM);
 
         mapRenderer.setView(cam);
 

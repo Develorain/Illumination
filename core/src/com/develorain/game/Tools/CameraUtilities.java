@@ -13,4 +13,28 @@ public class CameraUtilities {
 
         cam.update();
     }
+
+    public static void boundary(Camera cam, float startX, float startY, float width, float height) {
+        Vector3 position = cam.position;
+
+        if (position.x < startX) {
+            position.x = startX;
+        }
+
+        if (position.y < startY) {
+            position.y = startY;
+        }
+
+        if (position.x > width - startX) {
+            position.x = width - startX;
+        }
+
+        if (position.y > height - startY) {
+            position.y = height - startY;
+        }
+
+        cam.position.set(position);
+
+        cam.update();
+    }
 }
