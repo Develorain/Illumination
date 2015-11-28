@@ -7,7 +7,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.develorain.game.Sprites.Player;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
-import static com.develorain.game.Screens.PlayScreen.currentTime;
 
 public class PlayerController {
     public static boolean SLOW_MOTION_MODE = false;
@@ -20,19 +19,19 @@ public class PlayerController {
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
     public boolean shouldRespawn = false;
+    private float curveTimer = 0;
+    private int jumpNumber = 0;
 
     // Reference of player and body to be controlled
     private Player player;
     private Body body;
-
-    private float lastTimeDashed = -100;
 
     public PlayerController(Player player) {
         this.player = player;
         this.body = player.playerB2DBody;
     }
 
-    public void handleInput() {
+    public void handleInput(float dt) {
         boolean inputGiven = false;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
@@ -45,7 +44,6 @@ public class PlayerController {
             inputGiven = true;
         }
 
-        // Jump and double jump
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
             if (canJump()) {
                 if (body.getLinearVelocity().y < 0) {
@@ -53,16 +51,34 @@ public class PlayerController {
                 }
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
-            } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
+                jumpNumber = 1;
+            } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight() && curveTimer == 0) {
+                curveTimer = 0;
+
                 if (body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
                 body.applyLinearImpulse(new Vector2(0, 9f), body.getWorldCenter(), true);
                 canDoubleJump = false;
+                jumpNumber = 2;
+            }
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
+            if (!canJump()) {
+                if (jumpNumber == 0 || jumpNumber == 1 || jumpNumber == 2) {
+                    if (curveTimer < 0.2) {
+                        if (body.getLinearVelocity().y < 0) {
+                            body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                        }
+
+                        body.applyLinearImpulse(new Vector2(0, 1f / 2), body.getWorldCenter(), true);
+                    }
+                }
             }
 
-            inputGiven = true;
+            curveTimer += dt;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheLeft() && !canJump()) {
@@ -73,6 +89,7 @@ public class PlayerController {
             body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
+            jumpNumber = 2;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheRight() && !canJump()) {
@@ -83,6 +100,7 @@ public class PlayerController {
             body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
+            jumpNumber = 2;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
@@ -90,9 +108,9 @@ public class PlayerController {
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
             //if (SLOW_MOTION_MODE)
-            //Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
+            //  Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
             //else
-            //Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
+            //  Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
@@ -112,24 +130,6 @@ public class PlayerController {
 
             body.applyLinearImpulse(new Vector2(0, -20f), body.getWorldCenter(), true);
             canChargeDownwards = false;
-            inputGiven = true;
-        }
-
-        // Dash right
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x <= DASH_SPEED_CAP) {
-            if (currentTime - lastTimeDashed > 1) {
-                body.applyLinearImpulse(new Vector2(80f, 0), body.getWorldCenter(), true);
-                lastTimeDashed = currentTime;
-            }
-            inputGiven = true;
-        }
-
-        // Dash left
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && body.getLinearVelocity().x >= -DASH_SPEED_CAP) {
-            if (currentTime - lastTimeDashed > 1) {
-                body.applyLinearImpulse(new Vector2(-80f, 0), body.getWorldCenter(), true);
-                lastTimeDashed = currentTime;
-            }
             inputGiven = true;
         }
 
@@ -158,6 +158,11 @@ public class PlayerController {
             body.setLinearVelocity(body.getLinearVelocity().x, 40);
         }
         */
+
+        if (!Gdx.input.isKeyPressed(Input.Keys.Z)) {
+            jumpNumber++;
+            curveTimer = 0;
+        }
 
         // Manual deceleration
         if (!inputGiven) {

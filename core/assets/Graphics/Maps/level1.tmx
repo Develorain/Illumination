@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="399">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="400">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -183,7 +183,7 @@
   <object id="340" x="1456" y="15008" width="16" height="16"/>
  </objectgroup>
  <objectgroup color="#03ff03" name="player">
-  <object id="394" x="144" y="15936" width="16" height="16"/>
+  <object id="399" x="6352" y="15824" width="16" height="16"/>
  </objectgroup>
  <objectgroup color="#0dff00" name="end">
   <object id="343" x="848" y="15616">

@@ -26,8 +26,8 @@ public class LevelCreator {
         level = new Level(this, batch, cam, currentLevel);
     }
 
-    public void update() {
-        level.update();
+    public void update(float dt) {
+        level.update(dt);
     }
 
     public void render() {

@@ -34,7 +34,7 @@ public class PlayScreen implements Screen {
     }
 
     public void update(float dt) {
-        levelCreator.update();
+        levelCreator.update(dt);
 
         currentTime += dt;
 

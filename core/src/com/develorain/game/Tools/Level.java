@@ -70,7 +70,7 @@ public class Level {
         world.setContactListener(contactListener);
     }
 
-    public void update() {
+    public void update(float dt) {
         hud.update();
 
         for (int i = 0; i < b2worldCreator.getWalkers().size(); i++) {
@@ -83,7 +83,7 @@ public class Level {
             enemy.update();
         }
 
-        playerController.handleInput();
+        playerController.handleInput(dt);
 
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
