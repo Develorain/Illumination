@@ -26,6 +26,7 @@ public abstract class Enemy extends Sprite {
         createSprite();
     }
 
+    // public void to make overridable
     protected abstract void createBody(float x, float y);
 
     protected abstract void createSprite();

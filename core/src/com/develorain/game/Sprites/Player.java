@@ -206,9 +206,11 @@ public class Player extends Sprite {
         //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 3));
         //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.WHITE, 3));
 
-        pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.CHARTREUSE, 1));
-        pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 2));
-        pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.CHARTREUSE, 1));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 2));
+
+        pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.CHARTREUSE, 0.5f));
     }
 
     public Player destroyAndRemake() {

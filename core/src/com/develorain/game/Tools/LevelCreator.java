@@ -1,5 +1,7 @@
 package com.develorain.game.Tools;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -18,6 +20,7 @@ public class LevelCreator {
 
         cam = new OrthographicCamera();
         fitViewport = new FitViewport(2f * V_WIDTH / PPM, 2f * V_HEIGHT / PPM, cam);
+        //fitViewport = new FitViewport(1.5f * V_WIDTH / PPM, 1.5f * V_HEIGHT / PPM, cam);
     }
 
     public void loadNextLevel() {
@@ -28,6 +31,10 @@ public class LevelCreator {
 
     public void update(float dt) {
         level.update(dt);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            loadNextLevel();
+        }
     }
 
     public void render() {

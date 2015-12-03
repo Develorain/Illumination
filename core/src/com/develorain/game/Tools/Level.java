@@ -1,6 +1,8 @@
 package com.develorain.game.Tools;
 
 import box2dLight.RayHandler;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
@@ -11,9 +13,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Scenes.HUD;
+import com.develorain.game.Sprites.Exploder;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.Sprinter;
 import com.develorain.game.Sprites.Walker;
+
+import java.util.Random;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Screens.PlayScreen.DEBUG_MODE;
@@ -38,6 +43,7 @@ public class Level {
     private int levelHeight; // in tiles  (ex: 150 tiles height)
     private int TILE_WIDTH = 16;
     private int TILE_HEIGHT = 16;
+    private Random random;
 
     public Level(LevelCreator levelCreator, SpriteBatch batch, OrthographicCamera cam, int currentLevel) {
         this.batch = batch;
@@ -68,6 +74,8 @@ public class Level {
         contactListener = new WorldContactListener(playerController, levelCreator);
 
         world.setContactListener(contactListener);
+
+        random = new Random();
     }
 
     public void update(float dt) {
@@ -81,6 +89,18 @@ public class Level {
         for (int i = 0; i < b2worldCreator.getSprinters().size(); i++) {
             Sprinter enemy = b2worldCreator.getSprinters().get(i);
             enemy.update();
+        }
+
+        for (int i = 0; i < b2worldCreator.getExploders().size(); i++) {
+            Exploder enemy = b2worldCreator.getExploders().get(i);
+            enemy.update();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+            for (int i = 0; i < b2worldCreator.getExploders().size(); i++) {
+                Exploder enemy = b2worldCreator.getExploders().get(i);
+                enemy.explode();
+            }
         }
 
         playerController.handleInput(dt);

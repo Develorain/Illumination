@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.develorain.game.Sprites.Exploder;
 import com.develorain.game.Sprites.Player;
 import com.develorain.game.Sprites.Sprinter;
 import com.develorain.game.Sprites.Walker;
@@ -18,6 +19,7 @@ public class B2WorldCreator {
     private Player player;
     private ArrayList<Walker> walkers;
     private ArrayList<Sprinter> sprinters;
+    private ArrayList<Exploder> exploders;
 
     public B2WorldCreator(RayHandler rayHandler, Level level) {
         TiledMap map = level.getTiledMap();
@@ -100,6 +102,22 @@ public class B2WorldCreator {
         for (MapObject object : map.getLayers().get(15).getObjects().getByType(PolylineMapObject.class)) {
             new AlternateSlope(object, level, false);
         }
+
+        exploders = new ArrayList<>();
+        for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+        }
+
+        for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+        }
+
+        for (MapObject object : map.getLayers().get(18).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+        }
     }
 
     public ArrayList<Walker> getWalkers() {
@@ -108,6 +126,10 @@ public class B2WorldCreator {
 
     public ArrayList<Sprinter> getSprinters() {
         return sprinters;
+    }
+
+    public ArrayList<Exploder> getExploders() {
+        return exploders;
     }
 
     public Player getPlayer() {

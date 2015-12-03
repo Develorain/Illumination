@@ -20,8 +20,6 @@ public class PlayerController {
     public boolean shouldRespawn = false;
     private float curveTimer = 0;
     private int jumpNumber = 0;
-
-    // Reference of player and body to be controlled
     private Player player;
     private Body body;
 
