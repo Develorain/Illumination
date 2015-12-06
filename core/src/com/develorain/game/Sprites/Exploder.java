@@ -3,15 +3,20 @@ package com.develorain.game.Sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.develorain.game.Tools.Level;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static com.develorain.game.Illumination.*;
 
 public class Exploder extends Enemy {
     public Sprite enemySprite;
+    private ArrayList<Body> projectiles;
     private boolean isAlive;
 
     public Exploder(float x, float y, Level level, String colour) {
@@ -92,8 +97,11 @@ public class Exploder extends Enemy {
     }
 
     public void createProjectiles(float x, float y) {
-        isAlive = false;
-        for (int i = 0; i < 1; i++) {
+        projectiles = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            Random random = new Random();
+            isAlive = false;
+
             BodyDef bdef = new BodyDef();
             FixtureDef fdef = new FixtureDef();
             PolygonShape enemyShape = new PolygonShape();
@@ -109,26 +117,32 @@ public class Exploder extends Enemy {
 
             switch (colour) {
                 case "white":
-                    fdef.filter.categoryBits = DEFAULT_ENEMY_BIT;
+                    fdef.filter.categoryBits = PROJECTILE_BIT;
                     fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
                     break;
                 case "blue":
-                    fdef.filter.categoryBits = NORMAL_ENEMY_BIT;
+                    fdef.filter.categoryBits = PROJECTILE_BIT;
                     fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT;
                     break;
                 case "red":
-                    fdef.filter.categoryBits = ALTERNATE_ENEMY_BIT;
+                    fdef.filter.categoryBits = PROJECTILE_BIT;
                     fdef.filter.maskBits = DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
                     break;
             }
 
             fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
-
             enemyShape.setAsBox(6 / PPM, 6 / PPM);
 
             b2body = world.createBody(bdef);
-            b2body.applyLinearImpulse(new Vector2(-6f, 8f), b2body.getWorldCenter(), true);
+            b2body.applyLinearImpulse(new Vector2(random.nextFloat() * 5, random.nextFloat() * 10), b2body.getWorldCenter(), true);
             b2body.createFixture(fdef).setUserData(this);
+            projectiles.add(b2body);
+        }
+    }
+
+    public void destroyProjectiles() {
+        for (int i = 0; i < projectiles.size(); i++) {
+            world.destroyBody(projectiles.get(i));
         }
     }
 }

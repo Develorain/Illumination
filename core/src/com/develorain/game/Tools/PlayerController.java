@@ -18,8 +18,6 @@ public class PlayerController {
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
     public boolean shouldRespawn = false;
-    private float curveTimer = 0;
-    private int jumpNumber = 0;
     private Player player;
     private Body body;
 
@@ -32,12 +30,12 @@ public class PlayerController {
         boolean inputGiven = false;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(1f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(-1f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
             inputGiven = true;
         }
 
@@ -47,35 +45,23 @@ public class PlayerController {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
-                body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
-                jumpNumber = 1;
-            } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight() && curveTimer == 0) {
-                curveTimer = 0;
+                body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
+            } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
 
-                if (body.getLinearVelocity().y < 0) {
-                    body.setLinearVelocity(body.getLinearVelocity().x, 0);
-                }
-
-                body.applyLinearImpulse(new Vector2(0, 5f), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
                 canDoubleJump = false;
-                jumpNumber = 2;
             }
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
             if (!canJump()) {
-                if (jumpNumber == 0 || jumpNumber == 1 || jumpNumber == 2) {
-                    if (curveTimer < 0.15) {
-                        if (body.getLinearVelocity().y < 0) {
-                            body.setLinearVelocity(body.getLinearVelocity().x, 0);
-                        }
-
-                        body.applyLinearImpulse(new Vector2(0, 0.8f), body.getWorldCenter(), true);
-                    }
+                if (body.getLinearVelocity().y < 0) {
+                    body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
-            }
 
-            curveTimer += dt;
+                body.applyLinearImpulse(new Vector2(0, 0.8f), body.getWorldCenter(), true);
+            }
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheLeft() && !canJump()) {
@@ -86,7 +72,6 @@ public class PlayerController {
             body.applyLinearImpulse(new Vector2(-10f, 6f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
-            jumpNumber = 2;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheRight() && !canJump()) {
@@ -97,7 +82,6 @@ public class PlayerController {
             body.applyLinearImpulse(new Vector2(10f, 6f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
-            jumpNumber = 2;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
@@ -150,27 +134,36 @@ public class PlayerController {
         }
 
         // Limit movement on Y-axis
-        if (body.getLinearVelocity().y >= 20) {
-            body.setLinearVelocity(body.getLinearVelocity().x, 20);
-        }
-
-        if (!Gdx.input.isKeyPressed(Input.Keys.Z)) {
-            jumpNumber++;
-            curveTimer = 0;
-        }
+        //if (body.getLinearVelocity().y >= 20) {
+        //    body.setLinearVelocity(body.getLinearVelocity().x, 20);
+        //}
 
         // Manual deceleration
         if (!inputGiven) {
-            if (body.getLinearVelocity().x > 0.2f) {
-                body.applyLinearImpulse(new Vector2(-0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-            } else if (body.getLinearVelocity().x > 0) {
-                body.setLinearVelocity(0, body.getLinearVelocity().y);
-            }
+            if (canJump()) {
+                if (body.getLinearVelocity().x > 0.5f) {
+                    body.applyLinearImpulse(new Vector2(-0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+                } else if (body.getLinearVelocity().x > 0) {
+                    body.setLinearVelocity(0, body.getLinearVelocity().y);
+                }
 
-            if (body.getLinearVelocity().x < -0.2f) {
-                body.applyLinearImpulse(new Vector2(0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-            } else if (body.getLinearVelocity().x < 0) {
-                body.setLinearVelocity(0, body.getLinearVelocity().y);
+                if (body.getLinearVelocity().x < -0.5f) {
+                    body.applyLinearImpulse(new Vector2(0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+                } else if (body.getLinearVelocity().x < 0) {
+                    body.setLinearVelocity(0, body.getLinearVelocity().y);
+                }
+            } else {
+                if (body.getLinearVelocity().x > 0.2f) {
+                    body.applyLinearImpulse(new Vector2(-0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+                } else if (body.getLinearVelocity().x > 0) {
+                    body.setLinearVelocity(0, body.getLinearVelocity().y);
+                }
+
+                if (body.getLinearVelocity().x < -0.2f) {
+                    body.applyLinearImpulse(new Vector2(0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+                } else if (body.getLinearVelocity().x < 0) {
+                    body.setLinearVelocity(0, body.getLinearVelocity().y);
+                }
             }
         }
     }

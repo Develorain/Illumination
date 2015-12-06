@@ -84,6 +84,9 @@
  <objectgroup name="unclimbable white slope"/>
  <objectgroup name="unclimbable blue slope"/>
  <objectgroup name="unclimbable red slope"/>
+ <objectgroup name="Object Layer 14"/>
+ <objectgroup name="Object Layer 15"/>
+ <objectgroup name="Object Layer 16"/>
  <layer name="white tiles" width="300" height="150">
   <data encoding="base64" compression="zlib">
    eJzt1MGN4DAMA8C9Aq7/drcFBRuHsjQD6O8QIX9+gCf+u9gBz6Q7u/mAZ9Kd3XzAM+nObj7gmXRnNx/wTLqzmw94Jt3ZzQc8k+7s5gOeSXd28wHPpDu7+YBn0p3dfMAz6c5uPuAZPauxV5CnZzX2CvL0rMZeQZ6e1dgryNOzGnsFeXpWY68gT89q7BXk6VmNvYI8PauxV5CnZzX2CvL0rMZeQZ6e1dgryNOzGnsFeXpWY68gT89q7BXk6VmNvYI8PauxV5CnZzX2CvL0rMZeQZ6e1dgryNOzGnsFeXpWY68gT89q7BXk6VmNvYI8PauxV5CnZzX2CvL0rMZeQZ6e1dgryNOzGnsFeXpWY68gT89q7BXk6VmNvYI8PauxV5CnZzX2CvJO9LDjdcwJeCa9I/YKqErviL0CqtI7Yq+AqvSO2CugKr0j9gqoSu+IvQKq0jtir4Cq9I7YK6AqvSP2CqhK74i9AqrSO2KvgOnsFXCLCXtlx2AHewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewXcwl4Bt7BXwC3sFXALewV3+rJLXfpkr+BO9spewS3slb2CW9grewW32LhXX5MvvMNenSdfeIe9Ok++8A57dZ584R326jz5wjvs1XnyhXfYq/PkC++wV+fJF95hr86TL7zDXp0nX3iHvTpPvvCOjXv19TdvyxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMzxdO2din9KZMz5c90v/7hj6lM5ieL3uk//cNfUpnMD1f9kj/7xv6lM5ger7skf7fN/QpncH0fNkj/b9v6FM6g+n5skf6f9/Qp3QG0/Nlj/T/vqFP6Qym58se6f99Q5/SGUzPlz3S//uGPqUzmJ4ve6T/9w19SmcwPV/2SP/vG/qUzmB6vuyR/t839CmdwfR82SP9v2/oUzqD6fmyR/p/39CndAbT82WP9P++oU/pDKbnyx7p/31Dn9IZTM+3u38/ffPv+q6v39vlOkhnMD3fzk5u1Rv5d33X1+/tch2kM5ieb1ent+qN/Lu+6+v3drkO0hlMz7ejL7bqjfy7vuvr93a5DtIZTM+3m6+26o38u77r6/d2uQ7SGUzPt5Mvt+qN/Lu+6+v3drkO0hlMz7eLr7fqjfy7vuvr93a5DtIZTM+3g8RWvZF/13d9/d4u10E6g+n5pqW26o38u77r6/d2uQ7SGbi591dd3/X1e7tcB+kM3Nz7q67v+vq9Xa6DdAbOOeecc84555xzzk2/X2SCO1g=

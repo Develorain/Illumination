@@ -17,9 +17,9 @@ public class Illumination extends Game {
     public static final short NORMAL_SLOPE_BIT = 2;
     public static final short ALTERNATE_SLOPE_BIT = 4;
     public static final short PLAYER_BIT = 8;
-    public static final short PLAYER_FOOT_SENSOR_BIT = 16;
-    public static final short PLAYER_LEFT_SENSOR_BIT = 32;
-    public static final short PLAYER_RIGHT_SENSOR_BIT = 64;
+    public static final short PLAYER_FOOT_SENSOR_BIT = 16; // remove
+    public static final short PLAYER_LEFT_SENSOR_BIT = 32;  // remove
+    public static final short PLAYER_RIGHT_SENSOR_BIT = 64;  // remove
     public static final short DEFAULT_ENEMY_BIT = 128;
     public static final short BOUNDARY_SLOPE_BIT = 256;
     public static final short END_SLOPE_BIT = 512;
@@ -28,8 +28,9 @@ public class Illumination extends Game {
     public static final short UNCLIMBABLE_DEFAULT_SLOPE_BIT = 4096;
     public static final short UNCLIMBABLE_NORMAL_SLOPE_BIT = 8192;
     public static final short UNCLIMBABLE_ALTERNATE_SLOPE_BIT = 16384;
+    public static final short PROJECTILE_BIT = -32768;
 
-    public static AssetManager manager;  //consider not using static version
+    public static AssetManager manager;  // consider not using static keyword
     public SpriteBatch batch;
 
     @Override

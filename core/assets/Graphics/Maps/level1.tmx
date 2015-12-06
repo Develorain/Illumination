@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="402">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="1000" height="1000" tilewidth="16" tileheight="16" nextobjectid="405">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -197,7 +197,7 @@
  <objectgroup name="unclimbable blue slope"/>
  <objectgroup name="unclimbable red slope"/>
  <objectgroup name="white exploders">
-  <object id="401" x="48" y="15936" width="16" height="16"/>
+  <object id="404" x="32" y="15952" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="blue exploders"/>
  <objectgroup name="red exploders"/>

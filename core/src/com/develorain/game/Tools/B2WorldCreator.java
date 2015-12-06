@@ -106,12 +106,12 @@ public class B2WorldCreator {
         exploders = new ArrayList<>();
         for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "white"));
         }
 
         for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "blue"));
         }
 
         for (MapObject object : map.getLayers().get(18).getObjects().getByType(RectangleMapObject.class)) {
