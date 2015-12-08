@@ -18,6 +18,7 @@ public class PlayerController {
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
     public boolean shouldRespawn = false;
+    float jumpTimer = 0;
     private Player player;
     private Body body;
 
@@ -41,12 +42,14 @@ public class PlayerController {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
             if (canJump()) {
+                jumpTimer = 0;
                 if (body.getLinearVelocity().y < 0) {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
+                jumpTimer = 0;
                 body.setLinearVelocity(body.getLinearVelocity().x, 0);
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
@@ -55,13 +58,22 @@ public class PlayerController {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
-            if (!canJump()) {
-                if (body.getLinearVelocity().y < 0) {
-                    body.setLinearVelocity(body.getLinearVelocity().x, 0);
-                }
+            if (jumpTimer <= 0.1) {
+                if (!canJump()) {
+                    if (body.getLinearVelocity().y < 0) {
+                        body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                    }
 
-                body.applyLinearImpulse(new Vector2(0, 0.8f), body.getWorldCenter(), true);
+                    body.applyLinearImpulse(new Vector2(0, 0.8f), body.getWorldCenter(), true);
+                    jumpTimer += dt;
+                }
             }
+        } else if (!Gdx.input.isKeyPressed(Input.Keys.Z) && canJump()) {
+            // when you land on the ground, consider making this in the contact listener
+            jumpTimer = 0;
+        } else if (!Gdx.input.isKeyPressed(Input.Keys.Z)) {
+            // if you're let go of jump after double jump
+            jumpTimer = 0.2f;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheLeft() && !canJump()) {

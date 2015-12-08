@@ -40,7 +40,7 @@ public class Level {
     private OrthographicCamera cam;
     private MapProperties mapProperties;
     private int levelWidth;  // in tiles (ex: 300 tiles width)
-    private int levelHeight; // in tiles  (ex: 150 tiles height)
+    private int levelHeight; // in tiles (ex: 150 tiles height)
     private int TILE_WIDTH = 16;
     private int TILE_HEIGHT = 16;
     private Random random;
