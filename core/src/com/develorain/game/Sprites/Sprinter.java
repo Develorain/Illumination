@@ -73,9 +73,4 @@ public class Sprinter extends Enemy {
         enemySprite.setOrigin(enemySprite.getWidth() / 2, enemySprite.getHeight() / 2);
         b2body.setUserData(enemySprite);
     }
-
-    @Override
-    public void update() {
-        b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
-    }
 }

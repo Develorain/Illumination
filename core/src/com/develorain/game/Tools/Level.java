@@ -93,7 +93,7 @@ public class Level {
 
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
-        CameraUtilities.lerpToTarget(cam, player.playerB2DBody.getPosition());
+        CameraUtilities.lerpToTarget(cam, player.b2body.getPosition());
 
         float startX = cam.viewportWidth / 2;
         float startY = cam.viewportHeight / 2;
@@ -115,7 +115,15 @@ public class Level {
 
         mapRenderer.render();
 
+        batch.begin();
+
         player.draw(batch);
+
+        for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
+            b2worldCreator.getEnemies().get(i).draw(batch);
+        }
+
+        batch.end();
 
         rayHandler.render();
 

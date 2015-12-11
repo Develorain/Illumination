@@ -12,7 +12,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Array;
 import com.develorain.game.Tools.Level;
 import com.develorain.game.Tools.LightBuilder;
 
@@ -40,9 +39,8 @@ public class Player extends Sprite {
 
     public World world;
     public RayHandler rayHandler;
-    public Body playerB2DBody;
+    public Body b2body;
     public Sprite playerSprite;
-    public Array<Body> tmpBodies;
     public ArrayList<PointLight> pointLights = new ArrayList<>();
     public Level level;
 
@@ -52,8 +50,6 @@ public class Player extends Sprite {
         this.level = level;
 
         createPlayer(x, y, rayHandler);
-
-        tmpBodies = new Array<>();
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
@@ -90,15 +86,15 @@ public class Player extends Sprite {
             fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT | UNCLIMBABLE_ALTERNATE_SLOPE_BIT | ALTERNATE_ENEMY_BIT;
         }
 
-        playerB2DBody = world.createBody(bdef);
-        playerB2DBody.createFixture(fdef);
+        b2body = world.createBody(bdef);
+        b2body.createFixture(fdef);
     }
 
     private void createSprite() {
         playerSprite = new Sprite(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
         playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
-        playerB2DBody.setUserData(playerSprite);
+        b2body.setUserData(playerSprite);
     }
 
     private void createFootSensor() {
@@ -130,7 +126,7 @@ public class Player extends Sprite {
         sensorShape.set(footCoords);
         fdef.shape = sensorShape;
 
-        playerB2DBody.createFixture(fdef).setUserData("foot sensor");
+        b2body.createFixture(fdef).setUserData("foot sensor");
     }
 
     private void createLeftSensor() {
@@ -161,7 +157,7 @@ public class Player extends Sprite {
         sensorShape.set(leftCoords);
         fdef.shape = sensorShape;
 
-        playerB2DBody.createFixture(fdef).setUserData("left sensor");
+        b2body.createFixture(fdef).setUserData("left sensor");
     }
 
     private void createRightSensor() {
@@ -192,32 +188,32 @@ public class Player extends Sprite {
         sensorShape.set(rightCoords);
         fdef.shape = sensorShape;
 
-        playerB2DBody.createFixture(fdef).setUserData("right sensor");
+        b2body.createFixture(fdef).setUserData("right sensor");
     }
 
     private void createLights(RayHandler rayHandler) {
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.RED, 1));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.RED, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.RED, 1));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.RED, 2));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.CHARTREUSE, 2));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 3));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 3));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 3));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.WHITE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.WHITE, 3));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.CHARTREUSE, 1));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 2));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.BLUE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 1));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 2));
 
-        pointLights.add(LightBuilder.createPointLight(rayHandler, playerB2DBody, Color.CHARTREUSE, 0.5f));
+        pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 0.5f));
     }
 
     public Player destroyAndRemake() {
-        float x = playerB2DBody.getPosition().x * PPM;  // position is in world units, so it is converted to pixels
-        float y = playerB2DBody.getPosition().y * PPM;
+        float x = b2body.getPosition().x * PPM;  // position is in world units, so it is converted to pixels
+        float y = b2body.getPosition().y * PPM;
 
-        world.destroyBody(playerB2DBody);
+        world.destroyBody(b2body);
 
         for (int i = 0; i < pointLights.size(); i++) {
             pointLights.get(i).remove();
@@ -227,7 +223,7 @@ public class Player extends Sprite {
     }
 
     public void destroy() {
-        world.destroyBody(playerB2DBody);
+        world.destroyBody(b2body);
 
         for (int i = 0; i < pointLights.size(); i++) {
             pointLights.get(i).remove();
@@ -245,21 +241,10 @@ public class Player extends Sprite {
     }
 
     public void draw(Batch batch) {
-        batch.begin();
-        world.getBodies(tmpBodies);
-        for (Body body : tmpBodies) {
-            if (body.getUserData() instanceof Sprite) {
-                Sprite sprite = (Sprite) body.getUserData();
-
-                // Sets the texture to the center of the player
-                sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / PPM), body.getPosition().y - (PLAYER_HEIGHT / PPM));
-
-                sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-
-                sprite.draw(batch);
-            }
-        }
-        batch.end();
+        Sprite sprite = (Sprite) b2body.getUserData();
+        sprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
+        sprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
+        sprite.draw(batch);
     }
 
     public void switchBoxSprite() {

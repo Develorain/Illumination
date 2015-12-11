@@ -1,6 +1,7 @@
 package com.develorain.game.Sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -87,6 +88,15 @@ public class Exploder extends Enemy {
             b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
         } else {
             explode();
+        }
+    }
+
+    @Override
+    public void draw(Batch batch) {
+        if (isAlive) {
+            Sprite sprite = (Sprite) b2body.getUserData();
+            sprite.setPosition(b2body.getPosition().x - (ENEMY_WIDTH / PPM), b2body.getPosition().y - (ENEMY_HEIGHT / PPM));
+            sprite.draw(batch);
         }
     }
 
