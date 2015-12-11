@@ -64,7 +64,7 @@ public class PlayerController {
                         body.setLinearVelocity(body.getLinearVelocity().x, 0);
                     }
 
-                    body.applyLinearImpulse(new Vector2(0, 0.8f), body.getWorldCenter(), true);
+                    body.applyLinearImpulse(new Vector2(0, 0.6f), body.getWorldCenter(), true);
                     jumpTimer += dt;
                 }
             }
@@ -72,11 +72,12 @@ public class PlayerController {
             // when you land on the ground, consider making this in the contact listener
             jumpTimer = 0;
         } else if (!Gdx.input.isKeyPressed(Input.Keys.Z)) {
-            // if you're let go of jump after double jump
+            // if you let go of jump after double jump
             jumpTimer = 0.2f;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheLeft() && !canJump()) {
+            jumpTimer = 0;
             if (body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
@@ -87,6 +88,7 @@ public class PlayerController {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheRight() && !canJump()) {
+            jumpTimer = 0;
             if (body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(0, 0);
             }
