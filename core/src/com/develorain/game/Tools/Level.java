@@ -13,12 +13,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Scenes.HUD;
+import com.develorain.game.Sprites.Enemy;
 import com.develorain.game.Sprites.Exploder;
 import com.develorain.game.Sprites.Player;
-import com.develorain.game.Sprites.Sprinter;
-import com.develorain.game.Sprites.Walker;
-
-import java.util.Random;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Screens.PlayScreen.DEBUG_MODE;
@@ -43,7 +40,6 @@ public class Level {
     private int levelHeight; // in tiles (ex: 150 tiles height)
     private int TILE_WIDTH = 16;
     private int TILE_HEIGHT = 16;
-    private Random random;
 
     public Level(LevelCreator levelCreator, SpriteBatch batch, OrthographicCamera cam, int currentLevel) {
         this.batch = batch;
@@ -74,32 +70,22 @@ public class Level {
         contactListener = new WorldContactListener(playerController, levelCreator);
 
         world.setContactListener(contactListener);
-
-        random = new Random();
     }
 
     public void update(float dt) {
         hud.update();
 
-        for (int i = 0; i < b2worldCreator.getWalkers().size(); i++) {
-            Walker enemy = b2worldCreator.getWalkers().get(i);
+        for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
+            Enemy enemy = b2worldCreator.getEnemies().get(i);
             enemy.update();
         }
 
-        for (int i = 0; i < b2worldCreator.getSprinters().size(); i++) {
-            Sprinter enemy = b2worldCreator.getSprinters().get(i);
-            enemy.update();
-        }
-
-        for (int i = 0; i < b2worldCreator.getExploders().size(); i++) {
-            Exploder enemy = b2worldCreator.getExploders().get(i);
-            enemy.update();
-        }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            for (int i = 0; i < b2worldCreator.getExploders().size(); i++) {
-                Exploder enemy = b2worldCreator.getExploders().get(i);
-                enemy.explode();
+            for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
+                if (b2worldCreator.getEnemies().get(i) instanceof Exploder) {
+                    ((Exploder) b2worldCreator.getEnemies().get(i)).isAlive = false;
+                }
             }
         }
 
@@ -123,8 +109,9 @@ public class Level {
         batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
 
-        if (DEBUG_MODE)
+        if (DEBUG_MODE) {
             b2dr.render(world, cam.combined);
+        }
 
         mapRenderer.render();
 

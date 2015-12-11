@@ -248,7 +248,7 @@ public class Player extends Sprite {
         batch.begin();
         world.getBodies(tmpBodies);
         for (Body body : tmpBodies) {
-            if (body.getUserData() != null && body.getUserData() instanceof Sprite) {
+            if (body.getUserData() instanceof Sprite) {
                 Sprite sprite = (Sprite) body.getUserData();
 
                 // Sets the texture to the center of the player

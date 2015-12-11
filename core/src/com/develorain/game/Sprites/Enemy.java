@@ -31,6 +31,8 @@ public abstract class Enemy extends Sprite {
 
     protected abstract void createSprite();
 
+    public abstract void update();
+
     public void reverseVelocity(boolean x, boolean y) {
         if (x)
             velocity.x = -velocity.x;

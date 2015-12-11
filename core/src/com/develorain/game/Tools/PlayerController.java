@@ -11,7 +11,7 @@ import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 public class PlayerController {
     public static boolean SLOW_MOTION_MODE = false;
     private final int SPRINT_SPEED_CAP = 13;
-    private final int REGULAR_SPEED_CAP = 7;
+    private final int REGULAR_SPEED_CAP = 8;
     public int footContactCounter = 0;
     public int leftContactCounter = 0;
     public int rightContactCounter = 0;
@@ -50,24 +50,20 @@ public class PlayerController {
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
             } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
                 jumpTimer = 0;
-                body.setLinearVelocity(body.getLinearVelocity().x, 0);
+                body.setLinearVelocity(body.getLinearVelocity().x, 1);
 
                 body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
                 canDoubleJump = false;
             }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.Z)) {
-            if (jumpTimer <= 0.1) {
-                if (!canJump()) {
-                    if (body.getLinearVelocity().y < 0) {
-                        body.setLinearVelocity(body.getLinearVelocity().x, 0);
-                    }
-
-                    body.applyLinearImpulse(new Vector2(0, 0.6f), body.getWorldCenter(), true);
-                    jumpTimer += dt;
-                }
+        if (Gdx.input.isKeyPressed(Input.Keys.Z) && jumpTimer <= 0.1 && !canJump()) {
+            if (body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(body.getLinearVelocity().x, 0);
             }
+
+            body.applyLinearImpulse(new Vector2(0, 0.6f), body.getWorldCenter(), true);
+            jumpTimer += dt;
         } else if (!Gdx.input.isKeyPressed(Input.Keys.Z) && canJump()) {
             // when you land on the ground, consider making this in the contact listener
             jumpTimer = 0;

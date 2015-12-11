@@ -7,19 +7,14 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.develorain.game.Sprites.Exploder;
-import com.develorain.game.Sprites.Player;
-import com.develorain.game.Sprites.Sprinter;
-import com.develorain.game.Sprites.Walker;
+import com.develorain.game.Sprites.*;
 import com.develorain.game.Tools.Slopes.*;
 
 import java.util.ArrayList;
 
 public class B2WorldCreator {
     private Player player;
-    private ArrayList<Walker> walkers;
-    private ArrayList<Sprinter> sprinters;
-    private ArrayList<Exploder> exploders;
+    private ArrayList<Enemy> enemies = new ArrayList<>();
 
     public B2WorldCreator(RayHandler rayHandler, Level level) {
         TiledMap map = level.getTiledMap();
@@ -40,20 +35,19 @@ public class B2WorldCreator {
             new BoundarySlope(object, level);
         }
 
-        walkers = new ArrayList<>();
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), level, "white"));
+            enemies.add(new Walker(rect.getX(), rect.getY(), level, "white"));
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), level, "blue"));
+            enemies.add(new Walker(rect.getX(), rect.getY(), level, "blue"));
         }
 
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            walkers.add(new Walker(rect.getX(), rect.getY(), level, "red"));
+            enemies.add(new Walker(rect.getX(), rect.getY(), level, "red"));
         }
 
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
@@ -75,20 +69,19 @@ public class B2WorldCreator {
             new EndSlope(object, level);
         }
 
-        sprinters = new ArrayList<>();
         for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "white"));
+            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, "white"));
         }
 
         for (MapObject object : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "blue"));
+            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, "blue"));
         }
 
         for (MapObject object : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            sprinters.add(new Sprinter(rect.getX(), rect.getY(), level, "red"));
+            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, "red"));
         }
 
         for (MapObject object : map.getLayers().get(13).getObjects().getByType(PolylineMapObject.class)) {
@@ -103,33 +96,24 @@ public class B2WorldCreator {
             new AlternateSlope(object, level, false);
         }
 
-        exploders = new ArrayList<>();
         for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "white"));
+            enemies.add(new Exploder(rect.getX(), rect.getY(), level, "white"));
         }
 
         for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "blue"));
+            enemies.add(new Exploder(rect.getX(), rect.getY(), level, "blue"));
         }
 
         for (MapObject object : map.getLayers().get(18).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            exploders.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+            enemies.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
         }
     }
 
-    public ArrayList<Walker> getWalkers() {
-        return walkers;
-    }
-
-    public ArrayList<Sprinter> getSprinters() {
-        return sprinters;
-    }
-
-    public ArrayList<Exploder> getExploders() {
-        return exploders;
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
     }
 
     public Player getPlayer() {

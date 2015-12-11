@@ -16,8 +16,8 @@ import static com.develorain.game.Illumination.*;
 
 public class Exploder extends Enemy {
     public Sprite enemySprite;
+    public boolean isAlive;
     private ArrayList<Body> projectiles;
-    private boolean isAlive;
 
     public Exploder(float x, float y, Level level, String colour) {
         super(x, y, level, colour, new Vector2(3, 0));
@@ -81,9 +81,12 @@ public class Exploder extends Enemy {
         b2body.setUserData(enemySprite);
     }
 
+    @Override
     public void update() {
         if (isAlive) {
             b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
+        } else {
+            explode();
         }
     }
 

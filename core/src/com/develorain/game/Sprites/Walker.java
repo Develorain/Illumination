@@ -74,6 +74,7 @@ public class Walker extends Enemy {
         b2body.setUserData(enemySprite);
     }
 
+    @Override
     public void update() {
         b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
     }
