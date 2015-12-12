@@ -37,8 +37,8 @@ public class LevelCreator {
         }
     }
 
-    public void render() {
-        level.render();
+    public void render(float dt) {
+        level.render(dt);
     }
 
     public void resize(int width, int height) {

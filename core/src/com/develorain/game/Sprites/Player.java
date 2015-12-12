@@ -42,7 +42,10 @@ public class Player extends Sprite {
     public Body b2body;
     public Sprite playerSprite;
     public ArrayList<PointLight> pointLights = new ArrayList<>();
+    public ArrayList<Sprite> sprites = new ArrayList<>();
     public Level level;
+
+    float timer = 0;
 
     public Player(RayHandler rayHandler, float x, float y, Level level) {
         this.world = level.getWorld();
@@ -88,6 +91,12 @@ public class Player extends Sprite {
 
         b2body = world.createBody(bdef);
         b2body.createFixture(fdef);
+    }
+
+    public void draw(Batch batch, float dt) {
+        playerSprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
+        playerSprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
+        playerSprite.draw(batch);
     }
 
     private void createSprite() {
@@ -238,13 +247,6 @@ public class Player extends Sprite {
         }
 
         return null;
-    }
-
-    public void draw(Batch batch) {
-        Sprite sprite = (Sprite) b2body.getUserData();
-        sprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
-        sprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
-        sprite.draw(batch);
     }
 
     public void switchBoxSprite() {

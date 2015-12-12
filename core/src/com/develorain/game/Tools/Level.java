@@ -105,7 +105,7 @@ public class Level {
         rayHandler.update();
     }
 
-    public void render() {
+    public void render(float dt) {
         batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
 
@@ -117,7 +117,7 @@ public class Level {
 
         batch.begin();
 
-        player.draw(batch);
+        player.draw(batch, dt);
 
         for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
             b2worldCreator.getEnemies().get(i).draw(batch);

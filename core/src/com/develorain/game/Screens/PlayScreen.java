@@ -48,7 +48,7 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        levelCreator.render();
+        levelCreator.render(dt);
     }
 
     public void handleInput() {
