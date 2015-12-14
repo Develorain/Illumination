@@ -99,26 +99,26 @@ public class Player extends Sprite {
         Sprite sprite = new Sprite(playerSprite);
         sprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
         sprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
-        sprite.setAlpha(1);
         sprites.add(sprite);
 
         if (timer >= 0.01f) {
             timer = 0;
 
             for (int i = 0; i < sprites.size(); i++) {
-                sprites.get(i).setAlpha(sprites.get(i).getColor().a - 0.1f);
+                sprites.get(i).draw(batch);
+                sprites.get(i).setAlpha(sprites.get(i).getColor().a - 0.05f);
 
                 if (sprites.get(i).getColor().a <= 0) {
                     sprites.remove(i);
                 }
-
-                sprites.get(i).draw(batch);
             }
         }
 
-        //playerSprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
-        //playerSprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
-        //playerSprite.draw(batch);
+        /*
+        playerSprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
+        playerSprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
+        playerSprite.draw(batch);
+        */
     }
 
     private void createSprite() {
@@ -223,6 +223,8 @@ public class Player extends Sprite {
     }
 
     private void createLights(RayHandler rayHandler) {
+        pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.WHITE, 1));
+
         //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.RED, 1));
         //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.RED, 2));
 
@@ -237,7 +239,7 @@ public class Player extends Sprite {
         //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 2));
         //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 2));
 
-        pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 0.5f));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 0.5f));
     }
 
     public Player destroyAndRemake() {

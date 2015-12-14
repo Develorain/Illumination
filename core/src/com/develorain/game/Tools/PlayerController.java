@@ -75,7 +75,9 @@ public class PlayerController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheLeft() && !canJump()) {
             jumpTimer = 0;
 
-            //body.setLinearVelocity(0, 0);
+            if (body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(0, 0);
+            }
 
             body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
@@ -85,7 +87,9 @@ public class PlayerController {
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheRight() && !canJump()) {
             jumpTimer = 0;
 
-            //body.setLinearVelocity(0, 0);
+            if (body.getLinearVelocity().y < 0) {
+                body.setLinearVelocity(0, 0);
+            }
 
             body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
             inputGiven = true;
