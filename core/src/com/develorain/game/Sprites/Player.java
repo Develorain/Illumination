@@ -18,7 +18,6 @@ import com.develorain.game.Tools.LightBuilder;
 import java.util.ArrayList;
 
 import static com.develorain.game.Illumination.*;
-import static com.develorain.game.Screens.PlayScreen.WHITE_MODE;
 import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
 public class Player extends Sprite {
@@ -45,7 +44,7 @@ public class Player extends Sprite {
     public ArrayList<Sprite> sprites = new ArrayList<>();
     public Level level;
 
-    float timer = 0;
+    private float timer = 0;
 
     public Player(RayHandler rayHandler, float x, float y, Level level) {
         this.world = level.getWorld();
@@ -113,12 +112,6 @@ public class Player extends Sprite {
                 }
             }
         }
-
-        /*
-        playerSprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
-        playerSprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
-        playerSprite.draw(batch);
-        */
     }
 
     private void createSprite() {
@@ -271,17 +264,5 @@ public class Player extends Sprite {
         }
 
         return null;
-    }
-
-    public void switchBoxSprite() {
-        playerSprite.getTexture().dispose();
-
-        if (WHITE_MODE) {
-            playerSprite.setTexture(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
-        }
-
-        if (!WHITE_MODE) {
-            playerSprite.setTexture(new Texture("Graphics/Sprites/PlayerSprites/blackplayer.png"));
-        }
     }
 }

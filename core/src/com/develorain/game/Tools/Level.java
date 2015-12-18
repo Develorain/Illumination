@@ -57,8 +57,7 @@ public class Level {
         b2dr = new Box2DDebugRenderer();
 
         rayHandler = new RayHandler(world);
-        //rayHandler.setAmbientLight(0.25f);
-        rayHandler.setAmbientLight(0.01f);
+        rayHandler.setAmbientLight(0.25f);
 
         hud = new HUD(batch);
 
@@ -80,7 +79,6 @@ public class Level {
             Enemy enemy = b2worldCreator.getEnemies().get(i);
             enemy.update();
         }
-
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {

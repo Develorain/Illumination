@@ -27,10 +27,10 @@ public class PlayScreen implements Screen {
         levelCreator = new LevelCreator(game.batch);
         levelCreator.loadNextLevel();
 
-        //music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);
-        //music.setVolume(0.5f);
-        //music.setLooping(true);
-        //music.play();
+        music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
     }
 
     public void update(float dt) {
@@ -55,13 +55,6 @@ public class PlayScreen implements Screen {
         // Toggles between debug modes
         if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
             DEBUG_MODE = !DEBUG_MODE;
-        }
-
-        // Toggle between player sprites
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F2)) {
-            WHITE_MODE = !WHITE_MODE;
-
-            //player.switchBoxSprite();
         }
     }
 
