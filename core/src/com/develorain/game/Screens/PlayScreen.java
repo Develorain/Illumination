@@ -10,7 +10,6 @@ import com.develorain.game.Tools.LevelCreator;
 
 public class PlayScreen implements Screen {
     public static boolean DEBUG_MODE = false;
-    public static boolean WHITE_MODE = true;
     public static int TIME_SLOWDOWN_MODIFIER = 1;
 
     // Stores current game time
@@ -30,7 +29,7 @@ public class PlayScreen implements Screen {
         music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
-        music.play();
+        //music.play();
     }
 
     public void update(float dt) {
