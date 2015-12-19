@@ -39,20 +39,16 @@ public class Exploder extends Enemy {
     }
 
     public void explode() {
-        float x = body.getPosition().x * PPM;
-        float y = body.getPosition().y * PPM;
+        float x = body.getPosition().x;
+        float y = body.getPosition().y;
 
         world.destroyBody(body);
 
-        createProjectiles(x, y);
-    }
-
-    public void createProjectiles(float x, float y) {
         projectiles = new ArrayList<>();
         isAlive = false;
 
         for (int i = 0; i < 3; i++) {
-            Body body = BodyFactory.createBoxBody(world, this, x, y, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, type, PROJECTILE_DENSITY, ENEMY_FIXED_ROTATION);
+            Body body = BodyFactory.createBoxBody(world, this, x, y, PROJECTILE_WIDTH / PPM, PROJECTILE_HEIGHT / PPM, type, PROJECTILE_DENSITY, ENEMY_FIXED_ROTATION);
 
             //Random random = new Random();
             //body.applyLinearImpulse(new Vector2(random.nextFloat() * 5, random.nextFloat() * 10), body.getWorldCenter(), true);

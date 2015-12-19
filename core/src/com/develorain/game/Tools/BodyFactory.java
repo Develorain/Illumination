@@ -16,9 +16,9 @@ public class BodyFactory {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width / PPM, height / PPM);
+        shape.setAsBox(width, height);
 
-        bdef.position.set(x / PPM, y / PPM);
+        bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = fixedRotation;
 

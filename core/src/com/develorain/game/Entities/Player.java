@@ -57,7 +57,7 @@ public class Player {
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
-        body = BodyFactory.createBoxBody(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, EntityType.PLAYER, PLAYER_DENSITY, PLAYER_FIXED_ROTATION);
+        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, EntityType.PLAYER, PLAYER_DENSITY, PLAYER_FIXED_ROTATION);
         createSprite();
         createFootSensor();
         createLeftSensor();
