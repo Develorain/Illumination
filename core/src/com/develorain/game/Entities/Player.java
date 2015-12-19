@@ -36,7 +36,6 @@ public class Player {
     public final float FOOT_SENSOR_SCALING_HEIGHT = 1.5f;
     public final float SIDE_SENSOR_SCALING_HEIGHT = 1f;
     public final float SIDE_SENSOR_SCALING_WIDTH = 1.6f;
-    public boolean PLAYER_FIXED_ROTATION = true;
 
     public World world;
     public RayHandler rayHandler;
@@ -57,7 +56,7 @@ public class Player {
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
-        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, EntityType.PLAYER, PLAYER_DENSITY, PLAYER_FIXED_ROTATION);
+        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, EntityType.PLAYER, PLAYER_DENSITY);
         createSprite();
         createFootSensor();
         createLeftSensor();

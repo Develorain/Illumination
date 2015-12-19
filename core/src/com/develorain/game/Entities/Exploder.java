@@ -11,21 +11,24 @@ import java.util.ArrayList;
 import static com.develorain.game.Illumination.PPM;
 
 public class Exploder extends Enemy {
-    public static final int PROJECTILE_WIDTH = 6;
-    public static final int PROJECTILE_HEIGHT = 6;
-    private final int PROJECTILE_DENSITY = 1; // TODO: MAKE A PROJECTILES CLASS
+    private static final int EXPLODER_WIDTH = 16;
+    private static final int EXPLODER_HEIGHT = 16;
+    private static final int EXPLODER_DENSITY = 10;
+
     public boolean isAlive = true;
     private ArrayList<Body> projectiles;
+    private Level level;
 
     public Exploder(float x, float y, Level level, EntityType type) {
-        super(x, y, level, type, new Vector2(3, 0));
+        super(x, y, EXPLODER_WIDTH, EXPLODER_HEIGHT, EXPLODER_DENSITY, level, type, new Vector2(3, 0));
+        this.level = level;
     }
 
     @Override
     public void update() {
         if (isAlive) {
             body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
-        } else if (!isAlive) {
+        } else {
             explode();
         }
     }
@@ -33,7 +36,7 @@ public class Exploder extends Enemy {
     @Override
     public void draw(Batch batch) {
         if (isAlive) {
-            sprite.setPosition(body.getPosition().x - (ENEMY_WIDTH / PPM), body.getPosition().y - (ENEMY_HEIGHT / PPM));
+            sprite.setPosition(body.getPosition().x - (EXPLODER_WIDTH / PPM), body.getPosition().y - (EXPLODER_HEIGHT / PPM));
             sprite.draw(batch);
         }
     }
@@ -48,7 +51,7 @@ public class Exploder extends Enemy {
         isAlive = false;
 
         for (int i = 0; i < 3; i++) {
-            Body body = BodyFactory.createBoxBody(world, this, x, y, PROJECTILE_WIDTH / PPM, PROJECTILE_HEIGHT / PPM, type, PROJECTILE_DENSITY, ENEMY_FIXED_ROTATION);
+            Body body = BodyFactory.createBoxBody(world, this, x, y, EXPLODER_WIDTH / PPM, EXPLODER_HEIGHT / PPM, type, EXPLODER_DENSITY);
 
             //Random random = new Random();
             //body.applyLinearImpulse(new Vector2(random.nextFloat() * 5, random.nextFloat() * 10), body.getWorldCenter(), true);

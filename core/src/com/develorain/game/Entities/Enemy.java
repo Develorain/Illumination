@@ -12,23 +12,21 @@ import com.develorain.game.Tools.Level;
 import static com.develorain.game.Illumination.PPM;
 
 public abstract class Enemy {
-    public final int ENEMY_WIDTH = 16;     // pixels
-    public final int ENEMY_HEIGHT = 16;    // pixels
-    public final int ENEMY_RESTITUTION = 0;
-    public final int ENEMY_FRICTION = 0;
-    public final int ENEMY_DENSITY = 10;
-    public final boolean ENEMY_FIXED_ROTATION = true;
     public Body body;
     public Vector2 velocity;
     protected World world;
     protected Sprite sprite;
     protected EntityType type;
+    private float width;
+    private float height;
 
-    public Enemy(float x, float y, Level level, EntityType type, Vector2 velocity) {
+    public Enemy(float x, float y, int width, int height, int density, Level level, EntityType type, Vector2 velocity) {
         this.type = type;
         this.velocity = velocity;
+        this.width = width;
+        this.height = height;
         world = level.getWorld();
-        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, ENEMY_WIDTH / PPM, ENEMY_HEIGHT / PPM, type, ENEMY_DENSITY, true);
+        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, width / PPM, height / PPM, type, density);
         createSprite();
     }
 
@@ -37,7 +35,7 @@ public abstract class Enemy {
     }
 
     public void draw(Batch batch) {
-        sprite.setPosition(body.getPosition().x - (ENEMY_WIDTH / PPM), body.getPosition().y - (ENEMY_HEIGHT / PPM));
+        sprite.setPosition(body.getPosition().x - (width / PPM), body.getPosition().y - (height / PPM));
         sprite.draw(batch);
     }
 
@@ -61,7 +59,7 @@ public abstract class Enemy {
                 break;
         }
 
-        sprite.setSize(ENEMY_WIDTH * 2 / PPM, ENEMY_HEIGHT * 2 / PPM);
+        sprite.setSize(width * 2 / PPM, height * 2 / PPM);
         //sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
     }
 }

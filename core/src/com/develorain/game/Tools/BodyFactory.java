@@ -8,11 +8,12 @@ import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
 public class BodyFactory {
 
-    public static final int DEFAULT_RESTITUTION = 0;
-    public static final int DEFAULT_FRICTION = 0;
+    private static final int DEFAULT_RESTITUTION = 0;
+    private static final int DEFAULT_FRICTION = 0;
+    private static final boolean DEFAULT_FIXED_ROTATION = true;
 
     public static Body createBoxBody(World world, Object entityInstanceForFixture, float x, float y, float width, float height,
-                                     EntityType type, float density, boolean fixedRotation) {
+                                     EntityType type, float density) {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
         PolygonShape shape = new PolygonShape();
@@ -20,7 +21,7 @@ public class BodyFactory {
 
         bdef.position.set(x, y);
         bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.fixedRotation = fixedRotation;
+        bdef.fixedRotation = DEFAULT_FIXED_ROTATION;
 
         fdef.shape = shape;
         fdef.restitution = DEFAULT_RESTITUTION;
