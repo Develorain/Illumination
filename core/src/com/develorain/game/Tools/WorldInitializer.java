@@ -101,6 +101,7 @@ public class WorldInitializer {
             enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
+        /*
         for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
@@ -110,6 +111,7 @@ public class WorldInitializer {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
+        */
     }
 
     public ArrayList<Enemy> getEnemies() {

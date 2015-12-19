@@ -30,14 +30,14 @@ public class Exploder extends Enemy {
     }
 
     public void explode() {
-        float x = body.getPosition().x;
-        float y = body.getPosition().y;
+        float x = body.getPosition().x * PPM;
+        float y = body.getPosition().y * PPM;
 
+        sprite.getTexture().dispose();
         world.destroyBody(body);
 
         for (int i = 0; i < 3; i++) {
             level.getWorldInitializer().createProjectile(x, y, type);
-            System.out.println("Hello");
         }
     }
 }

@@ -84,7 +84,7 @@ public class Level {
             for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
                 if (worldInitializer.getEnemies().get(i) instanceof Exploder) {
                     ((Exploder) worldInitializer.getEnemies().get(i)).explode();
-                    System.out.println("Hi");
+                    worldInitializer.getEnemies().remove(i);
                 }
             }
         }
