@@ -2,7 +2,6 @@ package com.develorain.game.Tools;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.Entities.Enemy;
-import com.develorain.game.Entities.Exploder;
 
 import static com.develorain.game.Illumination.*;
 
@@ -109,18 +108,6 @@ public class WorldContactListener implements ContactListener {
             case PLAYER_BIT | RED_ENEMY_BIT:
                 playerController.shouldRespawn = true;
                 //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
-                break;
-
-            case PROJECTILE_BIT | WHITE_LINE_BIT:
-                if (fixA.getFilterData().categoryBits == PROJECTILE_BIT) {
-                    ((Exploder) fixA.getUserData()).destroyProjectiles();
-                } else {
-                    ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-                }
-                break;
-            case PROJECTILE_BIT | BLUE_LINE_BIT:
-                break;
-            case PROJECTILE_BIT | RED_LINE_BIT:
                 break;
 
             case PLAYER_BIT | END_LINE_BIT:

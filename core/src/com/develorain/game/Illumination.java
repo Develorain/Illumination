@@ -28,7 +28,7 @@ public class Illumination extends Game {
     public static final short UNCLIMBABLE_WHITE_LINE_BIT = 4096;
     public static final short UNCLIMBABLE_BLUE_LINE_BIT = 8192;
     public static final short UNCLIMBABLE_RED_LINE_BIT = 16384;
-    public static final short PROJECTILE_BIT = -32768;
+    //public static final short PROJECTILE_BIT = -32768;
 
     public static AssetManager manager;  // consider not using static keyword
     public SpriteBatch batch;

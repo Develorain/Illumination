@@ -11,7 +11,7 @@ public class BodyFactory {
     public static final int DEFAULT_RESTITUTION = 0;
     public static final int DEFAULT_FRICTION = 0;
 
-    public static Body createBoxBody(World world, Object userDataObject, float x, float y, float width, float height,
+    public static Body createBoxBody(World world, Object entityInstanceForFixture, float x, float y, float width, float height,
                                      EntityType type, float density, boolean fixedRotation) {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
@@ -57,7 +57,7 @@ public class BodyFactory {
 
         Body body = world.createBody(bdef);
         Fixture fixture = body.createFixture(fdef);
-        fixture.setUserData(userDataObject);
+        fixture.setUserData(entityInstanceForFixture);
         return body;
     }
 }
