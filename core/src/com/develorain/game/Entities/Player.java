@@ -25,8 +25,6 @@ import static com.develorain.game.Illumination.*;
 import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
 public class Player {
-    public static final int PLAYER_RESTITUTION = 0;
-    public static final int PLAYER_FRICTION = 0;
     public static final int PLAYER_DENSITY = 10;
     public final int PLAYER_WIDTH = 16;     // pixels
     public final int PLAYER_HEIGHT = 16;    // pixels
@@ -59,7 +57,7 @@ public class Player {
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
-        body = BodyFactory.createBoxBody(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, EntityType.PLAYER, PLAYER_DENSITY, true);
+        body = BodyFactory.createBoxBody(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, EntityType.PLAYER, PLAYER_DENSITY, PLAYER_FIXED_ROTATION);
         createSprite();
         createFootSensor();
         createLeftSensor();
