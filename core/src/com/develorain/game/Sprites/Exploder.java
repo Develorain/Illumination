@@ -14,6 +14,7 @@ import java.util.Random;
 import static com.develorain.game.Illumination.*;
 
 public class Exploder extends Enemy {
+    private final int PROJECTILE_DENSITY = 1;
     public boolean isAlive = true;
     private ArrayList<Body> projectiles;
 
@@ -63,7 +64,7 @@ public class Exploder extends Enemy {
 
             fdef.shape = enemyShape;
             fdef.restitution = ENEMY_RESTITUTION;
-            fdef.density = 1;
+            fdef.density = PROJECTILE_DENSITY;
             fdef.friction = ENEMY_FRICTION;
 
             switch (colour) {

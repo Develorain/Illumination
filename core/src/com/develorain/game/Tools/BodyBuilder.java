@@ -9,29 +9,33 @@ public abstract class BodyBuilder {
     public static Body createBox(World world, Object userDataObject, float x, float y, float width, float height, String colour, float density, boolean fixedRotation) {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
-        PolygonShape enemyShape = new PolygonShape();
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width / PPM, height / PPM);
 
         bdef.position.set(x / PPM, y / PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         bdef.fixedRotation = fixedRotation;
 
-        fdef.shape = enemyShape;
-        fdef.restitution = 0;
+        fdef.shape = shape;
+        fdef.restitution = 0; // TODO: REMOVE MAGICAL NUMBER
         fdef.density = density;
-        fdef.friction = 0;
+        fdef.friction = 0; // TODO: REMOVE MAGICAL NUMBER
 
         switch (colour) {
             case "white":
                 fdef.filter.categoryBits = DEFAULT_ENEMY_BIT;
                 fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
+                fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
                 break;
             case "blue":
                 fdef.filter.categoryBits = NORMAL_ENEMY_BIT;
                 fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT;
+                fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
                 break;
             case "red":
                 fdef.filter.categoryBits = ALTERNATE_ENEMY_BIT;
                 fdef.filter.maskBits = DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
+                fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
                 break;
             case "none":
                 fdef.filter.categoryBits = PLAYER_BIT;
@@ -42,12 +46,9 @@ public abstract class BodyBuilder {
                 } else {
                     fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT | UNCLIMBABLE_ALTERNATE_SLOPE_BIT | ALTERNATE_ENEMY_BIT;
                 }
+
                 break;
         }
-
-        fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
-
-        enemyShape.setAsBox(width / PPM, height / PPM);
 
         Body body = world.createBody(bdef);
         Fixture fixture = body.createFixture(fdef);
