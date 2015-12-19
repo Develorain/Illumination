@@ -71,19 +71,19 @@ public class Exploder extends Enemy {
             switch (colour) {
                 case "white":
                     fdef.filter.categoryBits = PROJECTILE_BIT;
-                    fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
+                    fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT | RED_ENEMY_BIT;
                     break;
                 case "blue":
                     fdef.filter.categoryBits = PROJECTILE_BIT;
-                    fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT;
+                    fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT;
                     break;
                 case "red":
                     fdef.filter.categoryBits = PROJECTILE_BIT;
-                    fdef.filter.maskBits = DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
+                    fdef.filter.maskBits = WHITE_ENEMY_BIT | RED_ENEMY_BIT;
                     break;
             }
 
-            fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
+            fdef.filter.maskBits |= WHITE_SLOPE_BIT | BLUE_SLOPE_BIT | RED_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
             enemyShape.setAsBox(6 / PPM, 6 / PPM);
 
             b2body = world.createBody(bdef);

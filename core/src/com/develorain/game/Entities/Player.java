@@ -15,7 +15,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.develorain.game.Tools.BodyBuilder;
+import com.develorain.game.Tools.BodyFactory;
 import com.develorain.game.Tools.Level;
 import com.develorain.game.Tools.LightBuilder;
 
@@ -68,7 +68,7 @@ public class Player {
     }
 
     private void createBody(float x, float y) {
-        b2body = BodyBuilder.createBox(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, "none", PLAYER_DENSITY, true);
+        b2body = BodyFactory.createBox(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, "none", PLAYER_DENSITY, true);
     }
 
     public void draw(Batch batch, float dt) {
@@ -109,12 +109,12 @@ public class Player {
         fdef.friction = 0;
         fdef.filter.categoryBits = PLAYER_FOOT_SENSOR_BIT;
 
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
+        fdef.filter.maskBits = WHITE_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= NORMAL_SLOPE_BIT;
+            fdef.filter.maskBits |= BLUE_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT;
+            fdef.filter.maskBits |= RED_SLOPE_BIT;
         }
 
         sensorShape.setAsBox(FOOT_SENSOR_WIDTH / PPM, FOOT_SENSOR_HEIGHT / PPM);
@@ -140,12 +140,12 @@ public class Player {
         fdef.density = 0f;
         fdef.friction = 0;
         fdef.filter.categoryBits = PLAYER_LEFT_SENSOR_BIT;
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
+        fdef.filter.maskBits = WHITE_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= NORMAL_SLOPE_BIT;
+            fdef.filter.maskBits |= BLUE_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT;
+            fdef.filter.maskBits |= RED_SLOPE_BIT;
         }
 
         sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
@@ -171,12 +171,12 @@ public class Player {
         fdef.density = 0f;
         fdef.friction = 0;
         fdef.filter.categoryBits = PLAYER_RIGHT_SENSOR_BIT;
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT;
+        fdef.filter.maskBits = WHITE_SLOPE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= NORMAL_SLOPE_BIT;
+            fdef.filter.maskBits |= BLUE_SLOPE_BIT;
         } else {
-            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT;
+            fdef.filter.maskBits |= RED_SLOPE_BIT;
         }
 
         sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);

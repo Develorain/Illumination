@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.develorain.game.Tools.BodyBuilder;
+import com.develorain.game.Tools.BodyFactory;
 import com.develorain.game.Tools.Level;
 
 import static com.develorain.game.Illumination.PPM;
@@ -66,6 +66,6 @@ public abstract class Enemy {
     }
 
     public void createBody(float x, float y) {
-        b2body = BodyBuilder.createBox(world, this, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, colour, ENEMY_DENSITY, true);
+        b2body = BodyFactory.createBox(world, this, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, colour, ENEMY_DENSITY, true);
     }
 }

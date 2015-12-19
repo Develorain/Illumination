@@ -24,103 +24,103 @@ public class WorldContactListener implements ContactListener {
 
         // if object has more than one bit, must rewrite switch statement
         switch (cDef) {
-            case PLAYER_FOOT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+            case PLAYER_FOOT_SENSOR_BIT | WHITE_SLOPE_BIT:
                 playerController.footContactCounter++;
                 break;
-            case PLAYER_FOOT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+            case PLAYER_FOOT_SENSOR_BIT | BLUE_SLOPE_BIT:
                 playerController.footContactCounter++;
                 break;
-            case PLAYER_FOOT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+            case PLAYER_FOOT_SENSOR_BIT | RED_SLOPE_BIT:
                 playerController.footContactCounter++;
                 break;
 
-            case PLAYER_LEFT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+            case PLAYER_LEFT_SENSOR_BIT | WHITE_SLOPE_BIT:
                 playerController.leftContactCounter++;
                 break;
-            case PLAYER_LEFT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+            case PLAYER_LEFT_SENSOR_BIT | BLUE_SLOPE_BIT:
                 playerController.leftContactCounter++;
                 break;
-            case PLAYER_LEFT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+            case PLAYER_LEFT_SENSOR_BIT | RED_SLOPE_BIT:
                 playerController.leftContactCounter++;
                 break;
 
-            case PLAYER_RIGHT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+            case PLAYER_RIGHT_SENSOR_BIT | WHITE_SLOPE_BIT:
                 playerController.rightContactCounter++;
                 break;
-            case PLAYER_RIGHT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+            case PLAYER_RIGHT_SENSOR_BIT | BLUE_SLOPE_BIT:
                 playerController.rightContactCounter++;
                 break;
-            case PLAYER_RIGHT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+            case PLAYER_RIGHT_SENSOR_BIT | RED_SLOPE_BIT:
                 playerController.rightContactCounter++;
                 break;
 
-            case DEFAULT_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
-                if (fixA.getFilterData().categoryBits == DEFAULT_ENEMY_BIT) {
+            case WHITE_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == WHITE_ENEMY_BIT) {
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 } else {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 }
                 break;
-            case NORMAL_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
-                if (fixA.getFilterData().categoryBits == DEFAULT_ENEMY_BIT) {
+            case BLUE_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == WHITE_ENEMY_BIT) {
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 } else {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 }
                 break;
-            case ALTERNATE_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
-                if (fixA.getFilterData().categoryBits == DEFAULT_ENEMY_BIT) {
+            case RED_ENEMY_BIT | BOUNDARY_SLOPE_BIT:
+                if (fixA.getFilterData().categoryBits == WHITE_ENEMY_BIT) {
                     ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 } else {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 }
                 break;
 
-            case DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT:
+            case WHITE_ENEMY_BIT | BLUE_ENEMY_BIT:
                 ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
-            case DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT:
-                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-                break;
-
-            case DEFAULT_ENEMY_BIT:
-                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-                break;
-            case NORMAL_ENEMY_BIT:
-                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
-                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
-                break;
-            case ALTERNATE_ENEMY_BIT:
+            case WHITE_ENEMY_BIT | RED_ENEMY_BIT:
                 ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
                 ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 break;
 
-            case PLAYER_BIT | DEFAULT_ENEMY_BIT:
+            case WHITE_ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case BLUE_ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+            case RED_ENEMY_BIT:
+                ((Enemy) fixA.getUserData()).reverseVelocity(true, false);
+                ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
+                break;
+
+            case PLAYER_BIT | WHITE_ENEMY_BIT:
                 playerController.shouldRespawn = true;
                 //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;
-            case PLAYER_BIT | NORMAL_ENEMY_BIT:
+            case PLAYER_BIT | BLUE_ENEMY_BIT:
                 playerController.shouldRespawn = true;
                 //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;
-            case PLAYER_BIT | ALTERNATE_ENEMY_BIT:
+            case PLAYER_BIT | RED_ENEMY_BIT:
                 playerController.shouldRespawn = true;
                 //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;
 
-            case PROJECTILE_BIT | DEFAULT_SLOPE_BIT:
+            case PROJECTILE_BIT | WHITE_SLOPE_BIT:
                 if (fixA.getFilterData().categoryBits == PROJECTILE_BIT) {
                     ((Exploder) fixA.getUserData()).destroyProjectiles();
                 } else {
                     ((Enemy) fixB.getUserData()).reverseVelocity(true, false);
                 }
                 break;
-            case PROJECTILE_BIT | NORMAL_SLOPE_BIT:
+            case PROJECTILE_BIT | BLUE_SLOPE_BIT:
                 break;
-            case PROJECTILE_BIT | ALTERNATE_SLOPE_BIT:
+            case PROJECTILE_BIT | RED_SLOPE_BIT:
                 break;
 
             case PLAYER_BIT | END_SLOPE_BIT:
@@ -137,41 +137,41 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
-            case PLAYER_FOOT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+            case PLAYER_FOOT_SENSOR_BIT | WHITE_SLOPE_BIT:
                 playerController.footContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
-            case PLAYER_FOOT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+            case PLAYER_FOOT_SENSOR_BIT | BLUE_SLOPE_BIT:
                 playerController.footContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
-            case PLAYER_FOOT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+            case PLAYER_FOOT_SENSOR_BIT | RED_SLOPE_BIT:
                 playerController.footContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
 
-            case PLAYER_LEFT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+            case PLAYER_LEFT_SENSOR_BIT | WHITE_SLOPE_BIT:
                 playerController.leftContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
-            case PLAYER_LEFT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+            case PLAYER_LEFT_SENSOR_BIT | BLUE_SLOPE_BIT:
                 playerController.leftContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
-            case PLAYER_LEFT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+            case PLAYER_LEFT_SENSOR_BIT | RED_SLOPE_BIT:
                 playerController.leftContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
 
-            case PLAYER_RIGHT_SENSOR_BIT | DEFAULT_SLOPE_BIT:
+            case PLAYER_RIGHT_SENSOR_BIT | WHITE_SLOPE_BIT:
                 playerController.rightContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
-            case PLAYER_RIGHT_SENSOR_BIT | NORMAL_SLOPE_BIT:
+            case PLAYER_RIGHT_SENSOR_BIT | BLUE_SLOPE_BIT:
                 playerController.rightContactCounter--;
                 playerController.canDoubleJump = true;
                 break;
-            case PLAYER_RIGHT_SENSOR_BIT | ALTERNATE_SLOPE_BIT:
+            case PLAYER_RIGHT_SENSOR_BIT | RED_SLOPE_BIT:
                 playerController.rightContactCounter--;
                 playerController.canDoubleJump = true;
                 break;

@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import static com.develorain.game.Illumination.*;
 import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
-public abstract class BodyBuilder {
+public class BodyFactory {
     public static Body createBox(World world, Object userDataObject, float x, float y, float width, float height, String colour, float density, boolean fixedRotation) {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
@@ -23,28 +23,28 @@ public abstract class BodyBuilder {
 
         switch (colour) {
             case "white":
-                fdef.filter.categoryBits = DEFAULT_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
-                fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
+                fdef.filter.categoryBits = WHITE_ENEMY_BIT;
+                fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT | RED_ENEMY_BIT;
+                fdef.filter.maskBits |= WHITE_SLOPE_BIT | BLUE_SLOPE_BIT | RED_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
                 break;
             case "blue":
-                fdef.filter.categoryBits = NORMAL_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT;
-                fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
+                fdef.filter.categoryBits = BLUE_ENEMY_BIT;
+                fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT;
+                fdef.filter.maskBits |= WHITE_SLOPE_BIT | BLUE_SLOPE_BIT | RED_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
                 break;
             case "red":
-                fdef.filter.categoryBits = ALTERNATE_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
-                fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
+                fdef.filter.categoryBits = RED_ENEMY_BIT;
+                fdef.filter.maskBits = WHITE_ENEMY_BIT | RED_ENEMY_BIT;
+                fdef.filter.maskBits |= WHITE_SLOPE_BIT | BLUE_SLOPE_BIT | RED_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
                 break;
             case "none":
                 fdef.filter.categoryBits = PLAYER_BIT;
-                fdef.filter.maskBits = DEFAULT_SLOPE_BIT | UNCLIMBABLE_DEFAULT_SLOPE_BIT | DEFAULT_ENEMY_BIT | END_SLOPE_BIT;
+                fdef.filter.maskBits = WHITE_SLOPE_BIT | UNCLIMBABLE_WHITE_SLOPE_BIT | WHITE_ENEMY_BIT | END_SLOPE_BIT;
 
                 if (!SLOW_MOTION_MODE) {
-                    fdef.filter.maskBits |= NORMAL_SLOPE_BIT | UNCLIMBABLE_NORMAL_SLOPE_BIT | NORMAL_ENEMY_BIT;
+                    fdef.filter.maskBits |= BLUE_SLOPE_BIT | UNCLIMBABLE_BLUE_SLOPE_BIT | BLUE_ENEMY_BIT;
                 } else {
-                    fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT | UNCLIMBABLE_ALTERNATE_SLOPE_BIT | ALTERNATE_ENEMY_BIT;
+                    fdef.filter.maskBits |= RED_SLOPE_BIT | UNCLIMBABLE_RED_SLOPE_BIT | RED_ENEMY_BIT;
                 }
 
                 break;
