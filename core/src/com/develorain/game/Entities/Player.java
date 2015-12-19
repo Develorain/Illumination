@@ -1,4 +1,4 @@
-package com.develorain.game.Sprites;
+package com.develorain.game.Entities;
 
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
@@ -94,7 +94,7 @@ public class Player {
     }
 
     private void createSprite() {
-        playerSprite = new Sprite(new Texture("Graphics/Sprites/PlayerSprites/whiteplayer.png"));
+        playerSprite = new Sprite(new Texture("Graphics/Textures/PlayerSprites/whiteplayer.png"));
         playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
         b2body.setUserData(playerSprite);

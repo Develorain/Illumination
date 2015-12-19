@@ -7,7 +7,7 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
-import com.develorain.game.Sprites.*;
+import com.develorain.game.Entities.*;
 import com.develorain.game.Tools.Slopes.*;
 
 import java.util.ArrayList;

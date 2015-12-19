@@ -1,4 +1,4 @@
-package com.develorain.game.Sprites;
+package com.develorain.game.Entities;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -51,13 +51,13 @@ public abstract class Enemy {
     public void createSprite() {
         switch (colour) {
             case "white":
-                sprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/whitewalker.png"));
+                sprite = new Sprite(new Texture("Graphics/Textures/EnemySprites/whitewalker.png"));
                 break;
             case "blue":
-                sprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/bluewalker.png"));
+                sprite = new Sprite(new Texture("Graphics/Textures/EnemySprites/bluewalker.png"));
                 break;
             case "red":
-                sprite = new Sprite(new Texture("Graphics/Sprites/EnemySprites/redwalker.png"));
+                sprite = new Sprite(new Texture("Graphics/Textures/EnemySprites/redwalker.png"));
                 break;
         }
 

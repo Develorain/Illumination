@@ -13,9 +13,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Scenes.HUD;
-import com.develorain.game.Sprites.Enemy;
-import com.develorain.game.Sprites.Exploder;
-import com.develorain.game.Sprites.Player;
+import com.develorain.game.Entities.Enemy;
+import com.develorain.game.Entities.Exploder;
+import com.develorain.game.Entities.Player;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Screens.PlayScreen.DEBUG_MODE;

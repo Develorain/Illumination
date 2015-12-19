@@ -1,4 +1,4 @@
-package com.develorain.game.Sprites;
+package com.develorain.game.Entities;
 
 import com.badlogic.gdx.math.Vector2;
 import com.develorain.game.Tools.Level;

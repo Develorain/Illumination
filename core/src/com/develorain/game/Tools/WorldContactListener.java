@@ -1,8 +1,8 @@
 package com.develorain.game.Tools;
 
 import com.badlogic.gdx.physics.box2d.*;
-import com.develorain.game.Sprites.Enemy;
-import com.develorain.game.Sprites.Exploder;
+import com.develorain.game.Entities.Enemy;
+import com.develorain.game.Entities.Exploder;
 
 import static com.develorain.game.Illumination.*;
 

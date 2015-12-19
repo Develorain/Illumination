@@ -1,4 +1,4 @@
-package com.develorain.game.Sprites;
+package com.develorain.game.Entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
@@ -14,7 +14,7 @@ import java.util.Random;
 import static com.develorain.game.Illumination.*;
 
 public class Exploder extends Enemy {
-    private final int PROJECTILE_DENSITY = 1;
+    private final int PROJECTILE_DENSITY = 1; // TODO: MAKE A PROJECTILES CLASS
     public boolean isAlive = true;
     private ArrayList<Body> projectiles;
 
@@ -50,6 +50,7 @@ public class Exploder extends Enemy {
 
     public void createProjectiles(float x, float y) {
         projectiles = new ArrayList<>();
+
         for (int i = 0; i < 3; i++) {
             Random random = new Random();
             isAlive = false;

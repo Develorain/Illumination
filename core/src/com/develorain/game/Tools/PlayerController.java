@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.develorain.game.Sprites.Player;
+import com.develorain.game.Entities.Player;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
