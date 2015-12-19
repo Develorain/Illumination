@@ -11,7 +11,11 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.develorain.game.Tools.BodyBuilder;
 import com.develorain.game.Tools.Level;
 import com.develorain.game.Tools.LightBuilder;
 
@@ -64,32 +68,7 @@ public class Player {
     }
 
     private void createBody(float x, float y) {
-        BodyDef bdef = new BodyDef();
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape playerShape = new PolygonShape();
-
-        bdef.position.set(x / PPM, y / PPM);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.fixedRotation = PLAYER_FIXED_ROTATION;
-
-        playerShape.setAsBox(PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM);
-
-        fdef.shape = playerShape;
-        fdef.restitution = PLAYER_RESTITUTION;
-        fdef.density = PLAYER_DENSITY;
-        fdef.friction = PLAYER_FRICTION;
-        fdef.filter.categoryBits = PLAYER_BIT;
-
-        fdef.filter.maskBits = DEFAULT_SLOPE_BIT | UNCLIMBABLE_DEFAULT_SLOPE_BIT | DEFAULT_ENEMY_BIT | END_SLOPE_BIT;
-
-        if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= NORMAL_SLOPE_BIT | UNCLIMBABLE_NORMAL_SLOPE_BIT | NORMAL_ENEMY_BIT;
-        } else {
-            fdef.filter.maskBits |= ALTERNATE_SLOPE_BIT | UNCLIMBABLE_ALTERNATE_SLOPE_BIT | ALTERNATE_ENEMY_BIT;
-        }
-
-        b2body = world.createBody(bdef);
-        b2body.createFixture(fdef);
+        b2body = BodyBuilder.createBox(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, "none", PLAYER_DENSITY, true);
     }
 
     public void draw(Batch batch, float dt) {

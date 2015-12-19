@@ -4,11 +4,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Tools.BodyBuilder;
 import com.develorain.game.Tools.Level;
 
-import static com.develorain.game.Illumination.*;
+import static com.develorain.game.Illumination.PPM;
 
 public abstract class Enemy {
     public final int ENEMY_WIDTH = 16;     // pixels
@@ -65,44 +66,6 @@ public abstract class Enemy {
     }
 
     public void createBody(float x, float y) {
-        BodyBuilder.createBox(world, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, colour, ENEMY_DENSITY);
-
-        //b2body = BodyBuilder.createBox(world, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, colour, ENEMY_DENSITY);
-        //b2body.createFixture(fdef.setUserData(this));
-
-        BodyDef bdef = new BodyDef();
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape enemyShape = new PolygonShape();
-
-        bdef.position.set(x / PPM, y / PPM);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.fixedRotation = ENEMY_FIXED_ROTATION;
-
-        fdef.shape = enemyShape;
-        fdef.restitution = ENEMY_RESTITUTION;
-        fdef.density = ENEMY_DENSITY;
-        fdef.friction = ENEMY_FRICTION;
-
-        switch (colour) {
-            case "white":
-                fdef.filter.categoryBits = DEFAULT_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
-                break;
-            case "blue":
-                fdef.filter.categoryBits = NORMAL_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | NORMAL_ENEMY_BIT;
-                break;
-            case "red":
-                fdef.filter.categoryBits = ALTERNATE_ENEMY_BIT;
-                fdef.filter.maskBits = DEFAULT_ENEMY_BIT | ALTERNATE_ENEMY_BIT;
-                break;
-        }
-
-        fdef.filter.maskBits |= DEFAULT_SLOPE_BIT | NORMAL_SLOPE_BIT | ALTERNATE_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
-
-        enemyShape.setAsBox(ENEMY_WIDTH / PPM, ENEMY_HEIGHT / PPM);
-
-        b2body = world.createBody(bdef);
-        b2body.createFixture(fdef).setUserData(this);
+        b2body = BodyBuilder.createBox(world, this, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, colour, ENEMY_DENSITY, true);
     }
 }
