@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import static com.develorain.game.Illumination.*;
 import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
-public class Player extends Sprite {
+public class Player {
     public static final int PLAYER_RESTITUTION = 0;
     public static final int PLAYER_FRICTION = 0;
     public static final int PLAYER_DENSITY = 10;

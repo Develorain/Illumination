@@ -10,7 +10,7 @@ import com.develorain.game.Tools.Level;
 
 import static com.develorain.game.Illumination.*;
 
-public abstract class Enemy extends Sprite {
+public abstract class Enemy {
     public final int ENEMY_WIDTH = 16;     // pixels
     public final int ENEMY_HEIGHT = 16;    // pixels
     public final int ENEMY_RESTITUTION = 0;
@@ -20,10 +20,8 @@ public abstract class Enemy extends Sprite {
     public Body b2body;
     public Vector2 velocity;
     public String colour;
-
-    private Sprite sprite;
-
     protected World world;
+    protected Sprite sprite;
 
     public Enemy(float x, float y, Level level, String colour, Vector2 velocity) {
         this.colour = colour;
@@ -38,7 +36,6 @@ public abstract class Enemy extends Sprite {
     }
 
     public void draw(Batch batch) {
-        Sprite sprite = (Sprite) b2body.getUserData();
         sprite.setPosition(b2body.getPosition().x - (ENEMY_WIDTH / PPM), b2body.getPosition().y - (ENEMY_HEIGHT / PPM));
         sprite.draw(batch);
     }
@@ -64,8 +61,7 @@ public abstract class Enemy extends Sprite {
         }
 
         sprite.setSize(ENEMY_WIDTH * 2 / PPM, ENEMY_HEIGHT * 2 / PPM);
-        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-        b2body.setUserData(sprite);
+        //sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
     }
 
     public void createBody(float x, float y) {
