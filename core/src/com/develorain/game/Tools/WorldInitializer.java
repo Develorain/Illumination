@@ -8,31 +8,33 @@ import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.develorain.game.Entities.*;
-import com.develorain.game.Tools.Slopes.*;
+import com.develorain.game.Tools.Lines.*;
 
 import java.util.ArrayList;
 
-public class WorldCreator {
+public class WorldInitializer {
     private Player player;
     private ArrayList<Enemy> enemies = new ArrayList<>();
+    private Level level;
 
-    public WorldCreator(RayHandler rayHandler, Level level) {
+    public WorldInitializer(RayHandler rayHandler, Level level) {
+        this.level = level;
         TiledMap map = level.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
-            new DefaultSlope(object, level, true);
+            new WhiteLine(object, level, true);
         }
 
         for (MapObject object : map.getLayers().get(1).getObjects().getByType(PolylineMapObject.class)) {
-            new NormalSlope(object, level, true);
+            new BlueLine(object, level, true);
         }
 
         for (MapObject object : map.getLayers().get(2).getObjects().getByType(PolylineMapObject.class)) {
-            new AlternateSlope(object, level, true);
+            new RedLine(object, level, true);
         }
 
         for (MapObject object : map.getLayers().get(3).getObjects().getByType(PolylineMapObject.class)) {
-            new BoundarySlope(object, level);
+            new BoundaryLine(object, level);
         }
 
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
@@ -64,7 +66,7 @@ public class WorldCreator {
         }
 
         for (MapObject object : map.getLayers().get(9).getObjects().getByType(PolylineMapObject.class)) {
-            new EndSlope(object, level);
+            new EndLine(object, level);
         }
 
         for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
@@ -83,15 +85,15 @@ public class WorldCreator {
         }
 
         for (MapObject object : map.getLayers().get(13).getObjects().getByType(PolylineMapObject.class)) {
-            new DefaultSlope(object, level, false);
+            new WhiteLine(object, level, false);
         }
 
         for (MapObject object : map.getLayers().get(14).getObjects().getByType(PolylineMapObject.class)) {
-            new NormalSlope(object, level, false);
+            new BlueLine(object, level, false);
         }
 
         for (MapObject object : map.getLayers().get(15).getObjects().getByType(PolylineMapObject.class)) {
-            new AlternateSlope(object, level, false);
+            new RedLine(object, level, false);
         }
 
         for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
@@ -116,5 +118,10 @@ public class WorldCreator {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void createProjectile(float x, float y, EntityType type) {
+        Projectile projectile = new Projectile(x, y, level, type);
+        enemies.add(projectile);
     }
 }

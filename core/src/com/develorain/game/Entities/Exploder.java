@@ -2,11 +2,7 @@ package com.develorain.game.Entities;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.develorain.game.Tools.BodyFactory;
 import com.develorain.game.Tools.Level;
-
-import java.util.ArrayList;
 
 import static com.develorain.game.Illumination.PPM;
 
@@ -15,8 +11,6 @@ public class Exploder extends Enemy {
     private static final int EXPLODER_HEIGHT = 16;
     private static final int EXPLODER_DENSITY = 10;
 
-    public boolean isAlive = true;
-    private ArrayList<Body> projectiles;
     private Level level;
 
     public Exploder(float x, float y, Level level, EntityType type) {
@@ -26,19 +20,13 @@ public class Exploder extends Enemy {
 
     @Override
     public void update() {
-        if (isAlive) {
-            body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
-        } else {
-            explode();
-        }
+        body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
     }
 
     @Override
     public void draw(Batch batch) {
-        if (isAlive) {
-            sprite.setPosition(body.getPosition().x - (EXPLODER_WIDTH / PPM), body.getPosition().y - (EXPLODER_HEIGHT / PPM));
-            sprite.draw(batch);
-        }
+        sprite.setPosition(body.getPosition().x - (EXPLODER_WIDTH / PPM), body.getPosition().y - (EXPLODER_HEIGHT / PPM));
+        sprite.draw(batch);
     }
 
     public void explode() {
@@ -47,22 +35,9 @@ public class Exploder extends Enemy {
 
         world.destroyBody(body);
 
-        projectiles = new ArrayList<>();
-        isAlive = false;
-
         for (int i = 0; i < 3; i++) {
-            Body body = BodyFactory.createBoxBody(world, this, x, y, EXPLODER_WIDTH / PPM, EXPLODER_HEIGHT / PPM, type, EXPLODER_DENSITY);
-
-            //Random random = new Random();
-            //body.applyLinearImpulse(new Vector2(random.nextFloat() * 5, random.nextFloat() * 10), body.getWorldCenter(), true);
-
-            projectiles.add(body);
-        }
-    }
-
-    public void destroyProjectiles() {
-        for (int i = 0; i < projectiles.size(); i++) {
-            world.destroyBody(projectiles.get(i));
+            level.getWorldInitializer().createProjectile(x, y, type);
+            System.out.println("Hello");
         }
     }
 }

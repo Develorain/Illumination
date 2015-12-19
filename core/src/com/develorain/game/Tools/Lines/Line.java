@@ -1,4 +1,4 @@
-package com.develorain.game.Tools.Slopes;
+package com.develorain.game.Tools.Lines;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.PolylineMapObject;
@@ -9,7 +9,7 @@ import com.develorain.game.Tools.Level;
 
 import static com.develorain.game.Illumination.PPM;
 
-public class SlopeTiledObject {
+public class Line {
     public World world;
     public TiledMap map;
     public Body body;
@@ -17,7 +17,7 @@ public class SlopeTiledObject {
     public MapObject object;
     public Fixture fixture;
 
-    public SlopeTiledObject(MapObject object, Level level) {
+    public Line(MapObject object, Level level) {
         this.object = object;
         this.world = level.getWorld();
         this.map = level.getTiledMap();

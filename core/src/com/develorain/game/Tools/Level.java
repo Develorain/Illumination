@@ -12,17 +12,17 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.develorain.game.Scenes.HUD;
 import com.develorain.game.Entities.Enemy;
 import com.develorain.game.Entities.Exploder;
 import com.develorain.game.Entities.Player;
+import com.develorain.game.Scenes.HUD;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Screens.PlayScreen.DEBUG_MODE;
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class Level {
-    private WorldCreator worldCreator;
+    private WorldInitializer worldInitializer;
     private SpriteBatch batch;
     private World world;
     private Box2DDebugRenderer b2dr;
@@ -61,9 +61,9 @@ public class Level {
 
         hud = new HUD(batch);
 
-        worldCreator = new WorldCreator(rayHandler, this);
+        worldInitializer = new WorldInitializer(rayHandler, this);
 
-        player = worldCreator.getPlayer();
+        player = worldInitializer.getPlayer();
 
         playerController = new PlayerController(player);
 
@@ -75,15 +75,16 @@ public class Level {
     public void update(float dt) {
         hud.update();
 
-        for (int i = 0; i < worldCreator.getEnemies().size(); i++) {
-            Enemy enemy = worldCreator.getEnemies().get(i);
+        for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
+            Enemy enemy = worldInitializer.getEnemies().get(i);
             enemy.update();
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            for (int i = 0; i < worldCreator.getEnemies().size(); i++) {
-                if (worldCreator.getEnemies().get(i) instanceof Exploder) {
-                    ((Exploder) worldCreator.getEnemies().get(i)).isAlive = false;
+            for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
+                if (worldInitializer.getEnemies().get(i) instanceof Exploder) {
+                    ((Exploder) worldInitializer.getEnemies().get(i)).explode();
+                    System.out.println("Hi");
                 }
             }
         }
@@ -118,8 +119,8 @@ public class Level {
 
         player.draw(batch, dt);
 
-        for (int i = 0; i < worldCreator.getEnemies().size(); i++) {
-            worldCreator.getEnemies().get(i).draw(batch);
+        for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
+            worldInitializer.getEnemies().get(i).draw(batch);
         }
 
         batch.end();
@@ -136,5 +137,9 @@ public class Level {
 
     public TiledMap getTiledMap() {
         return tiledMap;
+    }
+
+    public WorldInitializer getWorldInitializer() {
+        return worldInitializer;
     }
 }
