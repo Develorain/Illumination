@@ -39,8 +39,8 @@ public class Exploder extends Enemy {
     }
 
     public void explode() {
-        float x = body.getPosition().x;
-        float y = body.getPosition().y;
+        float x = body.getPosition().x * PPM;
+        float y = body.getPosition().y * PPM;
 
         world.destroyBody(body);
 

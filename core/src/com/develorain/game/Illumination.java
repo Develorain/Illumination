@@ -11,7 +11,7 @@ public class Illumination extends Game {
     public static final String TITLE = "Illumination";
     public static final int V_WIDTH = 1080;
     public static final int V_HEIGHT = 720;
-    public static final float PPM = 100;
+    public static final float PPM = 100;  // MULTIPLYING BY PPM CONVERTS METERS TO PIXELS. DIVIDING CONVERTS PIXELS TO METERS.
 
     public static final short WHITE_LINE_BIT = 1;
     public static final short BLUE_LINE_BIT = 2;
