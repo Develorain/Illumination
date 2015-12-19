@@ -24,7 +24,7 @@ public class PlayerController {
 
     public PlayerController(Player player) {
         this.player = player;
-        this.body = player.b2body;
+        this.body = player.body;
     }
 
     public void handleInput(float dt) {
@@ -110,7 +110,7 @@ public class PlayerController {
 
             player = player.destroyAndRemake();
 
-            body = player.b2body;
+            body = player.body;
             body.setLinearVelocity(xVelocity, yVelocity);
         }
 

@@ -19,12 +19,12 @@ public class LightBuilder {
         pl.setXray(false);
 
         Filter filter = new Filter();
-        filter.maskBits = WHITE_SLOPE_BIT | UNCLIMBABLE_WHITE_SLOPE_BIT;
+        filter.maskBits = WHITE_LINE_BIT | UNCLIMBABLE_WHITE_LINE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            filter.maskBits |= BLUE_SLOPE_BIT | UNCLIMBABLE_BLUE_SLOPE_BIT;
+            filter.maskBits |= BLUE_LINE_BIT | UNCLIMBABLE_BLUE_LINE_BIT;
         } else {
-            filter.maskBits |= RED_SLOPE_BIT | UNCLIMBABLE_RED_SLOPE_BIT;
+            filter.maskBits |= RED_LINE_BIT | UNCLIMBABLE_RED_LINE_BIT;
         }
 
         pl.setContactFilter(filter);

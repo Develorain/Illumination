@@ -13,9 +13,9 @@ public class Illumination extends Game {
     public static final int V_HEIGHT = 720;
     public static final float PPM = 100;
 
-    public static final short WHITE_SLOPE_BIT = 1;
-    public static final short BLUE_SLOPE_BIT = 2;
-    public static final short RED_SLOPE_BIT = 4;
+    public static final short WHITE_LINE_BIT = 1;
+    public static final short BLUE_LINE_BIT = 2;
+    public static final short RED_LINE_BIT = 4;
     public static final short PLAYER_BIT = 8;
     public static final short PLAYER_FOOT_SENSOR_BIT = 16; // remove
     public static final short PLAYER_LEFT_SENSOR_BIT = 32;  // remove
@@ -23,11 +23,11 @@ public class Illumination extends Game {
     public static final short WHITE_ENEMY_BIT = 128;
     public static final short BLUE_ENEMY_BIT = 256;
     public static final short RED_ENEMY_BIT = 512;
-    public static final short BOUNDARY_SLOPE_BIT = 1024;
-    public static final short END_SLOPE_BIT = 2048;
-    public static final short UNCLIMBABLE_WHITE_SLOPE_BIT = 4096;
-    public static final short UNCLIMBABLE_BLUE_SLOPE_BIT = 8192;
-    public static final short UNCLIMBABLE_RED_SLOPE_BIT = 16384;
+    public static final short BOUNDARY_LINE_BIT = 1024;
+    public static final short END_LINE_BIT = 2048;
+    public static final short UNCLIMBABLE_WHITE_LINE_BIT = 4096;
+    public static final short UNCLIMBABLE_BLUE_LINE_BIT = 8192;
+    public static final short UNCLIMBABLE_RED_LINE_BIT = 16384;
     public static final short PROJECTILE_BIT = -32768;
 
     public static AssetManager manager;  // consider not using static keyword

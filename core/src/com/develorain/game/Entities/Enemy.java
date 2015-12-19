@@ -18,26 +18,26 @@ public abstract class Enemy {
     public final int ENEMY_FRICTION = 0;
     public final int ENEMY_DENSITY = 10;
     public final boolean ENEMY_FIXED_ROTATION = true;
-    public Body b2body;
+    public Body body;
     public Vector2 velocity;
-    public String colour;
     protected World world;
     protected Sprite sprite;
+    protected EntityType type;
 
-    public Enemy(float x, float y, Level level, String colour, Vector2 velocity) {
-        this.colour = colour;
+    public Enemy(float x, float y, Level level, EntityType type, Vector2 velocity) {
+        this.type = type;
         this.velocity = velocity;
         world = level.getWorld();
-        createBody(x, y);
+        body = BodyFactory.createBoxBody(world, this, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, type, ENEMY_DENSITY, true);
         createSprite();
     }
 
     public void update() {
-        b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
+        body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
     }
 
     public void draw(Batch batch) {
-        sprite.setPosition(b2body.getPosition().x - (ENEMY_WIDTH / PPM), b2body.getPosition().y - (ENEMY_HEIGHT / PPM));
+        sprite.setPosition(body.getPosition().x - (ENEMY_WIDTH / PPM), body.getPosition().y - (ENEMY_HEIGHT / PPM));
         sprite.draw(batch);
     }
 
@@ -49,23 +49,19 @@ public abstract class Enemy {
     }
 
     public void createSprite() {
-        switch (colour) {
-            case "white":
+        switch (type) {
+            case WHITE_ENEMY:
                 sprite = new Sprite(new Texture("Graphics/Textures/EnemySprites/whitewalker.png"));
                 break;
-            case "blue":
+            case BLUE_ENEMY:
                 sprite = new Sprite(new Texture("Graphics/Textures/EnemySprites/bluewalker.png"));
                 break;
-            case "red":
+            case RED_ENEMY:
                 sprite = new Sprite(new Texture("Graphics/Textures/EnemySprites/redwalker.png"));
                 break;
         }
 
         sprite.setSize(ENEMY_WIDTH * 2 / PPM, ENEMY_HEIGHT * 2 / PPM);
         //sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-    }
-
-    public void createBody(float x, float y) {
-        b2body = BodyFactory.createBox(world, this, x, y, ENEMY_WIDTH, ENEMY_HEIGHT, colour, ENEMY_DENSITY, true);
     }
 }

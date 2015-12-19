@@ -16,44 +16,45 @@ import static com.develorain.game.Illumination.*;
 public class Exploder extends Enemy {
     private final int PROJECTILE_DENSITY = 1; // TODO: MAKE A PROJECTILES CLASS
     public boolean isAlive = true;
+    public boolean projectilesFired = false;
     private ArrayList<Body> projectiles;
 
-    public Exploder(float x, float y, Level level, String colour) {
-        super(x, y, level, colour, new Vector2(3, 0));
+    public Exploder(float x, float y, Level level, EntityType type) {
+        super(x, y, level, type, new Vector2(3, 0));
     }
 
     @Override
     public void update() {
-        if (isAlive) {
-            b2body.setLinearVelocity(velocity.x, b2body.getLinearVelocity().y);
-        } else {
+        if (isAlive && !projectilesFired) {
+            body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
+        } else if (!isAlive && !projectilesFired) {
             explode();
         }
     }
 
     @Override
     public void draw(Batch batch) {
-        if (isAlive) {
-            sprite.setPosition(b2body.getPosition().x - (ENEMY_WIDTH / PPM), b2body.getPosition().y - (ENEMY_HEIGHT / PPM));
+        if (isAlive && !projectilesFired) {
+            sprite.setPosition(body.getPosition().x - (ENEMY_WIDTH / PPM), body.getPosition().y - (ENEMY_HEIGHT / PPM));
             sprite.draw(batch);
         }
     }
 
     public void explode() {
-        float x = b2body.getPosition().x;
-        float y = b2body.getPosition().y;
+        float x = body.getPosition().x;
+        float y = body.getPosition().y;
 
-        world.destroyBody(b2body);
+        world.destroyBody(body);
 
         createProjectiles(x, y);
     }
 
     public void createProjectiles(float x, float y) {
         projectiles = new ArrayList<>();
+        isAlive = false;
 
         for (int i = 0; i < 3; i++) {
             Random random = new Random();
-            isAlive = false;
 
             BodyDef bdef = new BodyDef();
             FixtureDef fdef = new FixtureDef();
@@ -68,29 +69,31 @@ public class Exploder extends Enemy {
             fdef.density = PROJECTILE_DENSITY;
             fdef.friction = ENEMY_FRICTION;
 
-            switch (colour) {
-                case "white":
+            switch (type) {
+                case WHITE_ENEMY:
                     fdef.filter.categoryBits = PROJECTILE_BIT;
                     fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT | RED_ENEMY_BIT;
                     break;
-                case "blue":
+                case BLUE_ENEMY:
                     fdef.filter.categoryBits = PROJECTILE_BIT;
                     fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT;
                     break;
-                case "red":
+                case RED_ENEMY:
                     fdef.filter.categoryBits = PROJECTILE_BIT;
                     fdef.filter.maskBits = WHITE_ENEMY_BIT | RED_ENEMY_BIT;
                     break;
             }
 
-            fdef.filter.maskBits |= WHITE_SLOPE_BIT | BLUE_SLOPE_BIT | RED_SLOPE_BIT | BOUNDARY_SLOPE_BIT | PLAYER_BIT;
+            fdef.filter.maskBits |= WHITE_LINE_BIT | BLUE_LINE_BIT | RED_LINE_BIT | BOUNDARY_LINE_BIT | PLAYER_BIT;
             enemyShape.setAsBox(6 / PPM, 6 / PPM);
 
-            b2body = world.createBody(bdef);
-            b2body.applyLinearImpulse(new Vector2(random.nextFloat() * 5, random.nextFloat() * 10), b2body.getWorldCenter(), true);
-            b2body.createFixture(fdef).setUserData(this);
-            projectiles.add(b2body);
+            body = world.createBody(bdef);
+            body.applyLinearImpulse(new Vector2(random.nextFloat() * 5, random.nextFloat() * 10), body.getWorldCenter(), true);
+            body.createFixture(fdef).setUserData(this);
+            projectiles.add(body);
         }
+
+        projectilesFired = true;
     }
 
     public void destroyProjectiles() {

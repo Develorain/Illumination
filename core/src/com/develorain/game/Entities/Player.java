@@ -42,7 +42,7 @@ public class Player {
 
     public World world;
     public RayHandler rayHandler;
-    public Body b2body;
+    public Body body;
     public Sprite playerSprite;
     public ArrayList<PointLight> pointLights = new ArrayList<>();
     public ArrayList<Sprite> sprites = new ArrayList<>();
@@ -59,7 +59,7 @@ public class Player {
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
-        createBody(x, y);
+        body = BodyFactory.createBoxBody(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, EntityType.PLAYER, PLAYER_DENSITY, true);
         createSprite();
         createFootSensor();
         createLeftSensor();
@@ -67,16 +67,12 @@ public class Player {
         createLights(rayHandler);
     }
 
-    private void createBody(float x, float y) {
-        b2body = BodyFactory.createBox(world, this, x, y, PLAYER_WIDTH, PLAYER_HEIGHT, "none", PLAYER_DENSITY, true);
-    }
-
     public void draw(Batch batch, float dt) {
         timer += dt;
 
         Sprite sprite = new Sprite(playerSprite);
-        sprite.setPosition(b2body.getPosition().x - (PLAYER_WIDTH / PPM), b2body.getPosition().y - (PLAYER_HEIGHT / PPM));
-        sprite.setRotation(b2body.getAngle() * MathUtils.radiansToDegrees);
+        sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / PPM), body.getPosition().y - (PLAYER_HEIGHT / PPM));
+        sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
         sprites.add(sprite);
 
         if (timer >= 0.01f) {
@@ -97,7 +93,7 @@ public class Player {
         playerSprite = new Sprite(new Texture("Graphics/Textures/PlayerSprites/whiteplayer.png"));
         playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
-        b2body.setUserData(playerSprite);
+        body.setUserData(playerSprite);
     }
 
     private void createFootSensor() {
@@ -109,12 +105,12 @@ public class Player {
         fdef.friction = 0;
         fdef.filter.categoryBits = PLAYER_FOOT_SENSOR_BIT;
 
-        fdef.filter.maskBits = WHITE_SLOPE_BIT;
+        fdef.filter.maskBits = WHITE_LINE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_SLOPE_BIT;
+            fdef.filter.maskBits |= BLUE_LINE_BIT;
         } else {
-            fdef.filter.maskBits |= RED_SLOPE_BIT;
+            fdef.filter.maskBits |= RED_LINE_BIT;
         }
 
         sensorShape.setAsBox(FOOT_SENSOR_WIDTH / PPM, FOOT_SENSOR_HEIGHT / PPM);
@@ -129,7 +125,7 @@ public class Player {
         sensorShape.set(footCoords);
         fdef.shape = sensorShape;
 
-        b2body.createFixture(fdef).setUserData("foot sensor");
+        body.createFixture(fdef).setUserData("foot sensor");
     }
 
     private void createLeftSensor() {
@@ -140,12 +136,12 @@ public class Player {
         fdef.density = 0f;
         fdef.friction = 0;
         fdef.filter.categoryBits = PLAYER_LEFT_SENSOR_BIT;
-        fdef.filter.maskBits = WHITE_SLOPE_BIT;
+        fdef.filter.maskBits = WHITE_LINE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_SLOPE_BIT;
+            fdef.filter.maskBits |= BLUE_LINE_BIT;
         } else {
-            fdef.filter.maskBits |= RED_SLOPE_BIT;
+            fdef.filter.maskBits |= RED_LINE_BIT;
         }
 
         sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
@@ -160,7 +156,7 @@ public class Player {
         sensorShape.set(leftCoords);
         fdef.shape = sensorShape;
 
-        b2body.createFixture(fdef).setUserData("left sensor");
+        body.createFixture(fdef).setUserData("left sensor");
     }
 
     private void createRightSensor() {
@@ -171,12 +167,12 @@ public class Player {
         fdef.density = 0f;
         fdef.friction = 0;
         fdef.filter.categoryBits = PLAYER_RIGHT_SENSOR_BIT;
-        fdef.filter.maskBits = WHITE_SLOPE_BIT;
+        fdef.filter.maskBits = WHITE_LINE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_SLOPE_BIT;
+            fdef.filter.maskBits |= BLUE_LINE_BIT;
         } else {
-            fdef.filter.maskBits |= RED_SLOPE_BIT;
+            fdef.filter.maskBits |= RED_LINE_BIT;
         }
 
         sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
@@ -191,34 +187,34 @@ public class Player {
         sensorShape.set(rightCoords);
         fdef.shape = sensorShape;
 
-        b2body.createFixture(fdef).setUserData("right sensor");
+        body.createFixture(fdef).setUserData("right sensor");
     }
 
     private void createLights(RayHandler rayHandler) {
-        pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.WHITE, 1));
+        pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.WHITE, 1));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.RED, 1));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.RED, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.RED, 1));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.RED, 2));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 2));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 3));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.CHARTREUSE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 3));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 3));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.WHITE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 3));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.WHITE, 3));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 1));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 2));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.BLUE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.CHARTREUSE, 1));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 2));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 2));
 
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, b2body, Color.CHARTREUSE, 0.5f));
+        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.CHARTREUSE, 0.5f));
     }
 
     public Player destroyAndRemake() {
-        float x = b2body.getPosition().x * PPM;  // position is in world units, so it is converted to pixels
-        float y = b2body.getPosition().y * PPM;
+        float x = body.getPosition().x * PPM;  // position is in world units, so it is converted to pixels
+        float y = body.getPosition().y * PPM;
 
-        world.destroyBody(b2body);
+        world.destroyBody(body);
 
         for (int i = 0; i < pointLights.size(); i++) {
             pointLights.get(i).remove();
@@ -228,7 +224,7 @@ public class Player {
     }
 
     public void destroy() {
-        world.destroyBody(b2body);
+        world.destroyBody(body);
 
         for (int i = 0; i < pointLights.size(); i++) {
             pointLights.get(i).remove();

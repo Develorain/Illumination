@@ -12,11 +12,11 @@ import com.develorain.game.Tools.Slopes.*;
 
 import java.util.ArrayList;
 
-public class B2WorldCreator {
+public class WorldCreator {
     private Player player;
     private ArrayList<Enemy> enemies = new ArrayList<>();
 
-    public B2WorldCreator(RayHandler rayHandler, Level level) {
+    public WorldCreator(RayHandler rayHandler, Level level) {
         TiledMap map = level.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
@@ -37,17 +37,17 @@ public class B2WorldCreator {
 
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Walker(rect.getX(), rect.getY(), level, "white"));
+            enemies.add(new Walker(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Walker(rect.getX(), rect.getY(), level, "blue"));
+            enemies.add(new Walker(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Walker(rect.getX(), rect.getY(), level, "red"));
+            enemies.add(new Walker(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
@@ -69,17 +69,17 @@ public class B2WorldCreator {
 
         for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, "white"));
+            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, "blue"));
+            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, "red"));
+            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(13).getObjects().getByType(PolylineMapObject.class)) {
@@ -96,17 +96,17 @@ public class B2WorldCreator {
 
         for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Exploder(rect.getX(), rect.getY(), level, "white"));
+            enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Exploder(rect.getX(), rect.getY(), level, "blue"));
+            enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(18).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Exploder(rect.getX(), rect.getY(), level, "red"));
+            enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
     }
 

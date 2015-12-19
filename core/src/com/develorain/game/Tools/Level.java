@@ -22,7 +22,7 @@ import static com.develorain.game.Screens.PlayScreen.DEBUG_MODE;
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class Level {
-    private B2WorldCreator b2worldCreator;
+    private WorldCreator worldCreator;
     private SpriteBatch batch;
     private World world;
     private Box2DDebugRenderer b2dr;
@@ -61,9 +61,9 @@ public class Level {
 
         hud = new HUD(batch);
 
-        b2worldCreator = new B2WorldCreator(rayHandler, this);
+        worldCreator = new WorldCreator(rayHandler, this);
 
-        player = b2worldCreator.getPlayer();
+        player = worldCreator.getPlayer();
 
         playerController = new PlayerController(player);
 
@@ -75,15 +75,15 @@ public class Level {
     public void update(float dt) {
         hud.update();
 
-        for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
-            Enemy enemy = b2worldCreator.getEnemies().get(i);
+        for (int i = 0; i < worldCreator.getEnemies().size(); i++) {
+            Enemy enemy = worldCreator.getEnemies().get(i);
             enemy.update();
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
-                if (b2worldCreator.getEnemies().get(i) instanceof Exploder) {
-                    ((Exploder) b2worldCreator.getEnemies().get(i)).isAlive = false;
+            for (int i = 0; i < worldCreator.getEnemies().size(); i++) {
+                if (worldCreator.getEnemies().get(i) instanceof Exploder) {
+                    ((Exploder) worldCreator.getEnemies().get(i)).isAlive = false;
                 }
             }
         }
@@ -92,7 +92,7 @@ public class Level {
 
         world.step(1 / (60f * TIME_SLOWDOWN_MODIFIER), 6, 2);
 
-        CameraUtilities.lerpToTarget(cam, player.b2body.getPosition());
+        CameraUtilities.lerpToTarget(cam, player.body.getPosition());
 
         float startX = cam.viewportWidth / 2;
         float startY = cam.viewportHeight / 2;
@@ -118,8 +118,8 @@ public class Level {
 
         player.draw(batch, dt);
 
-        for (int i = 0; i < b2worldCreator.getEnemies().size(); i++) {
-            b2worldCreator.getEnemies().get(i).draw(batch);
+        for (int i = 0; i < worldCreator.getEnemies().size(); i++) {
+            worldCreator.getEnemies().get(i).draw(batch);
         }
 
         batch.end();
