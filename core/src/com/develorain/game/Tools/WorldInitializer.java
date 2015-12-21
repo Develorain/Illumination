@@ -14,11 +14,17 @@ import java.util.ArrayList;
 
 public class WorldInitializer {
     private Player player;
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Enemy>[] enemies = (ArrayList<Enemy>[]) new ArrayList[4];
+    //private ArrayList<Enemy> enemies = new ArrayList<>();
     private Level level;
 
     public WorldInitializer(RayHandler rayHandler, Level level) {
         this.level = level;
+
+        for (int i = 0; i < enemies.length; i++) {
+            enemies[i] = new ArrayList<>();
+        }
+
         TiledMap map = level.getTiledMap();
 
         for (MapObject object : map.getLayers().get(0).getObjects().getByType(PolylineMapObject.class)) {
@@ -39,17 +45,17 @@ public class WorldInitializer {
 
         for (MapObject object : map.getLayers().get(4).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Walker(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
+            getWalkers().add(new Walker(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Walker(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
+            getWalkers().add(new Walker(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(6).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Walker(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
+            getWalkers().add(new Walker(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
@@ -71,17 +77,17 @@ public class WorldInitializer {
 
         for (MapObject object : map.getLayers().get(10).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
+            getSprinters().add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(11).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
+            getSprinters().add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(12).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
+            getSprinters().add(new Sprinter(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(13).getObjects().getByType(PolylineMapObject.class)) {
@@ -98,24 +104,38 @@ public class WorldInitializer {
 
         for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
+            getExploders().add(new Exploder(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
-        /*
         for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
+            getExploders().add(new Exploder(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
         for (MapObject object : map.getLayers().get(18).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            enemies.add(new Exploder(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
+            getExploders().add(new Exploder(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
         }
-        */
     }
 
-    public ArrayList<Enemy> getEnemies() {
+    public ArrayList<Enemy>[] getEnemies() {
         return enemies;
+    }
+
+    public ArrayList<Walker> getWalkers() {
+        return (ArrayList) enemies[0];
+    }
+
+    public ArrayList<Sprinter> getSprinters() {
+        return (ArrayList) enemies[1];
+    }
+
+    public ArrayList<Exploder> getExploders() {
+        return (ArrayList) enemies[2];
+    }
+
+    public ArrayList<Projectile> getProjectiles() {
+        return (ArrayList) enemies[3];
     }
 
     public Player getPlayer() {
@@ -124,6 +144,6 @@ public class WorldInitializer {
 
     public void createProjectile(float x, float y, EntityType type) {
         Projectile projectile = new Projectile(x, y, level, type);
-        enemies.add(projectile);
+        getProjectiles().add(projectile);
     }
 }

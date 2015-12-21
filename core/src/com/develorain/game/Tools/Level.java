@@ -13,9 +13,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Entities.Enemy;
-import com.develorain.game.Entities.Exploder;
 import com.develorain.game.Entities.Player;
 import com.develorain.game.Scenes.HUD;
+
+import java.util.ArrayList;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Screens.PlayScreen.DEBUG_MODE;
@@ -75,17 +76,16 @@ public class Level {
     public void update(float dt) {
         hud.update();
 
-        for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
-            Enemy enemy = worldInitializer.getEnemies().get(i);
-            enemy.update();
+        for (ArrayList<Enemy> arrayList : worldInitializer.getEnemies()) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                Enemy enemy = arrayList.get(i);
+                enemy.update();
+            }
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
-                if (worldInitializer.getEnemies().get(i) instanceof Exploder) {
-                    ((Exploder) worldInitializer.getEnemies().get(i)).explode();
-                    worldInitializer.getEnemies().remove(i);
-                }
+            for (int i = 0; i < worldInitializer.getExploders().size(); i++) {
+                worldInitializer.getExploders().get(i).explode();
             }
         }
 
@@ -115,15 +115,17 @@ public class Level {
 
         mapRenderer.render();
 
-        batch.begin();
+        batch.begin();  // BEGIN BATCH
 
         player.draw(batch, dt);
 
-        for (int i = 0; i < worldInitializer.getEnemies().size(); i++) {
-            worldInitializer.getEnemies().get(i).draw(batch);
+        for (ArrayList<Enemy> arrayList : worldInitializer.getEnemies()) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                arrayList.get(i).draw(batch);
+            }
         }
 
-        batch.end();
+        batch.end();  // END BATCH
 
         rayHandler.render();
 
