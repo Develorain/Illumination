@@ -12,26 +12,34 @@ public class Exploder extends Enemy {
     private static final int EXPLODER_DENSITY = 10;
 
     private Level level;
+    private boolean alive;
 
     public Exploder(float x, float y, Level level, EntityType type) {
         super(x, y, EXPLODER_WIDTH, EXPLODER_HEIGHT, EXPLODER_DENSITY, level, type, new Vector2(3, 0));
         this.level = level;
+        alive = true;
     }
 
     @Override
     public void update() {
-        body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
+        if (alive) {
+            body.setLinearVelocity(velocity.x, body.getLinearVelocity().y);
+        }
     }
 
     @Override
     public void draw(Batch batch) {
-        sprite.setPosition(body.getPosition().x - (EXPLODER_WIDTH / PPM), body.getPosition().y - (EXPLODER_HEIGHT / PPM));
-        sprite.draw(batch);
+        if (alive) {
+            sprite.setPosition(body.getPosition().x - (EXPLODER_WIDTH / PPM), body.getPosition().y - (EXPLODER_HEIGHT / PPM));
+            sprite.draw(batch);
+        }
     }
 
     public void explode() {
         float x = body.getPosition().x * PPM;
         float y = body.getPosition().y * PPM;
+
+        alive = false;
 
         sprite.getTexture().dispose();
         world.destroyBody(body);
