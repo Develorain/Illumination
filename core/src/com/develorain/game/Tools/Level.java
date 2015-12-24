@@ -84,8 +84,9 @@ public class Level {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-            for (int i = 0; i < worldInitializer.getExploders().size(); i++) {
+            for (int i = worldInitializer.getExploders().size() - 1; i >= 0; i--) {
                 worldInitializer.getExploders().get(i).explode();
+                worldInitializer.getExploders().remove(i);
             }
         }
 
