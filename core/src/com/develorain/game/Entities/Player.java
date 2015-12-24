@@ -208,7 +208,7 @@ public class Player {
     }
 
     public Player destroyAndRemake() {
-        float x = body.getPosition().x * PPM;  // position is in world units, so it is converted to pixels
+        float x = body.getPosition().x * PPM;  // position is in meters, so covert it to pixels
         float y = body.getPosition().y * PPM;
 
         world.destroyBody(body);

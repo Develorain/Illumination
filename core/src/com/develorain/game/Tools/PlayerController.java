@@ -47,12 +47,12 @@ public class PlayerController {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
-                body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
             } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
                 jumpTimer = 0;
                 body.setLinearVelocity(body.getLinearVelocity().x, 1);
 
-                body.applyLinearImpulse(new Vector2(0, 10f), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
                 canDoubleJump = false;
             }
         }
@@ -62,7 +62,7 @@ public class PlayerController {
                 body.setLinearVelocity(body.getLinearVelocity().x, 0);
             }
 
-            body.applyLinearImpulse(new Vector2(0, 0.6f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(0, 1f), body.getWorldCenter(), true);
             jumpTimer += dt;
         } else if (!Gdx.input.isKeyPressed(Input.Keys.Z) && canJump()) {
             // when you land on the ground, consider making this in the contact listener
@@ -79,7 +79,7 @@ public class PlayerController {
                 body.setLinearVelocity(0, 0);
             }
 
-            body.applyLinearImpulse(new Vector2(-10f, 10f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-10f, 6f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
         }
@@ -91,7 +91,7 @@ public class PlayerController {
                 body.setLinearVelocity(0, 0);
             }
 
-            body.applyLinearImpulse(new Vector2(10f, 10f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(10f, 6f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
         }
@@ -100,10 +100,12 @@ public class PlayerController {
             TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 3 : 1;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
-            //if (SLOW_MOTION_MODE)
-            //  Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
-            //else
-            //  Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
+            /*
+            if (SLOW_MOTION_MODE)
+                Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
+            else
+                Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
+            */
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
