@@ -47,12 +47,12 @@ public class PlayerController {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
-                body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(0, 7f), body.getWorldCenter(), true);
             } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
                 jumpTimer = 0;
                 body.setLinearVelocity(body.getLinearVelocity().x, 1);
 
-                body.applyLinearImpulse(new Vector2(0, 6f), body.getWorldCenter(), true);
+                body.applyLinearImpulse(new Vector2(0, 7f), body.getWorldCenter(), true);
                 canDoubleJump = false;
             }
         }
@@ -79,7 +79,7 @@ public class PlayerController {
                 body.setLinearVelocity(0, 0);
             }
 
-            body.applyLinearImpulse(new Vector2(-10f, 6f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(-10f, 7f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
         }
@@ -91,7 +91,7 @@ public class PlayerController {
                 body.setLinearVelocity(0, 0);
             }
 
-            body.applyLinearImpulse(new Vector2(10f, 6f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(10f, 7f), body.getWorldCenter(), true);
             inputGiven = true;
             canDoubleJump = true;
         }

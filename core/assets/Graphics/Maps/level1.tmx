@@ -197,13 +197,13 @@
  <objectgroup name="unclimbable blue slope"/>
  <objectgroup name="unclimbable red slope"/>
  <objectgroup name="white exploders">
-  <object id="404" x="32" y="15952" width="16" height="16"/>
+  <object id="404" x="4512" y="15760" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="blue exploders">
-  <object id="405" x="80" y="15952" width="16" height="16"/>
+  <object id="405" x="4768" y="15840" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="red exploders">
-  <object id="406" x="128" y="15952" width="16" height="16"/>
+  <object id="406" x="4928" y="15840" width="16" height="16"/>
  </objectgroup>
  <layer name="white tiles" width="1000" height="1000">
   <data encoding="base64" compression="zlib">

@@ -14,6 +14,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Entities.Enemy;
 import com.develorain.game.Entities.Player;
+import com.develorain.game.Scenes.Background;
 import com.develorain.game.Scenes.HUD;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class Level {
     private int levelHeight; // in tiles (ex: 150 tiles height)
     private int TILE_WIDTH = 16;
     private int TILE_HEIGHT = 16;
+
+    private Background background;
 
     public Level(LevelCreator levelCreator, SpriteBatch batch, OrthographicCamera cam, int currentLevel) {
         this.batch = batch;
@@ -71,10 +74,13 @@ public class Level {
         contactListener = new WorldContactListener(playerController, levelCreator);
 
         world.setContactListener(contactListener);
+
+        background = new Background();
     }
 
     public void update(float dt) {
         hud.update();
+        background.update(cam);
 
         for (ArrayList<Enemy> arrayList : worldInitializer.getEnemies()) {
             for (int i = 0; i < arrayList.size(); i++) {
@@ -109,6 +115,8 @@ public class Level {
     public void render(float dt) {
         batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
+
+        background.render();
 
         if (DEBUG_MODE) {
             b2dr.render(world, cam.combined);
