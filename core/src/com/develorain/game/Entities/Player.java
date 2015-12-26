@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Tools.BodyFactory;
 import com.develorain.game.Tools.Level;
 import com.develorain.game.Tools.LightBuilder;
+import com.develorain.game.Tools.SensorFactory;
 
 import java.util.ArrayList;
 
@@ -28,14 +29,10 @@ public class Player {
     public static final int PLAYER_DENSITY = 10;
     public final int PLAYER_WIDTH = 16;     // pixels
     public final int PLAYER_HEIGHT = 16;    // pixels
-    public final float FOOT_SENSOR_WIDTH = 16f;
-    public final float FOOT_SENSOR_HEIGHT = 6f;
-    public final float SIDE_SENSOR_WIDTH = 6f;
-    public final float SIDE_SENSOR_HEIGHT = 16f;
-    public final float FOOT_SENSOR_SCALING_WIDTH = 0.875f;
-    public final float FOOT_SENSOR_SCALING_HEIGHT = 1.5f;
-    public final float SIDE_SENSOR_SCALING_HEIGHT = 1f;
-    public final float SIDE_SENSOR_SCALING_WIDTH = 1.6f;
+    public final float FOOT_SENSOR_WIDTH = 0.875f;
+    public final float FOOT_SENSOR_HEIGHT = 1.5f;
+    public final float SIDE_SENSOR_WIDTH = 1.6f;
+    public final float SIDE_SENSOR_HEIGHT = 1f;
 
     public World world;
     public RayHandler rayHandler;
@@ -57,10 +54,10 @@ public class Player {
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
         body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, EntityType.PLAYER, PLAYER_DENSITY);
+        body.createFixture(SensorFactory.createSensorFixture(FOOT_SENSOR_WIDTH, FOOT_SENSOR_HEIGHT, EntityType.FOOT_SENSOR));
+        body.createFixture(SensorFactory.createSensorFixture(SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.LEFT_SENSOR));
+        body.createFixture(SensorFactory.createSensorFixture(SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.RIGHT_SENSOR));
         createSprite();
-        createFootSensor();
-        createLeftSensor();
-        createRightSensor();
         createLights(rayHandler);
     }
 
@@ -91,100 +88,6 @@ public class Player {
         playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
         body.setUserData(playerSprite);
-    }
-
-    private void createFootSensor() {
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape sensorShape = new PolygonShape();
-
-        fdef.isSensor = true;
-        fdef.density = 0f;
-        fdef.friction = 0;
-        fdef.filter.categoryBits = PLAYER_FOOT_SENSOR_BIT;
-
-        fdef.filter.maskBits = WHITE_LINE_BIT;
-
-        if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_LINE_BIT;
-        } else {
-            fdef.filter.maskBits |= RED_LINE_BIT;
-        }
-
-        sensorShape.setAsBox(FOOT_SENSOR_WIDTH / PPM, FOOT_SENSOR_HEIGHT / PPM);
-
-        Vector2[] footCoords = new Vector2[]{
-                new Vector2((-PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, 0),
-                new Vector2((PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, 0),
-                new Vector2((-PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, -PLAYER_HEIGHT * FOOT_SENSOR_SCALING_HEIGHT / PPM),
-                new Vector2((PLAYER_WIDTH * FOOT_SENSOR_SCALING_WIDTH) / PPM, -PLAYER_HEIGHT * FOOT_SENSOR_SCALING_HEIGHT / PPM)
-        };
-
-        sensorShape.set(footCoords);
-        fdef.shape = sensorShape;
-
-        body.createFixture(fdef).setUserData("foot sensor");
-    }
-
-    private void createLeftSensor() {
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape sensorShape = new PolygonShape();
-
-        fdef.isSensor = true;
-        fdef.density = 0f;
-        fdef.friction = 0;
-        fdef.filter.categoryBits = PLAYER_LEFT_SENSOR_BIT;
-        fdef.filter.maskBits = WHITE_LINE_BIT;
-
-        if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_LINE_BIT;
-        } else {
-            fdef.filter.maskBits |= RED_LINE_BIT;
-        }
-
-        sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
-
-        Vector2[] leftCoords = new Vector2[]{
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * -PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
-        };
-
-        sensorShape.set(leftCoords);
-        fdef.shape = sensorShape;
-
-        body.createFixture(fdef).setUserData("left sensor");
-    }
-
-    private void createRightSensor() {
-        FixtureDef fdef = new FixtureDef();
-        PolygonShape sensorShape = new PolygonShape();
-
-        fdef.isSensor = true;
-        fdef.density = 0f;
-        fdef.friction = 0;
-        fdef.filter.categoryBits = PLAYER_RIGHT_SENSOR_BIT;
-        fdef.filter.maskBits = WHITE_LINE_BIT;
-
-        if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_LINE_BIT;
-        } else {
-            fdef.filter.maskBits |= RED_LINE_BIT;
-        }
-
-        sensorShape.setAsBox(SIDE_SENSOR_WIDTH / PPM, SIDE_SENSOR_HEIGHT / PPM);
-
-        Vector2[] rightCoords = new Vector2[]{
-                new Vector2(0 / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(0 / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM),
-                new Vector2(SIDE_SENSOR_SCALING_WIDTH * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * FOOT_SENSOR_SCALING_WIDTH * SIDE_SENSOR_SCALING_HEIGHT) / PPM)
-        };
-
-        sensorShape.set(rightCoords);
-        fdef.shape = sensorShape;
-
-        body.createFixture(fdef).setUserData("right sensor");
     }
 
     private void createLights(RayHandler rayHandler) {

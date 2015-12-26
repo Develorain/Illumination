@@ -7,7 +7,6 @@ import static com.develorain.game.Illumination.*;
 import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
 
 public class BodyFactory {
-
     private static final int DEFAULT_RESTITUTION = 0;
     private static final int DEFAULT_FRICTION = 0;
     private static final boolean DEFAULT_FIXED_ROTATION = true;

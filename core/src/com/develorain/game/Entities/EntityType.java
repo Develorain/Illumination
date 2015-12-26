@@ -4,5 +4,8 @@ public enum EntityType {
     WHITE_ENEMY,
     BLUE_ENEMY,
     RED_ENEMY,
-    PLAYER
+    PLAYER,
+    FOOT_SENSOR,
+    LEFT_SENSOR,
+    RIGHT_SENSOR
 }

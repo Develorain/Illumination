@@ -116,7 +116,7 @@ public class Level {
         batch.setProjectionMatrix(cam.combined);
         rayHandler.setCombinedMatrix(cam);
 
-        background.render();
+        //background.render();
 
         if (DEBUG_MODE) {
             b2dr.render(world, cam.combined);
