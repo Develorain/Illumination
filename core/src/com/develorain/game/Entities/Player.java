@@ -10,10 +10,7 @@ import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.Tools.BodyFactory;
 import com.develorain.game.Tools.Level;
@@ -22,25 +19,23 @@ import com.develorain.game.Tools.SensorFactory;
 
 import java.util.ArrayList;
 
-import static com.develorain.game.Illumination.*;
-import static com.develorain.game.Tools.PlayerController.SLOW_MOTION_MODE;
+import static com.develorain.game.Illumination.PPM;
 
 public class Player {
-    public static final int PLAYER_DENSITY = 10;
+    public final int PLAYER_DENSITY = 10;
     public final int PLAYER_WIDTH = 16;     // pixels
     public final int PLAYER_HEIGHT = 16;    // pixels
     public final float FOOT_SENSOR_WIDTH = 0.875f;
     public final float FOOT_SENSOR_HEIGHT = 1.5f;
     public final float SIDE_SENSOR_WIDTH = 1.6f;
     public final float SIDE_SENSOR_HEIGHT = 1f;
-
-    public World world;
-    public RayHandler rayHandler;
     public Body body;
-    public Sprite playerSprite;
-    public ArrayList<PointLight> pointLights = new ArrayList<>();
-    public ArrayList<Sprite> sprites = new ArrayList<>();
-    public Level level;
+    private World world;
+    private RayHandler rayHandler;
+    private Sprite playerSprite;
+    private ArrayList<PointLight> pointLights = new ArrayList<>();
+    private ArrayList<Sprite> sprites = new ArrayList<>();
+    private Level level;
 
     private float timer = 0;
 

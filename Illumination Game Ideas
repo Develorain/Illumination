@@ -1,0 +1,173 @@
+THINGS TO REMEMBER
+------------------
+Design a map that is hard to traverse.
+Do not set velocities, apply a force. (most of the time)
+Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge
+Check video file on desktop for idea for developing map with slowmo gameplay
+Check video file on desktop for idea that using slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity
+Also with the rule above, using slowmotion allows you to double jump much higher
+
+
+Level 1
+-------
+Add dropping tiles above first pit. The player is forced to drop into that hole. the box will look hollow:
+
+------------- <-- dropping tiles
+-           -
+-           -
+-------------
+
+
+Current game problems
+---------------------
+Make cooldowns work properly with slowmotion // useless
+Dispose of maps when done with them, lots of wasted memory
+Holding left and right at the same time makes you travel with no friction.
+Make jump rely more on how long you hold the jump button, and less initial velocity. // useless
+if you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
+consider getting rid of playerSprite
+
+
+
+Primary ideas
+-------------
+Add unwalljumpable walls: introduce it in the tutorial
+Add a background
+Deadly obstacles
+Moving platforms
+Player breaks/goes ground if high y-velocity is reached
+Add breakable walls or boxes
+You can alternate between foreground and background (similiar to Floating Point)
+Changing mode fades out some tiles (opacity) and fades in others such as Fly'N mechanic (background becomes foreground and vice versa)
+When you go in slow motion, the tileset flips, and maybe make enemies and obstacles depending on the tileset to be visible or not
+Teleporter
+Respawn slope // useless
+Light gets bigger the faster you go
+Player light only collides with enemies that player can die from
+.setColour() for something that looks cool. Moving changes player colour. This may also change ambient light colour too.
+Player dies when changes time in out of bounds area
+Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
+Make bodybuilder class // useless
+Make MenuScreen
+Make death more meaningful
+
+
+
+Secondary ideas
+---------------
+Slow down time in areas of the map
+Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
+Mimick Dustforce's running up wall // useless
+Make it so that holding down jump button makes you jump higher // useless
+Doing combos can do a strong dash in a direction that breaks destructable walls
+Make dustforce climbing up walls similiar to the wall seen in video 4. pressing up on these walls makes you run up them
+Exploder's projectiles kills other enemies. 
+Exploder's projecticles spawn small enemies upon landing. 
+Exploder's projectiles contaminate ground so player can't walk on it.
+
+
+
+Main Mechanics
+--------------
+	1) Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
+	   This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
+	   and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the current
+	   speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
+
+
+
+Cool ideas
+----------
+Implement a very quick running enemies, enemies that can stick onto walls, rainbow, when enemy is near player, enemy explodes throwing projectiles towards player to kill him, ranged throwing enemy
+Some enemies don't kill you, they just push you
+Inverted gravity on some levels
+Some maps you have 1 restitiuation and you have to get through the map while bouncing
+Add a fun mode-type map where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
+Can only use teleport to go through specific walls
+Some maps have tile opacity of 0, and you need to traverse in complete darkness
+Some maps have the player rotate (use old code)
+In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
+Introduce controls by a small rhyming poem
+Add screen shake
+
+
+
+Graphics
+--------
+Swinging box2d lights
+Player leaves trail just like shadow of texture (MS)
+Particle effects when double jumping, jumping, dashing, or moving
+Shake screen when hitting ground hard
+Add sound effects (jump, landing, walking/sprinting, dash, smashing objects, death)
+Add sliding animation
+When player dies, they explode into flames
+The faster you walk, a bit of black fade in the corners of the screen, add dash like gunz, or popkart nitro white lines in front of player (kinda like a white arc seen on image on desktop)
+Brawlhalla has cool artstyle
+More see through objects for cool light effects (bookmarks for reference)
+Limit the number of rotations that the player can do so it doesn't look like it's not rotating
+Add knockback when hit
+Ground that has already been traversed is erased
+Low gravity areas of the world
+Everytime the player jumps, an animation similar to this plays: https://youtu.be/2SaYkWNv0Hg?t=14m37s
+Trampoline or propeller similar to Geometry Dash upwards push things
+Vignette pulses to the beat of the music
+Map is engulfed in flames, you must walk over the flame to quench it
+
+
+
+Sound
+-----
+Make killing enemies sound
+Music plays slower when you're in slow motion
+Music only plays when you're moving (or plays really slowly when not moving)
+Music speeds up as you go faster
+Music is intense in hard area, music is calm in easy area
+Music is intense when you're moving quickly, calm when you're moving slowly
+Sync map/gameplay with music somehow
+When changing between slowmotion and non-slowmotion, the slow-mo sound plays
+All sounds are slower in slow-motion
+
+
+
+Story
+-----
+Maybe character is a transparent ghost, that's why he can go in multiple dimensions
+Explain why the player can be in two dimensions
+Square is on a journey to enlighten all the dull squares, making them smart
+"Deception was key, the map was determined in stopping cubey. things that looked like they were there were not, and things that appeared to be there weren't there."
+
+
+
+Tertiary ideas (meh ideas)
+--------------------------
+Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key)
+Walking through an emancipation-grid-esque changes your colour forcefully
+Dying alows you to rewind (similar to dirt 3 mechanic)
+Player light shows invisible and fake tiles
+The light can act as a toggle
+Fez-like swapping collision
+You can change your light's colour in game using a (league of legends ping based copy) colour picking system. the colour somehow affects collision
+Make the y axis limit higher when sprinting (only somewhat good idea)
+Pressing down when holding on a wall and no ground is below you allows you to grapple/hold onto the wall
+When your head hits a block, you can double jump again
+Mario-killing style
+Changing modes changes the tile collision
+Must be bright in light areas or dark in dark areas
+Dark mode: square is black, background is white
+Light mode: square is white, background is black
+Square always emits a light, mild dark light when in dark mode, mild white light when in light mode
+Make screen flip interpolate rotations
+NOT ONLY ARE THE TILES THAT ARE NOT USED FOR COLLISION 10% OPACITY, BUT THEY ARE PART OF THE BACKGROUND AS WELL
+
+
+Friction and movement is stronger in slowmotion. (The problem is that the input/gameplay mechanics still run at 60Hz)
+Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration
+Transparent tiles
+
+
+// How to do the trail
+Make a queue that stores body position every 200 ms
+Queue only has 5
+Draw all 5
+
+https://www.youtube.com/watch?v=5zzQJohPPwc
