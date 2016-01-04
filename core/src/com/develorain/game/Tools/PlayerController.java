@@ -2,9 +2,11 @@ package com.develorain.game.Tools;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.develorain.game.Entities.Player;
+import com.develorain.game.Illumination;
 
 import static com.develorain.game.Screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
@@ -18,13 +20,19 @@ public class PlayerController {
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
     public boolean shouldRespawn = false;
-    float jumpTimer = 0;
+    private float jumpTimer = 0;
     private Player player;
     private Body body;
+    private Music music;
 
     public PlayerController(Player player) {
         this.player = player;
         this.body = player.body;
+
+        music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        //music.play();
     }
 
     public void handleInput(float dt) {
@@ -150,6 +158,21 @@ public class PlayerController {
         // Limit movement on Y-axis
         if (body.getLinearVelocity().y >= 15) {
             body.setLinearVelocity(body.getLinearVelocity().x, 15);
+        }
+
+        // Music volume control
+        if (body.getLinearVelocity().x != 0 || body.getLinearVelocity().y != 0) {
+            if (music.getVolume() < 0.4f) {
+                //music.setVolume(music.getVolume() * 1.04f);
+                music.setVolume(music.getVolume() + (music.getVolume() * 0.04f));
+            }
+            //music.play();
+        } else {
+            if (music.getVolume() > 0.2f) {
+                //music.setVolume(music.getVolume() * 0.96f);
+                music.setVolume(music.getVolume() - (music.getVolume() * 0.04f));
+            }
+            //music.pause();
         }
 
         // Manual deceleration

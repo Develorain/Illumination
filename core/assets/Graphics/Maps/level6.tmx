@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="600" height="300" tilewidth="16" tileheight="16" nextobjectid="191">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36">
+  <image source="tileset.png" width="96" height="96"/>
+ </tileset>
+ <objectgroup name="default slope">
+  <object id="92" x="1632" y="2336">
+   <polyline points="0,0 256,0 256,-176"/>
+  </object>
+  <object id="93" x="1888" y="2160">
+   <polyline points="0,0 352,0 352,176 704,176"/>
+  </object>
+  <object id="95" x="3296" y="2336">
+   <polyline points="0,0 720,0"/>
+  </object>
+  <object id="105" x="96" y="2304">
+   <polyline points="0,0 1040,0 1184,-144 1536,-144"/>
+  </object>
+  <object id="123" x="4016" y="2336">
+   <polyline points="0,0 0,-608 448,-608"/>
+  </object>
+  <object id="127" x="1632" y="2160">
+   <polyline points="0,0 0,176"/>
+  </object>
+  <object id="130" x="4464" y="1728">
+   <polyline points="0,0 0,-1536"/>
+  </object>
+  <object id="132" x="3488" y="192">
+   <polyline points="0,0 976,0"/>
+  </object>
+  <object id="133" x="3488" y="192">
+   <polyline points="0,0 0,544"/>
+  </object>
+  <object id="134" x="3488" y="736">
+   <polyline points="0,0 720,0"/>
+  </object>
+  <object id="135" x="4208" y="736">
+   <polyline points="0,0 0,816"/>
+  </object>
+  <object id="136" x="4208" y="1552">
+   <polyline points="0,0 -192,0"/>
+  </object>
+  <object id="137" x="4016" y="1552">
+   <polyline points="0,0 0,-624 -736,-624"/>
+  </object>
+  <object id="146" x="2592" y="2336">
+   <polyline points="0,0 0,-432 448,-432"/>
+  </object>
+  <object id="148" x="3040" y="1904">
+   <polyline points="0,0 0,-416 448,-416"/>
+  </object>
+  <object id="149" x="3488" y="1488">
+   <polyline points="0,0 0,848"/>
+  </object>
+  <object id="151" x="96" y="2304">
+   <polyline points="0,0 0,-2304"/>
+  </object>
+  <object id="161" x="0" y="4672">
+   <polyline points="0,0 1184,0"/>
+  </object>
+  <object id="162" x="1184" y="4672">
+   <polyline points="0,0 144,-144 528,-144"/>
+  </object>
+  <object id="163" x="1712" y="4528">
+   <polyline points="0,0 144,-144 368,-144 512,0"/>
+  </object>
+  <object id="165" x="2224" y="4528">
+   <polyline points="0,0 352,0"/>
+  </object>
+  <object id="166" x="2576" y="4528">
+   <polyline points="0,0 0,-144 304,-144"/>
+  </object>
+  <object id="167" x="2880" y="4384">
+   <polyline points="0,0 0,-192 560,-192"/>
+  </object>
+  <object id="168" x="3440" y="4192">
+   <polyline points="0,0 0,176"/>
+  </object>
+  <object id="169" x="3440" y="4368">
+   <polyline points="0,0 352,0"/>
+  </object>
+  <object id="170" x="3792" y="4368">
+   <polyline points="0,0 0,-432 400,-432"/>
+  </object>
+  <object id="171" x="4192" y="3936">
+   <polyline points="0,0 0,-320 352,-320"/>
+  </object>
+  <object id="172" x="4544" y="3616">
+   <polyline points="0,0 0,-640"/>
+  </object>
+  <object id="173" x="4544" y="2976">
+   <polyline points="0,0 192,-192"/>
+  </object>
+  <object id="174" x="4736" y="2784">
+   <polyline points="0,0 480,0"/>
+  </object>
+  <object id="175" x="5216" y="2784">
+   <polyline points="0,0 0,544"/>
+  </object>
+  <object id="176" x="5216" y="3328">
+   <polyline points="0,0 544,0"/>
+  </object>
+  <object id="180" x="5760" y="2800">
+   <polyline points="0,0 496,0"/>
+  </object>
+  <object id="181" x="6256" y="2800">
+   <polyline points="0,0 0,528"/>
+  </object>
+  <object id="182" x="6256" y="3328">
+   <polyline points="0,0 896,0"/>
+  </object>
+  <object id="184" x="4256" y="3440">
+   <polyline points="0,0 96,0"/>
+  </object>
+  <object id="185" x="4352" y="3440">
+   <polyline points="0,0 0,-624"/>
+  </object>
+  <object id="187" x="4352" y="2816">
+   <polyline points="0,0 240,-240"/>
+  </object>
+  <object id="188" x="4592" y="2576">
+   <polyline points="0,0 288,0"/>
+  </object>
+  <object id="190" x="4880" y="2576">
+   <polyline points="0,0 272,-272"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="normal slope"/>
+ <objectgroup name="alternate slope"/>
+ <objectgroup name="boundary slope"/>
+ <objectgroup name="white enemies"/>
+ <objectgroup name="blue enemies"/>
+ <objectgroup name="red enemies"/>
+ <objectgroup name="lights">
+  <object id="36" x="528" y="1824" width="16" height="16"/>
+  <object id="52" x="1456" y="1632" width="16" height="16"/>
+  <object id="114" x="2176" y="1568" width="16" height="16"/>
+  <object id="117" x="3104" y="960" width="16" height="16"/>
+  <object id="118" x="3632" y="1632" width="16" height="16"/>
+  <object id="119" x="4336" y="1312" width="16" height="16"/>
+  <object id="120" x="4336" y="800" width="16" height="16"/>
+  <object id="121" x="3808" y="224" width="16" height="16"/>
+  <object id="122" x="4304" y="240" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="player">
+  <object id="160" x="256" y="4432" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="end">
+  <object id="129" x="3664" y="736">
+   <polyline points="0,0 0,-176"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="unclimbable white slope">
+  <object id="177" x="5760" y="3328">
+   <polyline points="0,0 0,-528"/>
+  </object>
+  <object id="183" x="7152" y="3328">
+   <polyline points="0,0 0,-528"/>
+  </object>
+ </objectgroup>
+ <objectgroup name="unclimbable blue slope"/>
+ <objectgroup name="unclimbable red slope"/>
+ <objectgroup name="Object Layer 14"/>
+ <objectgroup name="Object Layer 15"/>
+ <objectgroup name="Object Layer 16"/>
+ <layer name="white tiles" width="600" height="300">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+ <layer name="blue tiles" width="600" height="300">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4M8A/RYAAQ==
+  </data>
+ </layer>
+ <layer name="red tiles" width="600" height="300">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4M8A/RYAAQ==
+  </data>
+ </layer>
+ <layer name="door tiles" width="600" height="300">
+  <data encoding="base64" compression="zlib">
+   eJzt1jENACAQwMC3gH+zGICFdGC4S+qhMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcrEsAALzxVwAALX8FANDyVwAALX8FANDyVwAALX8FANDyVwAALX8FANDyVwAALX8FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/GoD42QEYw==
+  </data>
+ </layer>
+</map>

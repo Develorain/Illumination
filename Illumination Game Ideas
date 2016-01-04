@@ -1,11 +1,13 @@
 THINGS TO REMEMBER
 ------------------
-Design a map that is hard to traverse.
-Do not set velocities, apply a force. (most of the time)
-Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge
+Design a map that is hard to traverse. // useless
+Do not set velocities, apply a force. (most of the time) // useless
+Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge // useless
 Check video file on desktop for idea for developing map with slowmo gameplay
-Check video file on desktop for idea that using slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity
-Also with the rule above, using slowmotion allows you to double jump much higher
+Check video file on desktop for idea that using slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity // useless
+Also with the rule above, using slowmotion allows you to double jump much higher // useless
+
+The only way to make the game fun is to make moving and jumping feel fun, sound fun!
 
 
 Level 1
@@ -24,8 +26,20 @@ Make cooldowns work properly with slowmotion // useless
 Dispose of maps when done with them, lots of wasted memory
 Holding left and right at the same time makes you travel with no friction.
 Make jump rely more on how long you hold the jump button, and less initial velocity. // useless
-if you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
-consider getting rid of playerSprite
+If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
+Consider getting rid of playerSprite
+
+
+
+Ideas
+-----
+Make music volume depend on player velocity
+Change music speed depending on player velocity
+Normalize music volume
+Make doors big to make player finishing level feel better
+Make door sound effect really nice to make finishing level feel great
+Reward players as they accomplish things in the level
+Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
 
 
 
@@ -33,13 +47,13 @@ Primary ideas
 -------------
 Add unwalljumpable walls: introduce it in the tutorial
 Add a background
-Deadly obstacles
-Moving platforms
-Player breaks/goes ground if high y-velocity is reached
+Deadly obstacles // useless
+Moving platforms // useless
+Player breaks/goes ground if high y-velocity is reached // useless
 Add breakable walls or boxes
-You can alternate between foreground and background (similiar to Floating Point)
-Changing mode fades out some tiles (opacity) and fades in others such as Fly'N mechanic (background becomes foreground and vice versa)
-When you go in slow motion, the tileset flips, and maybe make enemies and obstacles depending on the tileset to be visible or not
+You can alternate between foreground and background (similiar to Floating Point) // useless
+Changing mode fades out some tiles (opacity) and fades in others such as Fly'N mechanic (background becomes foreground and vice versa) // useless
+When you go in slow motion, the tileset flips, and maybe make enemies and obstacles depending on the tileset to be visible or not // useless
 Teleporter
 Respawn slope // useless
 Light gets bigger the faster you go
@@ -60,32 +74,32 @@ Enemies that's movement pattern resembles the hamster wheels found in Mighty Que
 Mimick Dustforce's running up wall // useless
 Make it so that holding down jump button makes you jump higher // useless
 Doing combos can do a strong dash in a direction that breaks destructable walls
-Make dustforce climbing up walls similiar to the wall seen in video 4. pressing up on these walls makes you run up them
-Exploder's projectiles kills other enemies. 
-Exploder's projecticles spawn small enemies upon landing. 
+Make dustforce climbing up walls similiar to the wall seen in video 4. pressing up on these walls makes you run up them // useless
+Exploder's projectiles kills other enemies.
+Exploder's projecticles spawn small enemies upon landing.
 Exploder's projectiles contaminate ground so player can't walk on it.
 
 
 
 Main Mechanics
 --------------
-	1) Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
-	   This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
-	   and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the current
-	   speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
+Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
+This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
+and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the current
+speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
 
 
 
 Cool ideas
 ----------
 Implement a very quick running enemies, enemies that can stick onto walls, rainbow, when enemy is near player, enemy explodes throwing projectiles towards player to kill him, ranged throwing enemy
-Some enemies don't kill you, they just push you
+Some enemies don't kill you, they just push you // useless
 Inverted gravity on some levels
 Some maps you have 1 restitiuation and you have to get through the map while bouncing
 Add a fun mode-type map where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
-Can only use teleport to go through specific walls
-Some maps have tile opacity of 0, and you need to traverse in complete darkness
-Some maps have the player rotate (use old code)
+Can only use teleport to go through specific walls // useless
+Some maps have tile opacity of 0, and you need to traverse in complete darkness // useless
+Some maps have the player rotate (use old code) // useless
 In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
 Introduce controls by a small rhyming poem
 Add screen shake
@@ -96,22 +110,22 @@ Graphics
 --------
 Swinging box2d lights
 Player leaves trail just like shadow of texture (MS)
-Particle effects when double jumping, jumping, dashing, or moving
+Particle effects, sound effect, animation, when double jumping, jumping, dashing, walking, sprinting, smashing objects, death, sliding
 Shake screen when hitting ground hard
-Add sound effects (jump, landing, walking/sprinting, dash, smashing objects, death)
-Add sliding animation
+Add sound effects (jump, landing, walking/sprinting, dash, smashing objects, death) // useless
+Add sliding animation // useless
 When player dies, they explode into flames
-The faster you walk, a bit of black fade in the corners of the screen, add dash like gunz, or popkart nitro white lines in front of player (kinda like a white arc seen on image on desktop)
-Brawlhalla has cool artstyle
+The faster you walk, a bit of black fade in the corners of the screen (vignette), add dash like gunz, or popkart nitro white lines in front of player
+Brawlhalla has cool map artstyle
 More see through objects for cool light effects (bookmarks for reference)
-Limit the number of rotations that the player can do so it doesn't look like it's not rotating
-Add knockback when hit
-Ground that has already been traversed is erased
+Limit the number of rotations that the player can do so it doesn't look like it's not rotating // useless
+Add knockback when hit // useless
+Ground that has already been traversed is erased // useless
 Low gravity areas of the world
 Everytime the player jumps, an animation similar to this plays: https://youtu.be/2SaYkWNv0Hg?t=14m37s
 Trampoline or propeller similar to Geometry Dash upwards push things
 Vignette pulses to the beat of the music
-Map is engulfed in flames, you must walk over the flame to quench it
+Map is engulfed in flames, you must walk over the flame to quench it // useless
 
 
 
@@ -141,28 +155,28 @@ Square is on a journey to enlighten all the dull squares, making them smart
 Tertiary ideas (meh ideas)
 --------------------------
 Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key)
-Walking through an emancipation-grid-esque changes your colour forcefully
-Dying alows you to rewind (similar to dirt 3 mechanic)
-Player light shows invisible and fake tiles
-The light can act as a toggle
-Fez-like swapping collision
-You can change your light's colour in game using a (league of legends ping based copy) colour picking system. the colour somehow affects collision
-Make the y axis limit higher when sprinting (only somewhat good idea)
-Pressing down when holding on a wall and no ground is below you allows you to grapple/hold onto the wall
-When your head hits a block, you can double jump again
-Mario-killing style
-Changing modes changes the tile collision
-Must be bright in light areas or dark in dark areas
-Dark mode: square is black, background is white
-Light mode: square is white, background is black
-Square always emits a light, mild dark light when in dark mode, mild white light when in light mode
-Make screen flip interpolate rotations
-NOT ONLY ARE THE TILES THAT ARE NOT USED FOR COLLISION 10% OPACITY, BUT THEY ARE PART OF THE BACKGROUND AS WELL
+Walking through an emancipation-grid-esque changes your colour forcefully // useless
+Dying alows you to rewind (similar to dirt 3 mechanic) // useless
+Player light shows invisible and fake tiles // useless
+The light can act as a toggle // useless
+Fez-like swapping collision // useless
+You can change your light's colour in game using a (league of legends ping based copy) colour picking system. the colour somehow affects collision // useless
+Make the y axis limit higher when sprinting (only somewhat good idea) // useless
+Pressing down when holding on a wall and no ground is below you allows you to grapple/hold onto the wall // useless
+When your head hits a block, you can double jump again // useless
+Mario-killing style // useless
+Changing modes changes the tile collision // useless
+Must be bright in light areas or dark in dark areas // useless
+Dark mode: square is black, background is white // useless
+Light mode: square is white, background is black // useless
+Square always emits a light, mild dark light when in dark mode, mild white light when in light mode // useless
+Make screen flip interpolate rotations // useless
+NOT ONLY ARE THE TILES THAT ARE NOT USED FOR COLLISION 10% OPACITY, BUT THEY ARE PART OF THE BACKGROUND AS WELL // useless
 
 
-Friction and movement is stronger in slowmotion. (The problem is that the input/gameplay mechanics still run at 60Hz)
-Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration
-Transparent tiles
+Friction and movement is stronger in slowmotion. (The problem is that the input/gameplay mechanics still run at 60Hz) // useless
+Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration // useless
+Transparent tiles // useless
 
 
 // How to do the trail

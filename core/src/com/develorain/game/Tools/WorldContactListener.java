@@ -1,7 +1,9 @@
 package com.develorain.game.Tools;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.Entities.Enemy;
+import com.develorain.game.Illumination;
 
 import static com.develorain.game.Illumination.*;
 
@@ -99,15 +101,17 @@ public class WorldContactListener implements ContactListener {
 
             case PLAYER_BIT | WHITE_ENEMY_BIT:
                 playerController.shouldRespawn = true;
-                //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                //long id = Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).setPitch(id, 0.05f);
                 break;
             case PLAYER_BIT | BLUE_ENEMY_BIT:
                 playerController.shouldRespawn = true;
-                //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;
             case PLAYER_BIT | RED_ENEMY_BIT:
                 playerController.shouldRespawn = true;
-                //Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 break;
 
             case PLAYER_BIT | END_LINE_BIT:
