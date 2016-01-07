@@ -5,7 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.develorain.game.Screens.PlayScreen;
+import com.develorain.game.states.PlayState;
 
 public class Illumination extends Game {
     public static final String TITLE = "Illumination";
@@ -25,10 +25,8 @@ public class Illumination extends Game {
     public static final short RED_ENEMY_BIT = 512;
     public static final short BOUNDARY_LINE_BIT = 1024;
     public static final short END_LINE_BIT = 2048;
-    public static final short UNCLIMBABLE_WHITE_LINE_BIT = 4096;
-    public static final short UNCLIMBABLE_BLUE_LINE_BIT = 8192;
-    public static final short UNCLIMBABLE_RED_LINE_BIT = 16384;
-    //public static final short PROJECTILE_BIT = -32768;
+    public static final short UNCLIMBABLE_LINE_BIT = 4096;
+    // last bit is -32768
 
     public static AssetManager manager;  // consider not using static keyword
     public SpriteBatch batch;
@@ -37,14 +35,14 @@ public class Illumination extends Game {
     public void create() {
         batch = new SpriteBatch();
         manager = new AssetManager();
-        manager.load("Audio/Music/disconnected.ogg", Music.class);
-        manager.load("Audio/Sounds/hitsound.wav", Sound.class);
-        manager.load("Audio/Sounds/startslowmotion.ogg", Sound.class);
-        manager.load("Audio/Sounds/endslowmotion.ogg", Sound.class);
-        manager.load("Audio/Sounds/Jump8.wav", Sound.class);
+        manager.load("audio/music/disconnected.ogg", Music.class);
+        manager.load("audio/sounds/hitsound.wav", Sound.class);
+        manager.load("audio/sounds/startslowmotion.ogg", Sound.class);
+        manager.load("audio/sounds/endslowmotion.ogg", Sound.class);
+        manager.load("audio/sounds/Jump8.wav", Sound.class);
         manager.finishLoading();
 
-        setScreen(new PlayScreen(this));
+        setScreen(new PlayState(this));
     }
 
     @Override

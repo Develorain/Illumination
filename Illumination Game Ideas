@@ -40,6 +40,9 @@ Make doors big to make player finishing level feel better
 Make door sound effect really nice to make finishing level feel great
 Reward players as they accomplish things in the level
 Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
+Make projectiles big and fun
+Cooler hud text
+Levels do not need to do a complete learning curve. Design simple levels into harder levels later.
 
 
 
@@ -143,8 +146,9 @@ All sounds are slower in slow-motion
 
 
 
-Story
------
+Game environment/story
+-----------------------
+Cubey is the soul of a lost traveller,
 Maybe character is a transparent ghost, that's why he can go in multiple dimensions
 Explain why the player can be in two dimensions
 Square is on a journey to enlighten all the dull squares, making them smart
