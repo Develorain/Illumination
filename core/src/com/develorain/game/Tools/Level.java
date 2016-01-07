@@ -89,6 +89,15 @@ public class Level {
             }
         }
 
+        for (int i = worldInitializer.getExploders().size() - 1; i >= 0; i--) {
+            if (worldInitializer.getExploders().get(i).body.getPosition().x < player.body.getPosition().x + 300 / PPM) {
+                worldInitializer.getExploders().get(i).explode();
+                worldInitializer.getExploders().remove(i);
+            }
+
+            System.out.println("RAN");
+        }
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.R)) {
             for (int i = worldInitializer.getExploders().size() - 1; i >= 0; i--) {
                 worldInitializer.getExploders().get(i).explode();
