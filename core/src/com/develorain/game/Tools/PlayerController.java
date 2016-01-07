@@ -3,6 +3,7 @@ package com.develorain.game.Tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.develorain.game.Entities.Player;
@@ -32,7 +33,7 @@ public class PlayerController {
         music = Illumination.manager.get("Audio/Music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
-        //music.play();
+        music.play();
     }
 
     public void handleInput(float dt) {
@@ -49,6 +50,7 @@ public class PlayerController {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
+            //Illumination.manager.get("Audio/Sounds/Jump8.wav", Sound.class).play();
             if (canJump()) {
                 jumpTimer = 0;
                 if (body.getLinearVelocity().y < 0) {
