@@ -43,6 +43,9 @@ Consider leaving souls on the ground (similar to coins in mario) so you can leav
 Make projectiles big and fun
 Cooler hud text
 Levels do not need to do a complete learning curve. Design simple levels into harder levels later.
+Maybe add a "DEADLY LINE", if the player touches it they die
+Do music slowmo like in super mario world, by not slowing it down, but making each note take longer: reference: https://youtu.be/Aj-Mf0ZVoGs?t=7m18s
+Lamps change colour over time
 
 
 

@@ -56,7 +56,9 @@ public class Level {
         b2dr = new Box2DDebugRenderer();
 
         rayHandler = new RayHandler(world);
-        rayHandler.setAmbientLight(0.25f);
+        //rayHandler.setAmbientLight(0.25f);
+        //rayHandler.setAmbientLight(0.75f);
+        rayHandler.setAmbientLight(0.5f);
 
         hud = new HUD(batch);
 

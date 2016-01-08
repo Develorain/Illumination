@@ -49,7 +49,6 @@ public class PlayState implements Screen {
         }
     }
 
-
     @Override
     public void dispose() {
     }

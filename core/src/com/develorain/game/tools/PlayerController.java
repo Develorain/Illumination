@@ -32,7 +32,7 @@ public class PlayerController {
         music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
-        music.play();
+        //music.play();
     }
 
     public void handleInput(float dt) {
