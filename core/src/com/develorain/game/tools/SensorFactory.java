@@ -12,7 +12,7 @@ public class SensorFactory {
     public static final int PLAYER_WIDTH = 16;     // pixels
     public static final int PLAYER_HEIGHT = 16;    // pixels
 
-    public static FixtureDef createSensorFixture(float sensorWidth, float sensorHeight, EntityType type) {
+    public static FixtureDef createSensorFixture(float x, float y, float sensorWidth, float sensorHeight, EntityType type) {
         FixtureDef fdef = new FixtureDef();
         PolygonShape sensorShape = new PolygonShape();
 
@@ -20,15 +20,7 @@ public class SensorFactory {
         fdef.density = 0f;
         fdef.friction = 0;
 
-        fdef.filter.maskBits = WHITE_LINE_BIT;
-
-        if (!SLOW_MOTION_MODE) {
-            fdef.filter.maskBits |= BLUE_LINE_BIT;
-        } else {
-            fdef.filter.maskBits |= RED_LINE_BIT;
-        }
-
-        Vector2[] sensorCoords = new Vector2[]{};
+        Vector2[] sensorCoords = new Vector2[]{}; // first is top left, top right, bottom right, bottom left
         switch (type) {
             case FOOT_SENSOR:
                 sensorCoords = new Vector2[]{
@@ -39,6 +31,14 @@ public class SensorFactory {
                 };
 
                 fdef.filter.categoryBits = PLAYER_FOOT_SENSOR_BIT;
+
+                fdef.filter.maskBits = WHITE_LINE_BIT;
+
+                if (!SLOW_MOTION_MODE) {
+                    fdef.filter.maskBits |= BLUE_LINE_BIT;
+                } else {
+                    fdef.filter.maskBits |= RED_LINE_BIT;
+                }
                 break;
             case LEFT_SENSOR:
                 sensorCoords = new Vector2[]{
@@ -49,6 +49,14 @@ public class SensorFactory {
                 };
 
                 fdef.filter.categoryBits = PLAYER_LEFT_SENSOR_BIT;
+
+                fdef.filter.maskBits = WHITE_LINE_BIT;
+
+                if (!SLOW_MOTION_MODE) {
+                    fdef.filter.maskBits |= BLUE_LINE_BIT;
+                } else {
+                    fdef.filter.maskBits |= RED_LINE_BIT;
+                }
                 break;
             case RIGHT_SENSOR:
                 sensorCoords = new Vector2[]{
@@ -59,6 +67,26 @@ public class SensorFactory {
                 };
 
                 fdef.filter.categoryBits = PLAYER_RIGHT_SENSOR_BIT;
+
+                fdef.filter.maskBits = WHITE_LINE_BIT;
+
+                if (!SLOW_MOTION_MODE) {
+                    fdef.filter.maskBits |= BLUE_LINE_BIT;
+                } else {
+                    fdef.filter.maskBits |= RED_LINE_BIT;
+                }
+                break;
+            case TRIGGER_SENSOR:
+                sensorCoords = new Vector2[]{
+                        new Vector2(x / PPM, (y + sensorHeight) / PPM),
+                        new Vector2((x + sensorWidth) / PPM, (y + sensorHeight) / PPM),
+                        new Vector2((x + sensorWidth) / PPM, y / PPM),
+                        new Vector2(x / PPM, y / PPM)
+                };
+
+                fdef.filter.categoryBits = SCRIPTED_EVENT_TRIGGER_BIT;
+
+                fdef.filter.maskBits = PLAYER_BIT;
                 break;
         }
 

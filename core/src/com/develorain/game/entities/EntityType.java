@@ -7,5 +7,6 @@ public enum EntityType {
     PLAYER,
     FOOT_SENSOR,
     LEFT_SENSOR,
-    RIGHT_SENSOR
+    RIGHT_SENSOR,
+    TRIGGER_SENSOR
 }

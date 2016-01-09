@@ -23,7 +23,7 @@ public class HUD {
     private Label timeLabel;
 
     public HUD(SpriteBatch sb) {
-        viewport = new FitViewport(Illumination.V_WIDTH, Illumination.V_HEIGHT, new OrthographicCamera());
+        viewport = new FitViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
         worldTimer = 0;

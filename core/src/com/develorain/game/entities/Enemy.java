@@ -26,7 +26,7 @@ public abstract class Enemy {
         this.width = width;
         this.height = height;
         world = level.getWorld();
-        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, width / PPM, height / PPM, type, density);
+        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, width / PPM, height / PPM, density, true, type, false);
         createSprite();
     }
 

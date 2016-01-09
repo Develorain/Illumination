@@ -9,8 +9,8 @@ import com.develorain.game.states.PlayState;
 
 public class Illumination extends Game {
     public static final String TITLE = "Illumination";
-    public static final int V_WIDTH = 1080;
-    public static final int V_HEIGHT = 720;
+    public static final int RESOLUTION_X = 1080;
+    public static final int RESOLUTION_Y = 720;
     public static final float PPM = 100;  // MULTIPLYING BY PPM CONVERTS METERS TO PIXELS. DIVIDING CONVERTS PIXELS TO METERS.
 
     public static final short WHITE_LINE_BIT = 1;
@@ -26,6 +26,7 @@ public class Illumination extends Game {
     public static final short BOUNDARY_LINE_BIT = 1024;
     public static final short END_LINE_BIT = 2048;
     public static final short UNCLIMBABLE_LINE_BIT = 4096;
+    public static final short SCRIPTED_EVENT_TRIGGER_BIT = 8192;
     // last bit is -32768
 
     public static AssetManager manager;  // consider not using static keyword

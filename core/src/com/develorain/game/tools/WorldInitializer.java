@@ -7,10 +7,14 @@ import com.badlogic.gdx.maps.objects.PolylineMapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.develorain.game.entities.*;
 import com.develorain.game.tools.lines.*;
 
 import java.util.ArrayList;
+
+import static com.develorain.game.Illumination.PPM;
 
 public class WorldInitializer {
     private Player player;
@@ -94,19 +98,27 @@ public class WorldInitializer {
             new UnclimbableLine(object, level);
         }
 
-        for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(14).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             getExploders().add(new Exploder(rect.getX(), rect.getY(), level, EntityType.WHITE_ENEMY));
         }
 
-        for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(15).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             getExploders().add(new Exploder(rect.getX(), rect.getY(), level, EntityType.BLUE_ENEMY));
         }
 
-        for (MapObject object : map.getLayers().get(18).getObjects().getByType(RectangleMapObject.class)) {
+        for (MapObject object : map.getLayers().get(16).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
             getExploders().add(new Exploder(rect.getX(), rect.getY(), level, EntityType.RED_ENEMY));
+        }
+
+        for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
+            Rectangle rect = ((RectangleMapObject) object).getRectangle();
+            Body body = BodyFactory.createBoxBody(level.getWorld(), null, 0, 0,
+                    rect.width / PPM, rect.height / PPM, 0, false, null, true);
+            FixtureDef fdef = SensorFactory.createSensorFixture(rect.getX(), rect.getY(), rect.width, rect.height, EntityType.TRIGGER_SENSOR);
+            body.createFixture(fdef);
         }
     }
 

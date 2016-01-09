@@ -48,10 +48,10 @@ public class Player {
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
-        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, EntityType.PLAYER, PLAYER_DENSITY);
-        body.createFixture(SensorFactory.createSensorFixture(FOOT_SENSOR_WIDTH, FOOT_SENSOR_HEIGHT, EntityType.FOOT_SENSOR));
-        body.createFixture(SensorFactory.createSensorFixture(SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.LEFT_SENSOR));
-        body.createFixture(SensorFactory.createSensorFixture(SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.RIGHT_SENSOR));
+        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, PLAYER_DENSITY, true, EntityType.PLAYER, false);
+        body.createFixture(SensorFactory.createSensorFixture(0, 0, FOOT_SENSOR_WIDTH, FOOT_SENSOR_HEIGHT, EntityType.FOOT_SENSOR));
+        body.createFixture(SensorFactory.createSensorFixture(0, 0, SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.LEFT_SENSOR));
+        body.createFixture(SensorFactory.createSensorFixture(0, 0, SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.RIGHT_SENSOR));
         createSprite();
         createLights(rayHandler);
     }

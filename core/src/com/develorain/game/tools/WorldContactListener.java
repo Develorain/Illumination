@@ -21,8 +21,13 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        // if object has more than one bit, must rewrite switch statement
+        // TODO: must rewrite switch statement
         switch (cDef) {
+            case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
+                levelCreator.fitViewport.setWorldSize(3f * RESOLUTION_X / PPM, 3f * RESOLUTION_Y / PPM);
+                levelCreator.fitViewport.apply();
+                break;
+
             case PLAYER_FOOT_SENSOR_BIT | WHITE_LINE_BIT:
                 playerController.footContactCounter++;
                 break;
@@ -131,6 +136,11 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
+            case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
+                levelCreator.fitViewport.setWorldSize(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM);
+                levelCreator.fitViewport.apply();
+                break;
+
             case PLAYER_FOOT_SENSOR_BIT | WHITE_LINE_BIT:
                 playerController.footContactCounter--;
                 playerController.canDoubleJump = true;

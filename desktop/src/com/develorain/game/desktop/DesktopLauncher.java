@@ -10,8 +10,8 @@ public class DesktopLauncher {
         config.title = Illumination.TITLE;
         //config.width = LwjglApplicationConfiguration.getDesktopDisplayMode().width;
         //config.height = LwjglApplicationConfiguration.getDesktopDisplayMode().height;
-        config.width = Illumination.V_WIDTH;
-        config.height = Illumination.V_HEIGHT;
+        config.width = Illumination.RESOLUTION_X;
+        config.height = Illumination.RESOLUTION_Y;
         new LwjglApplication(new Illumination(), config);
     }
 }

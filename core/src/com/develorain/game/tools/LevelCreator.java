@@ -10,17 +10,18 @@ import static com.develorain.game.Illumination.*;
 
 public class LevelCreator {
     public int currentLevel = 0;
+    public FitViewport fitViewport;
     private SpriteBatch batch;
     private OrthographicCamera cam;
-    private FitViewport fitViewport;
     private Level level;
 
     public LevelCreator(SpriteBatch batch) {
         this.batch = batch;
 
         cam = new OrthographicCamera();
-        fitViewport = new FitViewport(2f * V_WIDTH / PPM, 2f * V_HEIGHT / PPM, cam);
-        //fitViewport = new FitViewport(1.5f * V_WIDTH / PPM, 1.5f * V_HEIGHT / PPM, cam);
+        //fitViewport = new FitViewport(3f * RESOLUTION_X / PPM, 3f * RESOLUTION_Y / PPM, cam);
+        fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM, cam);
+        //fitViewport = new FitViewport(1.5f * RESOLUTION_X / PPM, 1.5f * RESOLUTION_Y / PPM, cam);
     }
 
     public void loadNextLevel() {
