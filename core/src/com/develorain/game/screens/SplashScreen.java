@@ -15,7 +15,6 @@ import com.develorain.game.Illumination;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class SplashScreen implements Screen {
-
     private final Illumination game;
     private Stage stage;
     private OrthographicCamera cam;
@@ -29,7 +28,7 @@ public class SplashScreen implements Screen {
         stage = new Stage(new StretchViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, cam));
         Gdx.input.setInputProcessor(stage);
 
-        splashTexture = new Texture(Gdx.files.internal("graphics/Logo1.png"));
+        splashTexture = game.assetManager.get("graphics/Logo1.png", Texture.class);
         splashImage = new Image(splashTexture);
         splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
 
@@ -66,9 +65,7 @@ public class SplashScreen implements Screen {
         stage.draw();
 
         game.batch.begin();
-
-        game.font.draw(game.batch, "Splashscreen", 20, 20);
-
+        game.font.draw(game.batch, "Splash screen", 20, 20);
         game.batch.end();
     }
 

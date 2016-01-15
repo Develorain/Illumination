@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.develorain.game.screens.SplashScreen;
+import com.develorain.game.screens.LoadingScreen;
 
 public class Illumination extends Game {
     public static final String TITLE = "Illumination";
@@ -30,7 +30,7 @@ public class Illumination extends Game {
     public static final short SCRIPTED_EVENT_TRIGGER_BIT = 8192;
     // last bit is -32768
 
-    public static AssetManager manager;  // consider not using static keyword
+    public AssetManager assetManager;  // consider not using static keyword
     public SpriteBatch batch;
 
     public BitmapFont font;
@@ -38,22 +38,31 @@ public class Illumination extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        manager = new AssetManager();
-        manager.load("audio/music/disconnected.ogg", Music.class);
-        manager.load("audio/sounds/hitsound.wav", Sound.class);
-        manager.load("audio/sounds/startslowmotion.ogg", Sound.class);
-        manager.load("audio/sounds/endslowmotion.ogg", Sound.class);
-        manager.load("audio/sounds/Jump8.wav", Sound.class);
-        manager.finishLoading();
+        assetManager = new AssetManager();
+        assetManager.load("audio/music/disconnected.ogg", Music.class);
+        assetManager.load("audio/sounds/hitsound.wav", Sound.class);
+        assetManager.load("audio/sounds/startslowmotion.ogg", Sound.class);
+        assetManager.load("audio/sounds/endslowmotion.ogg", Sound.class);
+        assetManager.load("audio/sounds/Jump8.wav", Sound.class);
+        assetManager.finishLoading();
 
         font = new BitmapFont();
 
-        setScreen(new SplashScreen(this));
+        setScreen(new LoadingScreen(this));
+        //setScreen(new SplashScreen(this));
         //setScreen(new PlayScreen(this));
     }
 
     @Override
     public void render() {
         super.render();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        font.dispose();
+        assetManager.dispose();
+        getScreen().dispose();
     }
 }

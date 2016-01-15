@@ -29,9 +29,9 @@ public class PlayerController {
         this.player = player;
         this.body = player.body;
 
-        music = Illumination.manager.get("audio/music/disconnected.ogg", Music.class);
-        music.setVolume(0.5f);
-        music.setLooping(true);
+        //music = Illumination.assetManager.get("audio/music/disconnected.ogg", Music.class);
+        //music.setVolume(0.5f);
+        //music.setLooping(true);
         //music.play();
     }
 
@@ -110,9 +110,9 @@ public class PlayerController {
 
             /*
             if (SLOW_MOTION_MODE)
-                Illumination.manager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
+                Illumination.assetManager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
             else
-                Illumination.manager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
+                Illumination.assetManager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
             */
 
             float xVelocity = body.getLinearVelocity().x;
@@ -161,6 +161,7 @@ public class PlayerController {
         }
 
         // Music volume control
+        /*
         if (body.getLinearVelocity().x != 0 || body.getLinearVelocity().y != 0) {
             if (music.getVolume() < 0.4f) {
                 music.setVolume(music.getVolume() + (music.getVolume() * 0.04f));
@@ -170,6 +171,7 @@ public class PlayerController {
                 music.setVolume(music.getVolume() - (music.getVolume() * 0.04f));
             }
         }
+        */
 
         // Manual deceleration
         if (!inputGiven) {

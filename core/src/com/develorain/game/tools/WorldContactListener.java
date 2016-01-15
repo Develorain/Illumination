@@ -109,20 +109,20 @@ public class WorldContactListener implements ContactListener {
             case PLAYER_BIT | WHITE_ENEMY_BIT:
                 playerController.shouldRespawn = true;
                 /*
-                long id = Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
-                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).setPitch(id, 0.1f);
+                long id = Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).setPitch(id, 0.1f);
                 */
                 break;
             case PLAYER_BIT | BLUE_ENEMY_BIT:
                 /*
                 playerController.shouldRespawn = true;
-                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 */
                 break;
             case PLAYER_BIT | RED_ENEMY_BIT:
                 /*
                 playerController.shouldRespawn = true;
-                Illumination.manager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
+                Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 */
                 break;
 
