@@ -87,22 +87,6 @@ public class Player {
 
     private void createLights(RayHandler rayHandler) {
         pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.WHITE, 1));
-
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.RED, 1));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.RED, 2));
-
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.CHARTREUSE, 2));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 3));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 3));
-
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 3));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.WHITE, 3));
-
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.CHARTREUSE, 1));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 2));
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.BLUE, 2));
-
-        //pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.CHARTREUSE, 0.5f));
     }
 
     public Player destroyAndRemake() {

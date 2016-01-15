@@ -24,8 +24,12 @@ public class WorldContactListener implements ContactListener {
         // TODO: must rewrite switch statement
         switch (cDef) {
             case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
-                levelCreator.fitViewport.setWorldSize(3f * RESOLUTION_X / PPM, 3f * RESOLUTION_Y / PPM);
+                /*
+                // not working since only fired off once, need to use boolean to see if still in contact
+                levelCreator.fitViewport.setWorldSize(levelCreator.fitViewport.getWorldWidth() + (levelCreator.fitViewport.getWorldWidth() * 0.02f),
+                        levelCreator.fitViewport.getWorldHeight() + (levelCreator.fitViewport.getWorldHeight() * 0.02f));
                 levelCreator.fitViewport.apply();
+                */
                 break;
 
             case PLAYER_FOOT_SENSOR_BIT | WHITE_LINE_BIT:
@@ -137,7 +141,8 @@ public class WorldContactListener implements ContactListener {
 
         switch (cDef) {
             case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
-                levelCreator.fitViewport.setWorldSize(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM);
+                levelCreator.fitViewport.setWorldSize(levelCreator.fitViewport.getWorldWidth() - (levelCreator.fitViewport.getWorldWidth() * 0.02f) / 60,
+                        levelCreator.fitViewport.getWorldHeight() - (levelCreator.fitViewport.getWorldHeight() * 0.02f) / 60);
                 levelCreator.fitViewport.apply();
                 break;
 

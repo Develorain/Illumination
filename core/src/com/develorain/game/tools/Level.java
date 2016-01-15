@@ -25,7 +25,7 @@ public class Level {
     private SpriteBatch batch;
     private World world;
     private Box2DDebugRenderer b2dr;
-    private WorldContactListener contactListener;
+    private WorldContactListener worldContactListener;
     private TmxMapLoader mapLoader;
     private TiledMap tiledMap;
     private OrthogonalTiledMapRenderer mapRenderer;
@@ -68,9 +68,9 @@ public class Level {
 
         playerController = new PlayerController(player);
 
-        contactListener = new WorldContactListener(playerController, levelCreator);
+        worldContactListener = new WorldContactListener(playerController, levelCreator);
 
-        world.setContactListener(contactListener);
+        world.setContactListener(worldContactListener);
     }
 
     public void update(float dt) {

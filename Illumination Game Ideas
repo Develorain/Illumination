@@ -1,11 +1,6 @@
 THINGS TO REMEMBER
 ------------------
-Design a map that is hard to traverse. // useless
-Do not set velocities, apply a force. (most of the time) // useless
-Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge // useless
 Check video file on desktop for idea for developing map with slowmo gameplay
-Check video file on desktop for idea that using slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity // useless
-Also with the rule above, using slowmotion allows you to double jump much higher // useless
 
 The only way to make the game fun is to make moving and jumping feel fun, sound fun!
 
@@ -22,12 +17,17 @@ Add dropping tiles above first pit. The player is forced to drop into that hole.
 
 Current game problems
 ---------------------
-Make cooldowns work properly with slowmotion // useless
 Dispose of maps when done with them, lots of wasted memory
 Holding left and right at the same time makes you travel with no friction.
-Make jump rely more on how long you hold the jump button, and less initial velocity. // useless
 If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
 Consider getting rid of playerSprite
+
+
+
+Camera focusing
+---------------
+Every level has a vector2 arraylist of squares "triggers" that will be rendered from the map file
+When close to these "triggers", camera interpolates
 
 
 
@@ -46,6 +46,8 @@ Levels do not need to do a complete learning curve. Design simple levels into ha
 Maybe add a "DEADLY LINE", if the player touches it they die
 Do music slowmo like in super mario world, by not slowing it down, but making each note take longer: reference: https://youtu.be/Aj-Mf0ZVoGs?t=7m18s
 Lamps change colour over time
+Time doesn't start until you move
+Shadow effect after player only activates when player hits max speed (consider something with sprinting)
 
 
 
@@ -53,21 +55,13 @@ Primary ideas
 -------------
 Add unwalljumpable walls: introduce it in the tutorial
 Add a background
-Deadly obstacles // useless
-Moving platforms // useless
-Player breaks/goes ground if high y-velocity is reached // useless
 Add breakable walls or boxes
-You can alternate between foreground and background (similiar to Floating Point) // useless
-Changing mode fades out some tiles (opacity) and fades in others such as Fly'N mechanic (background becomes foreground and vice versa) // useless
-When you go in slow motion, the tileset flips, and maybe make enemies and obstacles depending on the tileset to be visible or not // useless
 Teleporter
-Respawn slope // useless
 Light gets bigger the faster you go
 Player light only collides with enemies that player can die from
 .setColour() for something that looks cool. Moving changes player colour. This may also change ambient light colour too.
 Player dies when changes time in out of bounds area
 Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
-Make bodybuilder class // useless
 Make MenuScreen
 Make death more meaningful
 
@@ -77,13 +71,11 @@ Secondary ideas
 ---------------
 Slow down time in areas of the map
 Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
-Mimick Dustforce's running up wall // useless
-Make it so that holding down jump button makes you jump higher // useless
 Doing combos can do a strong dash in a direction that breaks destructable walls
-Make dustforce climbing up walls similiar to the wall seen in video 4. pressing up on these walls makes you run up them // useless
 Exploder's projectiles kills other enemies.
 Exploder's projecticles spawn small enemies upon landing.
 Exploder's projectiles contaminate ground so player can't walk on it.
+Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key)
 
 
 
@@ -99,13 +91,9 @@ speed mode, the unused tile set is very translucent with low opacity, and tiles 
 Cool ideas
 ----------
 Implement a very quick running enemies, enemies that can stick onto walls, rainbow, when enemy is near player, enemy explodes throwing projectiles towards player to kill him, ranged throwing enemy
-Some enemies don't kill you, they just push you // useless
 Inverted gravity on some levels
 Some maps you have 1 restitiuation and you have to get through the map while bouncing
 Add a fun mode-type map where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
-Can only use teleport to go through specific walls // useless
-Some maps have tile opacity of 0, and you need to traverse in complete darkness // useless
-Some maps have the player rotate (use old code) // useless
 In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
 Introduce controls by a small rhyming poem
 Add screen shake
@@ -118,20 +106,14 @@ Swinging box2d lights
 Player leaves trail just like shadow of texture (MS)
 Particle effects, sound effect, animation, when double jumping, jumping, dashing, walking, sprinting, smashing objects, death, sliding
 Shake screen when hitting ground hard
-Add sound effects (jump, landing, walking/sprinting, dash, smashing objects, death) // useless
-Add sliding animation // useless
 When player dies, they explode into flames
 The faster you walk, a bit of black fade in the corners of the screen (vignette), add dash like gunz, or popkart nitro white lines in front of player
 Brawlhalla has cool map artstyle
 More see through objects for cool light effects (bookmarks for reference)
-Limit the number of rotations that the player can do so it doesn't look like it's not rotating // useless
-Add knockback when hit // useless
-Ground that has already been traversed is erased // useless
 Low gravity areas of the world
 Everytime the player jumps, an animation similar to this plays: https://youtu.be/2SaYkWNv0Hg?t=14m37s
 Trampoline or propeller similar to Geometry Dash upwards push things
 Vignette pulses to the beat of the music
-Map is engulfed in flames, you must walk over the flame to quench it // useless
 
 
 
@@ -159,9 +141,36 @@ Square is on a journey to enlighten all the dull squares, making them smart
 
 
 
-Tertiary ideas (meh ideas)
---------------------------
-Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key)
+Ideas up for removal
+--------------------
+Design a map that is hard to traverse. // useless
+Do not set velocities, apply a force. (most of the time) // useless
+Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge // useless
+Check video file on desktop for idea that using slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity // useless
+Also with the rule above, using slowmotion allows you to double jump much higher // useless
+Make cooldowns work properly with slowmotion // useless
+Make jump rely more on how long you hold the jump button, and less initial velocity. // useless
+Deadly obstacles // useless
+Moving platforms // useless
+Player breaks/goes ground if high y-velocity is reached // useless
+You can alternate between foreground and background (similiar to Floating Point) // useless
+Changing mode fades out some tiles (opacity) and fades in others such as Fly'N mechanic (background becomes foreground and vice versa) // useless
+When you go in slow motion, the tileset flips, and maybe make enemies and obstacles depending on the tileset to be visible or not // useless
+Respawn slope // useless
+Make bodybuilder class // useless
+Mimick Dustforce's running up wall // useless
+Make it so that holding down jump button makes you jump higher // useless
+Make dustforce climbing up walls similiar to the wall seen in video 4. pressing up on these walls makes you run up them // useless
+Some enemies don't kill you, they just push you // useless
+Can only use teleport to go through specific walls // useless
+Some maps have tile opacity of 0, and you need to traverse in complete darkness // useless
+Some maps have the player rotate (use old code) // useless
+Add sound effects (jump, landing, walking/sprinting, dash, smashing objects, death) // useless
+Add sliding animation // useless
+Limit the number of rotations that the player can do so it doesn't look like it's not rotating // useless
+Add knockback when hit // useless
+Ground that has already been traversed is erased // useless
+Map is engulfed in flames, you must walk over the flame to quench it // useless
 Walking through an emancipation-grid-esque changes your colour forcefully // useless
 Dying alows you to rewind (similar to dirt 3 mechanic) // useless
 Player light shows invisible and fake tiles // useless
@@ -179,16 +188,16 @@ Light mode: square is white, background is black // useless
 Square always emits a light, mild dark light when in dark mode, mild white light when in light mode // useless
 Make screen flip interpolate rotations // useless
 NOT ONLY ARE THE TILES THAT ARE NOT USED FOR COLLISION 10% OPACITY, BUT THEY ARE PART OF THE BACKGROUND AS WELL // useless
-
-
 Friction and movement is stronger in slowmotion. (The problem is that the input/gameplay mechanics still run at 60Hz) // useless
 Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration // useless
 Transparent tiles // useless
+
+
+
+
 
 
 // How to do the trail
 Make a queue that stores body position every 200 ms
 Queue only has 5
 Draw all 5
-
-https://www.youtube.com/watch?v=5zzQJohPPwc

@@ -19,9 +19,7 @@ public class LevelCreator {
         this.batch = batch;
 
         cam = new OrthographicCamera();
-        //fitViewport = new FitViewport(3f * RESOLUTION_X / PPM, 3f * RESOLUTION_Y / PPM, cam);
         fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM, cam);
-        //fitViewport = new FitViewport(1.5f * RESOLUTION_X / PPM, 1.5f * RESOLUTION_Y / PPM, cam);
     }
 
     public void loadNextLevel() {

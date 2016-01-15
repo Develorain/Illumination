@@ -9,12 +9,11 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.develorain.game.Illumination;
 import com.develorain.game.entities.*;
 import com.develorain.game.tools.lines.*;
 
 import java.util.ArrayList;
-
-import static com.develorain.game.Illumination.PPM;
 
 public class WorldInitializer {
     private Player player;
@@ -115,8 +114,8 @@ public class WorldInitializer {
 
         for (MapObject object : map.getLayers().get(17).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
-            Body body = BodyFactory.createBoxBody(level.getWorld(), null, 0, 0,
-                    rect.width / PPM, rect.height / PPM, 0, false, null, true);
+            Body body = BodyFactory.createBoxBody(level.getWorld(), Rectangle.class, 0, 0,
+                    rect.width / Illumination.PPM, rect.height / Illumination.PPM, 0, false, null, true);
             FixtureDef fdef = SensorFactory.createSensorFixture(rect.getX(), rect.getY(), rect.width, rect.height, EntityType.TRIGGER_SENSOR);
             body.createFixture(fdef);
         }
