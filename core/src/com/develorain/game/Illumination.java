@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.develorain.game.screens.SplashScreen;
 
@@ -32,6 +33,8 @@ public class Illumination extends Game {
     public static AssetManager manager;  // consider not using static keyword
     public SpriteBatch batch;
 
+    public BitmapFont font;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -42,6 +45,8 @@ public class Illumination extends Game {
         manager.load("audio/sounds/endslowmotion.ogg", Sound.class);
         manager.load("audio/sounds/Jump8.wav", Sound.class);
         manager.finishLoading();
+
+        font = new BitmapFont();
 
         setScreen(new SplashScreen(this));
         //setScreen(new PlayScreen(this));
