@@ -59,6 +59,12 @@ public class MainMenuScreen implements Screen {
         buttonPlay = new TextButton("Play", skin, "default");
         buttonPlay.setPosition(110, 260);
         buttonPlay.setSize(280, 60);
+        buttonPlay.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(game.playScreen);
+            }
+        });
         stage.addActor(buttonPlay);
 
         buttonExit = new TextButton("Exit", skin, "default");

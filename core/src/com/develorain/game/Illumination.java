@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.develorain.game.screens.LoadingScreen;
 import com.develorain.game.screens.MainMenuScreen;
+import com.develorain.game.screens.PlayScreen;
 import com.develorain.game.screens.SplashScreen;
 
 public class Illumination extends Game {
@@ -40,6 +41,7 @@ public class Illumination extends Game {
     public LoadingScreen loadingScreen;
     public SplashScreen splashScreen;
     public MainMenuScreen mainMenuScreen;
+    public PlayScreen playScreen;
 
     @Override
     public void create() {
@@ -57,9 +59,9 @@ public class Illumination extends Game {
         loadingScreen = new LoadingScreen(this);
         splashScreen = new SplashScreen(this);
         mainMenuScreen = new MainMenuScreen(this);
+        playScreen = new PlayScreen(this);
 
         setScreen(loadingScreen);
-        //setScreen(new PlayScreen(this));
     }
 
     @Override

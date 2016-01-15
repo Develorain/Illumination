@@ -47,6 +47,10 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
             DEBUG_MODE = !DEBUG_MODE;
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+            game.setScreen(game.mainMenuScreen);
+        }
     }
 
     @Override

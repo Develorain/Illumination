@@ -1,7 +1,6 @@
 THINGS TO REMEMBER
 ------------------
 Check video file on desktop for idea for developing map with slowmo gameplay
-
 The only way to make the game fun is to make moving and jumping feel fun, sound fun!
 
 
@@ -21,6 +20,7 @@ Dispose of maps when done with them, lots of wasted memory
 Holding left and right at the same time makes you travel with no friction.
 If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
 Consider getting rid of playerSprite
+Dispose more
 
 
 
