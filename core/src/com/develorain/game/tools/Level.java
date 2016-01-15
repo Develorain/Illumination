@@ -17,8 +17,8 @@ import com.develorain.game.scenes.HUD;
 import java.util.ArrayList;
 
 import static com.develorain.game.Illumination.PPM;
-import static com.develorain.game.states.PlayState.DEBUG_MODE;
-import static com.develorain.game.states.PlayState.TIME_SLOWDOWN_MODIFIER;
+import static com.develorain.game.screens.PlayScreen.DEBUG_MODE;
+import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class Level {
     private WorldInitializer worldInitializer;

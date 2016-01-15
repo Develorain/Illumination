@@ -1,4 +1,4 @@
-package com.develorain.game.states;
+package com.develorain.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.develorain.game.Illumination;
 import com.develorain.game.tools.LevelCreator;
 
-public class PlayState implements Screen {
+public class PlayScreen implements Screen {
     public static boolean DEBUG_MODE = false;
     public static int TIME_SLOWDOWN_MODIFIER = 1;
 
@@ -18,7 +18,7 @@ public class PlayState implements Screen {
     private Illumination game;
     private LevelCreator levelCreator;
 
-    public PlayState(Illumination game) {
+    public PlayScreen(Illumination game) {
         this.game = game;
 
         levelCreator = new LevelCreator(game.batch);

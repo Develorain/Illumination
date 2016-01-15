@@ -5,7 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.develorain.game.states.PlayState;
+import com.develorain.game.screens.SplashScreen;
 
 public class Illumination extends Game {
     public static final String TITLE = "Illumination";
@@ -43,7 +43,8 @@ public class Illumination extends Game {
         manager.load("audio/sounds/Jump8.wav", Sound.class);
         manager.finishLoading();
 
-        setScreen(new PlayState(this));
+        setScreen(new SplashScreen(this));
+        //setScreen(new PlayScreen(this));
     }
 
     @Override

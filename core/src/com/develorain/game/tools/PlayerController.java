@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.develorain.game.Illumination;
 import com.develorain.game.entities.Player;
 
-import static com.develorain.game.states.PlayState.TIME_SLOWDOWN_MODIFIER;
+import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class PlayerController {
     public static boolean SLOW_MOTION_MODE = false;

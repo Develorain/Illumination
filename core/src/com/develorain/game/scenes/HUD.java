@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.develorain.game.Illumination;
-import com.develorain.game.states.PlayState;
+import com.develorain.game.screens.PlayScreen;
 
 public class HUD {
     public Stage stage;
@@ -54,10 +54,10 @@ public class HUD {
     }
 
     public void update() {
-        if (PlayState.currentTime >= 1) {
+        if (PlayScreen.currentTime >= 1) {
             worldTimer++;
             countdownLabel.setText(String.format("%d", worldTimer));
-            PlayState.currentTime = 0;
+            PlayScreen.currentTime = 0;
         }
     }
 }
