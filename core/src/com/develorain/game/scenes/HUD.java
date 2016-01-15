@@ -16,7 +16,7 @@ import com.develorain.game.screens.PlayScreen;
 
 public class HUD {
     public Stage stage;
-    public BitmapFont myfont;
+    public BitmapFont font;
     private Viewport viewport;
     private int worldTimer;
     private Label countdownLabel;
@@ -35,16 +35,16 @@ public class HUD {
         parameter.borderWidth = 2;
         parameter.borderColor = Color.BLACK;
         parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
-        myfont = generator.generateFont(parameter);
-        myfont.setColor(Color.WHITE);
+        font = generator.generateFont(parameter);
+        font.setColor(Color.WHITE);
         generator.dispose();
 
         Table table = new Table();
         table.top();
         table.setFillParent(true);
 
-        countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(myfont, Color.WHITE));
-        timeLabel = new Label("Time", new Label.LabelStyle(myfont, Color.WHITE));
+        countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(font, Color.WHITE));
+        timeLabel = new Label("Time", new Label.LabelStyle(font, Color.WHITE));
 
         table.add(timeLabel).expandX().padTop(10);
         table.row();

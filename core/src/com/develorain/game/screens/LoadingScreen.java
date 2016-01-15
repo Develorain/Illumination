@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.develorain.game.Illumination;
 
 public class LoadingScreen implements Screen {
@@ -30,6 +32,8 @@ public class LoadingScreen implements Screen {
 
     private void queueAssets() {
         game.assetManager.load("graphics/Logo1.png", Texture.class);
+        game.assetManager.load("graphics/uiskin.atlas", TextureAtlas.class);
+        game.assetManager.load("graphics/uiskin.json", Skin.class);
         game.assetManager.finishLoading();
     }
 
