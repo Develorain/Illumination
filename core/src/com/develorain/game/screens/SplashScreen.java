@@ -31,6 +31,14 @@ public class SplashScreen implements Screen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+
+        Runnable transitionRunnable = new Runnable() {
+            @Override
+            public void run() {
+                game.setScreen(game.mainMenuScreen);
+            }
+        };
+
         //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
         splashTexture = game.assetManager.get("graphics/Logo1.png", Texture.class);
         splashImage = new Image(splashTexture);
@@ -41,7 +49,7 @@ public class SplashScreen implements Screen {
                 parallel(fadeIn(2f, Interpolation.pow2),
                         scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
                         moveTo(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2, 2f, Interpolation.swing)),
-                delay(1.5f), fadeOut(1.25f)));
+                delay(1.5f), fadeOut(1.25f), run(transitionRunnable)));
 
         stage.addActor(splashImage);
     }
@@ -53,7 +61,7 @@ public class SplashScreen implements Screen {
     @Override
     public void render(float dt) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            game.setScreen(new PlayScreen(game));
+            game.setScreen(new MainMenuScreen(game));
         }
 
         update(dt);

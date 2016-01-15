@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.develorain.game.Illumination;
 
 public class LoadingScreen implements Screen {
@@ -33,7 +32,6 @@ public class LoadingScreen implements Screen {
     private void queueAssets() {
         game.assetManager.load("graphics/Logo1.png", Texture.class);
         game.assetManager.load("graphics/uiskin.atlas", TextureAtlas.class);
-        game.assetManager.load("graphics/uiskin.json", Skin.class);
         game.assetManager.finishLoading();
     }
 
@@ -41,7 +39,7 @@ public class LoadingScreen implements Screen {
         progress = MathUtils.lerp(progress, game.assetManager.getProgress(), 0.1f);
 
         if (game.assetManager.update() && progress >= game.assetManager.getProgress() - 0.001f) {
-            game.setScreen(game.splashScreen);
+            game.setScreen(game.mainMenuScreen);
         }
     }
 
