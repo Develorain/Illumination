@@ -32,7 +32,7 @@ public class HUD {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/autoradiographic.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 30;
-        parameter.borderWidth = 2;
+        parameter.borderWidth = 1;
         parameter.borderColor = Color.BLACK;
         parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
         font = generator.generateFont(parameter);

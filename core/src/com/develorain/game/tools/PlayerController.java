@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.develorain.game.Illumination;
 import com.develorain.game.entities.Player;
 
 import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;

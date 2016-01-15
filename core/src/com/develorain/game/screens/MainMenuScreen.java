@@ -5,7 +5,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -19,7 +18,6 @@ public class MainMenuScreen implements Screen {
 
     private OrthographicCamera cam;
     private Stage stage;
-    private ShapeRenderer shapeRenderer;
     private Skin skin;
 
     private TextButton buttonPlay, buttonExit;
@@ -57,8 +55,9 @@ public class MainMenuScreen implements Screen {
 
     private void initButtons() {
         buttonPlay = new TextButton("Play", skin, "default");
-        buttonPlay.setPosition(110, 260);
         buttonPlay.setSize(280, 60);
+        buttonPlay.setPosition(Illumination.RESOLUTION_X / 2 - buttonPlay.getWidth() / 2,
+                Illumination.RESOLUTION_Y / 2 - buttonPlay.getHeight() / 2);
         buttonPlay.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -68,8 +67,9 @@ public class MainMenuScreen implements Screen {
         stage.addActor(buttonPlay);
 
         buttonExit = new TextButton("Exit", skin, "default");
-        buttonExit.setPosition(110, 190);
         buttonExit.setSize(280, 60);
+        buttonExit.setPosition(Illumination.RESOLUTION_X / 2 - buttonExit.getWidth() / 2,
+                Illumination.RESOLUTION_Y / 2 - buttonExit.getHeight() / 2 - buttonExit.getHeight());
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
