@@ -26,18 +26,15 @@ public class SplashScreen implements Screen {
         this.game = game;
         cam = new OrthographicCamera();
         stage = new Stage(new StretchViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, cam));
-        Gdx.input.setInputProcessor(stage);
-
-        splashTexture = game.assetManager.get("graphics/Logo1.png", Texture.class);
-        splashImage = new Image(splashTexture);
-        splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
-
-        stage.addActor(splashImage);
     }
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(stage);
         //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
+        splashTexture = game.assetManager.get("graphics/Logo1.png", Texture.class);
+        splashImage = new Image(splashTexture);
+        splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
         splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() - splashImage.getHeight() / 2);
 
         splashImage.addAction(sequence(alpha(0f), scaleTo(0.1f, 0.1f),
@@ -45,6 +42,8 @@ public class SplashScreen implements Screen {
                         scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
                         moveTo(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2, 2f, Interpolation.swing)),
                 delay(1.5f), fadeOut(1.25f)));
+
+        stage.addActor(splashImage);
     }
 
     public void update(float dt) {

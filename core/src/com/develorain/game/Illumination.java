@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.develorain.game.screens.LoadingScreen;
+import com.develorain.game.screens.SplashScreen;
 
 public class Illumination extends Game {
     public static final String TITLE = "Illumination";
@@ -30,10 +31,13 @@ public class Illumination extends Game {
     public static final short SCRIPTED_EVENT_TRIGGER_BIT = 8192;
     // last bit is -32768
 
-    public AssetManager assetManager;  // consider not using static keyword
+    public AssetManager assetManager;
     public SpriteBatch batch;
 
     public BitmapFont font;
+
+    public LoadingScreen loadingScreen;
+    public SplashScreen splashScreen;
 
     @Override
     public void create() {
@@ -48,9 +52,10 @@ public class Illumination extends Game {
 
         font = new BitmapFont();
 
-        setScreen(new LoadingScreen(this));
-        //setScreen(new SplashScreen(this));
-        //setScreen(new PlayScreen(this));
+        loadingScreen = new LoadingScreen(this);
+        splashScreen = new SplashScreen(this);
+
+        setScreen(loadingScreen);
     }
 
     @Override
@@ -63,6 +68,7 @@ public class Illumination extends Game {
         batch.dispose();
         font.dispose();
         assetManager.dispose();
-        getScreen().dispose();
+        loadingScreen.dispose();
+        splashScreen.dispose();
     }
 }

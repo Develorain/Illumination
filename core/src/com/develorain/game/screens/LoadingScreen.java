@@ -19,16 +19,13 @@ public class LoadingScreen implements Screen {
     public LoadingScreen(final Illumination game) {
         this.game = game;
         cam = new OrthographicCamera(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y);
-
         shapeRenderer = new ShapeRenderer();
-        progress = 0f;
-
-        queueAssets();
     }
 
     @Override
     public void show() {
-
+        progress = 0f;
+        queueAssets();
     }
 
     private void queueAssets() {
@@ -40,7 +37,7 @@ public class LoadingScreen implements Screen {
         progress = MathUtils.lerp(progress, game.assetManager.getProgress(), 0.1f);
 
         if (game.assetManager.update() && progress >= game.assetManager.getProgress() - 0.001f) {
-            game.setScreen(new SplashScreen(game));
+            game.setScreen(game.splashScreen);
         }
     }
 
