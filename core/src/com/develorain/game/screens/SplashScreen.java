@@ -6,10 +6,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.develorain.game.Illumination;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class SplashScreen implements Screen {
 
@@ -18,6 +21,7 @@ public class SplashScreen implements Screen {
     private OrthographicCamera cam;
 
     private Image splashImage;
+    private Texture splashTexture;
 
     public SplashScreen(final Illumination game) {
         this.game = game;
@@ -25,16 +29,23 @@ public class SplashScreen implements Screen {
         stage = new Stage(new StretchViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, cam));
         Gdx.input.setInputProcessor(stage);
 
-        Texture splashTexture = new Texture(Gdx.files.internal("graphics/Logo.png"));
+        splashTexture = new Texture(Gdx.files.internal("graphics/Logo1.png"));
         splashImage = new Image(splashTexture);
-        splashImage.setPosition(stage.getWidth() - splashTexture.getWidth(), stage.getHeight() - splashTexture.getHeight());
+        splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
 
         stage.addActor(splashImage);
     }
 
     @Override
     public void show() {
+        //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
+        splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() - splashImage.getHeight() / 2);
 
+        splashImage.addAction(sequence(alpha(0f), scaleTo(0.1f, 0.1f),
+                parallel(fadeIn(2f, Interpolation.pow2),
+                        scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
+                        moveTo(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2, 2f, Interpolation.swing)),
+                delay(1.5f), fadeOut(1.25f)));
     }
 
     public void update(float dt) {
@@ -83,6 +94,6 @@ public class SplashScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
     }
 }
