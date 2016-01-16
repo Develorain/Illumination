@@ -128,7 +128,7 @@ public class Level {
 
         batch.end();  // END BATCH
 
-        rayHandler.render();
+        //rayHandler.render();
 
         batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();

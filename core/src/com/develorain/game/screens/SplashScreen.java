@@ -40,6 +40,7 @@ public class SplashScreen implements Screen {
         };
 
         //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
+
         splashTexture = game.assetManager.get("graphics/Logo1.png", Texture.class);
         splashImage = new Image(splashTexture);
         splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
@@ -66,7 +67,7 @@ public class SplashScreen implements Screen {
 
         update(dt);
 
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
+        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
