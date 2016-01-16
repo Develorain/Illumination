@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import static com.develorain.game.Illumination.PPM;
 import static com.develorain.game.Illumination.RESOLUTION_X;
+import static com.develorain.game.Illumination.RESOLUTION_Y;
 
 public class LevelCreator {
     public int currentLevel = 0;
@@ -20,7 +21,7 @@ public class LevelCreator {
         this.batch = batch;
 
         cam = new OrthographicCamera();
-        fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_X / 16 * 9 / PPM, cam);
+        fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM, cam);
     }
 
     public void loadNextLevel() {
