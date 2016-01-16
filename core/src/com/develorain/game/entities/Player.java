@@ -33,8 +33,8 @@ public class Player {
     private World world;
     private RayHandler rayHandler;
     private Sprite playerSprite;
-    private ArrayList<PointLight> pointLights = new ArrayList<>();
-    private ArrayList<Sprite> sprites = new ArrayList<>();
+    private ArrayList<PointLight> pointLights = new ArrayList();
+    private ArrayList<Sprite> sprites = new ArrayList();
     private Level level;
 
     private float timer = 0;

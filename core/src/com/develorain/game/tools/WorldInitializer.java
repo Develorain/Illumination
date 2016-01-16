@@ -25,7 +25,7 @@ public class WorldInitializer {
         this.level = level;
 
         for (int i = 0; i < enemies.length; i++) {
-            enemies[i] = new ArrayList<>();
+            enemies[i] = new ArrayList();
         }
 
         TiledMap map = level.getTiledMap();
