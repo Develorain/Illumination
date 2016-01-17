@@ -64,8 +64,8 @@ public class WorldInitializer {
         for (MapObject object : map.getLayers().get(7).getObjects().getByType(RectangleMapObject.class)) {
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
-            LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.BLUE, 8, 270, 30);
-            LightBuilder.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.WHITE, 8, 270, 30);
+            LightFactory.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.BLUE, 8, 270, 30);
+            LightFactory.createConeLight(rayHandler, rect.getX(), rect.getY(), Color.WHITE, 8, 270, 30);
         }
 
         for (MapObject object : map.getLayers().get(8).getObjects().getByType(RectangleMapObject.class)) {

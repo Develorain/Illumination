@@ -6,11 +6,11 @@ import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
+import com.develorain.game.Illumination;
 
-import static com.develorain.game.Illumination.*;
 import static com.develorain.game.tools.PlayerController.SLOW_MOTION_MODE;
 
-public class LightBuilder {
+public class LightFactory {
     public static PointLight createPointLight(RayHandler rayHandler, Body body, Color c, float distance) {
         PointLight pl = new PointLight(rayHandler, 120, c, distance, 0, 0);
         pl.setSoftnessLength(0.5f);
@@ -18,12 +18,12 @@ public class LightBuilder {
         pl.setXray(false);
 
         Filter filter = new Filter();
-        filter.maskBits = WHITE_LINE_BIT | UNCLIMBABLE_LINE_BIT;
+        filter.maskBits = WorldContactListener.WHITE_LINE_BIT | WorldContactListener.UNCLIMBABLE_LINE_BIT;
 
         if (!SLOW_MOTION_MODE) {
-            filter.maskBits |= BLUE_LINE_BIT;
+            filter.maskBits |= WorldContactListener.BLUE_LINE_BIT;
         } else {
-            filter.maskBits |= RED_LINE_BIT;
+            filter.maskBits |= WorldContactListener.RED_LINE_BIT;
         }
 
         pl.setContactFilter(filter);
@@ -32,7 +32,7 @@ public class LightBuilder {
     }
 
     public static PointLight createPointLight(RayHandler rayHandler, float x, float y, Color c, float distance) {
-        PointLight pl = new PointLight(rayHandler, 120, c, distance, x / PPM, y / PPM);
+        PointLight pl = new PointLight(rayHandler, 120, c, distance, x / Illumination.PPM, y / Illumination.PPM);
         pl.setSoftnessLength(0.5f);
         pl.setXray(false);
         return pl;
@@ -47,7 +47,7 @@ public class LightBuilder {
     }
 
     public static ConeLight createConeLight(RayHandler rayHandler, float x, float y, Color c, float dist, float direction, float cone) {
-        ConeLight cl = new ConeLight(rayHandler, 120, c, dist, x / PPM, y / PPM, direction, cone);
+        ConeLight cl = new ConeLight(rayHandler, 120, c, dist, x / Illumination.PPM, y / Illumination.PPM, direction, cone);
         cl.setSoftnessLength(2f); // sets intensity of shadows, higher number = less shadows
         cl.setXray(false);          // changes light from being in background to foreground. when x-ray is true, shadows are not formed
         return cl;

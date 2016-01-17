@@ -3,9 +3,9 @@ package com.develorain.game.tools;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.develorain.game.Illumination;
 import com.develorain.game.entities.EntityType;
 
-import static com.develorain.game.Illumination.*;
 import static com.develorain.game.tools.PlayerController.SLOW_MOTION_MODE;
 
 public class SensorFactory {
@@ -24,69 +24,69 @@ public class SensorFactory {
         switch (type) {
             case FOOT_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2((-PLAYER_WIDTH * sensorWidth) / PPM, 0),
-                        new Vector2((PLAYER_WIDTH * sensorWidth) / PPM, 0),
-                        new Vector2((-PLAYER_WIDTH * sensorWidth) / PPM, -PLAYER_HEIGHT * sensorHeight / PPM),
-                        new Vector2((PLAYER_WIDTH * sensorWidth) / PPM, -PLAYER_HEIGHT * sensorHeight / PPM)
+                        new Vector2((-PLAYER_WIDTH * sensorWidth) / Illumination.PPM, 0),
+                        new Vector2((PLAYER_WIDTH * sensorWidth) / Illumination.PPM, 0),
+                        new Vector2((-PLAYER_WIDTH * sensorWidth) / Illumination.PPM, -PLAYER_HEIGHT * sensorHeight / Illumination.PPM),
+                        new Vector2((PLAYER_WIDTH * sensorWidth) / Illumination.PPM, -PLAYER_HEIGHT * sensorHeight / Illumination.PPM)
                 };
 
-                fdef.filter.categoryBits = PLAYER_FOOT_SENSOR_BIT;
+                fdef.filter.categoryBits = WorldContactListener.PLAYER_FOOT_SENSOR_BIT;
 
-                fdef.filter.maskBits = WHITE_LINE_BIT;
+                fdef.filter.maskBits = WorldContactListener.WHITE_LINE_BIT;
 
                 if (!SLOW_MOTION_MODE) {
-                    fdef.filter.maskBits |= BLUE_LINE_BIT;
+                    fdef.filter.maskBits |= WorldContactListener.BLUE_LINE_BIT;
                 } else {
-                    fdef.filter.maskBits |= RED_LINE_BIT;
+                    fdef.filter.maskBits |= WorldContactListener.RED_LINE_BIT;
                 }
                 break;
             case LEFT_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2(sensorWidth * -PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * sensorHeight) / PPM),
-                        new Vector2(0 / PPM, (PLAYER_HEIGHT * sensorHeight) / PPM),
-                        new Vector2(sensorWidth * -PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * sensorHeight) / PPM),
-                        new Vector2(0 / PPM, (-PLAYER_HEIGHT * sensorHeight) / PPM)
+                        new Vector2(sensorWidth * -PLAYER_WIDTH / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(0 / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(sensorWidth * -PLAYER_WIDTH / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(0 / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM)
                 };
 
-                fdef.filter.categoryBits = PLAYER_LEFT_SENSOR_BIT;
+                fdef.filter.categoryBits = WorldContactListener.PLAYER_LEFT_SENSOR_BIT;
 
-                fdef.filter.maskBits = WHITE_LINE_BIT;
+                fdef.filter.maskBits = WorldContactListener.WHITE_LINE_BIT;
 
                 if (!SLOW_MOTION_MODE) {
-                    fdef.filter.maskBits |= BLUE_LINE_BIT;
+                    fdef.filter.maskBits |= WorldContactListener.BLUE_LINE_BIT;
                 } else {
-                    fdef.filter.maskBits |= RED_LINE_BIT;
+                    fdef.filter.maskBits |= WorldContactListener.RED_LINE_BIT;
                 }
                 break;
             case RIGHT_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2(0 / PPM, (PLAYER_HEIGHT * sensorHeight) / PPM),
-                        new Vector2(sensorWidth * PLAYER_WIDTH / PPM, (PLAYER_HEIGHT * sensorHeight) / PPM),
-                        new Vector2(0 / PPM, (-PLAYER_HEIGHT * sensorHeight) / PPM),
-                        new Vector2(sensorWidth * PLAYER_WIDTH / PPM, (-PLAYER_HEIGHT * sensorHeight) / PPM)
+                        new Vector2(0 / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(sensorWidth * PLAYER_WIDTH / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(0 / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(sensorWidth * PLAYER_WIDTH / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM)
                 };
 
-                fdef.filter.categoryBits = PLAYER_RIGHT_SENSOR_BIT;
+                fdef.filter.categoryBits = WorldContactListener.PLAYER_RIGHT_SENSOR_BIT;
 
-                fdef.filter.maskBits = WHITE_LINE_BIT;
+                fdef.filter.maskBits = WorldContactListener.WHITE_LINE_BIT;
 
                 if (!SLOW_MOTION_MODE) {
-                    fdef.filter.maskBits |= BLUE_LINE_BIT;
+                    fdef.filter.maskBits |= WorldContactListener.BLUE_LINE_BIT;
                 } else {
-                    fdef.filter.maskBits |= RED_LINE_BIT;
+                    fdef.filter.maskBits |= WorldContactListener.RED_LINE_BIT;
                 }
                 break;
             case TRIGGER_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2(x / PPM, (y + sensorHeight) / PPM),
-                        new Vector2((x + sensorWidth) / PPM, (y + sensorHeight) / PPM),
-                        new Vector2((x + sensorWidth) / PPM, y / PPM),
-                        new Vector2(x / PPM, y / PPM)
+                        new Vector2(x / Illumination.PPM, (y + sensorHeight) / Illumination.PPM),
+                        new Vector2((x + sensorWidth) / Illumination.PPM, (y + sensorHeight) / Illumination.PPM),
+                        new Vector2((x + sensorWidth) / Illumination.PPM, y / Illumination.PPM),
+                        new Vector2(x / Illumination.PPM, y / Illumination.PPM)
                 };
 
-                fdef.filter.categoryBits = SCRIPTED_EVENT_TRIGGER_BIT;
+                fdef.filter.categoryBits = WorldContactListener.SCRIPTED_EVENT_TRIGGER_BIT;
 
-                fdef.filter.maskBits = PLAYER_BIT;
+                fdef.filter.maskBits = WorldContactListener.PLAYER_BIT;
                 break;
         }
 

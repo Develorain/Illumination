@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.develorain.game.tools.BodyFactory;
 import com.develorain.game.tools.Level;
-import com.develorain.game.tools.LightBuilder;
+import com.develorain.game.tools.LightFactory;
 import com.develorain.game.tools.SensorFactory;
 
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class Player {
     }
 
     private void createLights(RayHandler rayHandler) {
-        pointLights.add(LightBuilder.createPointLight(rayHandler, body, Color.WHITE, 1));
+        pointLights.add(LightFactory.createPointLight(rayHandler, body, Color.WHITE, 1));
     }
 
     public Player destroyAndRemake() {

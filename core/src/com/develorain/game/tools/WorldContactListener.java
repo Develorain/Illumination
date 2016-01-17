@@ -3,9 +3,23 @@ package com.develorain.game.tools;
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.entities.Enemy;
 
-import static com.develorain.game.Illumination.*;
-
 public class WorldContactListener implements ContactListener {
+    public static final short WHITE_LINE_BIT = 1;
+    public static final short BLUE_LINE_BIT = 2;
+    public static final short RED_LINE_BIT = 4;
+    public static final short PLAYER_BIT = 8;
+    public static final short PLAYER_FOOT_SENSOR_BIT = 16; // remove
+    public static final short PLAYER_LEFT_SENSOR_BIT = 32;  // remove
+    public static final short PLAYER_RIGHT_SENSOR_BIT = 64;  // remove
+    public static final short WHITE_ENEMY_BIT = 128;
+    public static final short BLUE_ENEMY_BIT = 256;
+    public static final short RED_ENEMY_BIT = 512;
+    public static final short BOUNDARY_LINE_BIT = 1024;
+    public static final short END_LINE_BIT = 2048;
+    public static final short UNCLIMBABLE_LINE_BIT = 4096;
+    public static final short SCRIPTED_EVENT_TRIGGER_BIT = 8192;
+    // last bit is -32768
+
     private PlayerController playerController;
     private LevelCreator levelCreator;
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.develorain.game.Illumination;
 import com.develorain.game.entities.Player;
 
 import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
@@ -28,10 +29,12 @@ public class PlayerController {
         this.player = player;
         this.body = player.body;
 
-        //music = Illumination.assetManager.get("audio/music/disconnected.ogg", Music.class);
-        //music.setVolume(0.5f);
-        //music.setLooping(true);
-        //music.play();
+        /*
+        music = Illumination.assetManager.get("audio/music/disconnected.ogg", Music.class);
+        music.setVolume(0.5f);
+        music.setLooping(true);
+        music.play();
+        */
     }
 
     public void handleInput(float dt) {

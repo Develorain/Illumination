@@ -3,7 +3,6 @@ package com.develorain.game.tools;
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.entities.EntityType;
 
-import static com.develorain.game.Illumination.*;
 import static com.develorain.game.tools.PlayerController.SLOW_MOTION_MODE;
 
 public class BodyFactory {
@@ -37,28 +36,28 @@ public class BodyFactory {
 
             switch (type) {
                 case WHITE_ENEMY:
-                    fdef.filter.categoryBits = WHITE_ENEMY_BIT;
-                    fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT | RED_ENEMY_BIT | WHITE_LINE_BIT |
-                            BLUE_LINE_BIT | RED_LINE_BIT | BOUNDARY_LINE_BIT | PLAYER_BIT;
+                    fdef.filter.categoryBits = WorldContactListener.WHITE_ENEMY_BIT;
+                    fdef.filter.maskBits = WorldContactListener.WHITE_ENEMY_BIT | WorldContactListener.BLUE_ENEMY_BIT | WorldContactListener.RED_ENEMY_BIT | WorldContactListener.WHITE_LINE_BIT |
+                            WorldContactListener.BLUE_LINE_BIT | WorldContactListener.RED_LINE_BIT | WorldContactListener.BOUNDARY_LINE_BIT | WorldContactListener.PLAYER_BIT;
                     break;
                 case BLUE_ENEMY:
-                    fdef.filter.categoryBits = BLUE_ENEMY_BIT;
-                    fdef.filter.maskBits = WHITE_ENEMY_BIT | BLUE_ENEMY_BIT | WHITE_LINE_BIT | BLUE_LINE_BIT |
-                            RED_LINE_BIT | BOUNDARY_LINE_BIT | PLAYER_BIT;
+                    fdef.filter.categoryBits = WorldContactListener.BLUE_ENEMY_BIT;
+                    fdef.filter.maskBits = WorldContactListener.WHITE_ENEMY_BIT | WorldContactListener.BLUE_ENEMY_BIT | WorldContactListener.WHITE_LINE_BIT | WorldContactListener.BLUE_LINE_BIT |
+                            WorldContactListener.RED_LINE_BIT | WorldContactListener.BOUNDARY_LINE_BIT | WorldContactListener.PLAYER_BIT;
                     break;
                 case RED_ENEMY:
-                    fdef.filter.categoryBits = RED_ENEMY_BIT;
-                    fdef.filter.maskBits = WHITE_ENEMY_BIT | RED_ENEMY_BIT | WHITE_LINE_BIT | BLUE_LINE_BIT |
-                            RED_LINE_BIT | BOUNDARY_LINE_BIT | PLAYER_BIT;
+                    fdef.filter.categoryBits = WorldContactListener.RED_ENEMY_BIT;
+                    fdef.filter.maskBits = WorldContactListener.WHITE_ENEMY_BIT | WorldContactListener.RED_ENEMY_BIT | WorldContactListener.WHITE_LINE_BIT | WorldContactListener.BLUE_LINE_BIT |
+                            WorldContactListener.RED_LINE_BIT | WorldContactListener.BOUNDARY_LINE_BIT | WorldContactListener.PLAYER_BIT;
                     break;
                 case PLAYER:
-                    fdef.filter.categoryBits = PLAYER_BIT;
-                    fdef.filter.maskBits = WHITE_LINE_BIT | UNCLIMBABLE_LINE_BIT | WHITE_ENEMY_BIT | END_LINE_BIT | SCRIPTED_EVENT_TRIGGER_BIT;
+                    fdef.filter.categoryBits = WorldContactListener.PLAYER_BIT;
+                    fdef.filter.maskBits = WorldContactListener.WHITE_LINE_BIT | WorldContactListener.UNCLIMBABLE_LINE_BIT | WorldContactListener.WHITE_ENEMY_BIT | WorldContactListener.END_LINE_BIT | WorldContactListener.SCRIPTED_EVENT_TRIGGER_BIT;
 
                     if (!SLOW_MOTION_MODE) {
-                        fdef.filter.maskBits |= BLUE_LINE_BIT | BLUE_ENEMY_BIT;
+                        fdef.filter.maskBits |= WorldContactListener.BLUE_LINE_BIT | WorldContactListener.BLUE_ENEMY_BIT;
                     } else {
-                        fdef.filter.maskBits |= RED_LINE_BIT | RED_ENEMY_BIT;
+                        fdef.filter.maskBits |= WorldContactListener.RED_LINE_BIT | WorldContactListener.RED_ENEMY_BIT;
                     }
                     break;
             }

@@ -39,18 +39,14 @@ public class SplashScreen implements Screen {
             }
         };
 
-        //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
-
-        splashTexture = game.assetManager.get("graphics/Logo1.png", Texture.class);
+        splashTexture = game.assetManager.get("graphics/leaf.png", Texture.class);
         splashImage = new Image(splashTexture);
         splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
-        splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() - splashImage.getHeight() / 2);
+        //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() - splashImage.getHeight() / 2);
+        splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
 
-        splashImage.addAction(sequence(alpha(0f), scaleTo(0.1f, 0.1f),
-                parallel(fadeIn(2f, Interpolation.pow2),
-                        scaleTo(2f, 2f, 2.5f, Interpolation.pow5),
-                        moveTo(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2, 2f, Interpolation.swing)),
-                delay(1.5f), fadeOut(1.25f), run(transitionRunnable)));
+        splashImage.addAction(sequence(alpha(0f), scaleTo(0.5f, 0.5f),fadeIn(1f, Interpolation.pow2), delay(1f),
+                fadeOut(1f), run(transitionRunnable)));
 
         stage.addActor(splashImage);
     }
@@ -67,14 +63,10 @@ public class SplashScreen implements Screen {
 
         update(dt);
 
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.draw();
-
-        game.batch.begin();
-        game.font.draw(game.batch, "Splash screen", 20, 20);
-        game.batch.end();
     }
 
     @Override

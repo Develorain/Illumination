@@ -3,7 +3,7 @@ package com.develorain.game.tools.lines;
 import com.badlogic.gdx.maps.MapObject;
 import com.develorain.game.tools.Level;
 
-import static com.develorain.game.Illumination.UNCLIMBABLE_LINE_BIT;
+import static com.develorain.game.tools.WorldContactListener.UNCLIMBABLE_LINE_BIT;
 
 public class UnclimbableLine extends Line {
     public UnclimbableLine(MapObject object, Level level) {

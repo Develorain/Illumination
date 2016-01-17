@@ -29,9 +29,9 @@ public class HUD {
         worldTimer = 0;
 
         // FONT
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/autoradiographic.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/unsteady oversteer.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 30;
+        parameter.size = 80;
         parameter.borderWidth = 1;
         parameter.borderColor = Color.BLACK;
         parameter.characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.!'()>?:";
@@ -44,7 +44,7 @@ public class HUD {
         table.setFillParent(true);
 
         countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(font, Color.WHITE));
-        timeLabel = new Label("Time", new Label.LabelStyle(font, Color.WHITE));
+        timeLabel = new Label("ILLUMINATION", new Label.LabelStyle(font, Color.WHITE));
 
         table.add(timeLabel).expandX().padTop(10);
         table.row();

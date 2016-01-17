@@ -3,7 +3,7 @@ package com.develorain.game.tools.lines;
 import com.badlogic.gdx.maps.MapObject;
 import com.develorain.game.tools.Level;
 
-import static com.develorain.game.Illumination.END_LINE_BIT;
+import static com.develorain.game.tools.WorldContactListener.END_LINE_BIT;
 
 public class EndLine extends Line {
     public EndLine(MapObject object, Level level) {

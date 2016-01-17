@@ -30,7 +30,9 @@ public class LoadingScreen implements Screen {
     }
 
     private void queueAssets() {
-        game.assetManager.load("graphics/Logo1.png", Texture.class);
+        game.assetManager.load("graphics/leaf.png", Texture.class);
+        game.assetManager.load("graphics/leafblurred.png", Texture.class);
+        game.assetManager.load("graphics/develorain.png", Texture.class);
         game.assetManager.load("graphics/uiskin.atlas", TextureAtlas.class);
         game.assetManager.finishLoading();
     }
@@ -47,20 +49,13 @@ public class LoadingScreen implements Screen {
     public void render(float dt) {
         update(dt);
 
-        Gdx.gl.glClearColor(1f, 1f, 1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(32, cam.viewportHeight / 2 - 8, cam.viewportWidth - 64, 2);
-
-        shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(32, cam.viewportHeight / 2 - 8, progress * (cam.viewportWidth - 64), 2);
         shapeRenderer.end();
-
-        game.batch.begin();
-        game.font.draw(game.batch, "Loading screen", 20, 20);
-        game.batch.end();
     }
 
     @Override
