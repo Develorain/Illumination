@@ -19,7 +19,6 @@ public class Illumination extends Game {
 
     public AssetManager assetManager;
     public SpriteBatch batch;
-    public BitmapFont font;
 
     public LoadingScreen loadingScreen;
     public SplashScreen splashScreen;
@@ -37,8 +36,6 @@ public class Illumination extends Game {
         assetManager.load("audio/sounds/Jump8.wav", Sound.class);
         assetManager.finishLoading();
 
-        font = new BitmapFont();
-
         loadingScreen = new LoadingScreen(this);
         splashScreen = new SplashScreen(this);
         mainMenuScreen = new MainMenuScreen(this);
@@ -55,7 +52,6 @@ public class Illumination extends Game {
     @Override
     public void dispose() {
         batch.dispose();
-        font.dispose();
         assetManager.dispose();
         loadingScreen.dispose();
         splashScreen.dispose();

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -27,10 +28,13 @@ public class MainMenuScreen implements Screen {
     private Image splashImage;
     private Texture splashTexture;
 
+    public BitmapFont font;
+
     public MainMenuScreen(Illumination game) {
         this.game = game;
         cam = new OrthographicCamera();
         stage = new Stage(new StretchViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, cam));
+        font = new BitmapFont();
     }
 
     @Override
@@ -38,7 +42,7 @@ public class MainMenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
         skin = new Skin();
         skin.addRegions(game.assetManager.get("graphics/uiskin.atlas", TextureAtlas.class));
-        skin.add("default-font", game.font);
+        skin.add("default-font", font);
         skin.load(Gdx.files.internal("graphics/uiskin.json"));
 
         initButtons();
@@ -116,6 +120,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        font.dispose();
     }
 }
