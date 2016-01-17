@@ -6,7 +6,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.develorain.game.Illumination;
 import com.develorain.game.entities.EntityType;
 
-import static com.develorain.game.tools.PlayerController.SLOW_MOTION_MODE;
+import static com.develorain.game.tools.GameInputHandler.SLOW_MOTION_MODE;
 
 public class SensorFactory {
     public static final int PLAYER_WIDTH = 16;     // pixels

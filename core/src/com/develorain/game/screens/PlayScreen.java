@@ -3,47 +3,39 @@ package com.develorain.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.develorain.game.Illumination;
-import com.develorain.game.tools.LevelCreator;
+import com.develorain.game.tools.Level;
+
+import static com.develorain.game.Illumination.*;
 
 public class PlayScreen implements Screen {
     public static boolean DEBUG_MODE = false;
     public static int TIME_SLOWDOWN_MODIFIER = 1;
 
-    // Stores current game time
     public static float currentTime = 0;
-
-    // Reference to the game, used to set Screens
+    public int currentLevel = 0;
+    public FitViewport fitViewport;
     private Illumination game;
-    private LevelCreator levelCreator;
+    private Level level;
+    private OrthographicCamera cam;
 
     public PlayScreen(Illumination game) {
         this.game = game;
+        cam = new OrthographicCamera();
+        fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM, cam);
 
-        levelCreator = new LevelCreator(game.batch);
-        levelCreator.loadNextLevel();
-    }
-
-    public void update(float dt) {
-        levelCreator.update(dt);
-
-        currentTime += dt;
-
-        handleInput();
+        loadNextLevel();
     }
 
     @Override
     public void render(float dt) {
-        update(dt);
+        currentTime += dt;
 
-        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        level.update(dt);
+        level.render(dt);
 
-        levelCreator.render(dt);
-    }
-
-    public void handleInput() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
             DEBUG_MODE = !DEBUG_MODE;
         }
@@ -55,6 +47,20 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            loadNextLevel();
+        }
+    }
+
+    public void loadNextLevel() {
+        currentLevel++;
+
+        if (level != null) {
+            level.dispose();
+        }
+
+        level = new Level(this, cam, currentLevel);
     }
 
     @Override
@@ -63,8 +69,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        //levelCreator.fitViewport.update(width, height);
-        levelCreator.resize(width, height);
+        fitViewport.update(width, height);
     }
 
     @Override

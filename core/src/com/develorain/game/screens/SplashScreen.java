@@ -2,30 +2,21 @@ package com.develorain.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.develorain.game.Illumination;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
-public class SplashScreen implements Screen {
-    private final Illumination game;
-    private Stage stage;
-    private OrthographicCamera cam;
+public class SplashScreen extends MyScreen {
 
     private Image splashImage;
     private Texture splashTexture;
 
     public SplashScreen(final Illumination game) {
-        this.game = game;
-        cam = new OrthographicCamera();
-        stage = new Stage(new StretchViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, cam));
+        super(game);
     }
 
     @Override
@@ -45,7 +36,7 @@ public class SplashScreen implements Screen {
         //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() - splashImage.getHeight() / 2);
         splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
 
-        splashImage.addAction(sequence(alpha(0f), scaleTo(0.5f, 0.5f),fadeIn(1f, Interpolation.pow2), delay(1f),
+        splashImage.addAction(sequence(alpha(0f), scaleTo(0.5f, 0.5f), fadeIn(1f, Interpolation.pow2), delay(1f),
                 fadeOut(1f), run(transitionRunnable)));
 
         stage.addActor(splashImage);

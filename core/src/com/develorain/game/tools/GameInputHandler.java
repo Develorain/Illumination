@@ -10,7 +10,7 @@ import com.develorain.game.entities.Player;
 
 import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
-public class PlayerController {
+public class GameInputHandler {
     public static boolean SLOW_MOTION_MODE = false;
     private final int SPRINT_SPEED_CAP = 13;
     private final int REGULAR_SPEED_CAP = 8;
@@ -25,7 +25,7 @@ public class PlayerController {
     private Body body;
     private Music music;
 
-    public PlayerController(Player player) {
+    public GameInputHandler(Player player) {
         this.player = player;
         this.body = player.body;
 

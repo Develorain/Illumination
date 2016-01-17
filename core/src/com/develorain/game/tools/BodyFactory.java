@@ -3,7 +3,7 @@ package com.develorain.game.tools;
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.entities.EntityType;
 
-import static com.develorain.game.tools.PlayerController.SLOW_MOTION_MODE;
+import static com.develorain.game.tools.GameInputHandler.SLOW_MOTION_MODE;
 
 public class BodyFactory {
     private static final int DEFAULT_RESTITUTION = 0;

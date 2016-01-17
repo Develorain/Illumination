@@ -2,6 +2,7 @@ package com.develorain.game.tools;
 
 import com.badlogic.gdx.physics.box2d.*;
 import com.develorain.game.entities.Enemy;
+import com.develorain.game.screens.PlayScreen;
 
 public class WorldContactListener implements ContactListener {
     public static final short WHITE_LINE_BIT = 1;
@@ -20,12 +21,12 @@ public class WorldContactListener implements ContactListener {
     public static final short SCRIPTED_EVENT_TRIGGER_BIT = 8192;
     // last bit is -32768
 
-    private PlayerController playerController;
-    private LevelCreator levelCreator;
+    private GameInputHandler gameInputHandler;
+    private PlayScreen playScreen;
 
-    public WorldContactListener(PlayerController playerController, LevelCreator levelCreator) {
-        this.playerController = playerController;
-        this.levelCreator = levelCreator;
+    public WorldContactListener(GameInputHandler gameInputHandler, PlayScreen playScreen) {
+        this.gameInputHandler = gameInputHandler;
+        this.playScreen = playScreen;
     }
 
     @Override
@@ -40,40 +41,40 @@ public class WorldContactListener implements ContactListener {
             case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
                 /*
                 // not working since only fired off once, need to use boolean to see if still in contact
-                levelCreator.fitViewport.setWorldSize(levelCreator.fitViewport.getWorldWidth() + (levelCreator.fitViewport.getWorldWidth() * 0.02f),
-                        levelCreator.fitViewport.getWorldHeight() + (levelCreator.fitViewport.getWorldHeight() * 0.02f));
-                levelCreator.fitViewport.apply();
+                playScreen.fitViewport.setWorldSize(playScreen.fitViewport.getWorldWidth() + (playScreen.fitViewport.getWorldWidth() * 0.02f),
+                        playScreen.fitViewport.getWorldHeight() + (playScreen.fitViewport.getWorldHeight() * 0.02f));
+                playScreen.fitViewport.apply();
                 */
                 break;
 
             case PLAYER_FOOT_SENSOR_BIT | WHITE_LINE_BIT:
-                playerController.footContactCounter++;
+                gameInputHandler.footContactCounter++;
                 break;
             case PLAYER_FOOT_SENSOR_BIT | BLUE_LINE_BIT:
-                playerController.footContactCounter++;
+                gameInputHandler.footContactCounter++;
                 break;
             case PLAYER_FOOT_SENSOR_BIT | RED_LINE_BIT:
-                playerController.footContactCounter++;
+                gameInputHandler.footContactCounter++;
                 break;
 
             case PLAYER_LEFT_SENSOR_BIT | WHITE_LINE_BIT:
-                playerController.leftContactCounter++;
+                gameInputHandler.leftContactCounter++;
                 break;
             case PLAYER_LEFT_SENSOR_BIT | BLUE_LINE_BIT:
-                playerController.leftContactCounter++;
+                gameInputHandler.leftContactCounter++;
                 break;
             case PLAYER_LEFT_SENSOR_BIT | RED_LINE_BIT:
-                playerController.leftContactCounter++;
+                gameInputHandler.leftContactCounter++;
                 break;
 
             case PLAYER_RIGHT_SENSOR_BIT | WHITE_LINE_BIT:
-                playerController.rightContactCounter++;
+                gameInputHandler.rightContactCounter++;
                 break;
             case PLAYER_RIGHT_SENSOR_BIT | BLUE_LINE_BIT:
-                playerController.rightContactCounter++;
+                gameInputHandler.rightContactCounter++;
                 break;
             case PLAYER_RIGHT_SENSOR_BIT | RED_LINE_BIT:
-                playerController.rightContactCounter++;
+                gameInputHandler.rightContactCounter++;
                 break;
 
             case WHITE_ENEMY_BIT | BOUNDARY_LINE_BIT:
@@ -121,7 +122,7 @@ public class WorldContactListener implements ContactListener {
                 break;
 
             case PLAYER_BIT | WHITE_ENEMY_BIT:
-                playerController.shouldRespawn = true;
+                gameInputHandler.shouldRespawn = true;
                 /*
                 long id = Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).setPitch(id, 0.1f);
@@ -129,19 +130,19 @@ public class WorldContactListener implements ContactListener {
                 break;
             case PLAYER_BIT | BLUE_ENEMY_BIT:
                 /*
-                playerController.shouldRespawn = true;
+                gameInputHandler.shouldRespawn = true;
                 Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 */
                 break;
             case PLAYER_BIT | RED_ENEMY_BIT:
                 /*
-                playerController.shouldRespawn = true;
+                gameInputHandler.shouldRespawn = true;
                 Illumination.assetManager.get("Audio/Sounds/hitsound.wav", Sound.class).play();
                 */
                 break;
 
             case PLAYER_BIT | END_LINE_BIT:
-                levelCreator.loadNextLevel();
+                playScreen.loadNextLevel();
                 break;
         }
     }
@@ -154,53 +155,55 @@ public class WorldContactListener implements ContactListener {
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
         switch (cDef) {
+            /*
             case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
-                levelCreator.fitViewport.setWorldSize(levelCreator.fitViewport.getWorldWidth() - (levelCreator.fitViewport.getWorldWidth() * 0.02f) / 60,
-                        levelCreator.fitViewport.getWorldHeight() - (levelCreator.fitViewport.getWorldHeight() * 0.02f) / 60);
-                levelCreator.fitViewport.apply();
+                playScreen.fitViewport.setWorldSize(playScreen.fitViewport.getWorldWidth() - (playScreen.fitViewport.getWorldWidth() * 0.02f) / 60,
+                        playScreen.fitViewport.getWorldHeight() - (playScreen.fitViewport.getWorldHeight() * 0.02f) / 60);
+                playScreen.fitViewport.apply();
                 break;
+            */
 
             case PLAYER_FOOT_SENSOR_BIT | WHITE_LINE_BIT:
-                playerController.footContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.footContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
             case PLAYER_FOOT_SENSOR_BIT | BLUE_LINE_BIT:
-                playerController.footContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.footContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
             case PLAYER_FOOT_SENSOR_BIT | RED_LINE_BIT:
-                playerController.footContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.footContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
 
             case PLAYER_LEFT_SENSOR_BIT | WHITE_LINE_BIT:
-                playerController.leftContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.leftContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
             case PLAYER_LEFT_SENSOR_BIT | BLUE_LINE_BIT:
-                playerController.leftContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.leftContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
             case PLAYER_LEFT_SENSOR_BIT | RED_LINE_BIT:
-                playerController.leftContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.leftContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
 
             case PLAYER_RIGHT_SENSOR_BIT | WHITE_LINE_BIT:
-                playerController.rightContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.rightContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
             case PLAYER_RIGHT_SENSOR_BIT | BLUE_LINE_BIT:
-                playerController.rightContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.rightContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
             case PLAYER_RIGHT_SENSOR_BIT | RED_LINE_BIT:
-                playerController.rightContactCounter--;
-                playerController.canDoubleJump = true;
+                gameInputHandler.rightContactCounter--;
+                gameInputHandler.canDoubleJump = true;
                 break;
         }
 
-        playerController.canChargeDownwards = true;
+        gameInputHandler.canChargeDownwards = true;
     }
 
     @Override

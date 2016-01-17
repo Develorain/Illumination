@@ -1,39 +1,29 @@
 package com.develorain.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.develorain.game.Illumination;
 
-public class MainMenuScreen implements Screen {
-    private final Illumination game;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
-    private OrthographicCamera cam;
-    private Stage stage;
+public class MainMenuScreen extends MyScreen {
+    public BitmapFont font;
     private Skin skin;
-
     private TextButton buttonPlay, buttonExit;
-
     private Image splashImage;
     private Texture splashTexture;
 
-    public BitmapFont font;
-
     public MainMenuScreen(Illumination game) {
-        this.game = game;
-        cam = new OrthographicCamera();
-        stage = new Stage(new StretchViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, cam));
+        super(game);
         font = new BitmapFont();
     }
 
@@ -47,15 +37,13 @@ public class MainMenuScreen implements Screen {
 
         initButtons();
 
-        /*
         splashTexture = game.assetManager.get("graphics/develorain.png", Texture.class);
         splashImage = new Image(splashTexture);
         splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
-        splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2);
+        splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2 + 300);
         splashImage.addAction(sequence(alpha(0f), scaleTo(0.8f, 0.8f), parallel(fadeIn(2f, Interpolation.pow2), delay(1.5f), fadeOut(1.25f))));
 
         stage.addActor(splashImage);
-        */
     }
 
     public void update(float dt) {

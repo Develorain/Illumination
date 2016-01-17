@@ -22,9 +22,9 @@ public class HUD {
     private Label countdownLabel;
     private Label timeLabel;
 
-    public HUD(SpriteBatch sb) {
+    public HUD(SpriteBatch batch) {
         viewport = new FitViewport(Illumination.RESOLUTION_X, Illumination.RESOLUTION_Y, new OrthographicCamera());
-        stage = new Stage(viewport, sb);
+        stage = new Stage(viewport, batch);
 
         worldTimer = 0;
 

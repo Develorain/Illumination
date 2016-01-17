@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Filter;
 import com.develorain.game.Illumination;
 
-import static com.develorain.game.tools.PlayerController.SLOW_MOTION_MODE;
+import static com.develorain.game.tools.GameInputHandler.SLOW_MOTION_MODE;
 
 public class LightFactory {
     public static PointLight createPointLight(RayHandler rayHandler, Body body, Color c, float distance) {
