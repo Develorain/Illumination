@@ -44,7 +44,7 @@ public class HUD {
         table.setFillParent(true);
 
         countdownLabel = new Label(String.format("%d", worldTimer), new Label.LabelStyle(font, Color.WHITE));
-        timeLabel = new Label("ILLUMINATION", new Label.LabelStyle(font, Color.WHITE));
+        timeLabel = new Label("TIME", new Label.LabelStyle(font, Color.WHITE));
 
         table.add(timeLabel).expandX().padTop(10);
         table.row();

@@ -15,7 +15,7 @@ public class PlayScreen implements Screen {
     public static int TIME_SLOWDOWN_MODIFIER = 1;
 
     public static float currentTime = 0;
-    public int currentLevel = 0;
+    public int currentLevel = 1;
     public FitViewport fitViewport;
     private Illumination game;
     private Level level;
@@ -25,8 +25,6 @@ public class PlayScreen implements Screen {
         this.game = game;
         cam = new OrthographicCamera();
         fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM, cam);
-
-        loadNextLevel();
     }
 
     @Override
@@ -56,9 +54,7 @@ public class PlayScreen implements Screen {
     public void loadNextLevel() {
         currentLevel++;
 
-        if (level != null) {
-            level.dispose();
-        }
+        level.dispose();
 
         level = new Level(this, cam, currentLevel);
     }
@@ -74,6 +70,9 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
+        if (level == null) {
+            level = new Level(this, cam, currentLevel);
+        }
     }
 
     @Override

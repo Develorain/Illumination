@@ -8,12 +8,18 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.develorain.game.Illumination;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class LoadingScreen extends MyScreen {
     private ShapeRenderer shapeRenderer;
     private float progress;
+    private Image titleImage;
+    private Texture titleTexture;
 
     public LoadingScreen(final Illumination game) {
         super(game);
@@ -23,26 +29,38 @@ public class LoadingScreen extends MyScreen {
     @Override
     public void show() {
         progress = 0f;
+
         queueAssets();
+
+        titleTexture = new Texture(Gdx.files.internal("graphics/illumination.png"));
+        titleImage = new Image(titleTexture);
+        titleImage.setOrigin(titleImage.getWidth() / 2, titleImage.getHeight() / 2);
+        titleImage.setPosition(stage.getWidth() / 2 - titleImage.getWidth() / 2, stage.getHeight() / 2 - titleImage.getHeight() / 2 + 300);
+        titleImage.addAction(sequence(alpha(0f), parallel(fadeIn(0.5f, Interpolation.pow2))));
+
+        stage.addActor(titleImage);
     }
 
     private void queueAssets() {
-        game.assetManager.load("audio/music/disconnected.ogg", Music.class);
-        game.assetManager.load("audio/sounds/hitsound.wav", Sound.class);
-        game.assetManager.load("audio/sounds/startslowmotion.ogg", Sound.class);
-        game.assetManager.load("audio/sounds/endslowmotion.ogg", Sound.class);
-        game.assetManager.load("audio/sounds/Jump8.wav", Sound.class);
-        game.assetManager.load("graphics/leaf.png", Texture.class);
-        game.assetManager.load("graphics/leafblurred.png", Texture.class);
-        game.assetManager.load("graphics/develorain.png", Texture.class);
-        game.assetManager.load("graphics/uiskin.atlas", TextureAtlas.class);
+        Illumination.assetManager.load("audio/music/disconnected.ogg", Music.class);
+        Illumination.assetManager.load("audio/sounds/hitsound.wav", Sound.class);
+        Illumination.assetManager.load("audio/sounds/startslowmotion.ogg", Sound.class);
+        Illumination.assetManager.load("audio/sounds/endslowmotion.ogg", Sound.class);
+        Illumination.assetManager.load("audio/sounds/Jump8.wav", Sound.class);
+        Illumination.assetManager.load("graphics/leaf.png", Texture.class);
+        Illumination.assetManager.load("graphics/leafblurred.png", Texture.class);
+        Illumination.assetManager.load("graphics/develorain.png", Texture.class);
+        Illumination.assetManager.load("graphics/illumination.png", Texture.class);
+        Illumination.assetManager.load("graphics/uiskin.atlas", TextureAtlas.class);
     }
 
     public void update(float dt) {
-        progress = MathUtils.lerp(progress, game.assetManager.getProgress(), 0.1f);
+        stage.act(dt);
+
+        progress = MathUtils.lerp(progress, Illumination.assetManager.getProgress(), 0.1f);
 
         // assetManager.update() returns false if not done loading and true if done loading
-        if (game.assetManager.update() && progress >= game.assetManager.getProgress() - 0.001f) {
+        if (Illumination.assetManager.update() && progress >= Illumination.assetManager.getProgress() - 0.001f) {
             game.setScreen(game.splashScreen);
         }
     }
@@ -58,6 +76,8 @@ public class LoadingScreen extends MyScreen {
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.rect(32, cam.viewportHeight / 2 - 8, progress * (cam.viewportWidth - 64), 2);
         shapeRenderer.end();
+
+        stage.draw();
     }
 
     @Override

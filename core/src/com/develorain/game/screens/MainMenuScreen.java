@@ -19,8 +19,8 @@ public class MainMenuScreen extends MyScreen {
     public BitmapFont font;
     private Skin skin;
     private TextButton buttonPlay, buttonExit;
-    private Image splashImage;
-    private Texture splashTexture;
+    private Image titleImage;
+    private Texture titleTexture;
 
     public MainMenuScreen(Illumination game) {
         super(game);
@@ -31,19 +31,19 @@ public class MainMenuScreen extends MyScreen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
         skin = new Skin();
-        skin.addRegions(game.assetManager.get("graphics/uiskin.atlas", TextureAtlas.class));
+        skin.addRegions(Illumination.assetManager.get("graphics/uiskin.atlas", TextureAtlas.class));
         skin.add("default-font", font);
         skin.load(Gdx.files.internal("graphics/uiskin.json"));
 
         initButtons();
 
-        splashTexture = game.assetManager.get("graphics/develorain.png", Texture.class);
-        splashImage = new Image(splashTexture);
-        splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
-        splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() / 2 - splashImage.getHeight() / 2 + 300);
-        splashImage.addAction(sequence(alpha(0f), scaleTo(0.8f, 0.8f), parallel(fadeIn(2f, Interpolation.pow2), delay(1.5f), fadeOut(1.25f))));
+        titleTexture = Illumination.assetManager.get("graphics/illumination.png", Texture.class);
+        titleImage = new Image(titleTexture);
+        titleImage.setOrigin(titleImage.getWidth() / 2, titleImage.getHeight() / 2);
+        titleImage.setPosition(stage.getWidth() / 2 - titleImage.getWidth() / 2, stage.getHeight() / 2 - titleImage.getHeight() / 2 + 300);
+        titleImage.addAction(sequence(alpha(0f), parallel(fadeIn(2f, Interpolation.pow2))));
 
-        stage.addActor(splashImage);
+        stage.addActor(titleImage);
     }
 
     public void update(float dt) {
@@ -71,6 +71,7 @@ public class MainMenuScreen extends MyScreen {
                 game.setScreen(game.playScreen);
             }
         });
+        buttonPlay.addAction(sequence(alpha(0f), parallel(fadeIn(1f, Interpolation.pow2))));
         stage.addActor(buttonPlay);
 
         buttonExit = new TextButton("Exit", skin, "default");
@@ -83,6 +84,7 @@ public class MainMenuScreen extends MyScreen {
                 Gdx.app.exit();
             }
         });
+        buttonExit.addAction(sequence(alpha(0f), parallel(fadeIn(1f, Interpolation.pow2))));
         stage.addActor(buttonExit);
     }
 
@@ -103,7 +105,8 @@ public class MainMenuScreen extends MyScreen {
 
     @Override
     public void hide() {
-
+        buttonPlay.remove();
+        buttonExit.remove();
     }
 
     @Override

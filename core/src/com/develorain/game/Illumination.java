@@ -2,7 +2,6 @@ package com.develorain.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.develorain.game.screens.LoadingScreen;
 import com.develorain.game.screens.MainMenuScreen;
 import com.develorain.game.screens.PlayScreen;
@@ -14,7 +13,7 @@ public class Illumination extends Game {
     public static final int RESOLUTION_Y = 900; // 720
     public static final float PPM = 100;  // MULTIPLYING BY PPM CONVERTS METERS TO PIXELS. DIVIDING CONVERTS PIXELS TO METERS.
 
-    public AssetManager assetManager;
+    public static AssetManager assetManager;
 
     public LoadingScreen loadingScreen;
     public SplashScreen splashScreen;

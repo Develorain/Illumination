@@ -13,6 +13,13 @@ Add dropping tiles above first pit. The player is forced to drop into that hole.
 -           -
 -------------
 
+Things to consider changing about the game
+------------------------------------------
+Remove double jump
+Fix jumping arc to better tighten jumping control
+Slowmotion doesn't slow down the player, only the environment
+Trail only appears when player is sprinting
+
 
 Current game problems
 ---------------------
@@ -48,6 +55,7 @@ Do music slowmo like in super mario world, by not slowing it down, but making ea
 Lamps change colour over time
 Time doesn't start until you move
 Shadow effect after player only activates when player hits max speed (consider something with sprinting)
+Reset y velocity to 0 after letting go of jump button to make jumping more responsive
 
 
 
