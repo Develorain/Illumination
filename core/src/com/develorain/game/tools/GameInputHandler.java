@@ -11,9 +11,12 @@ import com.develorain.game.entities.Player;
 import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class GameInputHandler {
+    public static final int WALKING_SPEED_CAP = 5;
+    public static final int SPRINTING_SPEED_CAP = 7;
+    public static final int WALKING_ACCELERATION = 1;
+    public static final int SPRINTING_ACCELERATION = 2;
+    public static final int NO_INPUT_DECELERATION = SPRINTING_ACCELERATION;
     public static boolean SLOW_MOTION_MODE = false;
-    private final int SPRINT_SPEED_CAP = 13;
-    private final int REGULAR_SPEED_CAP = 8;
     public int footContactCounter = 0;
     public int leftContactCounter = 0;
     public int rightContactCounter = 0;
@@ -43,25 +46,29 @@ public class GameInputHandler {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             inputGiven = true;
 
-            if (body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
-                if (body.getLinearVelocity().x + 1.5f > REGULAR_SPEED_CAP) {
-                    body.setLinearVelocity(REGULAR_SPEED_CAP, body.getLinearVelocity().y);
-                } else {
-                    body.setLinearVelocity(body.getLinearVelocity().x + 1.5f, body.getLinearVelocity().y);
-                }
+            float currentSpeedCap = WALKING_SPEED_CAP;
+            float currentAcceleration = WALKING_ACCELERATION;
+
+            if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+                currentSpeedCap = SPRINTING_SPEED_CAP;
+                currentAcceleration = SPRINTING_ACCELERATION;
             }
+
+            increaseVelocity(currentSpeedCap, currentAcceleration);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             inputGiven = true;
 
-            if (body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
-                if (body.getLinearVelocity().x - 1.5f < -REGULAR_SPEED_CAP) {
-                    body.setLinearVelocity(-REGULAR_SPEED_CAP, body.getLinearVelocity().y);
-                } else {
-                    body.setLinearVelocity(body.getLinearVelocity().x - 1.5f, body.getLinearVelocity().y);
-                }
+            float currentSpeedCap = -WALKING_SPEED_CAP;
+            float currentAcceleration = -WALKING_ACCELERATION;
+
+            if (Gdx.input.isKeyPressed(Input.Keys.X)) {
+                currentSpeedCap = -SPRINTING_SPEED_CAP;
+                currentAcceleration = -SPRINTING_ACCELERATION;
             }
+
+            decreaseVelocity(currentSpeedCap, currentAcceleration);
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
@@ -74,7 +81,7 @@ public class GameInputHandler {
                 body.applyLinearImpulse(new Vector2(0, 7f), body.getWorldCenter(), true);
             } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
                 jumpTimer = 0;
-                body.setLinearVelocity(body.getLinearVelocity().x, 1);
+                body.setLinearVelocity(body.getLinearVelocity().x, NO_INPUT_DECELERATION);
 
                 body.applyLinearImpulse(new Vector2(0, 7f), body.getWorldCenter(), true);
                 canDoubleJump = false;
@@ -121,7 +128,7 @@ public class GameInputHandler {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 3 : 1;
+            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == NO_INPUT_DECELERATION ? 3 : NO_INPUT_DECELERATION;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
 
             /*
@@ -152,18 +159,6 @@ public class GameInputHandler {
             inputGiven = true;
         }
 
-        // Sprint right
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x <= SPRINT_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-            inputGiven = true;
-        }
-
-        // Sprint left
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && Gdx.input.isKeyPressed(Input.Keys.X) && body.getLinearVelocity().x >= -SPRINT_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(-0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-            inputGiven = true;
-        }
-
         if (shouldRespawn) {
             player.destroy();
             player = player.respawn();
@@ -189,30 +184,30 @@ public class GameInputHandler {
 
         // Manual deceleration
         if (!inputGiven) {
-            if (canJump()) {
-                if (body.getLinearVelocity().x > 0.5f) {
-                    body.applyLinearImpulse(new Vector2(-0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-                } else if (body.getLinearVelocity().x > 0) {
-                    body.setLinearVelocity(0, body.getLinearVelocity().y);
-                }
+            if (body.getLinearVelocity().x > 0) {
+                decreaseVelocity(0, -NO_INPUT_DECELERATION);
+            } else if (body.getLinearVelocity().x < 0) {
+                increaseVelocity(0, NO_INPUT_DECELERATION);
+            }
+        }
+    }
 
-                if (body.getLinearVelocity().x < -0.5f) {
-                    body.applyLinearImpulse(new Vector2(0.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-                } else if (body.getLinearVelocity().x < 0) {
-                    body.setLinearVelocity(0, body.getLinearVelocity().y);
-                }
+    private void decreaseVelocity(float currentSpeedCap, float currentAcceleration) {
+        if (body.getLinearVelocity().x > currentSpeedCap) {
+            if (body.getLinearVelocity().x + currentAcceleration < currentSpeedCap) {
+                body.setLinearVelocity(currentSpeedCap, body.getLinearVelocity().y);
             } else {
-                if (body.getLinearVelocity().x > 0.2f) {
-                    body.applyLinearImpulse(new Vector2(-0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-                } else if (body.getLinearVelocity().x > 0) {
-                    body.setLinearVelocity(0, body.getLinearVelocity().y);
-                }
+                body.setLinearVelocity(body.getLinearVelocity().x + currentAcceleration, body.getLinearVelocity().y);
+            }
+        }
+    }
 
-                if (body.getLinearVelocity().x < -0.2f) {
-                    body.applyLinearImpulse(new Vector2(0.2f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
-                } else if (body.getLinearVelocity().x < 0) {
-                    body.setLinearVelocity(0, body.getLinearVelocity().y);
-                }
+    private void increaseVelocity(float currentSpeedCap, float currentAcceleration) {
+        if (body.getLinearVelocity().x < currentSpeedCap) {
+            if (body.getLinearVelocity().x + currentAcceleration > currentSpeedCap) {
+                body.setLinearVelocity(currentSpeedCap, body.getLinearVelocity().y);
+            } else {
+                body.setLinearVelocity(body.getLinearVelocity().x + currentAcceleration, body.getLinearVelocity().y);
             }
         }
     }

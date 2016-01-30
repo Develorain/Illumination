@@ -28,6 +28,11 @@ Holding left and right at the same time makes you travel with no friction.
 If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
 Consider getting rid of playerSprite
 Dispose more
+Fix player trail
+Fix sprinting movement limit
+Fix jump length
+Fix jump height
+Fix respawning player/lights
 
 
 

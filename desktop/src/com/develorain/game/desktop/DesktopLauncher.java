@@ -10,9 +10,11 @@ public class DesktopLauncher {
         config.title = Illumination.TITLE;
         config.width = Illumination.RESOLUTION_X;
         config.height = Illumination.RESOLUTION_Y;
-        config.fullscreen = true;
+        config.fullscreen = false;
         config.vSyncEnabled = false;
-        config.resizable = false;
+        config.resizable = true;
+        config.foregroundFPS = 60;
+        config.backgroundFPS = -1;
         new LwjglApplication(new Illumination(), config);
     }
 }
