@@ -32,20 +32,36 @@ public class GameInputHandler {
         music = Illumination.assetManager.get("audio/music/disconnected.ogg", Music.class);
         music.setVolume(0.5f);
         music.setLooping(true);
-        //music.play();
+        music.play();
     }
 
     public void handleInput(float dt) {
         boolean inputGiven = false;
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+        System.out.println(body.getLinearVelocity().x);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             inputGiven = true;
+
+            if (body.getLinearVelocity().x <= REGULAR_SPEED_CAP) {
+                if (body.getLinearVelocity().x + 1.5f > REGULAR_SPEED_CAP) {
+                    body.setLinearVelocity(REGULAR_SPEED_CAP, body.getLinearVelocity().y);
+                } else {
+                    body.setLinearVelocity(body.getLinearVelocity().x + 1.5f, body.getLinearVelocity().y);
+                }
+            }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
-            body.applyLinearImpulse(new Vector2(-1.5f / TIME_SLOWDOWN_MODIFIER, 0), body.getWorldCenter(), true);
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             inputGiven = true;
+
+            if (body.getLinearVelocity().x >= -REGULAR_SPEED_CAP) {
+                if (body.getLinearVelocity().x - 1.5f < -REGULAR_SPEED_CAP) {
+                    body.setLinearVelocity(-REGULAR_SPEED_CAP, body.getLinearVelocity().y);
+                } else {
+                    body.setLinearVelocity(body.getLinearVelocity().x - 1.5f, body.getLinearVelocity().y);
+                }
+            }
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {

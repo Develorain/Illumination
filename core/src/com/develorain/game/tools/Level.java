@@ -61,7 +61,7 @@ public class Level {
         rayHandler = new RayHandler(world);
         //rayHandler.setAmbientLight(0.25f);
         //rayHandler.setAmbientLight(0.75f);
-        rayHandler.setAmbientLight(0.5f);
+        rayHandler.setAmbientLight(1f);
 
         hud = new HUD(batch);
 
@@ -124,7 +124,7 @@ public class Level {
 
         batch.begin();
 
-        player.draw(batch, dt);
+        player.draw(batch);
 
         for (ArrayList<Enemy> arrayList : worldInitializer.getEnemies()) {
             for (int i = 0; i < arrayList.size(); i++) {

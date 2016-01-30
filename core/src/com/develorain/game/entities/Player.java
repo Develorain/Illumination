@@ -34,10 +34,7 @@ public class Player {
     private RayHandler rayHandler;
     private Sprite playerSprite;
     private ArrayList<PointLight> pointLights = new ArrayList();
-    private ArrayList<Sprite> sprites = new ArrayList();
     private Level level;
-
-    private float timer = 0;
 
     public Player(RayHandler rayHandler, float x, float y, Level level) {
         this.world = level.getWorld();
@@ -56,26 +53,10 @@ public class Player {
         createLights(rayHandler);
     }
 
-    public void draw(Batch batch, float dt) {
-        timer += dt;
-
-        Sprite sprite = new Sprite(playerSprite);
-        sprite.setPosition(body.getPosition().x - (PLAYER_HALF_WIDTH / PPM), body.getPosition().y - (PLAYER_HALF_HEIGHT / PPM));
-        sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-        sprites.add(sprite);
-
-        if (timer >= 0.01f) {
-            timer = 0;
-
-            for (int i = 0; i < sprites.size(); i++) {
-                sprites.get(i).draw(batch);
-                sprites.get(i).setAlpha(sprites.get(i).getColor().a - 0.05f);
-
-                if (sprites.get(i).getColor().a <= 0) {
-                    sprites.remove(i);
-                }
-            }
-        }
+    public void draw(Batch batch) {
+        playerSprite.setPosition(body.getPosition().x - (PLAYER_HALF_WIDTH / PPM), body.getPosition().y - (PLAYER_HALF_HEIGHT / PPM));
+        playerSprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+        playerSprite.draw(batch);
     }
 
     private void createSprite() {
