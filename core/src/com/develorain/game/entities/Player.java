@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import static com.develorain.game.Illumination.PPM;
 
 public class Player {
-    public final int PLAYER_DENSITY = 10;
-    public final int PLAYER_WIDTH = 16;     // pixels
-    public final int PLAYER_HEIGHT = 16;    // pixels
-    public final float FOOT_SENSOR_WIDTH = 0.875f;
-    public final float FOOT_SENSOR_HEIGHT = 1.5f;
-    public final float SIDE_SENSOR_WIDTH = 1.6f;
-    public final float SIDE_SENSOR_HEIGHT = 1f;
+    public static final int PLAYER_DENSITY = 10;
+    public static final int PLAYER_HALF_WIDTH = 8;     // pixels
+    public static final int PLAYER_HALF_HEIGHT = 8;    // pixels
+    public static final float FOOT_SENSOR_WIDTH = 0.875f;
+    public static final float FOOT_SENSOR_HEIGHT = 1.5f;
+    public static final float SIDE_SENSOR_WIDTH = 1.6f;
+    public static final float SIDE_SENSOR_HEIGHT = 1f;
     public Body body;
     private World world;
     private RayHandler rayHandler;
@@ -48,7 +48,7 @@ public class Player {
     }
 
     private void createPlayer(float x, float y, RayHandler rayHandler) {
-        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_WIDTH / PPM, PLAYER_HEIGHT / PPM, PLAYER_DENSITY, true, EntityType.PLAYER, false);
+        body = BodyFactory.createBoxBody(world, this, x / PPM, y / PPM, PLAYER_HALF_WIDTH / PPM, PLAYER_HALF_HEIGHT / PPM, PLAYER_DENSITY, true, EntityType.PLAYER, false);
         body.createFixture(SensorFactory.createSensorFixture(0, 0, FOOT_SENSOR_WIDTH, FOOT_SENSOR_HEIGHT, EntityType.FOOT_SENSOR));
         body.createFixture(SensorFactory.createSensorFixture(0, 0, SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.LEFT_SENSOR));
         body.createFixture(SensorFactory.createSensorFixture(0, 0, SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.RIGHT_SENSOR));
@@ -60,7 +60,7 @@ public class Player {
         timer += dt;
 
         Sprite sprite = new Sprite(playerSprite);
-        sprite.setPosition(body.getPosition().x - (PLAYER_WIDTH / PPM), body.getPosition().y - (PLAYER_HEIGHT / PPM));
+        sprite.setPosition(body.getPosition().x - (PLAYER_HALF_WIDTH / PPM), body.getPosition().y - (PLAYER_HALF_HEIGHT / PPM));
         sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
         sprites.add(sprite);
 
@@ -80,7 +80,7 @@ public class Player {
 
     private void createSprite() {
         playerSprite = new Sprite(new Texture("graphics/textures/whiteplayer.png"));
-        playerSprite.setSize(PLAYER_WIDTH * 2 / PPM, PLAYER_HEIGHT * 2 / PPM);
+        playerSprite.setSize(PLAYER_HALF_WIDTH * 2 / PPM, PLAYER_HALF_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
         body.setUserData(playerSprite);
     }

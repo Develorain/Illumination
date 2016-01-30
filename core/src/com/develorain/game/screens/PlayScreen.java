@@ -24,7 +24,7 @@ public class PlayScreen implements Screen {
     public PlayScreen(Illumination game) {
         this.game = game;
         cam = new OrthographicCamera();
-        fitViewport = new FitViewport(2f * RESOLUTION_X / PPM, 2f * RESOLUTION_Y / PPM, cam);
+        fitViewport = new FitViewport(RESOLUTION_X / PPM, RESOLUTION_Y / PPM, cam);
     }
 
     @Override

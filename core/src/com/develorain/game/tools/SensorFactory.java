@@ -6,12 +6,11 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.develorain.game.Illumination;
 import com.develorain.game.entities.EntityType;
 
+import static com.develorain.game.entities.Player.PLAYER_HALF_HEIGHT;
+import static com.develorain.game.entities.Player.PLAYER_HALF_WIDTH;
 import static com.develorain.game.tools.GameInputHandler.SLOW_MOTION_MODE;
 
 public class SensorFactory {
-    public static final int PLAYER_WIDTH = 16;     // pixels
-    public static final int PLAYER_HEIGHT = 16;    // pixels
-
     public static FixtureDef createSensorFixture(float x, float y, float sensorWidth, float sensorHeight, EntityType type) {
         FixtureDef fdef = new FixtureDef();
         PolygonShape sensorShape = new PolygonShape();
@@ -24,10 +23,10 @@ public class SensorFactory {
         switch (type) {
             case FOOT_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2((-PLAYER_WIDTH * sensorWidth) / Illumination.PPM, 0),
-                        new Vector2((PLAYER_WIDTH * sensorWidth) / Illumination.PPM, 0),
-                        new Vector2((-PLAYER_WIDTH * sensorWidth) / Illumination.PPM, -PLAYER_HEIGHT * sensorHeight / Illumination.PPM),
-                        new Vector2((PLAYER_WIDTH * sensorWidth) / Illumination.PPM, -PLAYER_HEIGHT * sensorHeight / Illumination.PPM)
+                        new Vector2((-PLAYER_HALF_WIDTH * sensorWidth) / Illumination.PPM, 0),
+                        new Vector2((PLAYER_HALF_WIDTH * sensorWidth) / Illumination.PPM, 0),
+                        new Vector2((-PLAYER_HALF_WIDTH * sensorWidth) / Illumination.PPM, -PLAYER_HALF_HEIGHT * sensorHeight / Illumination.PPM),
+                        new Vector2((PLAYER_HALF_WIDTH * sensorWidth) / Illumination.PPM, -PLAYER_HALF_HEIGHT * sensorHeight / Illumination.PPM)
                 };
 
                 fdef.filter.categoryBits = WorldContactListener.PLAYER_FOOT_SENSOR_BIT;
@@ -42,10 +41,10 @@ public class SensorFactory {
                 break;
             case LEFT_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2(sensorWidth * -PLAYER_WIDTH / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
-                        new Vector2(0 / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
-                        new Vector2(sensorWidth * -PLAYER_WIDTH / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
-                        new Vector2(0 / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM)
+                        new Vector2(sensorWidth * -PLAYER_HALF_WIDTH / Illumination.PPM, (PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(0 / Illumination.PPM, (PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(sensorWidth * -PLAYER_HALF_WIDTH / Illumination.PPM, (-PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(0 / Illumination.PPM, (-PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM)
                 };
 
                 fdef.filter.categoryBits = WorldContactListener.PLAYER_LEFT_SENSOR_BIT;
@@ -60,10 +59,10 @@ public class SensorFactory {
                 break;
             case RIGHT_SENSOR:
                 sensorCoords = new Vector2[]{
-                        new Vector2(0 / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
-                        new Vector2(sensorWidth * PLAYER_WIDTH / Illumination.PPM, (PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
-                        new Vector2(0 / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM),
-                        new Vector2(sensorWidth * PLAYER_WIDTH / Illumination.PPM, (-PLAYER_HEIGHT * sensorHeight) / Illumination.PPM)
+                        new Vector2(0 / Illumination.PPM, (PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(sensorWidth * PLAYER_HALF_WIDTH / Illumination.PPM, (PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(0 / Illumination.PPM, (-PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM),
+                        new Vector2(sensorWidth * PLAYER_HALF_WIDTH / Illumination.PPM, (-PLAYER_HALF_HEIGHT * sensorHeight) / Illumination.PPM)
                 };
 
                 fdef.filter.categoryBits = WorldContactListener.PLAYER_RIGHT_SENSOR_BIT;
