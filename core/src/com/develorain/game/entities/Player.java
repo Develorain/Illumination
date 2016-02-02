@@ -23,8 +23,8 @@ import static com.develorain.game.Illumination.PPM;
 
 public class Player {
     public static final int PLAYER_DENSITY = 10;
-    public static final int PLAYER_HALF_WIDTH = 8;     // pixels
-    public static final int PLAYER_HALF_HEIGHT = 8;    // pixels
+    public static final int PLAYER_HALF_WIDTH = 10;     // pixels
+    public static final int PLAYER_HALF_HEIGHT = 10;    // pixels
     public static final float FOOT_SENSOR_WIDTH = 0.875f;
     public static final float FOOT_SENSOR_HEIGHT = 1.5f;
     public static final float SIDE_SENSOR_WIDTH = 1.6f;

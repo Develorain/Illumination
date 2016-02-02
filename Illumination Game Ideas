@@ -34,6 +34,10 @@ Fix jump length
 Fix jump height
 Fix respawning player/lights
 
+Increasing resolution shows you more of the map
+Higher dpi screens makes the game look tiny
+Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
+
 
 
 Camera focusing

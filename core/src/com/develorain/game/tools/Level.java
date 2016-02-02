@@ -38,8 +38,8 @@ public class Level {
     private MapProperties mapProperties;
     private int levelWidth;  // in tiles (ex: 300 tiles width)
     private int levelHeight; // in tiles (ex: 150 tiles height)
-    private int TILE_WIDTH = 16;
-    private int TILE_HEIGHT = 16;
+    private int TILE_WIDTH = 256;
+    private int TILE_HEIGHT = 256;
     private SpriteBatch batch;
     private OrthographicCamera cam;
 
@@ -48,20 +48,18 @@ public class Level {
         this.cam = cam;
 
         mapLoader = new TmxMapLoader();
-        tiledMap = mapLoader.load("graphics/maps/level" + currentLevel + ".tmx");
+        tiledMap = mapLoader.load("graphics/maps/oldlevel" + currentLevel + ".tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
         mapProperties = tiledMap.getProperties();
         levelWidth = mapProperties.get("width", Integer.class);
         levelHeight = mapProperties.get("height", Integer.class);
 
-        world = new World(new Vector2(0, -25f), true);
+        world = new World(new Vector2(0, -50f), true);
 
         b2dr = new Box2DDebugRenderer();
 
         rayHandler = new RayHandler(world);
-        //rayHandler.setAmbientLight(0.25f);
-        //rayHandler.setAmbientLight(0.75f);
-        rayHandler.setAmbientLight(1f);
+        rayHandler.setAmbientLight(0.5f);
 
         hud = new HUD(batch);
 

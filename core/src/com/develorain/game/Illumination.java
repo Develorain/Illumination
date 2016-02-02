@@ -9,8 +9,8 @@ import com.develorain.game.screens.SplashScreen;
 
 public class Illumination extends Game {
     public static final String TITLE = "Illumination";
-    public static final int RESOLUTION_X = 1440; // 1080
-    public static final int RESOLUTION_Y = 900; // 720
+    public static final int RESOLUTION_X = 1440; // 1080 // 1120
+    public static final int RESOLUTION_Y = 900;  // 720  // 700
     public static final float PPM = 100;  // MULTIPLYING BY PPM CONVERTS METERS TO PIXELS. DIVIDING CONVERTS PIXELS TO METERS.
 
     public static AssetManager assetManager;
