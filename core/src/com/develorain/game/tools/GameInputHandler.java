@@ -15,7 +15,7 @@ public class GameInputHandler {
     public static final int SPRINTING_SPEED_CAP = 12;
     public static final int WALKING_ACCELERATION = 1;
     public static final int SPRINTING_ACCELERATION = 2;
-    public static final int NO_INPUT_DECELERATION = SPRINTING_ACCELERATION;
+    public static final int NO_INPUT_DECELERATION = SPRINTING_ACCELERATION * 2;
     public static boolean SLOW_MOTION_MODE = false;
     public int footContactCounter = 0;
     public int leftContactCounter = 0;

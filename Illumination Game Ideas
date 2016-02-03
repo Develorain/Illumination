@@ -17,24 +17,14 @@ Slowmotion doesn't slow down the player, only the environment
 Trail only appears when player is sprinting. Shadow effect after player only activates when player hits max speed (or only when sprinting sprinting)
 
 
-Current game problems
----------------------
-Replace box2d lights with better alternative
-Increasing resolution shows you more of the map
-Higher dpi screens makes the game look tiny
-Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
-
-
 
 Primary ideas
 -------------
-Add unwalljumpable walls: introduce it in the tutorial
-Add a background
-Add breakable walls or boxes
+Unwalljumpable walls
+Breakable walls or boxes
 Teleporter
 Player dies when changes time in out of bounds area
 Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
-Make death more meaningful
 Falling tiles
 Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
 Time doesn't start until you move
@@ -57,21 +47,18 @@ Enemies
 Quick running enemies
 Enemies that can stick onto walls
 When enemy is near player, enemy explodes throwing projectiles towards player to kill him
-Ranged throwing enemy (projectiles)
+Projectile enemy
 
 
 
 Graphics
 --------
+Background
 Swinging box2d lights
-Player leaves trail just like shadow of texture (MS)
 Particle effects, sound effect, animation, when double jumping, jumping, dashing, walking, sprinting, smashing objects, death, sliding
-Shake screen when hitting ground hard
 When player dies, they explode into flames
 The faster you walk, a bit of black fade in the corners of the screen (vignette), add dash like gunz, or popkart nitro white lines in front of player
-Brawlhalla has cool map artstyle
 More see through objects for cool light effects (bookmarks for reference)
-Low gravity areas of the world
 Everytime the player jumps, an animation similar to this plays: https://youtu.be/2SaYkWNv0Hg?t=14m37s
 Trampoline or propeller similar to Geometry Dash upwards push things
 Vignette pulses to the beat of the music
@@ -114,6 +101,14 @@ In the main menu, you can control the player before selecting "Start" "Options" 
 Introduce controls by a small rhyming poem
 
 
+Current game problems
+---------------------
+Replace box2d lights with better alternative
+Increasing resolution shows you more of the map
+Higher dpi screens makes the game look tiny
+Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
+
+
 
 Game environment/story
 -----------------------
@@ -129,8 +124,8 @@ Game Mechanics
 --------------
 Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
 This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
-and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the current
-speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
+and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the c-
+urrent speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
 
 
 
@@ -186,7 +181,9 @@ Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration // 
 Transparent tiles // useless
 Slow down time in areas of the map // useless
 Reward players as they accomplish things in the level // useless
-
+Make death more meaningful // useless
+Shake screen when hitting ground hard // useless
+Low gravity areas of the world // useless
 
 
 
