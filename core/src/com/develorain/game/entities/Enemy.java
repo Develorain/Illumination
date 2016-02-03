@@ -49,13 +49,13 @@ public abstract class Enemy {
     public void createSprite() {
         switch (type) {
             case WHITE_ENEMY:
-                sprite = new Sprite(new Texture("graphics/textures/whitewalker.png"));
+                sprite = new Sprite(new Texture("graphics/entities/whitewalker.png"));
                 break;
             case BLUE_ENEMY:
-                sprite = new Sprite(new Texture("graphics/textures/bluewalker.png"));
+                sprite = new Sprite(new Texture("graphics/entities/bluewalker.png"));
                 break;
             case RED_ENEMY:
-                sprite = new Sprite(new Texture("graphics/textures/redwalker.png"));
+                sprite = new Sprite(new Texture("graphics/entities/redwalker.png"));
                 break;
         }
 

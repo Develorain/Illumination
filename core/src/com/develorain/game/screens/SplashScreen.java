@@ -30,7 +30,7 @@ public class SplashScreen extends MyScreen {
             }
         };
 
-        splashTexture = game.assetManager.get("graphics/leaf.png", Texture.class);
+        splashTexture = game.assetManager.get("graphics/logos/leaf.png", Texture.class);
         splashImage = new Image(splashTexture);
         splashImage.setOrigin(splashImage.getWidth() / 2, splashImage.getHeight() / 2);
         //splashImage.setPosition(stage.getWidth() / 2 - splashImage.getWidth() / 2, stage.getHeight() - splashImage.getHeight() / 2);

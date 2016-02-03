@@ -60,7 +60,7 @@ public class Player {
     }
 
     private void createSprite() {
-        playerSprite = new Sprite(new Texture("graphics/textures/whiteplayer.png"));
+        playerSprite = new Sprite(new Texture("graphics/entities/whiteplayer.png"));
         playerSprite.setSize(PLAYER_HALF_WIDTH * 2 / PPM, PLAYER_HALF_HEIGHT * 2 / PPM);
         playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
         body.setUserData(playerSprite);

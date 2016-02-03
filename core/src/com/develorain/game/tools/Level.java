@@ -48,7 +48,7 @@ public class Level {
         this.cam = cam;
 
         mapLoader = new TmxMapLoader();
-        tiledMap = mapLoader.load("graphics/maps/oldlevel" + currentLevel + ".tmx");
+        tiledMap = mapLoader.load("graphics/maps/level" + currentLevel + ".tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
         mapProperties = tiledMap.getProperties();
         levelWidth = mapProperties.get("width", Integer.class);

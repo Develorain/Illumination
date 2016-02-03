@@ -31,13 +31,13 @@ public class MainMenuScreen extends MyScreen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
         skin = new Skin();
-        skin.addRegions(Illumination.assetManager.get("graphics/uiskin.atlas", TextureAtlas.class));
+        skin.addRegions(Illumination.assetManager.get("graphics/gui/uiskin.atlas", TextureAtlas.class));
         skin.add("default-font", font);
-        skin.load(Gdx.files.internal("graphics/uiskin.json"));
+        skin.load(Gdx.files.internal("graphics/gui/uiskin.json"));
 
         initButtons();
 
-        titleTexture = Illumination.assetManager.get("graphics/illumination.png", Texture.class);
+        titleTexture = Illumination.assetManager.get("graphics/logos/illumination.png", Texture.class);
         titleImage = new Image(titleTexture);
         titleImage.setOrigin(titleImage.getWidth() / 2, titleImage.getHeight() / 2);
         titleImage.setPosition(stage.getWidth() / 2 - titleImage.getWidth() / 2, stage.getHeight() / 2 - titleImage.getHeight() / 2 + 300);

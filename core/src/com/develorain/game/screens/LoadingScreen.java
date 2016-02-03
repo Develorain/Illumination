@@ -32,7 +32,7 @@ public class LoadingScreen extends MyScreen {
 
         queueAssets();
 
-        titleTexture = new Texture(Gdx.files.internal("graphics/illumination.png"));
+        titleTexture = new Texture(Gdx.files.internal("graphics/logos/illumination.png"));
         titleImage = new Image(titleTexture);
         titleImage.setOrigin(titleImage.getWidth() / 2, titleImage.getHeight() / 2);
         titleImage.setPosition(stage.getWidth() / 2 - titleImage.getWidth() / 2, stage.getHeight() / 2 - titleImage.getHeight() / 2 + 300);
@@ -47,11 +47,10 @@ public class LoadingScreen extends MyScreen {
         Illumination.assetManager.load("audio/sounds/startslowmotion.ogg", Sound.class);
         Illumination.assetManager.load("audio/sounds/endslowmotion.ogg", Sound.class);
         Illumination.assetManager.load("audio/sounds/Jump8.wav", Sound.class);
-        Illumination.assetManager.load("graphics/leaf.png", Texture.class);
-        Illumination.assetManager.load("graphics/leafblurred.png", Texture.class);
-        Illumination.assetManager.load("graphics/develorain.png", Texture.class);
-        Illumination.assetManager.load("graphics/illumination.png", Texture.class);
-        Illumination.assetManager.load("graphics/uiskin.atlas", TextureAtlas.class);
+        Illumination.assetManager.load("graphics/logos/leaf.png", Texture.class);
+        Illumination.assetManager.load("graphics/logos/develorain.png", Texture.class);
+        Illumination.assetManager.load("graphics/logos/illumination.png", Texture.class);
+        Illumination.assetManager.load("graphics/gui/uiskin.atlas", TextureAtlas.class);
     }
 
     public void update(float dt) {

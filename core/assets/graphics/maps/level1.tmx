@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="244" height="95" tilewidth="16" tileheight="16" nextobjectid="470">
- <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="144" columns="12">
-  <image source="tileset.png" width="192" height="192"/>
- </tileset>
- <tileset firstgid="145" name="tileset" tilewidth="16" tileheight="16" tilecount="144" columns="12">
-  <image source="tileset.png" width="192" height="192"/>
- </tileset>
  <objectgroup color="#ffffff" name="white slope">
   <object id="436" x="128" y="1392">
    <polyline points="0,0 1392,0"/>
@@ -74,12 +68,12 @@
  <objectgroup name="red exploders"/>
  <layer name="white tiles" width="244" height="95">
   <data encoding="base64" compression="zlib">
-   eJzt04GNwzAMBEF/A+m/3JTwAUKbymIGuAIIaV/Xdb3MzMzMzMzMzMzMzMzMzMxuHnAOPUOHnqFDz9ChZ+jQM3ToGTr0DB16hg49Q4eeoUPP0KFn6NAzdOgZOvQMHXqGDj1Dh56hQ8/QoWfo0DN06Bk69AwdeoYOPUOHnqFDz9ChZ+jQM3ToGTr0DB16hg49Q4eeoUPP0KFn6NAzdOgZOvQMHXqGDj1Dh56hQ8/QoWfo0DN06Bk69AwdeoYOPUOHnqFDz9ChZ3jOt73dPeBz273qGeZs96pnmLPdq55hznaveoY5273qGeZs96pnmLPdq55hznaveoY5273qGeZs96pnmLPdq55hznaveoY5273qGeZs96pnmLPdq57P93f97vtv/9+n//b2TXo+22bLem7dq+dd2y3ruXWvnvec0LKeW/fqeccpLeu5da+en3dSy3pu3avnZ53Wsp5b9/53s97nnNiynlv36vUZp7as59a9er7fyS3ruXWvnu91est6bt1rZmZmZmZmZmZmZmZmZmb26d4KqWq9
+   eJztwTEBAAAAwqD1T20KP6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AWo/AAE=
   </data>
  </layer>
  <layer name="blue tiles" width="244" height="95">
   <data encoding="base64" compression="zlib">
-   eJzt3DkOgzAQQFGfy/c/WHqLQIK3Geu9ClHRfI2Ql1IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDM6u4PAIaoRc9wAi1DfjqGM2gZzqFnOIOW4Ry1edY25NT2Wy/eATl8a1nPkE/bsKYhp7t+NQ253M1icxry+KVXTUN8//4n6xpietumniGenllrTkMMI9eiNA37zFpX1jSsNXuPiJ5hjRX7vcxomGv1vk1Nwxy79mBrGsbbuaakaRgnwvqwpqFfpLOOeoY+7VlHIL/dsxkY4+muEXeQQB7aBAAAAACg1wcvfSR7
+   eJztwTEBAAAAwqD1T20KP6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AWo/AAE=
   </data>
  </layer>
  <layer name="red tiles" width="244" height="95">
@@ -89,7 +83,7 @@
  </layer>
  <layer name="door tiles" width="244" height="95">
   <data encoding="base64" compression="zlib">
-   eJzt0zENADAMwLBSG39S+3fua2RLgZAZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA/5wnYy8/Q4Wfo8DN0+Bk6/AwdfoYOPwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANtcYYQIIQ==
+   eJztwTEBAAAAwqD1T20KP6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AWo/AAE=
   </data>
  </layer>
 </map>
