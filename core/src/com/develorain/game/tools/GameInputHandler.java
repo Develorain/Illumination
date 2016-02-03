@@ -11,8 +11,8 @@ import com.develorain.game.entities.Player;
 import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class GameInputHandler {
-    public static final int WALKING_SPEED_CAP = 8;
-    public static final int SPRINTING_SPEED_CAP = 15;
+    public static final int WALKING_SPEED_CAP = 6;
+    public static final int SPRINTING_SPEED_CAP = 12;
     public static final int WALKING_ACCELERATION = 1;
     public static final int SPRINTING_ACCELERATION = 2;
     public static final int NO_INPUT_DECELERATION = SPRINTING_ACCELERATION;
@@ -76,32 +76,33 @@ public class GameInputHandler {
                     body.setLinearVelocity(body.getLinearVelocity().x, 0);
                 }
 
-                body.setLinearVelocity(body.getLinearVelocity().x, 20);
+                body.setLinearVelocity(body.getLinearVelocity().x, 4);
                 //body.applyLinearImpulse(new Vector2(0, 20f), body.getWorldCenter(), true);
             } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
                 jumpTimer = 0;
                 body.setLinearVelocity(body.getLinearVelocity().x, NO_INPUT_DECELERATION);
 
-                body.setLinearVelocity(body.getLinearVelocity().x, 20);
+                body.setLinearVelocity(body.getLinearVelocity().x, 4);
                 //body.applyLinearImpulse(new Vector2(0, 20f), body.getWorldCenter(), true);
                 canDoubleJump = false;
             }
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.Z) && jumpTimer <= 0.2 && !canJump()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.Z) && jumpTimer <= 0.1 && !canJump()) {
             if (body.getLinearVelocity().y < 0) {
                 body.setLinearVelocity(body.getLinearVelocity().x, 0);
             }
 
-            body.applyLinearImpulse(new Vector2(0, 2f), body.getWorldCenter(), true);
+            body.applyLinearImpulse(new Vector2(0, 0.1f), body.getWorldCenter(), true);
+            //body.setLinearVelocity(body.getLinearVelocity().x, body.getLinearVelocity().y + 0.5f);
             jumpTimer += dt;
         } else if (!Gdx.input.isKeyPressed(Input.Keys.Z)) {
             if (canJump()) {
                 // when you land on the ground, consider making this in the contact listener
                 jumpTimer = 0;
-            } else if (body.getLinearVelocity().y > 0) {
+            }/* else if (body.getLinearVelocity().y > 0) {
                 body.setLinearVelocity(body.getLinearVelocity().x, 0);
-            } else {
+            }*/ else {
                 // if you let go of jump after double jump
                 jumpTimer = 0.2f;
             }

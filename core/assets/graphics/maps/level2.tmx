@@ -78,9 +78,7 @@
  <objectgroup name="white exploders"/>
  <objectgroup name="blue exploders"/>
  <objectgroup name="red exploders"/>
- <objectgroup name="trigger">
-  <object id="483" x="1952" y="1472" width="1840" height="544"/>
- </objectgroup>
+ <objectgroup name="trigger"/>
  <layer name="white tiles" width="300" height="200">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20Hb6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4DeprQAB

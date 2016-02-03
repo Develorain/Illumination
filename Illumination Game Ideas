@@ -1,70 +1,28 @@
-THINGS TO REMEMBER
-------------------
-Check video file on desktop for idea for developing map with slowmo gameplay
-The only way to make the game fun is to make moving and jumping feel fun, sound fun!
+Things that are going to be implemented soon
+--------------------------------------------
+Increase stopping acceleration - 5 minutes
+Get rid of playerSprite - 10 minutes
+If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump (bug) - 3 minutes
+Holding left and right at the same time makes you travel with no friction. (bug) - 5 minutes
+Fix player trail, sprinting movement limit, jump length, jump height, respawning player/lights - 30 minutes
+Reset y velocity to 0 after letting go of jump button to make jumping more responsive - 10 minutes
 
 
-Level 1
--------
-Add dropping tiles above first pit. The player is forced to drop into that hole. the box will look hollow:
-
-------------- <-- dropping tiles
--           -
--           -
--------------
 
 Things to consider changing about the game
 ------------------------------------------
 Remove double jump
 Fix jumping arc to better tighten jumping control
 Slowmotion doesn't slow down the player, only the environment
-Trail only appears when player is sprinting
+Trail only appears when player is sprinting. Shadow effect after player only activates when player hits max speed (or only when sprinting sprinting)
 
 
 Current game problems
 ---------------------
-Dispose of maps when done with them, lots of wasted memory
-Holding left and right at the same time makes you travel with no friction.
-If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump
-Consider getting rid of playerSprite
-Dispose more
-Fix player trail
-Fix sprinting movement limit
-Fix jump length
-Fix jump height
-Fix respawning player/lights
-
+Replace box2d lights with better alternative
 Increasing resolution shows you more of the map
 Higher dpi screens makes the game look tiny
 Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
-
-
-
-Camera focusing
----------------
-Every level has a vector2 arraylist of squares "triggers" that will be rendered from the map file
-When close to these "triggers", camera interpolates
-
-
-
-Ideas
------
-Make music volume depend on player velocity
-Change music speed depending on player velocity
-Normalize music volume
-Make doors big to make player finishing level feel better
-Make door sound effect really nice to make finishing level feel great
-Reward players as they accomplish things in the level
-Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
-Make projectiles big and fun
-Cooler hud text
-Levels do not need to do a complete learning curve. Design simple levels into harder levels later.
-Maybe add a "DEADLY LINE", if the player touches it they die
-Do music slowmo like in super mario world, by not slowing it down, but making each note take longer: reference: https://youtu.be/Aj-Mf0ZVoGs?t=7m18s
-Lamps change colour over time
-Time doesn't start until you move
-Shadow effect after player only activates when player hits max speed (consider something with sprinting)
-Reset y velocity to 0 after letting go of jump button to make jumping more responsive
 
 
 
@@ -74,19 +32,17 @@ Add unwalljumpable walls: introduce it in the tutorial
 Add a background
 Add breakable walls or boxes
 Teleporter
-Light gets bigger the faster you go
-Player light only collides with enemies that player can die from
-.setColour() for something that looks cool. Moving changes player colour. This may also change ambient light colour too.
 Player dies when changes time in out of bounds area
 Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
-Make MenuScreen
 Make death more meaningful
+Falling tiles
+Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
+Time doesn't start until you move
 
 
 
 Secondary ideas
 ---------------
-Slow down time in areas of the map
 Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
 Doing combos can do a strong dash in a direction that breaks destructable walls
 Exploder's projectiles kills other enemies.
@@ -96,24 +52,12 @@ Holding "Z" allows you to slow down time or stop in mid air, allowing you to das
 
 
 
-Main Mechanics
---------------
-Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
-This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
-and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the current
-speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
-
-
-
-Cool ideas
-----------
-Implement a very quick running enemies, enemies that can stick onto walls, rainbow, when enemy is near player, enemy explodes throwing projectiles towards player to kill him, ranged throwing enemy
-Inverted gravity on some levels
-Some maps you have 1 restitiuation and you have to get through the map while bouncing
-Add a fun mode-type map where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
-In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
-Introduce controls by a small rhyming poem
-Add screen shake
+Enemies
+-------
+Quick running enemies
+Enemies that can stick onto walls
+When enemy is near player, enemy explodes throwing projectiles towards player to kill him
+Ranged throwing enemy (projectiles)
 
 
 
@@ -131,6 +75,14 @@ Low gravity areas of the world
 Everytime the player jumps, an animation similar to this plays: https://youtu.be/2SaYkWNv0Hg?t=14m37s
 Trampoline or propeller similar to Geometry Dash upwards push things
 Vignette pulses to the beat of the music
+Lamps change colour over time
+Make doors big to make player finishing level feel better
+Make projectiles big and fun
+Cooler hud text
+Light gets bigger the faster you go
+Player light only collides with enemies that player can die from
+.setColour() for something that looks cool. Moving changes player colour. This may also change ambient light colour too.
+Add screen shake
 
 
 
@@ -145,6 +97,21 @@ Music is intense when you're moving quickly, calm when you're moving slowly
 Sync map/gameplay with music somehow
 When changing between slowmotion and non-slowmotion, the slow-mo sound plays
 All sounds are slower in slow-motion
+Make music volume depend on player velocity
+Change music speed depending on player velocity
+Normalize music volume
+Make door sound effect really nice to make finishing level feel great
+Do music slowmo like in super mario world, by not slowing it down, but making each note take longer: reference: https://youtu.be/Aj-Mf0ZVoGs?t=7m18s
+
+
+
+Cool ideas
+----------
+Inverted gravity on some levels
+Some maps you have 1 restitiuation and you have to get through the map while bouncing
+Game mode where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
+In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
+Introduce controls by a small rhyming poem
 
 
 
@@ -155,6 +122,15 @@ Maybe character is a transparent ghost, that's why he can go in multiple dimensi
 Explain why the player can be in two dimensions
 Square is on a journey to enlighten all the dull squares, making them smart
 "Deception was key, the map was determined in stopping cubey. things that looked like they were there were not, and things that appeared to be there weren't there."
+
+
+
+Game Mechanics
+--------------
+Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
+This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
+and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the current
+speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.
 
 
 
@@ -208,6 +184,8 @@ NOT ONLY ARE THE TILES THAT ARE NOT USED FOR COLLISION 10% OPACITY, BUT THEY ARE
 Friction and movement is stronger in slowmotion. (The problem is that the input/gameplay mechanics still run at 60Hz) // useless
 Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration // useless
 Transparent tiles // useless
+Slow down time in areas of the map // useless
+Reward players as they accomplish things in the level // useless
 
 
 

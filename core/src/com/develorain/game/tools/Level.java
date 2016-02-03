@@ -54,7 +54,7 @@ public class Level {
         levelWidth = mapProperties.get("width", Integer.class);
         levelHeight = mapProperties.get("height", Integer.class);
 
-        world = new World(new Vector2(0, -50f), true);
+        world = new World(new Vector2(0, -10f), true);
 
         b2dr = new Box2DDebugRenderer();
 
