@@ -2,7 +2,6 @@ Things that are going to be implemented soon
 --------------------------------------------
 Fix player trail, sprinting movement limit, jump length, jump height, respawning player/lights - 30 minutes
 Reset y velocity to 0 after letting go of jump button to make jumping more responsive - 10 minutes
-Remove ugly leaf - 10 minutes
 
 
 
@@ -18,15 +17,11 @@ Trail only appears when player is sprinting. Shadow effect after player only act
 Primary ideas
 -------------
 There is a zoom function in orthogonal camera
-Unwalljumpable walls
-Breakable walls or boxes
 Teleporter
-Player dies when changes time in out of bounds area
-Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
+Unclimbable walls
 Falling tiles
-Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
+Player dies when changes time in out of bounds area
 Time doesn't start until you move
-Doing combos can do a strong dash in a direction that breaks destructable walls
 Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key). New game mechanic
 Add player states
 
@@ -34,14 +29,14 @@ Add player states
 
 Enemies
 -------
-Quick running enemies
+Fast-running enemies
 Enemies that can stick onto walls
 When enemy is near player, enemy explodes throwing projectiles towards player to kill him
 Projectile enemy
 Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
-Exploder's projectiles kills other enemies.
-Exploder's projecticles spawn small enemies upon landing.
-Exploder's projectiles contaminate ground so player can't walk on it.
+Exploder's projectiles kills other enemies
+Exploder's projectiles spawn small enemies upon landing
+Exploder's projectiles contaminate ground so player can't walk on it
 
 
 
@@ -64,6 +59,7 @@ Light gets bigger the faster you go
 Player light only collides with enemies that player can die from
 .setColour() for something that looks cool. Moving changes player colour. This may also change ambient light colour too.
 Add screen shake
+Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
 
 
 
@@ -93,6 +89,7 @@ Some maps you have 1 restitiuation and you have to get through the map while bou
 Game mode where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
 In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
 Introduce controls by a small rhyming poem
+Leave souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
 
 
 Current game problems
@@ -179,6 +176,8 @@ Reward players as they accomplish things in the level // useless
 Make death more meaningful // useless
 Shake screen when hitting ground hard // useless
 Low gravity areas of the world // useless
+Doing combos can do a strong dash in a direction that breaks destructable walls // useless
+Breakable walls or boxes // useless
 
 
 

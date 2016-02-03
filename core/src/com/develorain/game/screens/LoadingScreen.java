@@ -47,7 +47,6 @@ public class LoadingScreen extends MyScreen {
         Illumination.assetManager.load("audio/sounds/startslowmotion.ogg", Sound.class);
         Illumination.assetManager.load("audio/sounds/endslowmotion.ogg", Sound.class);
         Illumination.assetManager.load("audio/sounds/Jump8.wav", Sound.class);
-        Illumination.assetManager.load("graphics/logos/leaf.png", Texture.class);
         Illumination.assetManager.load("graphics/logos/develorain.png", Texture.class);
         Illumination.assetManager.load("graphics/logos/illumination.png", Texture.class);
         Illumination.assetManager.load("graphics/gui/uiskin.atlas", TextureAtlas.class);

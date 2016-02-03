@@ -23,7 +23,6 @@ public class GameInputHandler {
     public boolean canDoubleJump = true;  // starts as true because player spawns starting in the air
     public boolean canChargeDownwards = false;
     public boolean shouldRespawn = false;
-    private float jumpTimer = 0;
     private Player player;
     private Body body;
     private Music music;
@@ -74,66 +73,24 @@ public class GameInputHandler {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
-            if (canJump()) {
-                jumpTimer = 0;
-                if (body.getLinearVelocity().y < 0) {
-                    body.setLinearVelocity(body.getLinearVelocity().x, 0);
+            inputGiven = true;
+
+            if (playerIsOnGround()) {
+                body.setLinearVelocity(body.getLinearVelocity().x, 4);
+            } else {
+                if (playerCanWallJumpTowardsTheLeft()) {
+                    body.setLinearVelocity(-10f, 7f);
+                    canDoubleJump = true;
+                } else if (playerCanWallJumpTowardsTheRight()) {
+                    body.setLinearVelocity(10f, 7f);
+                    canDoubleJump = true;
+                } else if (canDoubleJump) {
+                    body.setLinearVelocity(body.getLinearVelocity().x, NO_INPUT_DECELERATION);
+
+                    body.setLinearVelocity(body.getLinearVelocity().x, 4);
+                    canDoubleJump = false;
                 }
-
-                body.setLinearVelocity(body.getLinearVelocity().x, 4);
-                //body.applyLinearImpulse(new Vector2(0, 20f), body.getWorldCenter(), true);
-            } else if (canDoubleJump && !canWallJumpTowardsTheLeft() && !canWallJumpTowardsTheRight()) {
-                jumpTimer = 0;
-                body.setLinearVelocity(body.getLinearVelocity().x, NO_INPUT_DECELERATION);
-
-                body.setLinearVelocity(body.getLinearVelocity().x, 4);
-                //body.applyLinearImpulse(new Vector2(0, 20f), body.getWorldCenter(), true);
-                canDoubleJump = false;
             }
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.Z) && jumpTimer <= 0.1 && !canJump()) {
-            if (body.getLinearVelocity().y < 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x, 0);
-            }
-
-            body.applyLinearImpulse(new Vector2(0, 0.1f), body.getWorldCenter(), true);
-            //body.setLinearVelocity(body.getLinearVelocity().x, body.getLinearVelocity().y + 0.5f);
-            jumpTimer += dt;
-        } else if (!Gdx.input.isKeyPressed(Input.Keys.Z)) {
-            if (canJump()) {
-                // when you land on the ground, consider making this in the contact listener
-                jumpTimer = 0;
-            }/* else if (body.getLinearVelocity().y > 0) {
-                body.setLinearVelocity(body.getLinearVelocity().x, 0);
-            }*/ else {
-                // if you let go of jump after double jump
-                jumpTimer = 0.2f;
-            }
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheLeft() && !canJump()) {
-            jumpTimer = 0;
-
-            if (body.getLinearVelocity().y < 0) {
-                body.setLinearVelocity(0, 0);
-            }
-
-            body.applyLinearImpulse(new Vector2(-10f, 7f), body.getWorldCenter(), true);
-            inputGiven = true;
-            canDoubleJump = true;
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.Z) && canWallJumpTowardsTheRight() && !canJump()) {
-            jumpTimer = 0;
-
-            if (body.getLinearVelocity().y < 0) {
-                body.setLinearVelocity(0, 0);
-            }
-
-            body.applyLinearImpulse(new Vector2(10f, 7f), body.getWorldCenter(), true);
-            inputGiven = true;
-            canDoubleJump = true;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
@@ -159,6 +116,7 @@ public class GameInputHandler {
         // Down charge
         if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN) && canChargeDownwards) {
             float yVelocity = body.getLinearVelocity().y;
+
             if (yVelocity >= 0) {
                 body.setLinearVelocity(body.getLinearVelocity().x, 0);
             }
@@ -221,15 +179,15 @@ public class GameInputHandler {
         }
     }
 
-    private boolean canJump() {
+    private boolean playerIsOnGround() {
         return footContactCounter > 0;
     }
 
-    private boolean canWallJumpTowardsTheLeft() {
+    private boolean playerCanWallJumpTowardsTheLeft() {
         return rightContactCounter > 0;
     }
 
-    private boolean canWallJumpTowardsTheRight() {
+    private boolean playerCanWallJumpTowardsTheRight() {
         return leftContactCounter > 0;
     }
 }

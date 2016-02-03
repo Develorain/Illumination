@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="244" height="95" tilewidth="16" tileheight="16" nextobjectid="470">
+ <tileset firstgid="1" name="rock" tilewidth="16" tileheight="16" tilecount="64" columns="8">
+  <image source="rock.png" width="128" height="128"/>
+ </tileset>
  <objectgroup color="#ffffff" name="white slope">
   <object id="436" x="128" y="1392">
    <polyline points="0,0 1392,0"/>
@@ -84,6 +87,11 @@
  <layer name="door tiles" width="244" height="95">
   <data encoding="base64" compression="zlib">
    eJztwTEBAAAAwqD1T20KP6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIC3AWo/AAE=
+  </data>
+ </layer>
+ <layer name="rocks" width="244" height="95">
+  <data encoding="base64" compression="zlib">
+   eJzt07duw0AURFE555yjnHPO//9lnt7FFktSFnQOcKvXkAtMrwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACMkrE0nibSZJpK02kmzQ7wu4C/SnudS/NpIS2mpbScVtLqAL4XRlntXtfSetpIm2krbaedtNvhf8AoaHuve2k/HaTDdJSOUz+dtP978K+U9lZ7b3uvp+ksnaeLdJmu0nW6ae6ZYCiU9lZ7b3uvt+ku3aeH9Jie0nN6ae6ZYCiU9lZ7b3uvr+ktvaeP9Jm+0nf6ae6ZYCiU9lZ7t1foTmlvtXd7he6U9lZ7t1foTmlvtXcAAAAA+AXj5Cul
   </data>
  </layer>
 </map>
