@@ -1,10 +1,10 @@
 Things that are going to be implemented soon
 --------------------------------------------
 Get rid of playerSprite - 10 minutes
-If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump (bug) - 3 minutes
 Holding left and right at the same time makes you travel with no friction. (bug) - 5 minutes
 Fix player trail, sprinting movement limit, jump length, jump height, respawning player/lights - 30 minutes
 Reset y velocity to 0 after letting go of jump button to make jumping more responsive - 10 minutes
+Remove ugly leaf - 10 minutes
 
 
 

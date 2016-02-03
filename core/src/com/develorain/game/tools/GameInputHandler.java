@@ -42,7 +42,9 @@ public class GameInputHandler {
         boolean inputGiven = false;
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            inputGiven = true;
+            if (!Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+                inputGiven = true;
+            }
 
             float currentSpeedCap = WALKING_SPEED_CAP;
             float currentAcceleration = WALKING_ACCELERATION;
@@ -56,7 +58,9 @@ public class GameInputHandler {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            inputGiven = true;
+            if (!Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+                inputGiven = true;
+            }
 
             float currentSpeedCap = -WALKING_SPEED_CAP;
             float currentAcceleration = -WALKING_ACCELERATION;

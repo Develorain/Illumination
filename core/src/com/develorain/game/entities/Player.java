@@ -50,7 +50,7 @@ public class Player {
         body.createFixture(SensorFactory.createSensorFixture(0, 0, SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.LEFT_SENSOR));
         body.createFixture(SensorFactory.createSensorFixture(0, 0, SIDE_SENSOR_WIDTH, SIDE_SENSOR_HEIGHT, EntityType.RIGHT_SENSOR));
         createSprite();
-        //createLights(rayHandler);
+        createLights(rayHandler);
     }
 
     public void draw(Batch batch) {
