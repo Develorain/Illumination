@@ -1,6 +1,5 @@
 Things that are going to be implemented soon
 --------------------------------------------
-Increase stopping acceleration - 5 minutes
 Get rid of playerSprite - 10 minutes
 If you jump a split second after you fall off a cliff, the side sensors will trigger walljump instead of a normal jump (bug) - 3 minutes
 Holding left and right at the same time makes you travel with no friction. (bug) - 5 minutes
@@ -20,6 +19,7 @@ Trail only appears when player is sprinting. Shadow effect after player only act
 
 Primary ideas
 -------------
+There is a zoom function in orthogonal camera
 Unwalljumpable walls
 Breakable walls or boxes
 Teleporter
@@ -28,17 +28,9 @@ Lights activate as you go on. Only when you fall into the pit does the light abo
 Falling tiles
 Consider leaving souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
 Time doesn't start until you move
-
-
-
-Secondary ideas
----------------
-Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
 Doing combos can do a strong dash in a direction that breaks destructable walls
-Exploder's projectiles kills other enemies.
-Exploder's projecticles spawn small enemies upon landing.
-Exploder's projectiles contaminate ground so player can't walk on it.
-Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key)
+Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key). New game mechanic
+Add player states
 
 
 
@@ -48,6 +40,10 @@ Quick running enemies
 Enemies that can stick onto walls
 When enemy is near player, enemy explodes throwing projectiles towards player to kill him
 Projectile enemy
+Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
+Exploder's projectiles kills other enemies.
+Exploder's projecticles spawn small enemies upon landing.
+Exploder's projectiles contaminate ground so player can't walk on it.
 
 
 
@@ -107,6 +103,7 @@ Replace box2d lights with better alternative
 Increasing resolution shows you more of the map
 Higher dpi screens makes the game look tiny
 Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
+Standing on a slope slowly makes you slide down
 
 
 
@@ -134,7 +131,7 @@ Ideas up for removal
 Design a map that is hard to traverse. // useless
 Do not set velocities, apply a force. (most of the time) // useless
 Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge // useless
-Check video file on desktop for idea that using slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity // useless
+Slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity // useless
 Also with the rule above, using slowmotion allows you to double jump much higher // useless
 Make cooldowns work properly with slowmotion // useless
 Make jump rely more on how long you hold the jump button, and less initial velocity. // useless

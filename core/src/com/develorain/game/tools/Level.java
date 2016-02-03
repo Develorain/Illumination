@@ -122,7 +122,7 @@ public class Level {
 
         batch.begin();
 
-        player.draw(batch);
+        //player.draw(batch);
 
         for (ArrayList<Enemy> arrayList : worldInitializer.getEnemies()) {
             for (int i = 0; i < arrayList.size(); i++) {
