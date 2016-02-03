@@ -32,7 +32,7 @@ public class Player {
     public Body body;
     private World world;
     private RayHandler rayHandler;
-    private Sprite playerSprite;
+    private Sprite sprite;
     private ArrayList<PointLight> pointLights = new ArrayList();
     private Level level;
 
@@ -54,16 +54,16 @@ public class Player {
     }
 
     public void draw(Batch batch) {
-        playerSprite.setPosition(body.getPosition().x - (PLAYER_HALF_WIDTH / PPM), body.getPosition().y - (PLAYER_HALF_HEIGHT / PPM));
-        playerSprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
-        playerSprite.draw(batch);
+        sprite.setPosition(body.getPosition().x - (PLAYER_HALF_WIDTH / PPM), body.getPosition().y - (PLAYER_HALF_HEIGHT / PPM));
+        sprite.setRotation(body.getAngle() * MathUtils.radiansToDegrees);
+        sprite.draw(batch);
     }
 
     private void createSprite() {
-        playerSprite = new Sprite(new Texture("graphics/entities/whiteplayer.png"));
-        playerSprite.setSize(PLAYER_HALF_WIDTH * 2 / PPM, PLAYER_HALF_HEIGHT * 2 / PPM);
-        playerSprite.setOrigin(playerSprite.getWidth() / 2, playerSprite.getHeight() / 2);
-        body.setUserData(playerSprite);
+        sprite = new Sprite(new Texture("graphics/entities/whiteplayer.png"));
+        sprite.setSize(PLAYER_HALF_WIDTH * 2 / PPM, PLAYER_HALF_HEIGHT * 2 / PPM);
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+        body.setUserData(sprite);
     }
 
     private void createLights(RayHandler rayHandler) {

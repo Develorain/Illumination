@@ -1,7 +1,5 @@
 Things that are going to be implemented soon
 --------------------------------------------
-Get rid of playerSprite - 10 minutes
-Holding left and right at the same time makes you travel with no friction. (bug) - 5 minutes
 Fix player trail, sprinting movement limit, jump length, jump height, respawning player/lights - 30 minutes
 Reset y velocity to 0 after letting go of jump button to make jumping more responsive - 10 minutes
 Remove ugly leaf - 10 minutes
