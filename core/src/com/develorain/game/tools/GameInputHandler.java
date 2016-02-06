@@ -3,6 +3,7 @@ package com.develorain.game.tools;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.develorain.game.Illumination;
@@ -94,15 +95,14 @@ public class GameInputHandler {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
-            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == NO_INPUT_DECELERATION ? 3 : NO_INPUT_DECELERATION;
+            TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 3 : 1;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
+            System.out.println("In slow motion: " + SLOW_MOTION_MODE);
 
-            /*
             if (SLOW_MOTION_MODE)
-                Illumination.assetManager.get("Audio/Sounds/startslowmotion.ogg", Sound.class).play();
+                Illumination.assetManager.get("audio/sounds/startslowmotion.ogg", Sound.class).play();
             else
-                Illumination.assetManager.get("Audio/Sounds/endslowmotion.ogg", Sound.class).play();
-            */
+                Illumination.assetManager.get("audio/sounds/endslowmotion.ogg", Sound.class).play();
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;

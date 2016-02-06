@@ -1,7 +1,11 @@
 Things that are going to be implemented soon
 --------------------------------------------
+Falling tiles - 20 minutes
+Time doesn't start until you move - 10 minutes
 Fix player trail, sprinting movement limit, jump length, jump height, respawning player/lights - 30 minutes
 Reset y velocity to 0 after letting go of jump button to make jumping more responsive - 10 minutes
+Think of a new game mechanic based on below: - 30 minutes
+Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key). New game mechanic
 
 
 
@@ -19,10 +23,7 @@ Primary ideas
 There is a zoom function in orthogonal camera
 Teleporter
 Unclimbable walls
-Falling tiles
 Player dies when changes time in out of bounds area
-Time doesn't start until you move
-Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key). New game mechanic
 Add player states
 
 
