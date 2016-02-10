@@ -25,6 +25,7 @@ Teleporter
 Unclimbable walls
 Player dies when changes time in out of bounds area
 Add player states
+Add rain effects and background sound and lightning flash and storm sound
 
 
 
@@ -100,6 +101,7 @@ Increasing resolution shows you more of the map
 Higher dpi screens makes the game look tiny
 Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
 Standing on a slope slowly makes you slide down
+On a slope, player walljumps instead of jumps
 
 
 

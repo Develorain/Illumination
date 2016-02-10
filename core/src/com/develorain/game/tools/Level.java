@@ -38,8 +38,8 @@ public class Level {
     private MapProperties mapProperties;
     private int levelWidth;  // in tiles (ex: 300 tiles width)
     private int levelHeight; // in tiles (ex: 150 tiles height)
-    private int TILE_WIDTH = 256;
-    private int TILE_HEIGHT = 256;
+    private int TILE_WIDTH = 16;
+    private int TILE_HEIGHT = 16;
     private SpriteBatch batch;
     private OrthographicCamera cam;
 
@@ -54,7 +54,7 @@ public class Level {
         levelWidth = mapProperties.get("width", Integer.class);
         levelHeight = mapProperties.get("height", Integer.class);
 
-        world = new World(new Vector2(0, -10f), true);
+        world = new World(new Vector2(0, -18f), true);
 
         b2dr = new Box2DDebugRenderer();
 

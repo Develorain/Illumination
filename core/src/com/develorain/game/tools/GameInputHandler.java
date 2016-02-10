@@ -12,11 +12,12 @@ import com.develorain.game.entities.Player;
 import static com.develorain.game.screens.PlayScreen.TIME_SLOWDOWN_MODIFIER;
 
 public class GameInputHandler {
-    public static final int WALKING_SPEED_CAP = 6;
+    public static final int WALKING_SPEED_CAP = 8;
     public static final int SPRINTING_SPEED_CAP = 12;
     public static final int WALKING_ACCELERATION = 1;
     public static final int SPRINTING_ACCELERATION = 2;
-    public static final int NO_INPUT_DECELERATION = SPRINTING_ACCELERATION * 2;
+    public static final int NO_INPUT_GROUND_DECELERATION = SPRINTING_ACCELERATION * 2;
+    public static final float NO_INPUT_AIR_DECELERATION = 0.1f;
     public static boolean SLOW_MOTION_MODE = false;
     public int footContactCounter = 0;
     public int leftContactCounter = 0;
@@ -77,7 +78,7 @@ public class GameInputHandler {
             inputGiven = true;
 
             if (playerIsOnGround()) {
-                body.setLinearVelocity(body.getLinearVelocity().x, 4);
+                body.setLinearVelocity(body.getLinearVelocity().x, 7);
             } else {
                 if (playerCanWallJumpTowardsTheLeft()) {
                     body.setLinearVelocity(-10f, 7f);
@@ -86,9 +87,9 @@ public class GameInputHandler {
                     body.setLinearVelocity(10f, 7f);
                     canDoubleJump = true;
                 } else if (canDoubleJump) {
-                    body.setLinearVelocity(body.getLinearVelocity().x, NO_INPUT_DECELERATION);
+                    body.setLinearVelocity(body.getLinearVelocity().x, NO_INPUT_GROUND_DECELERATION);
 
-                    body.setLinearVelocity(body.getLinearVelocity().x, 4);
+                    body.setLinearVelocity(body.getLinearVelocity().x, 7);
                     canDoubleJump = false;
                 }
             }
@@ -99,10 +100,11 @@ public class GameInputHandler {
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
             System.out.println("In slow motion: " + SLOW_MOTION_MODE);
 
-            if (SLOW_MOTION_MODE)
+            if (SLOW_MOTION_MODE) {
                 Illumination.assetManager.get("audio/sounds/startslowmotion.ogg", Sound.class).play();
-            else
+            } else {
                 Illumination.assetManager.get("audio/sounds/endslowmotion.ogg", Sound.class).play();
+            }
 
             float xVelocity = body.getLinearVelocity().x;
             float yVelocity = body.getLinearVelocity().y;
@@ -151,10 +153,18 @@ public class GameInputHandler {
 
         // Manual deceleration
         if (!inputGiven) {
-            if (body.getLinearVelocity().x > 0) {
-                decreaseVelocity(0, -NO_INPUT_DECELERATION);
-            } else if (body.getLinearVelocity().x < 0) {
-                increaseVelocity(0, NO_INPUT_DECELERATION);
+            if (playerIsOnGround()) {
+                if (body.getLinearVelocity().x > 0) {
+                    decreaseVelocity(0, -NO_INPUT_GROUND_DECELERATION);
+                } else if (body.getLinearVelocity().x < 0) {
+                    increaseVelocity(0, NO_INPUT_GROUND_DECELERATION);
+                }
+            } else {
+                if (body.getLinearVelocity().x > 0) {
+                    decreaseVelocity(0, -NO_INPUT_AIR_DECELERATION);
+                } else if (body.getLinearVelocity().x < 0) {
+                    increaseVelocity(0, NO_INPUT_AIR_DECELERATION);
+                }
             }
         }
     }
