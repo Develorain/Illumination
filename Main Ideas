@@ -1,0 +1,61 @@
+Things that are going to be implemented soon
+--------------------------------------------
+Falling tiles - 20 minutes
+Time doesn't start until you move - 10 minutes
+Fix player trail, sprinting movement limit, jump length, jump height, respawning player/lights - 30 minutes
+Reset y velocity to 0 after letting go of jump button to make jumping more responsive - 10 minutes
+Think of a new game mechanic based on below: - 30 minutes
+Holding "Z" allows you to slow down time or stop in mid air, allowing you to dash in any direction you choose (by pressing an arrow key). New game mechanic
+
+
+
+Things to consider changing about the game
+------------------------------------------
+Remove double jump
+Fix jumping arc to better tighten jumping control
+Slowmotion doesn't slow down the player, only the environment
+Trail only appears when player is sprinting. Shadow effect after player only activates when player hits max speed (or only when sprinting sprinting)
+
+
+
+Primary ideas
+-------------
+There is a zoom function in orthogonal camera
+Teleporter
+Unclimbable walls
+Player dies when changes time in out of bounds area
+Add player states
+Add rain effects and background sound and lightning flash and storm sound
+
+
+
+Enemies
+-------
+Fast-running enemies
+Enemies that can stick onto walls
+When enemy is near player, enemy explodes throwing projectiles towards player to kill him
+Projectile enemy
+Enemies that's movement pattern resembles the hamster wheels found in Mighty Quest for Epic Loot (enemy movement pattern matches music maybe)
+Exploder's projectiles kills other enemies
+Exploder's projectiles spawn small enemies upon landing
+Exploder's projectiles contaminate ground so player can't walk on it
+
+
+
+Current game problems
+---------------------
+Replace box2d lights with better alternative
+Increasing resolution shows you more of the map
+Higher dpi screens makes the game look tiny
+Add dpi scaling (at same size increasing resolution should keep the game the same size: at same resolution, increasing screen size should make the game bigger)
+Standing on a slope slowly makes you slide down
+On a slope, player walljumps instead of jumps
+
+
+
+Game Mechanics
+--------------
+Three different collision layers, one is constant, other two are interchangable depending on if the game is in normal time or slow motion
+This also allows for certain monsters to be visible and collide with you depending on the layer you're on. The two modes are normal speed
+and slow motion. Slow motion is used to make otherwise impossible passages possible, at the cost of the time running out. Based on the c-
+urrent speed mode, the unused tile set is very translucent with low opacity, and tiles that have collision are not see through.

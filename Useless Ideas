@@ -1,0 +1,57 @@
+Ideas up for removal
+--------------------
+Design a map that is hard to traverse. // useless
+Do not set velocities, apply a force. (most of the time) // useless
+Player can't touch ANYTHING that is dangerous, very hard to traverse in the sense that there is a lot of things to dodge // useless
+Slow motion when wall jumping allows you to get more walljumps in the same amount of time, making slowmotion a very good way to build up y-velocity // useless
+Also with the rule above, using slowmotion allows you to double jump much higher // useless
+Make cooldowns work properly with slowmotion // useless
+Make jump rely more on how long you hold the jump button, and less initial velocity. // useless
+Deadly obstacles // useless
+Moving platforms // useless
+Player breaks/goes ground if high y-velocity is reached // useless
+You can alternate between foreground and background (similiar to Floating Point) // useless
+Changing mode fades out some tiles (opacity) and fades in others such as Fly'N mechanic (background becomes foreground and vice versa) // useless
+When you go in slow motion, the tileset flips, and maybe make enemies and obstacles depending on the tileset to be visible or not // useless
+Respawn slope // useless
+Make bodybuilder class // useless
+Mimick Dustforce's running up wall // useless
+Make it so that holding down jump button makes you jump higher // useless
+Make dustforce climbing up walls similiar to the wall seen in video 4. pressing up on these walls makes you run up them // useless
+Some enemies don't kill you, they just push you // useless
+Can only use teleport to go through specific walls // useless
+Some maps have tile opacity of 0, and you need to traverse in complete darkness // useless
+Some maps have the player rotate (use old code) // useless
+Add sound effects (jump, landing, walking/sprinting, dash, smashing objects, death) // useless
+Add sliding animation // useless
+Limit the number of rotations that the player can do so it doesn't look like it's not rotating // useless
+Add knockback when hit // useless
+Ground that has already been traversed is erased // useless
+Map is engulfed in flames, you must walk over the flame to quench it // useless
+Walking through an emancipation-grid-esque changes your colour forcefully // useless
+Dying alows you to rewind (similar to dirt 3 mechanic) // useless
+Player light shows invisible and fake tiles // useless
+The light can act as a toggle // useless
+Fez-like swapping collision // useless
+You can change your light's colour in game using a (league of legends ping based copy) colour picking system. the colour somehow affects collision // useless
+Make the y axis limit higher when sprinting (only somewhat good idea) // useless
+Pressing down when holding on a wall and no ground is below you allows you to grapple/hold onto the wall // useless
+When your head hits a block, you can double jump again // useless
+Mario-killing style // useless
+Changing modes changes the tile collision // useless
+Must be bright in light areas or dark in dark areas // useless
+Dark mode: square is black, background is white // useless
+Light mode: square is white, background is black // useless
+Square always emits a light, mild dark light when in dark mode, mild white light when in light mode // useless
+Make screen flip interpolate rotations // useless
+NOT ONLY ARE THE TILES THAT ARE NOT USED FOR COLLISION 10% OPACITY, BUT THEY ARE PART OF THE BACKGROUND AS WELL // useless
+Friction and movement is stronger in slowmotion. (The problem is that the input/gameplay mechanics still run at 60Hz) // useless
+Can not vary timestep for 60 fps, run the 240 timestep 4 times per iteration // useless
+Transparent tiles // useless
+Slow down time in areas of the map // useless
+Reward players as they accomplish things in the level // useless
+Make death more meaningful // useless
+Shake screen when hitting ground hard // useless
+Low gravity areas of the world // useless
+Doing combos can do a strong dash in a direction that breaks destructable walls // useless
+Breakable walls or boxes // useless

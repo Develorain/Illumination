@@ -47,12 +47,24 @@ public class PlayScreen implements Screen {
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.O)) {
+            loadPreviousLevel();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             loadNextLevel();
         }
     }
 
     public void loadNextLevel() {
         currentLevel++;
+
+        level.dispose();
+
+        level = new Level(this, cam, currentLevel);
+    }
+
+    public void loadPreviousLevel() {
+        currentLevel--;
 
         level.dispose();
 

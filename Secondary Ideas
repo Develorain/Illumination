@@ -1,0 +1,61 @@
+Graphics
+--------
+Background
+Swinging box2d lights
+Particle effects, sound effect, animation, when double jumping, jumping, dashing, walking, sprinting, smashing objects, death, sliding
+When player dies, they explode into flames
+The faster you walk, a bit of black fade in the corners of the screen (vignette), add dash like gunz, or popkart nitro white lines in front of player
+More see through objects for cool light effects (bookmarks for reference)
+Everytime the player jumps, an animation similar to this plays: https://youtu.be/2SaYkWNv0Hg?t=14m37s
+Trampoline or propeller similar to Geometry Dash upwards push things
+Vignette pulses to the beat of the music
+Lamps change colour over time
+Make doors big to make player finishing level feel better
+Make projectiles big and fun
+Cooler hud text
+Light gets bigger the faster you go
+Player light only collides with enemies that player can die from
+.setColour() for something that looks cool. Moving changes player colour. This may also change ambient light colour too.
+Add screen shake
+Lights activate as you go on. Only when you fall into the pit does the light above the pit turn on. Similar to portal levels. Using goomba waiting idea.
+Projectiles have lights within them
+
+
+
+Sound
+-----
+Make killing enemies sound
+Music plays slower when you're in slow motion
+Music only plays when you're moving (or plays really slowly when not moving)
+Music speeds up as you go faster
+Music is intense in hard area, music is calm in easy area
+Music is intense when you're moving quickly, calm when you're moving slowly
+Sync map/gameplay with music somehow
+When changing between slowmotion and non-slowmotion, the slow-mo sound plays
+All sounds are slower in slow-motion
+Make music volume depend on player velocity
+Change music speed depending on player velocity
+Normalize music volume
+Make door sound effect really nice to make finishing level feel great
+Do music slowmo like in super mario world, by not slowing it down, but making each note take longer: reference: https://youtu.be/Aj-Mf0ZVoGs?t=7m18s
+
+
+
+Cool ideas
+----------
+Inverted gravity on some levels
+Some maps you have 1 restitiuation and you have to get through the map while bouncing
+Game mode where jumping instantly teleports you vertically up and swaps gravity, and then jumping again vertically teleports you down and changes gravity back to normal
+In the main menu, you can control the player before selecting "Start" "Options" etc, and maybe use the player to select these options
+Introduce controls by a small rhyming poem
+Leave souls on the ground (similar to coins in mario) so you can leave breadcrumbs in the map
+
+
+
+Game environment/story
+-----------------------
+Cubey is the soul of a lost traveller,
+Maybe character is a transparent ghost, that's why he can go in multiple dimensions
+Explain why the player can be in two dimensions
+Square is on a journey to enlighten all the dull squares, making them smart
+"Deception was key, the map was determined in stopping cubey. things that looked like they were there were not, and things that appeared to be there weren't there."

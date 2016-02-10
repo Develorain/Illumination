@@ -98,7 +98,6 @@ public class GameInputHandler {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
             TIME_SLOWDOWN_MODIFIER = TIME_SLOWDOWN_MODIFIER == 1 ? 3 : 1;
             SLOW_MOTION_MODE = !SLOW_MOTION_MODE;
-            System.out.println("In slow motion: " + SLOW_MOTION_MODE);
 
             if (SLOW_MOTION_MODE) {
                 Illumination.assetManager.get("audio/sounds/startslowmotion.ogg", Sound.class).play();
