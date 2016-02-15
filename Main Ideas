@@ -18,6 +18,13 @@ Trail only appears when player is sprinting. Shadow effect after player only act
 
 
 
+Attacks
+-------
+Sonic generations attack: dashes at enemy when in the air, and then knocks you up a little in the air. requires nearby enemy
+Dash on ground: attacks everyone that was between original position and new position
+
+
+
 Primary ideas
 -------------
 There is a zoom function in orthogonal camera
