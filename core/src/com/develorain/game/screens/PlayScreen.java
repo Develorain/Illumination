@@ -15,8 +15,8 @@ public class PlayScreen implements Screen {
     public static int TIME_SLOWDOWN_MODIFIER = 1;
 
     public static float currentTime = 0;
-    public int currentLevel = 1;
-    public FitViewport fitViewport;
+    private int currentLevel = 1;
+    private FitViewport fitViewport;
     private Illumination game;
     private Level level;
     private OrthographicCamera cam;
