@@ -9,9 +9,9 @@ public class WorldContactListener implements ContactListener {
     public static final short BLUE_LINE_BIT = 2;
     public static final short RED_LINE_BIT = 4;
     public static final short PLAYER_BIT = 8;
-    public static final short PLAYER_FOOT_SENSOR_BIT = 16; // remove
-    public static final short PLAYER_LEFT_SENSOR_BIT = 32;  // remove
-    public static final short PLAYER_RIGHT_SENSOR_BIT = 64;  // remove
+    public static final short PLAYER_FOOT_SENSOR_BIT = 16;
+    public static final short PLAYER_LEFT_SENSOR_BIT = 32;
+    public static final short PLAYER_RIGHT_SENSOR_BIT = 64;
     public static final short WHITE_ENEMY_BIT = 128;
     public static final short BLUE_ENEMY_BIT = 256;
     public static final short RED_ENEMY_BIT = 512;
@@ -19,6 +19,7 @@ public class WorldContactListener implements ContactListener {
     public static final short END_LINE_BIT = 2048;
     public static final short UNCLIMBABLE_LINE_BIT = 4096;
     public static final short SCRIPTED_EVENT_TRIGGER_BIT = 8192;
+    // TODO: remove unnecessary bit masks
     // last bit is -32768
 
     private GameInputHandler gameInputHandler;
@@ -36,10 +37,12 @@ public class WorldContactListener implements ContactListener {
 
         int cDef = fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 
-        // TODO: must rewrite switch statement
+        // TODO: rewrite switch statement: should not handle all collisions
         switch (cDef) {
             case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
                 /*
+                UNNEEDED, cam.zoom can replace code below
+
                 // not working since only fired off once, need to use boolean to see if still in contact
                 playScreen.fitViewport.setWorldSize(playScreen.fitViewport.getWorldWidth() + (playScreen.fitViewport.getWorldWidth() * 0.02f),
                         playScreen.fitViewport.getWorldHeight() + (playScreen.fitViewport.getWorldHeight() * 0.02f));
@@ -156,6 +159,8 @@ public class WorldContactListener implements ContactListener {
 
         switch (cDef) {
             /*
+            UNNEEDED, cam.zoom can replace code below
+
             case PLAYER_BIT | SCRIPTED_EVENT_TRIGGER_BIT:
                 playScreen.fitViewport.setWorldSize(playScreen.fitViewport.getWorldWidth() - (playScreen.fitViewport.getWorldWidth() * 0.02f) / 60,
                         playScreen.fitViewport.getWorldHeight() - (playScreen.fitViewport.getWorldHeight() * 0.02f) / 60);

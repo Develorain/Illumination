@@ -26,8 +26,8 @@ public class Player {
     public static final int PLAYER_HALF_WIDTH = 10;      // pixels
     public static final int PLAYER_HALF_HEIGHT = 10;     // pixels
     public static final float FOOT_SENSOR_WIDTH = 0.9f;  // 0.875
-    public static final float FOOT_SENSOR_HEIGHT = 1.5f; // 1.5
-    public static final float SIDE_SENSOR_WIDTH = 1.4f;  // 1.6
+    public static final float FOOT_SENSOR_HEIGHT = 1.5f;
+    public static final float SIDE_SENSOR_WIDTH = 1.4f;
     public static final float SIDE_SENSOR_HEIGHT = 0.9f;
     public Body body;
     private World world;

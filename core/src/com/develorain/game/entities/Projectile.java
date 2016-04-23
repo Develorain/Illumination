@@ -9,6 +9,7 @@ public class Projectile extends Enemy {
     private static final int PROJECTILE_DENSITY = 1;
 
     public Projectile(float x, float y, Level level, EntityType type) {
+        // TODO: randomize the velocity of projectile
         super(x, y, PROJECTILE_WIDTH, PROJECTILE_HEIGHT, PROJECTILE_DENSITY, level, type, new Vector2(3, 0));
     }
 }

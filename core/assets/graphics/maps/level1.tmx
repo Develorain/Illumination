@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="244" height="95" tilewidth="16" tileheight="16" nextobjectid="470">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="244" height="95" tilewidth="16" tileheight="16" nextobjectid="471">
  <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="36" columns="6">
   <image source="tileset.png" width="96" height="96"/>
  </tileset>
@@ -66,7 +66,9 @@
  <objectgroup name="blue sprinters"/>
  <objectgroup name="red sprinters"/>
  <objectgroup name="unclimbable"/>
- <objectgroup name="white exploders"/>
+ <objectgroup name="white exploders">
+  <object id="470" x="736" y="1280" width="16" height="16"/>
+ </objectgroup>
  <objectgroup name="blue exploders"/>
  <objectgroup name="red exploders"/>
  <layer name="white tiles" width="244" height="95">

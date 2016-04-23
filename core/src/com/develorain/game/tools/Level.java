@@ -44,11 +44,14 @@ public class Level {
     private OrthographicCamera cam;
 
     public Level(PlayScreen playScreen, OrthographicCamera cam, int currentLevel) {
+        System.out.println("Step 4");
         batch = new SpriteBatch();
         this.cam = cam;
 
         mapLoader = new TmxMapLoader();
+        System.out.println("Step 5");
         tiledMap = mapLoader.load("graphics/maps/level" + currentLevel + ".tmx");
+        System.out.println("Step 6");
         mapRenderer = new OrthogonalTiledMapRenderer(tiledMap, 1 / PPM);
         mapProperties = tiledMap.getProperties();
         levelWidth = mapProperties.get("width", Integer.class);

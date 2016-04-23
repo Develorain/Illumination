@@ -82,8 +82,11 @@ public class PlayScreen implements Screen {
 
     @Override
     public void show() {
+        System.out.println("Step 1");
         if (level == null) {
+            System.out.println("Step 2");
             level = new Level(this, cam, currentLevel);
+            System.out.println("Step 3");
         }
     }
 
